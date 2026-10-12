@@ -401,32 +401,43 @@ function initSoundControl(inputSelector, labelSelector) {
     });
 }
 
-function playFeedbackSound(isCorrect) {
+function playFeedbackSound(signal) {
     const soundToggle = $('#quiz-sound-toggle') || $('#challenge-sound-toggle');
     const AudioContextClass = window.AudioContext || window.webkitAudioContext;
     if (!soundToggle?.checked || !AudioContextClass) return;
+
+    const sequences = {
+        start: [{ frequency: 392, delay: 0, duration: 0.16 }, { frequency: 523.25, delay: 0.09, duration: 0.2 }],
+        correct: [{ frequency: 523.25, delay: 0, duration: 0.2 }, { frequency: 659.25, delay: 0.07, duration: 0.21 }, { frequency: 783.99, delay: 0.14, duration: 0.28 }],
+        gentle: [{ frequency: 440, delay: 0, duration: 0.18 }, { frequency: 392, delay: 0.1, duration: 0.22 }],
+        complete: [{ frequency: 523.25, delay: 0, duration: 0.22 }, { frequency: 659.25, delay: 0.08, duration: 0.22 }, { frequency: 783.99, delay: 0.16, duration: 0.25 }, { frequency: 1046.5, delay: 0.24, duration: 0.42 }]
+    };
 
     try {
         if (!feedbackAudioContext) feedbackAudioContext = new AudioContextClass();
         if (feedbackAudioContext.state === 'suspended') feedbackAudioContext.resume();
 
-        const notes = isCorrect ? [523.25, 659.25, 783.99] : [392, 349.23];
+        const notes = sequences[signal] || sequences.gentle;
         const startAt = feedbackAudioContext.currentTime;
 
-        notes.forEach((frequency, index) => {
+        notes.forEach(note => {
             const oscillator = feedbackAudioContext.createOscillator();
+            const filter = feedbackAudioContext.createBiquadFilter();
             const volume = feedbackAudioContext.createGain();
-            const noteStart = startAt + index * 0.09;
+            const noteStart = startAt + note.delay;
 
-            oscillator.type = 'sine';
-            oscillator.frequency.setValueAtTime(frequency, noteStart);
+            oscillator.type = 'triangle';
+            oscillator.frequency.setValueAtTime(note.frequency, noteStart);
+            filter.type = 'lowpass';
+            filter.frequency.setValueAtTime(2600, noteStart);
             volume.gain.setValueAtTime(0.0001, noteStart);
-            volume.gain.exponentialRampToValueAtTime(0.12, noteStart + 0.015);
-            volume.gain.exponentialRampToValueAtTime(0.0001, noteStart + 0.16);
-            oscillator.connect(volume);
+            volume.gain.exponentialRampToValueAtTime(0.075, noteStart + 0.025);
+            volume.gain.exponentialRampToValueAtTime(0.0001, noteStart + note.duration);
+            oscillator.connect(filter);
+            filter.connect(volume);
             volume.connect(feedbackAudioContext.destination);
             oscillator.start(noteStart);
-            oscillator.stop(noteStart + 0.17);
+            oscillator.stop(noteStart + note.duration + 0.02);
         });
     } catch {
         return;
@@ -468,12 +479,19 @@ function initMascot() {
     `;
 
     const heroContent = $('.hero__content');
-    const placement = heroContent || $('.activity-toolbar') || $('.main .section__header');
+    const introSlot = $('.activity-mascot-slot--intro');
+    const placement = heroContent || introSlot || $('.activity-toolbar') || $('.main .section__header');
 
     if (!placement) return;
     mascot.classList.toggle('mascot-guide--hero', Boolean(heroContent));
     placement.append(mascot);
     loadMascotAnimation(mascot);
+}
+
+function moveMascotTo(slotSelector) {
+    const mascot = $('.mascot-guide');
+    const slot = $(slotSelector);
+    if (mascot && slot) slot.append(mascot);
 }
 
 function loadMascotAnimation(mascot) {
@@ -524,18 +542,30 @@ function setMascotMood(mood, message) {
     $('.mascot-guide__message', mascot).textContent = message;
 
     if (!window.gsap) return;
+    const body = $('.mascot__body', mascot);
     const antenna = $('.mascot__antenna', mascot);
     const arm = $('.mascot__arm', mascot);
-    window.gsap.killTweensOf([antenna, arm]);
+    window.gsap.killTweensOf([body, antenna, arm]);
 
     if (mood === 'celebrate') {
         window.gsap.to(arm, { rotation: -22, transformOrigin: '100% 20%', duration: 0.16, repeat: 3, yoyo: true, ease: 'sine.inOut' });
         window.gsap.to(antenna, { rotation: 10, transformOrigin: '50% 100%', duration: 0.2, repeat: 3, yoyo: true });
+        window.gsap.to(body, {
+            y: -9,
+            scale: 1.08,
+            duration: 0.18,
+            repeat: 3,
+            yoyo: true,
+            ease: 'back.out(2)',
+            onComplete: () => window.gsap.to(body, { y: -4, duration: 0.9, repeat: -1, yoyo: true, ease: 'sine.inOut' })
+        });
     } else if (mood === 'think') {
         window.gsap.to(antenna, { rotation: -9, transformOrigin: '50% 100%', duration: 0.25, yoyo: true, repeat: 1 });
+        window.gsap.to(body, { rotation: -3, duration: 0.2, repeat: 1, yoyo: true, ease: 'sine.inOut', onComplete: () => window.gsap.to(body, { y: -4, duration: 0.9, repeat: -1, yoyo: true, ease: 'sine.inOut' }) });
     } else {
         window.gsap.to(antenna, { rotation: 0, transformOrigin: '50% 100%', duration: 0.2 });
         window.gsap.to(arm, { rotation: 0, transformOrigin: '100% 20%', duration: 0.2 });
+        window.gsap.to(body, { rotation: 0, y: -4, duration: 0.9, repeat: -1, yoyo: true, ease: 'sine.inOut' });
     }
 }
 
@@ -687,7 +717,9 @@ function startQuiz() {
     $('#quiz-results').hidden = true;
     $('#quiz-questions').hidden = false;
 
+    moveMascotTo('#quiz-mascot-slot');
     setMascotMood('ready', 'Vamos pregunta a pregunta. Cada respuesta suma aprendizaje.');
+    playFeedbackSound('start');
     renderQuestion();
 }
 
@@ -824,7 +856,7 @@ function handleAnswer(selectedIndex, options) {
     $('#quiz-xp').textContent = quizState.xp;
     $('#quiz-progress-fill').style.width = `${((quizState.currentQuestion + 1) / quizQuestions.length) * 100}%`;
     $('#quiz-steps').children[quizState.currentQuestion].classList.add('activity-step--complete');
-    playFeedbackSound(isCorrect);
+    playFeedbackSound(isCorrect ? 'correct' : 'gentle');
     showQuizFeedback(isCorrect, earnedXP, question.explanation);
     setMascotMood(isCorrect ? 'celebrate' : 'think', isCorrect
         ? '¡Buen ojo! Elegiste una opción segura.'
@@ -856,6 +888,7 @@ function showQuizResults() {
 
     $('#quiz-questions').hidden = true;
     $('#quiz-results').hidden = false;
+    moveMascotTo('#quiz-results-mascot-slot');
 
     const totalQuestions = quizQuestions.length;
     const percentage = Math.round((quizState.score / totalQuestions) * 100);
@@ -901,6 +934,7 @@ function showQuizResults() {
     $('#quiz-result-message').textContent = message;
     $('#quiz-score-value').textContent = `${quizState.score}/${totalQuestions}`;
     setMascotMood('celebrate', `Misión completa: ganaste ${quizState.xp} XP.`);
+    playFeedbackSound('complete');
 
     // Add stats to results
     const resultsCard = $('.quiz__results-card');
@@ -1031,7 +1065,9 @@ function startChallenge() {
     $('#challenge-complete').hidden = true;
     $('#challenge-questions').hidden = false;
 
+    moveMascotTo('#challenge-mascot-slot');
     setMascotMood('ready', 'Mira las señales y decide con calma.');
+    playFeedbackSound('start');
     renderScenario();
 }
 
@@ -1126,7 +1162,7 @@ function handleScenarioAnswer(selectedIndex, quality, options) {
     $('#challenge-xp').textContent = challengeState.xp;
     $('#challenge-progress-fill').style.width = `${((challengeState.currentScenario + 1) / challengeScenarios.length) * 100}%`;
     $('#challenge-steps').children[challengeState.currentScenario].classList.add('activity-step--complete');
-    playFeedbackSound(isSafeDecision);
+    playFeedbackSound(isSafeDecision ? 'correct' : 'gentle');
     setMascotMood(isSafeDecision ? 'celebrate' : 'think', isSafeDecision
         ? '¡Buena decisión! Protegiste tus datos.'
         : 'No pasa nada: ahora sabes qué señal observar.');
@@ -1147,11 +1183,13 @@ function handleNextScenario() {
 function showChallengeComplete() {
     $('#challenge-questions').hidden = true;
     $('#challenge-complete').hidden = false;
+    moveMascotTo('#challenge-results-mascot-slot');
 
     const summaryContainer = $('#challenge-summary');
     const goodDecisions = challengeState.decisions.filter(d => d.quality === 'good').length;
     const totalScenarios = challengeScenarios.length;
     setMascotMood('celebrate', `Reto completo: ${challengeState.xp} XP y ${goodDecisions} decisiones seguras.`);
+    playFeedbackSound('complete');
 
     summaryContainer.innerHTML = `
         <div class="challenge__summary">

@@ -2972,3 +2972,231 @@ button {
         height: 3.75rem;
     }
 }
+
+.mascot-guide--hero .mascot-guide__figure {
+    flex-basis: 5rem;
+    width: 5rem;
+    height: 5.25rem;
+}
+
+.activity-mascot-slot {
+    display: grid;
+    min-width: 0;
+    min-height: 100%;
+    padding: 1rem;
+    place-items: center;
+    background: var(--color-gray-50);
+    border: 1px solid var(--color-gray-200);
+    border-top: 4px solid var(--color-turquoise);
+    border-radius: 0.5rem;
+}
+
+.activity-mascot-slot .mascot-guide {
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    min-height: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.activity-mascot-slot .mascot-guide__figure {
+    flex-basis: auto;
+    width: 9rem;
+    height: 9rem;
+}
+
+.activity-mascot-slot .mascot-guide__copy {
+    width: 100%;
+    padding: 0.85rem 0 0;
+    border-top: 1px solid var(--color-gray-200);
+    border-left: 0;
+}
+
+.activity-mascot-slot .mascot-guide__name {
+    margin-bottom: 0.4rem;
+    font-size: 0.75rem;
+}
+
+.activity-mascot-slot .mascot-guide__message {
+    font-size: 0.92rem;
+}
+
+.activity-mascot-slot--intro,
+.activity-mascot-slot--results {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 0;
+    padding: 0;
+    background: transparent;
+    border: 0;
+}
+
+.activity-mascot-slot--intro {
+    margin: 0 0 1.25rem;
+}
+
+.activity-mascot-slot--intro .mascot-guide,
+.activity-mascot-slot--results .mascot-guide {
+    flex-direction: row;
+    justify-content: flex-start;
+    width: min(100%, 34rem);
+    text-align: left;
+}
+
+.activity-mascot-slot--intro .mascot-guide__figure,
+.activity-mascot-slot--results .mascot-guide__figure {
+    flex: 0 0 5rem;
+    width: 5rem;
+    height: 5.25rem;
+}
+
+.activity-mascot-slot--intro .mascot-guide__copy,
+.activity-mascot-slot--results .mascot-guide__copy {
+    padding: 0.35rem 0 0.35rem 0.85rem;
+    border-top: 0;
+    border-left: 2px solid var(--color-turquoise);
+}
+
+.activity-mascot-slot--results {
+    justify-content: center;
+    margin: 0.75rem auto;
+}
+
+.quiz__questions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(13rem, 16rem);
+    grid-template-areas:
+        "stats stats"
+        "progress progress"
+        "question mascot"
+        "feedback mascot"
+        "navigation mascot";
+    align-items: start;
+    column-gap: 1rem;
+}
+
+.quiz__stats {
+    grid-area: stats;
+}
+
+.quiz__progress {
+    grid-area: progress;
+}
+
+.quiz__question-card {
+    grid-area: question;
+}
+
+.quiz__feedback {
+    grid-area: feedback;
+}
+
+.quiz__navigation {
+    grid-area: navigation;
+}
+
+#quiz-mascot-slot {
+    grid-area: mascot;
+    position: sticky;
+    top: 6rem;
+    min-height: 23rem;
+}
+
+.challenge__questions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(13rem, 16rem);
+    grid-template-areas:
+        "progress progress"
+        "scenario mascot"
+        "feedback mascot"
+        "navigation mascot";
+    align-items: start;
+    column-gap: 1rem;
+}
+
+.challenge__progress {
+    grid-area: progress;
+}
+
+.challenge__scenario-card {
+    grid-area: scenario;
+}
+
+.challenge__feedback {
+    grid-area: feedback;
+}
+
+.challenge__navigation {
+    grid-area: navigation;
+}
+
+#challenge-mascot-slot {
+    grid-area: mascot;
+    position: sticky;
+    top: 6rem;
+    min-height: 23rem;
+}
+
+@media (max-width: 760px) {
+    .quiz__questions {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas:
+            "stats"
+            "mascot"
+            "progress"
+            "question"
+            "feedback"
+            "navigation";
+        row-gap: 0.75rem;
+    }
+
+    .challenge__questions {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas:
+            "mascot"
+            "progress"
+            "scenario"
+            "feedback"
+            "navigation";
+        row-gap: 0.75rem;
+    }
+
+    #quiz-mascot-slot,
+    #challenge-mascot-slot {
+        position: static;
+        min-height: 0;
+        padding: 0.65rem;
+    }
+
+    .activity-mascot-slot .mascot-guide {
+        flex-direction: row;
+        justify-content: flex-start;
+        text-align: left;
+    }
+
+    .activity-mascot-slot .mascot-guide__figure {
+        flex: 0 0 4.75rem;
+        width: 4.75rem;
+        height: 4.75rem;
+    }
+
+    .activity-mascot-slot .mascot-guide__copy {
+        padding: 0.35rem 0 0.35rem 0.75rem;
+        border-top: 0;
+        border-left: 2px solid var(--color-turquoise);
+        text-align: left;
+    }
+
+    .activity-mascot-slot .mascot-guide__message {
+        font-size: 0.84rem;
+    }
+
+    .activity-mascot-slot--intro .mascot-guide__figure,
+    .activity-mascot-slot--results .mascot-guide__figure {
+        flex-basis: 4.5rem;
+        width: 4.5rem;
+        height: 4.5rem;
+    }
+}
