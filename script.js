@@ -633,7 +633,8 @@ function initMascot() {
                     <path d="M43 91h14l3 8H45zm20 0h14l2 8H65z" fill="#ef9b65" stroke="#17352f" stroke-width="2.5" stroke-linejoin="round"/>
                     <path d="m60 79 10 4v7c0 6-6 10-10 12-4-2-10-6-10-12v-7z" fill="#d5ed69" stroke="#17352f" stroke-width="2" stroke-linejoin="round"/>
                     <path d="m56 89 3 3 5-6" fill="none" stroke="#17352f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path class="mascot__arm" d="M33 73q-12 5-10 16" fill="none" stroke="#26745c" stroke-width="7" stroke-linecap="round"/>
+                    <path class="mascot__arm mascot__arm--left" d="M33 73q-12 5-10 16" fill="none" stroke="#26745c" stroke-width="7" stroke-linecap="round"/>
+                    <path class="mascot__arm mascot__arm--right" d="M87 73q12 5 10 16" fill="none" stroke="#26745c" stroke-width="7" stroke-linecap="round"/>
                 </g>
             </svg>
         </div>
@@ -720,11 +721,13 @@ function setMascotMood(mood, message) {
     if (!window.gsap) return;
     const body = $('.mascot__body', mascot);
     const antenna = $('.mascot__antenna', mascot);
-    const arm = $('.mascot__arm', mascot);
-    window.gsap.killTweensOf([body, antenna, arm]);
+    const leftArm = $('.mascot__arm--left', mascot);
+    const rightArm = $('.mascot__arm--right', mascot);
+    window.gsap.killTweensOf([body, antenna, leftArm, rightArm]);
 
     if (mood === 'celebrate') {
-        window.gsap.to(arm, { rotation: -22, transformOrigin: '100% 20%', duration: 0.16, repeat: 3, yoyo: true, ease: 'sine.inOut' });
+        window.gsap.to(leftArm, { rotation: -26, transformOrigin: '100% 20%', duration: 0.16, repeat: 3, yoyo: true, ease: 'sine.inOut' });
+        window.gsap.to(rightArm, { rotation: 26, transformOrigin: '0% 20%', duration: 0.16, repeat: 3, yoyo: true, ease: 'sine.inOut' });
         window.gsap.to(antenna, { rotation: 10, transformOrigin: '50% 100%', duration: 0.2, repeat: 3, yoyo: true });
         window.gsap.to(body, {
             y: -9,
@@ -740,7 +743,8 @@ function setMascotMood(mood, message) {
         window.gsap.to(body, { rotation: -3, duration: 0.2, repeat: 1, yoyo: true, ease: 'sine.inOut', onComplete: () => window.gsap.to(body, { y: -4, duration: 0.9, repeat: -1, yoyo: true, ease: 'sine.inOut' }) });
     } else {
         window.gsap.to(antenna, { rotation: 0, transformOrigin: '50% 100%', duration: 0.2 });
-        window.gsap.to(arm, { rotation: 0, transformOrigin: '100% 20%', duration: 0.2 });
+        window.gsap.to(leftArm, { rotation: 0, transformOrigin: '100% 20%', duration: 0.2 });
+        window.gsap.to(rightArm, { rotation: 0, transformOrigin: '0% 20%', duration: 0.2 });
         window.gsap.to(body, { rotation: 0, y: -4, duration: 0.9, repeat: -1, yoyo: true, ease: 'sine.inOut' });
     }
 }
