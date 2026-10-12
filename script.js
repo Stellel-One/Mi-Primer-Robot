@@ -612,10 +612,10 @@ function playFeedbackSound(signal) {
 function initMascot() {
     const mascot = document.createElement('aside');
     mascot.className = 'mascot-guide';
-    mascot.setAttribute('aria-label', 'Navi, guía de TecnoSafe');
+    mascot.setAttribute('aria-label', 'Navia, guía de TecnoSafe');
     mascot.innerHTML = `
         <div class="mascot-guide__figure">
-            <svg class="mascot-guide__art" viewBox="0 0 120 120" role="img" aria-label="Navi, un pequeño guardián digital verde">
+            <svg class="mascot-guide__art" viewBox="0 0 120 120" role="img" aria-label="Navia, un pequeño guardián digital verde">
                 <g class="mascot__antenna">
                     <path d="M60 27V15" fill="none" stroke="#d5ed69" stroke-width="4" stroke-linecap="round"/>
                     <path d="m60 4 8 9-8 8-8-8z" fill="#ef9b65" stroke="#17352f" stroke-width="2"/>
@@ -638,8 +638,8 @@ function initMascot() {
             </svg>
         </div>
         <div class="mascot-guide__copy">
-            <span class="mascot-guide__name">Navi <span aria-hidden="true">/</span> TecnoSafe</span>
-            <p class="mascot-guide__message" aria-live="polite">Hola, soy Navi. Te acompaño a navegar con criterio.</p>
+            <span class="mascot-guide__name">Navia <span aria-hidden="true">/</span> TecnoSafe</span>
+            <p class="mascot-guide__message" aria-live="polite">Hola, soy Navia. Te acompaño a navegar con criterio.</p>
         </div>
     `;
 
@@ -697,6 +697,17 @@ function animateMascot(mascot) {
     const blink = gsap.timeline({ repeat: -1, repeatDelay: 3.5 });
     blink.to($('.mascot__eyes', mascot), { scaleY: 0.12, duration: 0.08, transformOrigin: 'center' });
     blink.to($('.mascot__eyes', mascot), { scaleY: 1, duration: 0.12, transformOrigin: 'center' });
+
+    const brandMarks = $$('.brand-mark');
+    gsap.to(brandMarks, { y: -1.5, duration: 2.8, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+    brandMarks.forEach(brandMark => {
+        brandMark.addEventListener('pointerenter', () => {
+            gsap.to(brandMark, { scale: 1.12, rotation: -5, duration: 0.2, ease: 'back.out(2)' });
+        });
+        brandMark.addEventListener('pointerleave', () => {
+            gsap.to(brandMark, { scale: 1, rotation: 0, duration: 0.35, ease: 'elastic.out(1, 0.5)' });
+        });
+    });
 }
 
 function setMascotMood(mood, message) {
