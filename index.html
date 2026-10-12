@@ -7,7 +7,7 @@
     <title>TecnoSafe - Inicio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -25,7 +25,7 @@
                 <span class="nav__toggle-icon" aria-hidden="true"></span>
             </button>
             <ul class="nav__menu" id="nav-menu" role="list">
-                <li><a href="index.html" class="nav__link nav__link--tab active" data-page="inicio">
+                <li><a href="index.html" class="nav__link nav__link--tab active" data-page="inicio" aria-current="page">
                     <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
                     <span>Inicio</span>
                 </a></li>
@@ -35,11 +35,11 @@
                 </a></li>
                 <li><a href="quiz.html" class="nav__link nav__link--tab" data-page="quiz">
                     <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                    <span>Cuestionario</span>
+                    <span>Quiz</span>
                 </a></li>
                 <li><a href="reto.html" class="nav__link nav__link--tab" data-page="reto">
                     <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22 8.5 12 15.5 2 8.5"/></svg>
-                    <span>Reto Digital</span>
+                    <span>Reto</span>
                 </a></li>
                 <li><a href="consejos.html" class="nav__link nav__link--tab" data-page="consejos">
                     <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 1 1 7.072 0l-.548.547A3.374 3.374 0 0 0 14 18.469V19a2 2 0 1 1-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
@@ -47,7 +47,7 @@
                 </a></li>
                 <li><a href="acerca.html" class="nav__link nav__link--tab" data-page="acerca">
                     <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-                    <span>Acerca</span>
+                    <span>Proyecto</span>
                 </a></li>
             </ul>
         </nav>
@@ -59,15 +59,13 @@
             <div class="container">
                 <div class="hero">
                     <div class="hero__content">
-                        <span class="hero__badge">Plataforma Educativa</span>
-                        <h1 id="inicio-title" class="hero__title">Tu seguridad digital comienza contigo</h1>
+                        <span class="hero__badge">Ciudadanía digital · Guía práctica</span>
+                        <h1 id="inicio-title" class="hero__title">Tu vida digital, más segura</h1>
                         <p class="hero__description">
-                            TecnoSafe es tu compañero para aprender a navegar por internet de forma segura,
-                            responsable y consciente. Descubre cómo proteger tu identidad, detectar amenazas
-                            y construir una huella digital positiva.
+                            Aprende a reconocer riesgos, cuidar tus datos y tomar mejores decisiones en internet.
                         </p>
-                        <a href="aprende.html" class="btn btn--primary btn--large hero__cta" role="button">
-                            <span>Comenzar a aprender</span>
+                        <a href="aprende.html" class="btn btn--primary btn--large hero__cta">
+                            <span>Explorar la guía</span>
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                                 <path d="M5 12h14M12 5l7 7-7 7"/>
                             </svg>
@@ -95,7 +93,7 @@
                                       fill="none" stroke="url(#shieldGradient)" stroke-width="1.5" stroke-dasharray="8,4"/>
                                 <g transform="translate(200, 180)" filter="url(#glow)">
                                     <rect x="-40" y="-10" width="80" height="60" rx="8" fill="#0c4a6e" stroke="#0ea5e9" stroke-width="2"/>
-                                    <rect x="-40" y="-10" width="80" height="25" rx="8 8 0 0" fill="#0ea5e9"/>
+                                    <rect x="-40" y="-10" width="80" height="25" rx="8" fill="#0ea5e9"/>
                                     <circle cx="0" cy="15" r="18" fill="none" stroke="#22d3ee" stroke-width="3"/>
                                     <path d="M0 5v10" stroke="#22d3ee" stroke-width="3" stroke-linecap="round"/>
                                 </g>
@@ -122,6 +120,42 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M12 5v14M19 12l-7 7-7-7"/>
                 </svg>
+            </div>
+        </section>
+        <section class="section home-journey" aria-labelledby="home-journey-title">
+            <div class="container">
+                <header class="section__header">
+                    <span class="section__eyebrow">Un recorrido en tres pasos</span>
+                    <h2 id="home-journey-title" class="section__title">Aprende. Practica. Decide mejor.</h2>
+                    <p class="section__subtitle">Avanza a tu ritmo con herramientas breves para situaciones reales de la vida digital.</p>
+                </header>
+                <div class="journey-grid">
+                    <article class="journey-card">
+                        <span class="journey-card__number">01 / APRENDE</span>
+                        <h3>Reconoce los riesgos</h3>
+                        <p>Conoce señales de alerta, privacidad y formas de cuidar tus cuentas.</p>
+                        <a href="aprende.html">Explorar temas <span aria-hidden="true">&#8594;</span></a>
+                    </article>
+                    <article class="journey-card">
+                        <span class="journey-card__number">02 / PRACTICA</span>
+                        <h3>Decide en contexto</h3>
+                        <p>Analiza escenarios cotidianos y descubre qué opciones te protegen mejor.</p>
+                        <a href="reto.html">Probar el reto <span aria-hidden="true">&#8594;</span></a>
+                    </article>
+                    <article class="journey-card">
+                        <span class="journey-card__number">03 / COMPRUEBA</span>
+                        <h3>Pon a prueba tu criterio</h3>
+                        <p>Responde preguntas y recibe explicaciones para afianzar lo aprendido.</p>
+                        <a href="quiz.html">Ir al cuestionario <span aria-hidden="true">&#8594;</span></a>
+                    </article>
+                </div>
+                <aside class="home-note" aria-label="Consejos prácticos">
+                    <div>
+                        <h3>La seguridad también se construye con pequeños hábitos.</h3>
+                        <p>Consulta acciones sencillas que puedes aplicar desde hoy.</p>
+                    </div>
+                    <a href="consejos.html">Ver consejos <span aria-hidden="true">&#8594;</span></a>
+                </aside>
             </div>
         </section>
     </main>
@@ -158,7 +192,7 @@
                 </div>
             </div>
             <div class="footer__bottom">
-                <p class="footer__copyright">&copy; 2025 TecnoSafe. Proyecto educativo sin fines de lucro.</p>
+                <p class="footer__copyright">&copy; 2026 TecnoSafe. Proyecto educativo sin fines de lucro.</p>
                 <p class="footer__disclaimer">No recopilamos datos personales. Todos los contenidos son con fines educativos.</p>
             </div>
         </div>

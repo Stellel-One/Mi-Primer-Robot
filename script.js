@@ -382,28 +382,34 @@ function initNavigation() {
     const navLinks = $$('.nav__link');
 
     if (navToggle && navMenu) {
+        const closeMenu = () => {
+            navMenu.classList.remove('active');
+            navToggle.setAttribute('aria-expanded', 'false');
+            navToggle.setAttribute('aria-label', 'Abrir menú');
+        };
+
         navToggle.addEventListener('click', () => {
             const isOpen = navMenu.classList.toggle('active');
             navToggle.setAttribute('aria-expanded', isOpen);
             navToggle.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
         });
 
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                navToggle.setAttribute('aria-expanded', 'false');
-            });
-        });
+        navLinks.forEach(link => link.addEventListener('click', closeMenu));
 
         document.addEventListener('click', (event) => {
             if (!navMenu.contains(event.target) && !navToggle.contains(event.target)) {
-                navMenu.classList.remove('active');
-                navToggle.setAttribute('aria-expanded', 'false');
+                closeMenu();
+            }
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && navMenu.classList.contains('active')) {
+                closeMenu();
+                navToggle.focus();
             }
         });
     }
 
-    let lastScroll = 0;
     window.addEventListener('scroll', () => {
         const currentScroll = window.pageYOffset;
         if (currentScroll > 50) {
@@ -411,7 +417,6 @@ function initNavigation() {
         } else {
             header.classList.remove('scrolled');
         }
-        lastScroll = currentScroll;
     }, { passive: true });
 
     highlightActiveLink(navLinks);
@@ -420,11 +425,18 @@ function initNavigation() {
 function highlightActiveLink(navLinks) {
     // Detect current page from URL
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-    const pageName = currentPage.replace('.html', '');
+    const pageName = currentPage === 'index.html' || !currentPage.endsWith('.html')
+        ? 'inicio'
+        : currentPage.slice(0, -5);
 
     navLinks.forEach(link => {
-        const linkPage = link.dataset.page;
-        link.classList.toggle('active', linkPage === pageName);
+        const isCurrentPage = link.dataset.page === pageName;
+        link.classList.toggle('active', isCurrentPage);
+        if (isCurrentPage) {
+            link.setAttribute('aria-current', 'page');
+        } else {
+            link.removeAttribute('aria-current');
+        }
     });
 }
 
@@ -445,7 +457,10 @@ function renderLearnCards() {
         cardElement.style.animationDelay = `${index * 0.1}s`;
 
         cardElement.innerHTML = `
-            <div class="card__icon" aria-hidden="true">${icons[card.icon]}</div>
+            <div class="card__heading">
+                <span class="card__index">TEMA ${String(index + 1).padStart(2, '0')}</span>
+                <div class="card__icon" aria-hidden="true">${icons[card.icon]}</div>
+            </div>
             <h3 class="card__title">${card.title}</h3>
             <p class="card__description">${card.description}</p>
             <ul class="card__tips" role="list">
@@ -985,7 +1000,10 @@ function renderTips() {
 
         tipElement.innerHTML = `
             <div class="tip__icon" aria-hidden="true">${icons[tip.icon]}</div>
-            <p class="tip__text">${tip.text}</p>
+            <div class="tip__content">
+                <span class="tip__index">HÁBITO ${String(index + 1).padStart(2, '0')}</span>
+                <p class="tip__text">${tip.text}</p>
+            </div>
         `;
 
         fragment.appendChild(tipElement);
