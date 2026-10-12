@@ -62,6 +62,14 @@
                     <h1 id="reto-title" class="section__title">Practica antes de que ocurra</h1>
                     <p class="section__subtitle">Analiza cinco situaciones cercanas y elige cómo responderías. Cada decisión incluye una explicación para aprender sin presión.</p>
                 </header>
+                <div class="activity-toolbar">
+                    <span class="activity-toolbar__label">Simulador de decisiones</span>
+                    <label class="sound-control" for="challenge-sound-toggle">
+                        <input id="challenge-sound-toggle" type="checkbox">
+                        <span class="sound-control__switch" aria-hidden="true"></span>
+                        <span class="sound-control__text">Sonidos <small id="challenge-sound-label">Desactivados</small></span>
+                    </label>
+                </div>
                 <div class="challenge-container" id="challenge-container">
                     <div class="challenge__start" id="challenge-start" role="region" aria-label="Inicio del reto digital">
                         <div class="challenge__start-card">
@@ -72,16 +80,16 @@
                                     <polyline points="22 8.5 12 15.5 2 8.5"/>
                                 </svg>
                             </div>
-                            <h3>Situaciones de la vida real</h3>
-                            <p>Te presentaremos 5 escenarios cotidianos. Elige qué harías y recibe una explicación educativa.</p>
+                            <h3>Elige tu siguiente movimiento</h3>
+                            <p>Resuelve cinco escenarios cotidianos, gana XP y descubre qué señales conviene reconocer.</p>
                             <ul class="challenge__rules" role="list">
-                                <li>5 situaciones interactivas</li>
-                                <li>Retroalimentación inmediata y educativa</li>
-                                <li>Sin respuestas incorrectas, solo aprendizaje</li>
-                                <li>Puedes repetir el reto cuando quieras</li>
+                                <li>Una decisión por escenario</li>
+                                <li>Feedback inmediato, sin penalizaciones</li>
+                                <li>+10 XP por cada decisión segura</li>
+                                <li>Repite el reto cuando quieras</li>
                             </ul>
                             <button class="btn btn--primary btn--large" id="challenge-start-btn" type="button">
-                                <span>Iniciar reto digital</span>
+                                <span>Jugar el reto</span>
                             </button>
                         </div>
                     </div>
@@ -92,6 +100,12 @@
                                 <div class="challenge__progress-fill" id="challenge-progress-fill" style="width: 0%"></div>
                             </div>
                             <span class="challenge__progress-text" id="challenge-progress-text">Situación 1 de 5</span>
+                            <ol class="activity-steps" id="challenge-steps" aria-label="Progreso del reto"></ol>
+                            <div class="challenge__xp" aria-label="Experiencia obtenida">
+                                <span aria-hidden="true">&#9733;</span>
+                                <strong id="challenge-xp">0</strong>
+                                <span>XP</span>
+                            </div>
                         </div>
                         <div class="challenge__scenario-card" id="challenge-scenario-card">
                             <!-- Scenario rendered by JS -->
@@ -100,7 +114,7 @@
                             <!-- Feedback rendered by JS -->
                         </div>
                         <div class="challenge__navigation">
-                            <button class="btn btn--secondary" id="challenge-next-btn" type="button" disabled>Siguiente situación</button>
+                            <button class="btn btn--secondary" id="challenge-next-btn" type="button" disabled>Continuar</button>
                         </div>
                     </div>
 

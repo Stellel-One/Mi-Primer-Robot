@@ -2368,3 +2368,497 @@ button {
         transition: none;
     }
 }
+
+.activity-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: -0.75rem 0 1.5rem;
+    padding: 0.75rem 1rem;
+    background: var(--color-white);
+    border: 1px solid var(--color-gray-200);
+    border-radius: 0.5rem;
+}
+
+.activity-toolbar__label {
+    color: var(--color-gray-500);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.sound-control {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    cursor: pointer;
+}
+
+.sound-control input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+
+.sound-control__switch {
+    position: relative;
+    width: 2.5rem;
+    height: 1.4rem;
+    flex: 0 0 auto;
+    background: var(--color-gray-200);
+    border: 1px solid var(--color-gray-300);
+    border-radius: var(--radius-full);
+    transition: background var(--transition-fast), border-color var(--transition-fast);
+}
+
+.sound-control__switch::after {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 1rem;
+    height: 1rem;
+    content: '';
+    background: var(--color-white);
+    border-radius: 50%;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-fast);
+}
+
+.sound-control input:checked + .sound-control__switch {
+    background: var(--color-electric-blue);
+    border-color: var(--color-electric-blue);
+}
+
+.sound-control input:checked + .sound-control__switch::after {
+    transform: translateX(1.1rem);
+}
+
+.sound-control input:focus-visible + .sound-control__switch {
+    outline: 3px solid var(--color-turquoise);
+    outline-offset: 3px;
+}
+
+.sound-control__text {
+    display: grid;
+    color: var(--color-gray-900);
+    font-size: 0.85rem;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.sound-control__text small {
+    color: var(--color-gray-500);
+    font-size: 0.72rem;
+    font-weight: 500;
+}
+
+.quiz-container,
+.challenge-container {
+    max-width: 820px;
+}
+
+.quiz__start-card,
+.challenge__start-card {
+    max-width: 680px;
+    text-align: left;
+}
+
+.quiz__start-icon,
+.challenge__start-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    margin: 0 0 1.25rem;
+    color: var(--color-dark-blue);
+    background: var(--color-turquoise);
+    border-radius: 0.75rem;
+}
+
+.quiz__start-icon svg,
+.challenge__start-icon svg {
+    width: 1.75rem;
+    height: 1.75rem;
+}
+
+.quiz__start-card h3,
+.challenge__start-card h3 {
+    max-width: 24ch;
+    font-size: 1.65rem;
+}
+
+.quiz__start-card p,
+.challenge__start-card p {
+    max-width: 55ch;
+    line-height: 1.7;
+}
+
+.quiz__rules,
+.challenge__rules {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem 1.25rem;
+    width: 100%;
+}
+
+.quiz__rules li,
+.challenge__rules li {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+    color: var(--color-gray-700);
+}
+
+.quiz__rules li::before,
+.challenge__rules li::before {
+    content: '\2713';
+    flex: 0 0 1.2rem;
+    color: var(--color-electric-blue);
+    font-weight: 700;
+}
+
+.quiz__start-card > .btn,
+.challenge__start-card > .btn {
+    width: 100%;
+}
+
+.quiz__stats {
+    justify-content: space-between;
+    align-items: center;
+    max-width: 820px;
+    margin: 0 auto 0.75rem;
+}
+
+.quiz__xp,
+.challenge__xp {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 0.75rem;
+    color: var(--color-dark-blue);
+    background: #eef5ce;
+    border: 1px solid #d8e99a;
+    border-radius: var(--radius-full);
+    font-size: 0.85rem;
+}
+
+.quiz__xp strong,
+.challenge__xp strong {
+    font-size: 1rem;
+}
+
+.quiz__xp-icon,
+.challenge__xp > span:first-child {
+    color: #6d8b17;
+}
+
+.quiz__streak {
+    margin: 0;
+    color: #81571c;
+    background: #fff5df;
+    border-color: #f0d9a7;
+}
+
+.activity-steps {
+    display: flex;
+    gap: 0.35rem;
+    width: 100%;
+    margin-top: 0.75rem;
+    list-style: none;
+}
+
+.activity-step {
+    flex: 1 1 0;
+    min-width: 0;
+    height: 0.5rem;
+    overflow: hidden;
+    color: transparent;
+    background: var(--color-gray-200);
+    border-radius: var(--radius-full);
+    font-size: 0;
+    transition: background var(--transition-normal), transform var(--transition-normal);
+}
+
+.activity-step--complete {
+    background: var(--color-electric-blue);
+}
+
+.activity-step--current {
+    background: #a8c952;
+    transform: scaleY(1.45);
+}
+
+.quiz__progress-text,
+.challenge__progress-text {
+    display: block;
+    color: var(--color-gray-700);
+    font-size: 0.88rem;
+    font-weight: 700;
+}
+
+.quiz__question-card,
+.challenge__scenario-card {
+    padding: clamp(1.25rem, 3vw, 2rem);
+    animation: activityEnter 280ms ease both;
+}
+
+.quiz__category-badge {
+    color: var(--color-dark-blue);
+    background: var(--color-gray-100);
+    border-color: var(--color-gray-200);
+    border-radius: 0.4rem;
+}
+
+.quiz__question-text {
+    max-width: 52ch;
+    font-size: 1.4rem;
+    line-height: 1.4;
+}
+
+.quiz__options,
+.challenge__options {
+    gap: 0.65rem;
+}
+
+.quiz__option,
+.challenge__option {
+    min-height: 3.5rem;
+    align-items: center;
+    background: var(--color-white);
+    border: 1px solid var(--color-gray-200);
+    border-radius: 0.5rem;
+    line-height: 1.5;
+    transition: transform var(--transition-fast), background var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.quiz__option:hover:not(:disabled),
+.challenge__option:hover:not(:disabled) {
+    transform: translateY(-1px);
+    border-color: var(--color-electric-blue-light);
+    box-shadow: 0 4px 12px rgba(23, 53, 47, 0.08);
+}
+
+.quiz__option:disabled,
+.challenge__option:disabled {
+    cursor: default;
+}
+
+.quiz__option--correct,
+.challenge__option--best {
+    color: #205d40;
+    background: #eff8f1;
+    border-color: #6ba77c;
+}
+
+.quiz__option--incorrect,
+.challenge__option--risky {
+    color: #72521d;
+    background: #fff7e7;
+    border-color: #dfbd73;
+}
+
+.quiz__option--correct .quiz__option-letter {
+    color: var(--color-white);
+    background: #398a57;
+}
+
+.quiz__option--incorrect .quiz__option-letter {
+    color: #fff;
+    background: #b78027;
+}
+
+.quiz__feedback,
+.challenge__feedback {
+    padding: 1rem 1.25rem;
+    border-radius: 0.5rem;
+}
+
+.quiz__feedback-heading,
+.challenge__feedback-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.4rem;
+}
+
+.quiz__feedback-title,
+.challenge__feedback-title {
+    margin: 0;
+}
+
+.quiz__feedback-xp,
+.challenge__feedback-xp {
+    flex: 0 0 auto;
+    padding: 0.25rem 0.55rem;
+    color: var(--color-dark-blue);
+    background: rgba(213, 237, 105, 0.55);
+    border-radius: var(--radius-full);
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+.quiz__feedback--incorrect {
+    background: #fff8e9;
+    border-color: #ecd49c;
+}
+
+.quiz__feedback--incorrect::before {
+    background: #cb9940;
+}
+
+.quiz__feedback--incorrect .quiz__feedback-title {
+    color: #7a5a1e;
+}
+
+.quiz__navigation {
+    align-items: center;
+}
+
+.challenge__progress {
+    margin-bottom: 1.25rem;
+}
+
+.challenge__progress-bar,
+.quiz__progress-bar {
+    height: 0.55rem;
+}
+
+.challenge__progress-fill,
+.quiz__progress-fill {
+    background: var(--color-electric-blue);
+}
+
+.challenge__scenario-title {
+    font-size: 1.35rem;
+}
+
+.challenge__scenario-text {
+    padding: 1rem 1.15rem;
+    color: var(--color-gray-700);
+    background: var(--color-gray-50);
+    border-left-color: var(--color-electric-blue);
+    border-radius: 0.35rem;
+}
+
+.challenge__option {
+    position: relative;
+    padding-left: 3.5rem;
+}
+
+.challenge__options {
+    counter-reset: challenge-option;
+}
+
+.challenge__option::before {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    display: grid;
+    width: 1.65rem;
+    height: 1.65rem;
+    place-items: center;
+    color: var(--color-gray-700);
+    content: counter(challenge-option, upper-alpha);
+    background: var(--color-gray-100);
+    border-radius: var(--radius-full);
+    counter-increment: challenge-option;
+    font-size: 0.78rem;
+    font-weight: 700;
+    transform: translateY(-50%);
+}
+
+.challenge__summary-choice {
+    display: block;
+    margin-top: 0.2rem;
+    color: var(--color-gray-500);
+    line-height: 1.5;
+}
+
+.challenge__complete-card {
+    max-width: 680px;
+    text-align: left;
+}
+
+.challenge__complete-icon {
+    display: grid;
+    width: 3.5rem;
+    height: 3.5rem;
+    margin: 0 0 1.25rem;
+    place-items: center;
+    color: var(--color-dark-blue);
+    background: var(--color-turquoise);
+    border-radius: 0.75rem;
+}
+
+.challenge__complete-icon svg {
+    width: 1.75rem;
+    height: 1.75rem;
+}
+
+.challenge__summary {
+    padding: 1rem;
+    border: 1px solid var(--color-gray-200);
+    border-radius: 0.5rem;
+}
+
+@keyframes activityEnter {
+    from {
+        opacity: 0;
+        transform: translateY(0.5rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 540px) {
+    .activity-toolbar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .activity-toolbar__label {
+        font-size: 0.8rem;
+    }
+
+    .quiz__stats {
+        justify-content: flex-start;
+    }
+
+    .quiz__rules,
+    .challenge__rules {
+        grid-template-columns: 1fr;
+    }
+
+    .quiz__question-text {
+        font-size: 1.2rem;
+    }
+
+    .quiz__feedback-heading,
+    .challenge__feedback-heading {
+        align-items: flex-start;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .activity-step,
+    .sound-control__switch,
+    .sound-control__switch::after,
+    .quiz__option,
+    .challenge__option {
+        transition: none;
+    }
+
+    .quiz__question-card,
+    .challenge__scenario-card {
+        animation: none;
+    }
+}
+
+[hidden] {
+    display: none !important;
+}

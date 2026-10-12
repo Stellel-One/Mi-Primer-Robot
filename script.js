@@ -371,6 +371,68 @@ const icons = {
     think: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 1 1 7.072 0l-.548.547A3.374 3.374 0 0 0 14 18.469V19a2 2 0 1 1-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>'
 };
 
+let feedbackAudioContext = null;
+const soundPreferenceKey = 'tecnosafe-sounds-enabled';
+
+function initSoundControl(inputSelector, labelSelector) {
+    const input = $(inputSelector);
+    const label = $(labelSelector);
+    if (!input) return;
+
+    try {
+        input.checked = localStorage.getItem(soundPreferenceKey) === 'true';
+    } catch {
+        input.checked = false;
+    }
+
+    const updateLabel = () => {
+        if (label) label.textContent = input.checked ? 'Activados' : 'Desactivados';
+    };
+
+    updateLabel();
+    input.addEventListener('change', () => {
+        try {
+            localStorage.setItem(soundPreferenceKey, input.checked);
+        } catch {
+            updateLabel();
+            return;
+        }
+        updateLabel();
+    });
+}
+
+function playFeedbackSound(isCorrect) {
+    const soundToggle = $('#quiz-sound-toggle') || $('#challenge-sound-toggle');
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (!soundToggle?.checked || !AudioContextClass) return;
+
+    try {
+        if (!feedbackAudioContext) feedbackAudioContext = new AudioContextClass();
+        if (feedbackAudioContext.state === 'suspended') feedbackAudioContext.resume();
+
+        const notes = isCorrect ? [523.25, 659.25, 783.99] : [392, 349.23];
+        const startAt = feedbackAudioContext.currentTime;
+
+        notes.forEach((frequency, index) => {
+            const oscillator = feedbackAudioContext.createOscillator();
+            const volume = feedbackAudioContext.createGain();
+            const noteStart = startAt + index * 0.09;
+
+            oscillator.type = 'sine';
+            oscillator.frequency.setValueAtTime(frequency, noteStart);
+            volume.gain.setValueAtTime(0.0001, noteStart);
+            volume.gain.exponentialRampToValueAtTime(0.12, noteStart + 0.015);
+            volume.gain.exponentialRampToValueAtTime(0.0001, noteStart + 0.16);
+            oscillator.connect(volume);
+            volume.connect(feedbackAudioContext.destination);
+            oscillator.start(noteStart);
+            oscillator.stop(noteStart + 0.17);
+        });
+    } catch {
+        return;
+    }
+}
+
 /* ============================================
  * 3. NAVEGACIÓN Y HEADER
  * ============================================ */
@@ -481,6 +543,7 @@ function renderLearnCards() {
 const quizState = {
     currentQuestion: 0,
     score: 0,
+    xp: 0,
     answers: [],
     isAnswered: false,
     streak: 0,
@@ -496,17 +559,17 @@ function initQuiz() {
     const nextBtn = $('#quiz-next-btn');
     const prevBtn = $('#quiz-prev-btn');
 
+    initSoundControl('#quiz-sound-toggle', '#quiz-sound-label');
     if (startBtn) startBtn.addEventListener('click', startQuiz);
     if (restartBtn) restartBtn.addEventListener('click', restartQuiz);
     if (nextBtn) nextBtn.addEventListener('click', handleNextQuestion);
     if (prevBtn) prevBtn.addEventListener('click', handlePrevQuestion);
 }
 
-let quizTimerInterval = null;
-
 function startQuiz() {
     quizState.currentQuestion = 0;
     quizState.score = 0;
+    quizState.xp = 0;
     quizState.answers = [];
     quizState.isAnswered = false;
     quizState.streak = 0;
@@ -518,45 +581,34 @@ function startQuiz() {
     $('#quiz-results').hidden = true;
     $('#quiz-questions').hidden = false;
 
-    startTimer();
     renderQuestion();
-}
-
-function startTimer() {
-    if (quizTimerInterval) clearInterval(quizTimerInterval);
-    quizTimerInterval = setInterval(() => {
-        const elapsed = Math.floor((Date.now() - quizState.startTime) / 1000);
-        const minutes = Math.floor(elapsed / 60).toString().padStart(2, '0');
-        const seconds = (elapsed % 60).toString().padStart(2, '0');
-        const timerText = $('#quiz-timer-text');
-        if (timerText) timerText.textContent = `${minutes}:${seconds}`;
-    }, 1000);
-}
-
-function stopTimer() {
-    if (quizTimerInterval) {
-        clearInterval(quizTimerInterval);
-        quizTimerInterval = null;
-    }
 }
 
 function renderQuestion() {
     const question = quizQuestions[quizState.currentQuestion];
     const totalQuestions = quizQuestions.length;
-    const progress = ((quizState.currentQuestion) / totalQuestions) * 100;
+    const previousAnswer = quizState.answers[quizState.currentQuestion];
+    const progress = ((quizState.currentQuestion + (previousAnswer ? 1 : 0)) / totalQuestions) * 100;
 
     $('#quiz-progress-fill').style.width = `${progress}%`;
     $('#quiz-progress-text').textContent = `Pregunta ${quizState.currentQuestion + 1} de ${totalQuestions}`;
+    $('#quiz-xp').textContent = quizState.xp;
+    $('#quiz-steps').innerHTML = quizQuestions.map((_, index) => {
+        const isComplete = Boolean(quizState.answers[index]);
+        const isCurrent = index === quizState.currentQuestion;
+        const stateClass = isComplete ? ' activity-step--complete' : isCurrent ? ' activity-step--current' : '';
+        const currentAttribute = isCurrent ? ' aria-current="step"' : '';
+        return `<li class="activity-step${stateClass}"${currentAttribute}><span>${index + 1}</span></li>`;
+    }).join('');
 
     const questionCard = $('#quiz-question-card');
     questionCard.innerHTML = `
         <div class="quiz__category-badge">${question.category}</div>
         <h3 class="quiz__question-text">${question.question}</h3>
-        <div class="quiz__options" role="radiogroup" aria-label="Opciones de respuesta">
+        <div class="quiz__options" role="group" aria-label="Opciones de respuesta">
             ${question.options.map((option, index) => `
                 <button class="quiz__option"
-                        role="radio"
-                        aria-checked="false"
+                        aria-pressed="false"
                         data-index="${index}"
                         type="button">
                     <span class="quiz__option-letter">${String.fromCharCode(65 + index)}</span>
@@ -570,7 +622,7 @@ function renderQuestion() {
 
     $('#quiz-prev-btn').disabled = quizState.currentQuestion === 0;
     $('#quiz-next-btn').disabled = true;
-    $('#quiz-next-btn').textContent = quizState.currentQuestion === totalQuestions - 1 ? 'Ver resultados' : 'Siguiente';
+    $('#quiz-next-btn').textContent = quizState.currentQuestion === totalQuestions - 1 ? 'Ver resultados' : 'Continuar';
 
     const options = $$('.quiz__option', questionCard);
     options.forEach(option => {
@@ -578,6 +630,31 @@ function renderQuestion() {
     });
 
     quizState.isAnswered = false;
+    if (previousAnswer) {
+        options.forEach((option, index) => {
+            option.disabled = true;
+            option.setAttribute('aria-pressed', index === previousAnswer.selected ? 'true' : 'false');
+            if (index === previousAnswer.selected) option.classList.add('quiz__option--selected');
+            if (index === question.correct) option.classList.add('quiz__option--correct');
+            else if (index === previousAnswer.selected) option.classList.add('quiz__option--incorrect');
+        });
+        showQuizFeedback(previousAnswer.correct, previousAnswer.earnedXP, question.explanation);
+        $('#quiz-next-btn').disabled = false;
+        quizState.isAnswered = true;
+    }
+}
+
+function showQuizFeedback(isCorrect, earnedXP, explanation) {
+    const feedback = $('#quiz-feedback');
+    feedback.className = `quiz__feedback ${isCorrect ? 'quiz__feedback--correct' : 'quiz__feedback--incorrect'}`;
+    feedback.innerHTML = `
+        <div class="quiz__feedback-heading">
+            <p class="quiz__feedback-title">${isCorrect ? '¡Buen trabajo!' : 'Una oportunidad para aprender'}</p>
+            <span class="quiz__feedback-xp">+${earnedXP} XP</span>
+        </div>
+        <p class="quiz__feedback-text">${explanation}</p>
+    `;
+    feedback.hidden = false;
 }
 
 function handleAnswer(selectedIndex, options) {
@@ -586,11 +663,14 @@ function handleAnswer(selectedIndex, options) {
     quizState.isAnswered = true;
     const question = quizQuestions[quizState.currentQuestion];
     const isCorrect = selectedIndex === question.correct;
+    const earnedXP = isCorrect ? 10 : 5;
 
     quizState.answers[quizState.currentQuestion] = {
         selected: selectedIndex,
-        correct: isCorrect
+        correct: isCorrect,
+        earnedXP
     };
+    quizState.xp += earnedXP;
 
     if (isCorrect) {
         quizState.score++;
@@ -624,24 +704,21 @@ function handleAnswer(selectedIndex, options) {
     }
 
     options.forEach((option, index) => {
-        option.setAttribute('aria-checked', index === selectedIndex ? 'true' : 'false');
+        option.disabled = true;
+        option.setAttribute('aria-pressed', index === selectedIndex ? 'true' : 'false');
 
         if (index === question.correct) {
             option.classList.add('quiz__option--correct');
         } else if (index === selectedIndex && !isCorrect) {
             option.classList.add('quiz__option--incorrect');
-        } else {
-            option.style.opacity = '0.5';
         }
     });
 
-    const feedback = $('#quiz-feedback');
-    feedback.className = `quiz__feedback ${isCorrect ? 'quiz__feedback--correct' : 'quiz__feedback--incorrect'}`;
-    feedback.innerHTML = `
-        <p class="quiz__feedback-title">${isCorrect ? '¡Correcto!' : 'Incorrecto'}</p>
-        <p class="quiz__feedback-text">${question.explanation}</p>
-    `;
-    feedback.hidden = false;
+    $('#quiz-xp').textContent = quizState.xp;
+    $('#quiz-progress-fill').style.width = `${((quizState.currentQuestion + 1) / quizQuestions.length) * 100}%`;
+    $('#quiz-steps').children[quizState.currentQuestion].classList.add('activity-step--complete');
+    playFeedbackSound(isCorrect);
+    showQuizFeedback(isCorrect, earnedXP, question.explanation);
 
     $('#quiz-next-btn').disabled = false;
 }
@@ -661,35 +738,10 @@ function handlePrevQuestion() {
     if (quizState.currentQuestion > 0) {
         quizState.currentQuestion--;
         renderQuestion();
-
-        const prevAnswer = quizState.answers[quizState.currentQuestion];
-        if (prevAnswer) {
-            const options = $$('.quiz__option');
-            options.forEach((option, index) => {
-                if (index === prevAnswer.selected) {
-                    option.classList.add('quiz__option--selected');
-                    option.setAttribute('aria-checked', 'true');
-                }
-                if (index === quizQuestions[quizState.currentQuestion].correct) {
-                    option.classList.add('quiz__option--correct');
-                }
-            });
-
-            const feedback = $('#quiz-feedback');
-            feedback.className = `quiz__feedback ${prevAnswer.correct ? 'quiz__feedback--correct' : 'quiz__feedback--incorrect'}`;
-            feedback.innerHTML = `
-                <p class="quiz__feedback-title">${prevAnswer.correct ? '¡Correcto!' : 'Incorrecto'}</p>
-                <p class="quiz__feedback-text">${quizQuestions[quizState.currentQuestion].explanation}</p>
-            `;
-            feedback.hidden = false;
-            $('#quiz-next-btn').disabled = false;
-            quizState.isAnswered = true;
-        }
     }
 }
 
 function showQuizResults() {
-    stopTimer();
     quizState.endTime = Date.now();
 
     $('#quiz-questions').hidden = true;
@@ -755,6 +807,10 @@ function showQuizResults() {
                 <span class="quiz__stat-value">${percentage}%</span>
                 <span class="quiz__stat-label">Aciertos</span>
             </div>
+            <div class="quiz__stat">
+                <span class="quiz__stat-value">${quizState.xp}</span>
+                <span class="quiz__stat-label">XP</span>
+            </div>
         </div>
     `;
 
@@ -810,7 +866,7 @@ function restartQuiz() {
 }
 
 function createConfetti() {
-    const colors = ['#2563eb', '#06b6d4', '#22c55e', '#f59e0b', '#ef4444', '#8b5cf6'];
+    const colors = ['#26745c', '#d5ed69', '#398a6c', '#f59e0b', '#ef4444'];
     const container = document.createElement('div');
     container.className = 'quiz__confetti';
     document.body.appendChild(container);
@@ -835,6 +891,9 @@ function createConfetti() {
 const challengeState = {
     currentScenario: 0,
     decisions: [],
+    xp: 0,
+    streak: 0,
+    bestStreak: 0,
     isAnswered: false
 };
 
@@ -843,6 +902,7 @@ function initChallenge() {
     const restartBtn = $('#challenge-restart-btn');
     const nextBtn = $('#challenge-next-btn');
 
+    initSoundControl('#challenge-sound-toggle', '#challenge-sound-label');
     if (startBtn) startBtn.addEventListener('click', startChallenge);
     if (restartBtn) restartBtn.addEventListener('click', restartChallenge);
     if (nextBtn) nextBtn.addEventListener('click', handleNextScenario);
@@ -851,6 +911,9 @@ function initChallenge() {
 function startChallenge() {
     challengeState.currentScenario = 0;
     challengeState.decisions = [];
+    challengeState.xp = 0;
+    challengeState.streak = 0;
+    challengeState.bestStreak = 0;
     challengeState.isAnswered = false;
 
     $('#challenge-start').hidden = true;
@@ -866,17 +929,24 @@ function renderScenario() {
     const progress = ((challengeState.currentScenario) / totalScenarios) * 100;
 
     $('#challenge-progress-fill').style.width = `${progress}%`;
-    $('#challenge-progress-text').textContent = `Situación ${challengeState.currentScenario + 1} de ${totalScenarios}`;
+    $('#challenge-progress-text').textContent = `Escenario ${challengeState.currentScenario + 1} de ${totalScenarios}`;
+    $('#challenge-xp').textContent = challengeState.xp;
+    $('#challenge-steps').innerHTML = challengeScenarios.map((_, index) => {
+        const isComplete = index < challengeState.currentScenario;
+        const isCurrent = index === challengeState.currentScenario;
+        const stateClass = isComplete ? ' activity-step--complete' : isCurrent ? ' activity-step--current' : '';
+        const currentAttribute = isCurrent ? ' aria-current="step"' : '';
+        return `<li class="activity-step${stateClass}"${currentAttribute}><span>${index + 1}</span></li>`;
+    }).join('');
 
     const scenarioCard = $('#challenge-scenario-card');
     scenarioCard.innerHTML = `
         <h3 class="challenge__scenario-title">${scenario.title}</h3>
         <p class="challenge__scenario-text">${scenario.scenario}</p>
-        <div class="challenge__options" role="radiogroup" aria-label="Opciones de decisión">
+        <div class="challenge__options" role="group" aria-label="Elige una respuesta">
             ${scenario.options.map((option, index) => `
                 <button class="challenge__option"
-                        role="radio"
-                        aria-checked="false"
+                        aria-pressed="false"
                         data-index="${index}"
                         data-quality="${option.quality}"
                         type="button">
@@ -889,7 +959,7 @@ function renderScenario() {
     $('#challenge-feedback').hidden = true;
 
     $('#challenge-next-btn').disabled = true;
-    $('#challenge-next-btn').textContent = challengeState.currentScenario === totalScenarios - 1 ? 'Ver resumen' : 'Siguiente situación';
+    $('#challenge-next-btn').textContent = challengeState.currentScenario === totalScenarios - 1 ? 'Ver resumen' : 'Continuar';
 
     const options = $$('.challenge__option', scenarioCard);
     options.forEach(option => {
@@ -904,14 +974,21 @@ function handleScenarioAnswer(selectedIndex, quality, options) {
 
     challengeState.isAnswered = true;
     const scenario = challengeScenarios[challengeState.currentScenario];
+    const isSafeDecision = quality === 'good';
+    const earnedXP = isSafeDecision ? 10 : 5;
 
     challengeState.decisions[challengeState.currentScenario] = {
         selected: selectedIndex,
-        quality: quality
+        quality,
+        earnedXP
     };
+    challengeState.xp += earnedXP;
+    challengeState.streak = isSafeDecision ? challengeState.streak + 1 : 0;
+    challengeState.bestStreak = Math.max(challengeState.bestStreak, challengeState.streak);
 
     options.forEach((option, index) => {
-        option.setAttribute('aria-checked', index === selectedIndex ? 'true' : 'false');
+        option.disabled = true;
+        option.setAttribute('aria-pressed', index === selectedIndex ? 'true' : 'false');
 
         if (index === selectedIndex) {
             option.classList.add('challenge__option--selected');
@@ -919,8 +996,6 @@ function handleScenarioAnswer(selectedIndex, quality, options) {
 
         if (scenario.options[index].quality === 'good') {
             option.classList.add('challenge__option--best');
-        } else if (index !== selectedIndex) {
-            option.style.opacity = '0.5';
         }
     });
 
@@ -928,11 +1003,18 @@ function handleScenarioAnswer(selectedIndex, quality, options) {
     const feedbackType = quality === 'good' ? 'good' : 'warning';
     feedback.className = `challenge__feedback challenge__feedback--${feedbackType}`;
     feedback.innerHTML = `
-        <p class="challenge__feedback-title">${quality === 'good' ? '¡Decisión segura!' : 'Decisión riesgosa'}</p>
+        <div class="challenge__feedback-heading">
+            <p class="challenge__feedback-title">${isSafeDecision ? '¡Decisión segura!' : 'Una señal para recordar'}</p>
+            <span class="challenge__feedback-xp">+${earnedXP} XP</span>
+        </div>
         <p class="challenge__feedback-text">${scenario.feedback[quality]}</p>
     `;
     feedback.hidden = false;
 
+    $('#challenge-xp').textContent = challengeState.xp;
+    $('#challenge-progress-fill').style.width = `${((challengeState.currentScenario + 1) / challengeScenarios.length) * 100}%`;
+    $('#challenge-steps').children[challengeState.currentScenario].classList.add('activity-step--complete');
+    playFeedbackSound(isSafeDecision);
     $('#challenge-next-btn').disabled = false;
 }
 
@@ -965,14 +1047,18 @@ function showChallengeComplete() {
                     return `
                         <div class="challenge__summary-item">
                             <span class="challenge__summary-dot ${isGood ? 'challenge__summary-dot--good' : 'challenge__summary-dot--warning'}"></span>
-                            <span>${scenario.title}: ${isGood ? 'Decisión segura' : 'Decisión riesgosa'}</span>
+                            <span>
+                                <strong>${scenario.title}</strong>: ${isGood ? 'Decisión segura' : 'Una oportunidad para aprender'}
+                                <small class="challenge__summary-choice">Elegiste: ${scenario.options[decision.selected].text}</small>
+                            </span>
                         </div>
                     `;
                 }).join('')}
             </div>
             <p style="margin-top: 1rem; font-size: 0.9375rem; color: var(--color-gray-700);">
-                Tomaste <strong>${goodDecisions} de ${totalScenarios}</strong> decisiones seguras.
-                ${goodDecisions >= 4 ? '¡Excelente criterio!' : 'Sigue practicando para mejorar tu intuición digital.'}
+                Tomaste <strong>${goodDecisions} de ${totalScenarios}</strong> decisiones seguras y ganaste <strong>${challengeState.xp} XP</strong>.
+                ${goodDecisions >= 4 ? '¡Excelente criterio!' : 'Cada escenario te deja una señal útil para la próxima.'}
+                Tu mejor racha segura fue de <strong>${challengeState.bestStreak}</strong>.
             </p>
         </div>
     `;
@@ -981,10 +1067,6 @@ function showChallengeComplete() {
 function restartChallenge() {
     startChallenge();
 }
-
-/* ============================================
- * 7. CONSEJOS PRÁCTICOS
- * ============================================ */
 
 function renderTips() {
     const container = $('#tips-grid');
@@ -997,7 +1079,6 @@ function renderTips() {
         tipElement.className = 'tip animate-on-scroll';
         tipElement.setAttribute('role', 'listitem');
         tipElement.style.animationDelay = `${index * 0.05}s`;
-
         tipElement.innerHTML = `
             <div class="tip__icon" aria-hidden="true">${icons[tip.icon]}</div>
             <div class="tip__content">
@@ -1005,7 +1086,6 @@ function renderTips() {
                 <p class="tip__text">${tip.text}</p>
             </div>
         `;
-
         fragment.appendChild(tipElement);
     });
 
