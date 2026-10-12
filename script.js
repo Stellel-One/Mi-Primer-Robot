@@ -255,7 +255,172 @@ const quizQuestions = [
         ],
         correct: 1,
         explanation: 'Muchas aplicaciones piden permisos innecesarios a contactos, cámara o ubicación. Revisar y limitar estos permisos protege tu privacidad y evita el uso indebido de tus datos.'
+    },
+    {
+        id: 13,
+        category: 'Contraseñas',
+        question: '¿Qué característica hace más resistente una frase de contraseña?',
+        options: [
+            'Que sea corta y fácil de escribir',
+            'Que combine varias palabras largas que no estén relacionadas',
+            'Que incluya tu nombre y año de nacimiento',
+            'Que la uses en todas tus cuentas'
+        ],
+        correct: 1,
+        explanation: 'Una frase larga con palabras no relacionadas resulta difícil de adivinar y fácil de recordar. Usa una distinta para cada cuenta y guárdala en un gestor confiable.'
+    },
+    {
+        id: 14,
+        category: 'Contraseñas',
+        question: 'Un compañero te pide tu contraseña para terminar una tarea en la plataforma escolar. ¿Qué haces?',
+        options: [
+            'Se la doy y la cambio después',
+            'Se la envío por un mensaje que se borra',
+            'No la comparto y busco otra forma de ayudarle',
+            'La comparto porque es alguien de confianza'
+        ],
+        correct: 2,
+        explanation: 'Las contraseñas son personales. Compartirlas puede exponer tus mensajes, archivos y datos, aunque la otra persona sea de confianza.'
+    },
+    {
+        id: 15,
+        category: 'Phishing',
+        question: 'Un mensaje urgente incluye un enlace acortado para "evitar el cierre" de tu cuenta. ¿Cuál es el paso más seguro?',
+        options: [
+            'Abrir el enlace para confirmar si es real',
+            'Responder con tu correo para recibir ayuda',
+            'Entrar a la aplicación o escribir la dirección oficial por tu cuenta',
+            'Reenviarlo a un grupo para que alguien lo pruebe'
+        ],
+        correct: 2,
+        explanation: 'Los avisos con urgencia y enlaces inesperados son una señal de alerta. Entra por la aplicación o dirección que ya conoces, nunca desde el enlace del mensaje.'
+    },
+    {
+        id: 16,
+        category: 'Phishing',
+        question: 'Recibes un archivo de "factura" que no esperabas y el remitente parece desconocido. ¿Qué haces?',
+        options: [
+            'Lo descargo para averiguar de qué se trata',
+            'Verifico al remitente por otro canal y no abro el archivo mientras tanto',
+            'Lo reenvío para preguntar si alguien lo reconoce',
+            'Respondo con mis datos para que confirmen el envío'
+        ],
+        correct: 1,
+        explanation: 'Los archivos inesperados pueden instalar software malicioso. Confirma el envío con la persona o entidad por un canal independiente antes de abrirlos.'
+    },
+    {
+        id: 17,
+        category: 'Privacidad',
+        question: 'Una aplicación de linterna solicita acceso permanente a tu ubicación. ¿Qué conviene hacer?',
+        options: [
+            'Aceptar todos los permisos para que funcione mejor',
+            'Permitir la ubicación solo cuando la aplicación esté abierta',
+            'Denegar ese permiso porque no es necesario para su función',
+            'Compartir también tus contactos'
+        ],
+        correct: 2,
+        explanation: 'Una linterna no necesita conocer tu ubicación. Concede solo los permisos indispensables y revísalos de nuevo si la aplicación cambia de función.'
+    },
+    {
+        id: 18,
+        category: 'Privacidad',
+        question: '¿Qué detalle deberías evitar publicar junto con una foto de tu casa?',
+        options: [
+            'Una descripción general del día',
+            'Tu dirección exacta y cuándo no hay nadie en casa',
+            'El nombre de una película que te gusta',
+            'Una opinión sobre un libro'
+        ],
+        correct: 1,
+        explanation: 'Combinar una ubicación precisa con horarios puede revelar cuándo una vivienda está vacía. Revisa el fondo de tus fotos y evita compartir rutinas en tiempo real.'
+    },
+    {
+        id: 19,
+        category: 'Ciberacoso',
+        question: 'Un grupo publica burlas repetidas sobre un compañero. ¿Qué acción ayuda más?',
+        options: [
+            'Sumarte con un comentario para no quedar fuera',
+            'Guardar evidencia, apoyar a la persona y reportar la publicación',
+            'Compartir la publicación para que todos la vean',
+            'Responder con insultos más fuertes'
+        ],
+        correct: 1,
+        explanation: 'No difundas el contenido. Guarda evidencia, acompaña a la persona afectada y repórtalo a la plataforma o a un adulto de confianza.'
+    },
+    {
+        id: 20,
+        category: 'Ciberacoso',
+        question: 'Después de bloquear una cuenta que te acosa, crea otra cuenta para seguir escribiéndote. ¿Qué haces?',
+        options: [
+            'Respondo para pedirle que pare',
+            'Publico su información para que otros lo enfrenten',
+            'No respondo, guardo los mensajes y pido apoyo para reportar el caso',
+            'Acepto la solicitud para averiguar quién es'
+        ],
+        correct: 2,
+        explanation: 'Evita entrar en una confrontación y no publiques datos de nadie. Conserva evidencia, bloquea y reporta las cuentas, y busca apoyo de una persona adulta de confianza.'
+    },
+    {
+        id: 21,
+        category: 'Desinformación',
+        question: 'Una publicación afirma que "cierran todas las escuelas mañana", pero no cita fuentes. ¿Cómo lo verificas?',
+        options: [
+            'La comparto rápido para prevenir a mis amigos',
+            'Reviso los canales oficiales y medios confiables antes de compartirla',
+            'Confío si la publicó una cuenta con muchos seguidores',
+            'Me fijo solo en la cantidad de reacciones'
+        ],
+        correct: 1,
+        explanation: 'Busca el aviso en canales oficiales y confirma la fecha. La popularidad de una publicación no comprueba que sea cierta.'
+    },
+    {
+        id: 22,
+        category: 'Desinformación',
+        question: 'Un video impactante se presenta como si hubiera ocurrido hoy. ¿Qué dato conviene comprobar primero?',
+        options: [
+            'El número de reproducciones',
+            'La fecha y el origen original del video',
+            'Si tiene subtítulos llamativos',
+            'Cuántas veces lo compartió tu grupo'
+        ],
+        correct: 1,
+        explanation: 'Un video real puede estar fuera de contexto. Busca su primera publicación y comprueba cuándo y dónde ocurrió antes de sacar conclusiones.'
+    },
+    {
+        id: 23,
+        category: 'Datos',
+        question: 'Estás conectado al Wi-Fi público de un café. ¿Qué hábito protege mejor tus datos?',
+        options: [
+            'Usar cualquier red que tenga el nombre del café',
+            'Realizar operaciones sensibles sin verificar la red',
+            'Evitar operaciones sensibles y confirmar el nombre de la red con el personal',
+            'Desactivar la pantalla de bloqueo para hacerlo más rápido'
+        ],
+        correct: 2,
+        explanation: 'Las redes públicas pueden ser imitadas o poco seguras. Confirma su nombre y evita consultar información sensible si no puedes verificar la conexión.'
+    },
+    {
+        id: 24,
+        category: 'Datos',
+        question: 'Un concurso desconocido pide una foto de tu documento para entregar un premio pequeño. ¿Qué haces?',
+        options: [
+            'La envío porque solo aparece mi nombre',
+            'Comparto una foto con parte del número visible',
+            'No envío el documento y compruebo quién organiza el concurso',
+            'La envío si prometen borrarla después'
+        ],
+        correct: 2,
+        explanation: 'Un documento puede facilitar la suplantación de identidad. No compartas datos sensibles con organizadores que no puedas verificar.'
     }
+];
+
+const quizCategories = [
+    { name: 'Contraseñas', icon: 'lock', description: 'Claves únicas y acceso seguro.' },
+    { name: 'Phishing', icon: 'fish', description: 'Detecta mensajes y enlaces falsos.' },
+    { name: 'Privacidad', icon: 'eye', description: 'Decide qué información compartir.' },
+    { name: 'Ciberacoso', icon: 'users', description: 'Actúa con empatía y seguridad.' },
+    { name: 'Desinformación', icon: 'news', description: 'Verifica fuentes antes de compartir.' },
+    { name: 'Datos', icon: 'database', description: 'Cuida permisos e identidad digital.' }
 ];
 
 const challengeScenarios = [
@@ -678,6 +843,9 @@ function renderLearnCards() {
 
 const quizState = {
     currentQuestion: 0,
+    questions: [],
+    mode: 'full',
+    category: null,
     score: 0,
     xp: 0,
     answers: [],
@@ -689,20 +857,70 @@ const quizState = {
     categoryScores: {}
 };
 
+function renderQuizCategories() {
+    const container = $('#quiz-mode-grid');
+    if (!container) return;
+
+    container.innerHTML = quizCategories.map((category, index) => {
+        const questionCount = quizQuestions.filter(question => question.category === category.name).length;
+        return `
+            <article class="quiz__mode-card" role="listitem">
+                <button class="quiz__mode-button" type="button" data-quiz-category="${category.name}" aria-label="Entrenar ${category.name}, ${questionCount} preguntas">
+                    <span class="quiz__mode-icon" aria-hidden="true">${icons[category.icon]}</span>
+                    <span class="quiz__mode-copy">
+                        <strong>${category.name}</strong>
+                        <span>${category.description}</span>
+                    </span>
+                    <span class="quiz__mode-meta">${String(index + 1).padStart(2, '0')} <span>${questionCount} preguntas</span></span>
+                </button>
+            </article>
+        `;
+    }).join('');
+}
+
+function shuffleQuizQuestions(questions) {
+    const shuffled = [...questions];
+    for (let position = shuffled.length - 1; position > 0; position--) {
+        const swapIndex = Math.floor(Math.random() * (position + 1));
+        [shuffled[position], shuffled[swapIndex]] = [shuffled[swapIndex], shuffled[position]];
+    }
+    return shuffled;
+}
+
 function initQuiz() {
     const startBtn = $('#quiz-start-btn');
+    const quickStartBtn = $('#quiz-quick-start-btn');
+    const categoryGrid = $('#quiz-mode-grid');
     const restartBtn = $('#quiz-restart-btn');
+    const changeModeBtn = $('#quiz-change-mode-btn');
     const nextBtn = $('#quiz-next-btn');
     const prevBtn = $('#quiz-prev-btn');
 
     initSoundControl('#quiz-sound-toggle', '#quiz-sound-label');
-    if (startBtn) startBtn.addEventListener('click', startQuiz);
+    renderQuizCategories();
+    if (startBtn) startBtn.addEventListener('click', () => startQuiz('full'));
+    if (quickStartBtn) quickStartBtn.addEventListener('click', () => startQuiz('quick'));
+    if (categoryGrid) {
+        categoryGrid.addEventListener('click', event => {
+            const categoryButton = event.target.closest('[data-quiz-category]');
+            if (categoryButton) startQuiz('category', categoryButton.dataset.quizCategory);
+        });
+    }
     if (restartBtn) restartBtn.addEventListener('click', restartQuiz);
+    if (changeModeBtn) changeModeBtn.addEventListener('click', showQuizModePicker);
     if (nextBtn) nextBtn.addEventListener('click', handleNextQuestion);
     if (prevBtn) prevBtn.addEventListener('click', handlePrevQuestion);
 }
 
-function startQuiz() {
+function startQuiz(mode = 'full', category = null) {
+    quizState.mode = mode;
+    quizState.category = category;
+    const categoryQuestions = category
+        ? quizQuestions.filter(question => question.category === category)
+        : quizQuestions;
+    quizState.questions = mode === 'quick'
+        ? shuffleQuizQuestions(quizQuestions).slice(0, 5)
+        : [...categoryQuestions];
     quizState.currentQuestion = 0;
     quizState.score = 0;
     quizState.xp = 0;
@@ -718,21 +936,26 @@ function startQuiz() {
     $('#quiz-questions').hidden = false;
 
     moveMascotTo('#quiz-mascot-slot');
-    setMascotMood('ready', 'Vamos pregunta a pregunta. Cada respuesta suma aprendizaje.');
+    const modeMessage = mode === 'quick'
+        ? 'Cinco preguntas sorpresa. ¡A por tu mejor racha!'
+        : category
+            ? `Entrenamiento de ${category}. Cada paso te acerca a dominar el tema.`
+            : 'Ruta completa: seis temas para fortalecer tu seguridad digital.';
+    setMascotMood('ready', modeMessage);
     playFeedbackSound('start');
     renderQuestion();
 }
 
 function renderQuestion() {
-    const question = quizQuestions[quizState.currentQuestion];
-    const totalQuestions = quizQuestions.length;
+    const question = quizState.questions[quizState.currentQuestion];
+    const totalQuestions = quizState.questions.length;
     const previousAnswer = quizState.answers[quizState.currentQuestion];
     const progress = ((quizState.currentQuestion + (previousAnswer ? 1 : 0)) / totalQuestions) * 100;
 
     $('#quiz-progress-fill').style.width = `${progress}%`;
     $('#quiz-progress-text').textContent = `Pregunta ${quizState.currentQuestion + 1} de ${totalQuestions}`;
     $('#quiz-xp').textContent = quizState.xp;
-    $('#quiz-steps').innerHTML = quizQuestions.map((_, index) => {
+    $('#quiz-steps').innerHTML = quizState.questions.map((_, index) => {
         const isComplete = Boolean(quizState.answers[index]);
         const isCurrent = index === quizState.currentQuestion;
         const stateClass = isComplete ? ' activity-step--complete' : isCurrent ? ' activity-step--current' : '';
@@ -800,7 +1023,7 @@ function handleAnswer(selectedIndex, options) {
     if (quizState.isAnswered) return;
 
     quizState.isAnswered = true;
-    const question = quizQuestions[quizState.currentQuestion];
+    const question = quizState.questions[quizState.currentQuestion];
     const isCorrect = selectedIndex === question.correct;
     const earnedXP = isCorrect ? 10 : 5;
 
@@ -854,7 +1077,7 @@ function handleAnswer(selectedIndex, options) {
     });
 
     $('#quiz-xp').textContent = quizState.xp;
-    $('#quiz-progress-fill').style.width = `${((quizState.currentQuestion + 1) / quizQuestions.length) * 100}%`;
+    $('#quiz-progress-fill').style.width = `${((quizState.currentQuestion + 1) / quizState.questions.length) * 100}%`;
     $('#quiz-steps').children[quizState.currentQuestion].classList.add('activity-step--complete');
     playFeedbackSound(isCorrect ? 'correct' : 'gentle');
     showQuizFeedback(isCorrect, earnedXP, question.explanation);
@@ -866,7 +1089,7 @@ function handleAnswer(selectedIndex, options) {
 }
 
 function handleNextQuestion() {
-    const totalQuestions = quizQuestions.length;
+    const totalQuestions = quizState.questions.length;
 
     if (quizState.currentQuestion < totalQuestions - 1) {
         quizState.currentQuestion++;
@@ -890,7 +1113,7 @@ function showQuizResults() {
     $('#quiz-results').hidden = false;
     moveMascotTo('#quiz-results-mascot-slot');
 
-    const totalQuestions = quizQuestions.length;
+    const totalQuestions = quizState.questions.length;
     const percentage = Math.round((quizState.score / totalQuestions) * 100);
 
     // Calculate time taken
@@ -960,8 +1183,10 @@ function showQuizResults() {
     `;
 
     // Insert stats after the score circle
+    const existingStats = resultsCard.querySelector('.quiz__result-stats');
+    if (existingStats) existingStats.remove();
     const scoreCircleEl = $('#quiz-score-circle');
-    if (scoreCircleEl && !resultsCard.querySelector('.quiz__result-stats')) {
+    if (scoreCircleEl) {
         scoreCircleEl.insertAdjacentHTML('afterend', statsHtml);
     }
 
@@ -987,7 +1212,7 @@ function showQuizResults() {
         </div>
         <h4 class="quiz__details-title" style="margin-top: 1.5rem;">Detalle de respuestas</h4>
         <div class="quiz__answer-list">
-            ${quizQuestions.map((q, index) => {
+            ${quizState.questions.map((q, index) => {
                 const answer = quizState.answers[index];
                 const isCorrect = answer && answer.correct;
                 return `
@@ -1007,7 +1232,15 @@ function showQuizResults() {
 }
 
 function restartQuiz() {
-    startQuiz();
+    startQuiz(quizState.mode, quizState.category);
+}
+
+function showQuizModePicker() {
+    $('#quiz-questions').hidden = true;
+    $('#quiz-results').hidden = true;
+    $('#quiz-start').hidden = false;
+    moveMascotTo('#quiz-intro-mascot-slot');
+    setMascotMood('ready', 'Elige otro tema o prueba una ruta distinta.');
 }
 
 function createConfetti() {

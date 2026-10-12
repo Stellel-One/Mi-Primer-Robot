@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Pon a prueba tus conocimientos de seguridad digital con el cuestionario interactivo de TecnoSafe">
+    <meta name="description" content="Entrena seguridad digital con 24 preguntas, seis categorías y retos rápidos de TecnoSafe">
     <title>TecnoSafe - Cuestionario</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -60,7 +60,7 @@
                 <header class="section__header">
                     <span class="section__eyebrow">02 / Comprueba</span>
                     <h1 id="quiz-title" class="section__title">¿Qué tan segura es tu vida digital?</h1>
-                    <p class="section__subtitle">Responde 12 preguntas sobre situaciones habituales y revisa la explicación de cada respuesta.</p>
+                    <p class="section__subtitle">Elige una ruta temática, prueba un reto rápido o completa el recorrido de 24 preguntas.</p>
                 </header>
                 <div class="activity-toolbar">
                     <span class="activity-toolbar__label">Entrenamiento de seguridad digital</span>
@@ -84,18 +84,34 @@
                                 </svg>
                             </div>
                             <div class="activity-mascot-slot activity-mascot-slot--intro" id="quiz-intro-mascot-slot"></div>
-                            <h3>Una misión para tu vida digital</h3>
-                            <p>Resuelve 12 preguntas, gana experiencia y aprende con una explicación en cada paso. Sin límite de tiempo.</p>
+                            <span class="quiz__catalog-eyebrow">Centro de entrenamiento</span>
+                            <h3>Elige tu próxima misión</h3>
+                            <p>Practica un tema concreto o completa la ruta para entrenar todos tus hábitos de seguridad digital.</p>
                             <ul class="quiz__rules" role="list">
-                                <li>12 preguntas en situaciones cotidianas</li>
+                                <li>24 preguntas en seis categorías</li>
                                 <li>+10 XP por una decisión segura</li>
                                 <li>Rachas por respuestas correctas seguidas</li>
-                                <li>Explicaciones y resultados por tema</li>
+                                <li>Explicaciones en cada respuesta</li>
                             </ul>
-                            <button class="btn btn--primary btn--large" id="quiz-start-btn" type="button">
-                                <span>Empezar entrenamiento</span>
-                            </button>
+                            <div class="quiz__launch-actions">
+                                <button class="btn btn--primary btn--large" id="quiz-start-btn" type="button">
+                                    <span>Ruta completa <small>24 preguntas</small></span>
+                                </button>
+                                <button class="btn btn--secondary btn--large" id="quiz-quick-start-btn" type="button">
+                                    <span>Reto relámpago <small>5 preguntas</small></span>
+                                </button>
+                            </div>
                         </div>
+                        <section class="quiz__mode-picker" aria-labelledby="quiz-mode-title">
+                            <header class="quiz__mode-header">
+                                <div>
+                                    <span class="section__eyebrow">Entrena por tema</span>
+                                    <h3 id="quiz-mode-title">Elige una categoría</h3>
+                                </div>
+                                <span class="quiz__mode-count">6 rutas</span>
+                            </header>
+                            <div class="quiz__mode-grid" id="quiz-mode-grid" role="list"></div>
+                        </section>
                     </div>
 
                     <!-- Quiz Questions -->
@@ -117,7 +133,7 @@
                             <div class="quiz__progress-bar">
                                 <div class="quiz__progress-fill" id="quiz-progress-fill" style="width: 0%"></div>
                             </div>
-                            <span class="quiz__progress-text" id="quiz-progress-text">Pregunta 1 de 12</span>
+                            <span class="quiz__progress-text" id="quiz-progress-text">Pregunta 1 de 24</span>
                             <ol class="activity-steps" id="quiz-steps" aria-label="Progreso del cuestionario"></ol>
                         </div>
                         <div class="activity-mascot-slot" id="quiz-mascot-slot"></div>
@@ -147,13 +163,16 @@
                             <p id="quiz-result-message">Has completado el cuestionario.</p>
                             <div class="activity-mascot-slot activity-mascot-slot--results" id="quiz-results-mascot-slot"></div>
                             <div class="quiz__result-details" id="quiz-result-details"></div>
-                            <button class="btn btn--primary btn--large" id="quiz-restart-btn" type="button">
-                                <span>Volver a intentarlo</span>
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
-                                    <path d="M3 3v5h5"/>
-                                </svg>
-                            </button>
+                            <div class="quiz__result-actions">
+                                <button class="btn btn--secondary" id="quiz-change-mode-btn" type="button">Elegir otra misión</button>
+                                <button class="btn btn--primary btn--large" id="quiz-restart-btn" type="button">
+                                    <span>Volver a intentarlo</span>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                                        <path d="M3 3v5h5"/>
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
