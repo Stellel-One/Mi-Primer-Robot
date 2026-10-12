@@ -1845,9 +1845,11 @@ button {
     }
 }
 
-/* Accessibility: Reduced motion */
+/* Accessibility: Reduced motion
+   Decisión del autor: el hero y la mascota Navia se animan siempre.
+   El resto del sitio sigue respetando la preferencia. */
 @media (prefers-reduced-motion: reduce) {
-    *,
+    *:not(.section--hero):not(.section--hero *),
     *::before,
     *::after {
         animation-duration: 0.01ms !important;

@@ -51,9 +51,7 @@
       76% { transform: rotate(5deg); }
       86% { transform: rotate(-2deg); }
     }
-    @media (prefers-reduced-motion: reduce) {
-      .navia-mark, .navia-antenna, .navia-bulb, .navia-ping, .navia-eyes, .navia-ear--l, .navia-ear--r { animation: none; }
-    }
+    /* Navia se anima siempre (decisión del autor). */
   </style>
   <g class="navia-mark">
     <circle class="navia-ping" cx="32" cy="9.5" r="6" fill="none" stroke="#d5ed69" stroke-width="1.8"/>
