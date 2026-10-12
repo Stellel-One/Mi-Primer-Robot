@@ -2862,3 +2862,113 @@ button {
 [hidden] {
     display: none !important;
 }
+
+.mascot-guide {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: min(100%, 32rem);
+    min-height: 5.25rem;
+    margin: 1.25rem 0 0;
+}
+
+.mascot-guide__figure {
+    display: grid;
+    flex: 0 0 4.5rem;
+    width: 4.5rem;
+    height: 4.75rem;
+    place-items: center;
+}
+
+.mascot-guide__art {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+}
+
+.mascot__body,
+.mascot__antenna,
+.mascot__eyes,
+.mascot__arm {
+    transform-box: fill-box;
+}
+
+.mascot-guide__copy {
+    min-width: 0;
+    padding: 0.35rem 0 0.35rem 0.85rem;
+    border-left: 2px solid var(--color-turquoise);
+}
+
+.mascot-guide__name {
+    display: block;
+    margin-bottom: 0.2rem;
+    color: var(--color-electric-blue-dark);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.mascot-guide__message {
+    margin: 0;
+    color: var(--color-gray-700);
+    font-size: 0.88rem;
+    line-height: 1.45;
+}
+
+.mascot-guide--hero {
+    margin-top: 1.5rem;
+}
+
+.mascot-guide--hero .mascot-guide__figure {
+    flex-basis: 4rem;
+    width: 4rem;
+    height: 4.25rem;
+}
+
+.mascot-guide--hero .mascot-guide__copy {
+    border-left-color: rgba(213, 237, 105, 0.65);
+}
+
+.mascot-guide--hero .mascot-guide__name {
+    color: var(--color-turquoise-light);
+}
+
+.mascot-guide--hero .mascot-guide__message {
+    color: #e0e9e2;
+}
+
+.mascot-guide[data-mood="celebrate"] .mascot-guide__name {
+    color: var(--color-electric-blue-dark);
+}
+
+.mascot-guide[data-mood="think"] .mascot-guide__copy {
+    border-left-color: #ef9b65;
+}
+
+@media (max-width: 540px) {
+    .mascot-guide {
+        gap: 0.5rem;
+        min-height: 4.25rem;
+        margin-top: 1rem;
+    }
+
+    .mascot-guide__figure {
+        flex-basis: 3.5rem;
+        width: 3.5rem;
+        height: 3.75rem;
+    }
+
+    .mascot-guide__copy {
+        padding-left: 0.65rem;
+    }
+
+    .mascot-guide__message {
+        font-size: 0.82rem;
+    }
+
+    .mascot-guide--hero .mascot-guide__figure {
+        flex-basis: 3.5rem;
+        width: 3.5rem;
+        height: 3.75rem;
+    }
+}

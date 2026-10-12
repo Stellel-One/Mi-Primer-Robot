@@ -433,6 +433,112 @@ function playFeedbackSound(isCorrect) {
     }
 }
 
+function initMascot() {
+    const mascot = document.createElement('aside');
+    mascot.className = 'mascot-guide';
+    mascot.setAttribute('aria-label', 'Navi, guía de TecnoSafe');
+    mascot.innerHTML = `
+        <div class="mascot-guide__figure">
+            <svg class="mascot-guide__art" viewBox="0 0 120 120" role="img" aria-label="Navi, un pequeño guardián digital verde">
+                <g class="mascot__antenna">
+                    <path d="M60 27V15" fill="none" stroke="#d5ed69" stroke-width="4" stroke-linecap="round"/>
+                    <path d="m60 4 8 9-8 8-8-8z" fill="#ef9b65" stroke="#17352f" stroke-width="2"/>
+                </g>
+                <g class="mascot__body">
+                    <path d="M30 47V41a7 7 0 0 1 7-7h46a7 7 0 0 1 7 7v6" fill="#398a6c" stroke="#17352f" stroke-width="3"/>
+                    <path d="M31 49c0-12 10-22 22-22h14c12 0 22 10 22 22v28c0 13-10 23-23 23H54c-13 0-23-10-23-23z" fill="#26745c" stroke="#17352f" stroke-width="3"/>
+                    <path d="M29 55h-5a7 7 0 0 0 0 14h5m62-14h5a7 7 0 0 1 0 14h-5" fill="#d5ed69" stroke="#17352f" stroke-width="3" stroke-linecap="round"/>
+                    <rect x="38" y="43" width="44" height="34" rx="15" fill="#f5f8f4" stroke="#17352f" stroke-width="2.5"/>
+                    <g class="mascot__eyes" fill="#17352f">
+                        <ellipse cx="51" cy="58" rx="3.5" ry="4.5"/>
+                        <ellipse cx="69" cy="58" rx="3.5" ry="4.5"/>
+                    </g>
+                    <path d="M53 68q7 7 14 0" fill="none" stroke="#26745c" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M43 91h14l3 8H45zm20 0h14l2 8H65z" fill="#ef9b65" stroke="#17352f" stroke-width="2.5" stroke-linejoin="round"/>
+                    <path d="m60 79 10 4v7c0 6-6 10-10 12-4-2-10-6-10-12v-7z" fill="#d5ed69" stroke="#17352f" stroke-width="2" stroke-linejoin="round"/>
+                    <path d="m56 89 3 3 5-6" fill="none" stroke="#17352f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path class="mascot__arm" d="M33 73q-12 5-10 16" fill="none" stroke="#26745c" stroke-width="7" stroke-linecap="round"/>
+                </g>
+            </svg>
+        </div>
+        <div class="mascot-guide__copy">
+            <span class="mascot-guide__name">Navi <span aria-hidden="true">/</span> TecnoSafe</span>
+            <p class="mascot-guide__message" aria-live="polite">Hola, soy Navi. Te acompaño a navegar con criterio.</p>
+        </div>
+    `;
+
+    const heroContent = $('.hero__content');
+    const placement = heroContent || $('.activity-toolbar') || $('.main .section__header');
+
+    if (!placement) return;
+    mascot.classList.toggle('mascot-guide--hero', Boolean(heroContent));
+    placement.append(mascot);
+    loadMascotAnimation(mascot);
+}
+
+function loadMascotAnimation(mascot) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (window.gsap) {
+        animateMascot(mascot);
+        return;
+    }
+
+    const animationScript = document.createElement('script');
+    animationScript.src = 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js';
+    animationScript.async = true;
+    animationScript.addEventListener('load', () => animateMascot(mascot), { once: true });
+    animationScript.addEventListener('error', () => mascot.classList.add('mascot-guide--static'), { once: true });
+    document.head.append(animationScript);
+}
+
+function animateMascot(mascot) {
+    if (!window.gsap || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const gsap = window.gsap;
+    gsap.to($('.mascot__body', mascot), {
+        y: -3,
+        duration: 1.5,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut'
+    });
+    gsap.to($('.mascot__antenna', mascot), {
+        rotation: 5,
+        transformOrigin: '50% 100%',
+        duration: 0.85,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut'
+    });
+
+    const blink = gsap.timeline({ repeat: -1, repeatDelay: 3.5 });
+    blink.to($('.mascot__eyes', mascot), { scaleY: 0.12, duration: 0.08, transformOrigin: 'center' });
+    blink.to($('.mascot__eyes', mascot), { scaleY: 1, duration: 0.12, transformOrigin: 'center' });
+}
+
+function setMascotMood(mood, message) {
+    const mascot = $('.mascot-guide');
+    if (!mascot) return;
+
+    mascot.dataset.mood = mood;
+    $('.mascot-guide__message', mascot).textContent = message;
+
+    if (!window.gsap) return;
+    const antenna = $('.mascot__antenna', mascot);
+    const arm = $('.mascot__arm', mascot);
+    window.gsap.killTweensOf([antenna, arm]);
+
+    if (mood === 'celebrate') {
+        window.gsap.to(arm, { rotation: -22, transformOrigin: '100% 20%', duration: 0.16, repeat: 3, yoyo: true, ease: 'sine.inOut' });
+        window.gsap.to(antenna, { rotation: 10, transformOrigin: '50% 100%', duration: 0.2, repeat: 3, yoyo: true });
+    } else if (mood === 'think') {
+        window.gsap.to(antenna, { rotation: -9, transformOrigin: '50% 100%', duration: 0.25, yoyo: true, repeat: 1 });
+    } else {
+        window.gsap.to(antenna, { rotation: 0, transformOrigin: '50% 100%', duration: 0.2 });
+        window.gsap.to(arm, { rotation: 0, transformOrigin: '100% 20%', duration: 0.2 });
+    }
+}
+
 /* ============================================
  * 3. NAVEGACIÓN Y HEADER
  * ============================================ */
@@ -581,6 +687,7 @@ function startQuiz() {
     $('#quiz-results').hidden = true;
     $('#quiz-questions').hidden = false;
 
+    setMascotMood('ready', 'Vamos pregunta a pregunta. Cada respuesta suma aprendizaje.');
     renderQuestion();
 }
 
@@ -719,6 +826,9 @@ function handleAnswer(selectedIndex, options) {
     $('#quiz-steps').children[quizState.currentQuestion].classList.add('activity-step--complete');
     playFeedbackSound(isCorrect);
     showQuizFeedback(isCorrect, earnedXP, question.explanation);
+    setMascotMood(isCorrect ? 'celebrate' : 'think', isCorrect
+        ? '¡Buen ojo! Elegiste una opción segura.'
+        : 'Una oportunidad para aprender otra señal de alerta.');
 
     $('#quiz-next-btn').disabled = false;
 }
@@ -790,6 +900,7 @@ function showQuizResults() {
     $('#quiz-result-title').textContent = title;
     $('#quiz-result-message').textContent = message;
     $('#quiz-score-value').textContent = `${quizState.score}/${totalQuestions}`;
+    setMascotMood('celebrate', `Misión completa: ganaste ${quizState.xp} XP.`);
 
     // Add stats to results
     const resultsCard = $('.quiz__results-card');
@@ -920,6 +1031,7 @@ function startChallenge() {
     $('#challenge-complete').hidden = true;
     $('#challenge-questions').hidden = false;
 
+    setMascotMood('ready', 'Mira las señales y decide con calma.');
     renderScenario();
 }
 
@@ -1015,6 +1127,9 @@ function handleScenarioAnswer(selectedIndex, quality, options) {
     $('#challenge-progress-fill').style.width = `${((challengeState.currentScenario + 1) / challengeScenarios.length) * 100}%`;
     $('#challenge-steps').children[challengeState.currentScenario].classList.add('activity-step--complete');
     playFeedbackSound(isSafeDecision);
+    setMascotMood(isSafeDecision ? 'celebrate' : 'think', isSafeDecision
+        ? '¡Buena decisión! Protegiste tus datos.'
+        : 'No pasa nada: ahora sabes qué señal observar.');
     $('#challenge-next-btn').disabled = false;
 }
 
@@ -1036,6 +1151,7 @@ function showChallengeComplete() {
     const summaryContainer = $('#challenge-summary');
     const goodDecisions = challengeState.decisions.filter(d => d.quality === 'good').length;
     const totalScenarios = challengeScenarios.length;
+    setMascotMood('celebrate', `Reto completo: ${challengeState.xp} XP y ${goodDecisions} decisiones seguras.`);
 
     summaryContainer.innerHTML = `
         <div class="challenge__summary">
@@ -1149,6 +1265,7 @@ function initBackToTop() {
 function init() {
     renderLearnCards();
     renderTips();
+    initMascot();
     initNavigation();
     initQuiz();
     initChallenge();
