@@ -3452,3 +3452,126 @@ button {
         height: 4.5rem;
     }
 }
+
+/* ============================================
+   Inicio: identidad de Navia + hero de primer impacto
+   ============================================ */
+
+/* --- Marca: Navia respira en reposo y saluda al pasar el cursor --- */
+@keyframes markBreathe {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-2px) scale(1.05); }
+}
+
+@keyframes markWiggle {
+    0%, 100% { transform: rotate(-7deg); }
+    50% { transform: rotate(7deg); }
+}
+
+.nav__logo-icon,
+.footer__logo-icon {
+    transform-origin: 50% 70%;
+    animation: markBreathe 3.6s ease-in-out infinite;
+    transition: filter var(--transition-normal);
+}
+
+.nav__logo:hover .nav__logo-icon,
+.footer__logo:hover .footer__logo-icon {
+    animation: markWiggle 0.55s ease-in-out infinite;
+    filter: drop-shadow(0 6px 14px rgba(213, 237, 105, 0.45));
+}
+
+/* --- Hero: entrada escalonada del contenido --- */
+@keyframes heroReveal {
+    from { opacity: 0; transform: translateY(22px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.hero__content {
+    animation: none;
+}
+
+.hero__content > * {
+    opacity: 0;
+    animation: heroReveal 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero__content > *:nth-child(1) { animation-delay: 0.06s; }
+.hero__content > *:nth-child(2) { animation-delay: 0.16s; }
+.hero__content > *:nth-child(3) { animation-delay: 0.26s; }
+.hero__content > *:nth-child(4) { animation-delay: 0.36s; }
+.hero__content > *:nth-child(n + 5) { animation-delay: 0.46s; }
+
+/* --- Hero: insignia con brillo suave --- */
+@keyframes badgeSheen {
+    0%, 100% { background-position: 150% 0; }
+    55% { background-position: -50% 0; }
+}
+
+.hero__badge {
+    background-image: linear-gradient(100deg, transparent 38%, rgba(213, 237, 105, 0.28) 50%, transparent 62%);
+    background-size: 220% 100%;
+    background-repeat: no-repeat;
+    animation:
+        heroReveal 0.75s cubic-bezier(0.22, 1, 0.36, 1) both,
+        badgeSheen 5s ease-in-out infinite;
+}
+
+/* --- Hero: botón principal con destello --- */
+.hero__cta {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero__cta::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(100deg, transparent 35%, rgba(255, 255, 255, 0.32) 50%, transparent 65%);
+    transform: translateX(-130%);
+    pointer-events: none;
+    animation: ctaShine 4.2s ease-in-out infinite;
+}
+
+@keyframes ctaShine {
+    0%, 55% { transform: translateX(-130%); }
+    80%, 100% { transform: translateX(130%); }
+}
+
+/* --- Hero: ilustración viva --- */
+@keyframes heroFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+
+.hero__svg {
+    animation: heroFloat 6.5s ease-in-out infinite;
+}
+
+@keyframes shieldGlow {
+    0%, 100% { opacity: 0.15; }
+    50% { opacity: 0.32; }
+}
+
+.hero__shield {
+    animation: shieldGlow 5.5s ease-in-out infinite;
+}
+
+@keyframes shieldFlow {
+    to { stroke-dashoffset: -24; }
+}
+
+.hero__shield-inner {
+    animation: shieldFlow 3.4s linear infinite;
+}
+
+@keyframes lockPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.hero__lock-pulse {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: lockPulse 3s ease-in-out infinite;
+}

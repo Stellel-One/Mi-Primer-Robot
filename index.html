@@ -85,15 +85,17 @@
                                         </feMerge>
                                     </filter>
                                 </defs>
-                                <path d="M200 40 L360 90 L360 250 C360 320 200 360 200 360 C200 360 40 320 40 250 L40 90 Z"
+                                <path class="hero__shield" d="M200 40 L360 90 L360 250 C360 320 200 360 200 360 C200 360 40 320 40 250 L40 90 Z"
                                       fill="url(#shieldGradient)" opacity="0.15" stroke="url(#shieldGradient)" stroke-width="2"/>
-                                <path d="M200 70 L320 110 L320 220 C320 270 200 300 200 300 C200 300 80 270 80 220 L80 110 Z"
+                                <path class="hero__shield-inner" d="M200 70 L320 110 L320 220 C320 270 200 300 200 300 C200 300 80 270 80 220 L80 110 Z"
                                       fill="none" stroke="url(#shieldGradient)" stroke-width="1.5" stroke-dasharray="8,4"/>
                                 <g transform="translate(200, 180)" filter="url(#glow)">
-                                    <rect x="-40" y="-10" width="80" height="60" rx="8" fill="#0c4a6e" stroke="#0ea5e9" stroke-width="2"/>
-                                    <rect x="-40" y="-10" width="80" height="25" rx="8" fill="#0ea5e9"/>
-                                    <circle cx="0" cy="15" r="18" fill="none" stroke="#22d3ee" stroke-width="3"/>
-                                    <path d="M0 5v10" stroke="#22d3ee" stroke-width="3" stroke-linecap="round"/>
+                                    <g class="hero__lock-pulse">
+                                        <rect x="-40" y="-10" width="80" height="60" rx="8" fill="#0c4a6e" stroke="#0ea5e9" stroke-width="2"/>
+                                        <rect x="-40" y="-10" width="80" height="25" rx="8" fill="#0ea5e9"/>
+                                        <circle cx="0" cy="15" r="18" fill="none" stroke="#22d3ee" stroke-width="3"/>
+                                        <path d="M0 5v10" stroke="#22d3ee" stroke-width="3" stroke-linecap="round"/>
+                                    </g>
                                 </g>
                                 <circle cx="100" cy="80" r="3" fill="#0ea5e9" opacity="0.6">
                                     <animate attributeName="cy" values="80;60;80" dur="3s" repeatCount="indefinite"/>
