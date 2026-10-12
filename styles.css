@@ -3833,3 +3833,198 @@ button {
     88% { opacity: 0; transform: translate3d(96vw, 12vh, 0) rotate(16deg) scaleX(1); }
     100% { opacity: 0; transform: translate3d(96vw, 12vh, 0) rotate(16deg) scaleX(1); }
 }
+
+/* ============================================
+   Inicio: Navia clickeable + chat predefinido
+   ============================================ */
+
+.hero__bubble-hover {
+    display: none;
+}
+
+.hero__illustration.is-hovering .hero__bubble-default {
+    display: none;
+}
+
+.hero__illustration.is-hovering .hero__bubble-hover {
+    display: inline;
+}
+
+.hero__navia-trigger {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    border-radius: 1.25rem;
+    cursor: pointer;
+}
+
+.hero__navia-trigger:focus-visible {
+    outline: 3px solid var(--color-turquoise);
+    outline-offset: 6px;
+}
+
+.hero__illustration.is-hovering .hero__svg {
+    filter: drop-shadow(0 22px 44px rgba(213, 237, 105, 0.32));
+}
+
+/* Panel de chat */
+.navia-chat {
+    position: fixed;
+    right: 1.25rem;
+    bottom: 1.25rem;
+    z-index: 60;
+    display: flex;
+    flex-direction: column;
+    width: min(23rem, calc(100vw - 2rem));
+    max-height: min(34rem, 78vh);
+    overflow: hidden;
+    background: var(--color-white);
+    border: 3px solid var(--color-dark-blue);
+    border-radius: 1rem;
+    box-shadow: 0 26px 60px rgba(0, 0, 0, 0.38);
+    transform-origin: bottom right;
+    animation: chatPop 0.34s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.navia-chat[hidden] {
+    display: none;
+}
+
+@keyframes chatPop {
+    from { transform: scale(0.7) translateY(18px); opacity: 0; }
+    to { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.navia-chat__head {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.7rem 0.85rem;
+    background: var(--gradient-dark);
+    color: var(--color-white);
+}
+
+.navia-chat__avatar {
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 50%;
+}
+
+.navia-chat__avatar img {
+    width: 1.6rem;
+    height: 1.6rem;
+}
+
+.navia-chat__id {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+}
+
+.navia-chat__id strong {
+    font-family: var(--font-display);
+    font-size: 1rem;
+}
+
+.navia-chat__id small {
+    color: var(--color-turquoise-light);
+    font-size: 0.72rem;
+}
+
+.navia-chat__close {
+    width: 2rem;
+    height: 2rem;
+    margin-left: auto;
+    font-size: 1.35rem;
+    line-height: 1;
+    color: var(--color-white);
+    background: transparent;
+    border: 0;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.navia-chat__close:hover {
+    background: rgba(255, 255, 255, 0.16);
+}
+
+.navia-chat__log {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    gap: 0.55rem;
+    min-height: 8rem;
+    padding: 0.9rem;
+    overflow-y: auto;
+}
+
+.navia-msg {
+    max-width: 84%;
+    padding: 0.55rem 0.8rem;
+    border-radius: 0.9rem;
+    font-size: 0.9rem;
+    line-height: 1.45;
+}
+
+.navia-msg--bot {
+    align-self: flex-start;
+    color: var(--color-gray-900);
+    background: var(--color-gray-100);
+    border-bottom-left-radius: 0.2rem;
+}
+
+.navia-msg--user {
+    align-self: flex-end;
+    color: var(--color-white);
+    background: var(--color-electric-blue);
+    border-bottom-right-radius: 0.2rem;
+}
+
+.navia-msg--typing {
+    color: var(--color-gray-500);
+    font-style: italic;
+}
+
+.navia-chat__quick {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    padding: 0.6rem 0.85rem 0.9rem;
+    border-top: 1px solid var(--color-gray-200);
+}
+
+.navia-chip {
+    padding: 0.34rem 0.62rem;
+    font: inherit;
+    font-size: 0.76rem;
+    color: var(--color-electric-blue-dark);
+    background: var(--color-white);
+    border: 1.5px solid var(--color-electric-blue);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.navia-chip:hover:not(:disabled) {
+    color: var(--color-white);
+    background: var(--color-electric-blue);
+}
+
+.navia-chip:disabled {
+    opacity: 0.45;
+    cursor: default;
+}
+
+@media (max-width: 540px) {
+    .navia-chat {
+        right: 0.75rem;
+        bottom: 0.75rem;
+        max-height: 76vh;
+    }
+}

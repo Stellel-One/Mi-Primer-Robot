@@ -76,10 +76,13 @@
                             </svg>
                         </a>
                     </div>
-                    <div class="hero__visual" aria-hidden="true">
+                    <div class="hero__visual">
                         <div class="hero__illustration">
-                            <p class="hero__bubble">¡Hola! Soy Navia</p>
-                            <svg class="hero__svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                            <p class="hero__bubble">
+                                <span class="hero__bubble-default">¡Hola! Soy Navia</span>
+                                <span class="hero__bubble-hover">¿Quieres hablar conmigo? ¡Da clic!</span>
+                            </p>
+                            <svg class="hero__svg" aria-hidden="true" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
                                 <defs>
                                     <radialGradient id="naviaHalo" cx="50%" cy="46%" r="52%">
                                         <stop offset="0%" stop-color="#d5ed69" stop-opacity="0.3"/>
@@ -143,6 +146,7 @@
                                     <animate attributeName="cx" values="340;330;340" dur="3.5s" repeatCount="indefinite"/>
                                 </circle>
                             </svg>
+                            <button class="hero__navia-trigger" type="button" aria-label="Hablar con Navia: abre un chat con preguntas sobre seguridad digital"></button>
                         </div>
                     </div>
                 </div>
@@ -231,6 +235,19 @@
             <path d="M18 15l-6-6-6 6"/>
         </svg>
     </button>
+
+    <div class="navia-chat" id="navia-chat" role="dialog" aria-label="Chat con Navia" hidden>
+        <div class="navia-chat__head">
+            <span class="navia-chat__avatar"><img src="navia.svg" alt="" aria-hidden="true"></span>
+            <span class="navia-chat__id">
+                <strong>Navia</strong>
+                <small>Guía de TecnoSafe</small>
+            </span>
+            <button class="navia-chat__close" type="button" aria-label="Cerrar chat">&times;</button>
+        </div>
+        <div class="navia-chat__log" id="navia-chat-log" role="log" aria-live="polite"></div>
+        <div class="navia-chat__quick" id="navia-chat-quick"></div>
+    </div>
 
     <script src="script.js"></script>
 </body>

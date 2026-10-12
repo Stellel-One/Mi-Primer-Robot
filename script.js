@@ -1577,7 +1577,125 @@ function initHeroNavia() {
 }
 
 /* ============================================
- * 11. INICIALIZACIÓN
+ * 11. CHAT DE NAVIA (respuestas predefinidas)
+ * ============================================ */
+
+const NAVIA_FAQ = [
+    {
+        q: '¿Cómo hago una contraseña segura?',
+        a: 'Usá una frase larga, de 4 palabras o más, y mezclá mayúsculas, números y símbolos. No repitas la misma en otros sitios y activá la verificación en dos pasos.'
+    },
+    {
+        q: '¿Qué es el phishing?',
+        a: 'Es un mensaje que imita a una empresa real para robarte datos. Señales: urgencia, errores de escritura, enlaces raros y que te pidan la contraseña. Ante la duda, no hagas clic: entrá escribiendo la dirección a mano.'
+    },
+    {
+        q: '¿Es seguro el WiFi público?',
+        a: 'No del todo. Evitá entrar a tu banco o al correo desde redes abiertas. Si podés, usá tus datos móviles o una VPN.'
+    },
+    {
+        q: '¿Qué datos no debería compartir?',
+        a: 'Contraseñas, códigos de verificación, número de documento, ubicación en tiempo real y datos de tu familia. Si te apuran para pedírtelos, desconfiá.'
+    },
+    {
+        q: '¿Qué hago si me hackearon?',
+        a: 'Primero cambiá la contraseña desde otro dispositivo. Segundo, cerrá todas las sesiones abiertas. Tercero, activá la verificación en dos pasos. Y avisá a tus contactos si mandaron mensajes en tu nombre.'
+    },
+    {
+        q: '¿Qué es la huella digital?',
+        a: 'Es todo lo que dejás al navegar: publicaciones, "me gusta", búsquedas. Antes de publicar, pensá que lo que sube a internet puede quedar para siempre.'
+    },
+    {
+        q: '¿Cómo cuido mis redes sociales?',
+        a: 'Revisá quién puede ver tus datos, aceptá solo a quien conozcas y desconfiá de los mensajes que piden dinero urgente, aunque parezcan de un amigo.'
+    }
+];
+
+function initNaviaChat() {
+    const trigger = $('.hero__navia-trigger');
+    const panel = $('#navia-chat');
+    if (!trigger || !panel) return;
+
+    const illustration = $('.hero__illustration');
+    const log = $('#navia-chat-log');
+    const quick = $('#navia-chat-quick');
+    const closeBtn = $('.navia-chat__close', panel);
+    let greeted = false;
+
+    const makeMessage = (role, text) => {
+        const node = document.createElement('p');
+        node.className = 'navia-msg navia-msg--' + role;
+        node.textContent = text;
+        return node;
+    };
+
+    const scrollToEnd = () => {
+        log.scrollTop = log.scrollHeight;
+    };
+
+    const reply = (text) => {
+        const typing = makeMessage('typing', 'Navia está escribiendo...');
+        log.append(typing);
+        scrollToEnd();
+        window.setTimeout(() => {
+            typing.remove();
+            log.append(makeMessage('bot', text));
+            scrollToEnd();
+        }, 550);
+    };
+
+    const renderQuickReplies = () => {
+        quick.innerHTML = '';
+        NAVIA_FAQ.forEach((item) => {
+            const chip = document.createElement('button');
+            chip.type = 'button';
+            chip.className = 'navia-chip';
+            chip.textContent = item.q;
+            chip.addEventListener('click', () => {
+                log.append(makeMessage('user', item.q));
+                scrollToEnd();
+                chip.disabled = true;
+                reply(item.a);
+            });
+            quick.append(chip);
+        });
+    };
+
+    const openChat = () => {
+        panel.hidden = false;
+        if (!greeted) {
+            greeted = true;
+            log.append(makeMessage('bot', '¡Hola! Soy Navia. Elegí una pregunta y te ayudo a navegar más seguro.'));
+            renderQuickReplies();
+            scrollToEnd();
+        }
+        const first = $('.navia-chip', quick);
+        if (first) first.focus();
+    };
+
+    const closeChat = () => {
+        panel.hidden = true;
+        trigger.focus();
+    };
+
+    trigger.addEventListener('click', openChat);
+
+    if (closeBtn) closeBtn.addEventListener('click', closeChat);
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && !panel.hidden) closeChat();
+    });
+
+    if (illustration) {
+        trigger.addEventListener('mouseenter', () => illustration.classList.add('is-hovering'));
+        trigger.addEventListener('mouseleave', () => illustration.classList.remove('is-hovering'));
+        trigger.addEventListener('focus', () => illustration.classList.add('is-hovering'));
+        trigger.addEventListener('blur', () => illustration.classList.remove('is-hovering'));
+    }
+}
+
+/* ============================================
+ * 12. INICIALIZACIÓN
  * ============================================ */
 
 function init() {
@@ -1585,6 +1703,7 @@ function init() {
     renderTips();
     initMascot();
     initHeroNavia();
+    initNaviaChat();
     initNavigation();
     initQuiz();
     initChallenge();
