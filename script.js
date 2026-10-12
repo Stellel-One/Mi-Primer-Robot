@@ -644,12 +644,13 @@ function initMascot() {
         </div>
     `;
 
-    const heroContent = $('.hero__content');
+    // El hero tiene su propia Navia grande: la guía chica se reserva para las actividades.
+    if ($('.hero__content')) return;
+
     const introSlot = $('.activity-mascot-slot--intro');
-    const placement = heroContent || introSlot || $('.activity-toolbar') || $('.main .section__header');
+    const placement = introSlot || $('.activity-toolbar') || $('.main .section__header');
 
     if (!placement) return;
-    mascot.classList.toggle('mascot-guide--hero', Boolean(heroContent));
     placement.append(mascot);
     loadMascotAnimation(mascot);
 }
@@ -1545,13 +1546,45 @@ function initBackToTop() {
 }
 
 /* ============================================
- * 10. INICIALIZACIÓN
+ * 10. NAVIA SIGUE EL MOUSE
+ * ============================================ */
+
+function initHeroNavia() {
+    const svg = $('.hero__svg');
+    if (!svg) return;
+
+    const follow = $('.hero-navia__follow', svg);
+    const gaze = $('.hero-navia__gaze', svg);
+    if (!follow && !gaze) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+    const maxLean = 12;
+    const maxGaze = 1.3;
+
+    window.addEventListener('mousemove', (event) => {
+        const rect = svg.getBoundingClientRect();
+        if (!rect.width || !rect.height) return;
+        const x = Math.max(-1, Math.min(1, (event.clientX - (rect.left + rect.width / 2)) / (rect.width / 2)));
+        const y = Math.max(-1, Math.min(1, (event.clientY - (rect.top + rect.height / 2)) / (rect.height / 2)));
+        if (follow) {
+            follow.style.transform = `translate(${(x * maxLean).toFixed(2)}px, ${(y * maxLean).toFixed(2)}px)`;
+        }
+        if (gaze) {
+            gaze.style.transform = `translate(${(x * maxGaze).toFixed(2)}px, ${(y * maxGaze).toFixed(2)}px)`;
+        }
+    }, { passive: true });
+}
+
+/* ============================================
+ * 11. INICIALIZACIÓN
  * ============================================ */
 
 function init() {
     renderLearnCards();
     renderTips();
     initMascot();
+    initHeroNavia();
     initNavigation();
     initQuiz();
     initChallenge();

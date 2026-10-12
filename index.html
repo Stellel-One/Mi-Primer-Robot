@@ -71,44 +71,68 @@
                     </div>
                     <div class="hero__visual" aria-hidden="true">
                         <div class="hero__illustration">
+                            <p class="hero__bubble">¡Hola! Soy Navia</p>
                             <svg class="hero__svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
                                 <defs>
-                                    <linearGradient id="shieldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" stop-color="#0ea5e9"/>
-                                        <stop offset="100%" stop-color="#06b6d4"/>
-                                    </linearGradient>
-                                    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-                                        <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
-                                        <feMerge>
-                                            <feMergeNode in="coloredBlur"/>
-                                            <feMergeNode in="SourceGraphic"/>
-                                        </feMerge>
-                                    </filter>
+                                    <radialGradient id="naviaHalo" cx="50%" cy="46%" r="52%">
+                                        <stop offset="0%" stop-color="#d5ed69" stop-opacity="0.3"/>
+                                        <stop offset="55%" stop-color="#398a6c" stop-opacity="0.14"/>
+                                        <stop offset="100%" stop-color="#26745c" stop-opacity="0"/>
+                                    </radialGradient>
                                 </defs>
-                                <path class="hero__shield" d="M200 40 L360 90 L360 250 C360 320 200 360 200 360 C200 360 40 320 40 250 L40 90 Z"
-                                      fill="url(#shieldGradient)" opacity="0.15" stroke="url(#shieldGradient)" stroke-width="2"/>
-                                <path class="hero__shield-inner" d="M200 70 L320 110 L320 220 C320 270 200 300 200 300 C200 300 80 270 80 220 L80 110 Z"
-                                      fill="none" stroke="url(#shieldGradient)" stroke-width="1.5" stroke-dasharray="8,4"/>
-                                <g transform="translate(200, 180)" filter="url(#glow)">
-                                    <g class="hero__lock-pulse">
-                                        <rect x="-40" y="-10" width="80" height="60" rx="8" fill="#0c4a6e" stroke="#0ea5e9" stroke-width="2"/>
-                                        <rect x="-40" y="-10" width="80" height="25" rx="8" fill="#0ea5e9"/>
-                                        <circle cx="0" cy="15" r="18" fill="none" stroke="#22d3ee" stroke-width="3"/>
-                                        <path d="M0 5v10" stroke="#22d3ee" stroke-width="3" stroke-linecap="round"/>
+                                <circle class="hero__halo" cx="200" cy="190" r="152" fill="url(#naviaHalo)"/>
+                                <g class="hero__orbit">
+                                    <circle cx="200" cy="190" r="150" fill="none" stroke="#d5ed69" stroke-width="1" stroke-dasharray="3 11" opacity="0.3"/>
+                                    <circle cx="200" cy="40" r="3.5" fill="#e7f4aa"/>
+                                    <circle cx="200" cy="340" r="2.5" fill="#d5ed69"/>
+                                </g>
+                                <g class="hero-navia__follow">
+                                <g class="hero-navia__drift">
+                                    <g class="hero__navia" transform="translate(200 190) scale(2.35) translate(-60 -51.5)">
+                                        <g class="hero-navia__inner">
+                                            <g class="hero-navia__antenna">
+                                                <path d="M60 27V15" fill="none" stroke="#d5ed69" stroke-width="4" stroke-linecap="round"/>
+                                                <path d="m60 4 8 9-8 8-8-8z" fill="#ef9b65" stroke="#17352f" stroke-width="2"/>
+                                            </g>
+                                            <g class="hero-navia__body">
+                                                <path d="M30 47V41a7 7 0 0 1 7-7h46a7 7 0 0 1 7 7v6" fill="#398a6c" stroke="#17352f" stroke-width="3"/>
+                                                <path d="M31 49c0-12 10-22 22-22h14c12 0 22 10 22 22v28c0 13-10 23-23 23H54c-13 0-23-10-23-23z" fill="#26745c" stroke="#17352f" stroke-width="3"/>
+                                                <path d="M29 55h-5a7 7 0 0 0 0 14h5m62-14h5a7 7 0 0 1 0 14h-5" fill="#d5ed69" stroke="#17352f" stroke-width="3" stroke-linecap="round"/>
+                                                <rect x="38" y="43" width="44" height="34" rx="15" fill="#f5f8f4" stroke="#17352f" stroke-width="2.5"/>
+                                                <g class="hero-navia__gaze">
+                                                    <g class="hero-navia__eyes" fill="#17352f">
+                                                        <ellipse cx="51" cy="58" rx="3.5" ry="4.5"/>
+                                                        <ellipse cx="69" cy="58" rx="3.5" ry="4.5"/>
+                                                    </g>
+                                                </g>
+                                                <path d="M53 68q7 7 14 0" fill="none" stroke="#26745c" stroke-width="2.5" stroke-linecap="round"/>
+                                                <path d="M43 91h14l3 8H45zm20 0h14l2 8H65z" fill="#ef9b65" stroke="#17352f" stroke-width="2.5" stroke-linejoin="round"/>
+                                                <g class="hero-navia__badge">
+                                                    <path d="m60 79 10 4v7c0 6-6 10-10 12-4-2-10-6-10-12v-7z" fill="#d5ed69" stroke="#17352f" stroke-width="2" stroke-linejoin="round"/>
+                                                    <path d="m56 89 3 3 5-6" fill="none" stroke="#17352f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </g>
+                                                <path class="hero-navia__arm hero-navia__arm--left" d="M33 73q-12 5-10 16" fill="none" stroke="#26745c" stroke-width="7" stroke-linecap="round"/>
+                                                <path class="hero-navia__arm hero-navia__arm--right" d="M87 73q12 5 10 16" fill="none" stroke="#26745c" stroke-width="7" stroke-linecap="round"/>
+                                            </g>
+                                        </g>
                                     </g>
                                 </g>
-                                <circle cx="100" cy="80" r="3" fill="#0ea5e9" opacity="0.6">
+                                </g>
+                                <g transform="translate(112 118)"><path class="hero__spark hero__spark--1" d="M0 -11 L2.8 -2.8 L11 0 L2.8 2.8 L0 11 L-2.8 2.8 L-11 0 L-2.8 -2.8 Z" fill="#e7f4aa"/></g>
+                                <g transform="translate(316 156)"><path class="hero__spark hero__spark--2" d="M0 -9 L2.3 -2.3 L9 0 L2.3 2.3 L0 9 L-2.3 2.3 L-9 0 L-2.3 -2.3 Z" fill="#d5ed69"/></g>
+                                <g transform="translate(118 296)"><path class="hero__spark hero__spark--3" d="M0 -8 L2 -2 L8 0 L2 2 L0 8 L-2 2 L-8 0 L-2 -2 Z" fill="#e7f4aa"/></g>
+                                <circle cx="100" cy="80" r="3" fill="#d5ed69" opacity="0.6">
                                     <animate attributeName="cy" values="80;60;80" dur="3s" repeatCount="indefinite"/>
-                                    <animate attributeName="opacity" values="0.6;0.2;0.6" dur="3s" repeatCount="indefinite"/>
+                                    <animate attributeName="opacity" values="0.6;0.15;0.6" dur="3s" repeatCount="indefinite"/>
                                 </circle>
-                                <circle cx="300" cy="120" r="2" fill="#22d3ee" opacity="0.5">
+                                <circle cx="300" cy="120" r="2" fill="#d5ed69" opacity="0.5">
                                     <animate attributeName="cy" values="120;100;120" dur="2.5s" repeatCount="indefinite"/>
                                     <animate attributeName="opacity" values="0.5;0.1;0.5" dur="2.5s" repeatCount="indefinite"/>
                                 </circle>
-                                <circle cx="80" cy="300" r="2.5" fill="#06b6d4" opacity="0.5">
+                                <circle cx="80" cy="300" r="2.5" fill="#b9d95a" opacity="0.5">
                                     <animate attributeName="cx" values="80;90;80" dur="4s" repeatCount="indefinite"/>
                                 </circle>
-                                <circle cx="340" cy="280" r="2" fill="#0ea5e9" opacity="0.4">
+                                <circle cx="340" cy="280" r="2" fill="#b9d95a" opacity="0.4">
                                     <animate attributeName="cx" values="340;330;340" dur="3.5s" repeatCount="indefinite"/>
                                 </circle>
                             </svg>
