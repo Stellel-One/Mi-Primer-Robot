@@ -3870,11 +3870,54 @@ button {
     filter: drop-shadow(0 22px 44px rgba(213, 237, 105, 0.32));
 }
 
+/* Botón flotante de Navia para abrir el chat */
+.navia-launcher {
+    position: fixed;
+    right: 1.25rem;
+    bottom: 1.25rem;
+    z-index: 61;
+    display: grid;
+    place-items: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    padding: 0;
+    background: var(--gradient-dark);
+    border: 3px solid var(--color-turquoise);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+    transition: transform var(--transition-fast);
+    animation: launcherPulse 2.6s ease-out infinite;
+}
+
+.navia-launcher[hidden] {
+    display: none;
+}
+
+.navia-launcher img {
+    width: 2.1rem;
+    height: 2.1rem;
+}
+
+.navia-launcher:hover {
+    transform: scale(1.07);
+}
+
+.navia-launcher:focus-visible {
+    outline: 3px solid var(--color-turquoise-light);
+    outline-offset: 3px;
+}
+
+@keyframes launcherPulse {
+    0%, 100% { box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35), 0 0 0 0 rgba(213, 237, 105, 0.5); }
+    70% { box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35), 0 0 0 16px rgba(213, 237, 105, 0); }
+}
+
 /* Panel de chat */
 .navia-chat {
     position: fixed;
     right: 1.25rem;
-    bottom: 1.25rem;
+    bottom: 5.5rem;
     z-index: 60;
     display: flex;
     flex-direction: column;
@@ -4022,9 +4065,14 @@ button {
 }
 
 @media (max-width: 540px) {
-    .navia-chat {
+    .navia-launcher {
         right: 0.75rem;
         bottom: 0.75rem;
+    }
+
+    .navia-chat {
+        right: 0.75rem;
+        bottom: 5rem;
         max-height: 76vh;
     }
 }

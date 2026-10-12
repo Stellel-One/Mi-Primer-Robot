@@ -1620,7 +1620,9 @@ function initNaviaChat() {
     const log = $('#navia-chat-log');
     const quick = $('#navia-chat-quick');
     const closeBtn = $('.navia-chat__close', panel);
+    const launcher = $('#navia-launcher');
     let greeted = false;
+    let lastFocused = null;
 
     const makeMessage = (role, text) => {
         const node = document.createElement('p');
@@ -1661,8 +1663,13 @@ function initNaviaChat() {
         });
     };
 
-    const openChat = () => {
+    const openChat = (opener) => {
+        lastFocused = opener || null;
         panel.hidden = false;
+        if (launcher) {
+            launcher.hidden = true;
+            launcher.setAttribute('aria-expanded', 'true');
+        }
         if (!greeted) {
             greeted = true;
             log.append(makeMessage('bot', '¡Hola! Soy Navia. Elegí una pregunta y te ayudo a navegar más seguro.'));
@@ -1675,10 +1682,16 @@ function initNaviaChat() {
 
     const closeChat = () => {
         panel.hidden = true;
-        trigger.focus();
+        if (launcher) {
+            launcher.hidden = false;
+            launcher.setAttribute('aria-expanded', 'false');
+        }
+        if (lastFocused) lastFocused.focus();
     };
 
-    trigger.addEventListener('click', openChat);
+    trigger.addEventListener('click', () => openChat(trigger));
+
+    if (launcher) launcher.addEventListener('click', () => openChat(launcher));
 
     if (closeBtn) closeBtn.addEventListener('click', closeChat);
 
