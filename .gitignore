@@ -1,1 +1,18 @@
+# Dependencias
+node_modules/
+package-lock.json
+
+# Entorno y logs
+.env
+npm-debug.log*
+yarn-debug.log*
+
+# Resguardo y duplicados
+_backup_tecnosafe/
+robot-seguidor-linea/
 .atl/
+
+# Editores y SO
+.vscode/
+.DS_Store
+Thumbs.db

@@ -3,255 +3,279 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="TecnoSafe - Tu guía educativa para la seguridad digital. Aprende a navegar de forma segura, responsable y consciente.">
-    <title>TecnoSafe - Inicio</title>
-    <link rel="icon" href="navia.svg" type="image/svg+xml">
+    <meta name="description" content="Proyecto Académico de Robótica y Electrónica Básica: Robot Seguidor de Línea sin Arduino. Grado 11 - Tecnología e Informática.">
+    <title>Robot Seguidor de Línea (Sin Arduino) | Proyecto Escolar 11°</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Header / Navigation -->
-    <header class="header" id="header">
+
+    <!-- Header / Navigation Estilo TecnoSafe -->
+    <header class="site-header" id="header">
         <nav class="nav container" aria-label="Navegación principal">
-            <a href="index.html" class="nav__logo" aria-label="TecnoSafe - Inicio">
-                <img class="nav__logo-icon brand-mark" src="navia.svg" alt="" aria-hidden="true">
-                <span class="nav__logo-text">TecnoSafe</span>
+            <a href="index.html" class="nav__logo" aria-label="RobotLab 11° - Inicio">
+                <div class="nav__logo-icon brand-mark">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                        <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+                        <circle cx="12" cy="5" r="2"></circle>
+                        <path d="M12 7v4"></path>
+                        <line x1="8" y1="16" x2="8" y2="16"></line>
+                        <line x1="16" y1="16" x2="16" y2="16"></line>
+                    </svg>
+                </div>
+                <div class="nav__logo-text-group">
+                    <span class="nav__logo-text">ROBOTLAB</span>
+                    <span class="nav__logo-sub">Grado 11 • Sin Arduino</span>
+                </div>
             </a>
+
+            <div class="nav__actions">
+                <div class="nav__academic-badge">
+                    <span class="badge__icon">⚡</span>
+                    <span class="badge__title">Tecnología e Informática</span>
+                    <span class="badge__tag">Electrónica Pura</span>
+                </div>
+            </div>
+
             <button class="nav__toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menú">
-                <span class="nav__toggle-icon" aria-hidden="true"></span>
+                <span class="nav__toggle-icon">☰</span>
             </button>
-            <ul class="nav__menu" id="nav-menu" role="list">
+
+            <ul class="nav__menu" id="nav-menu" role="menubar">
                 <li><a href="index.html" class="nav__link nav__link--tab active" data-page="inicio" aria-current="page">
-                    <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
                     <span>Inicio</span>
                 </a></li>
-                <li><a href="aprende.html" class="nav__link nav__link--tab" data-page="aprende">
-                    <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-                    <span>Aprende</span>
+                <li><a href="materiales.html" class="nav__link nav__link--tab" data-page="materiales">
+                    <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                    <span>1. Materiales</span>
                 </a></li>
-                <li><a href="quiz.html" class="nav__link nav__link--tab" data-page="quiz">
-                    <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                    <span>Quiz</span>
+                <li><a href="concepto.html" class="nav__link nav__link--tab" data-page="concepto">
+                    <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    <span>2. Concepto</span>
                 </a></li>
-                <li><a href="reto.html" class="nav__link nav__link--tab" data-page="reto">
-                    <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22 8.5 12 15.5 2 8.5"/></svg>
-                    <span>Reto</span>
+                <li><a href="funciones.html" class="nav__link nav__link--tab" data-page="funciones">
+                    <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22 8.5 12 15.5 2 8.5"/></svg>
+                    <span>3. Funciones</span>
                 </a></li>
-                <li><a href="consejos.html" class="nav__link nav__link--tab" data-page="consejos">
-                    <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 1 1 7.072 0l-.548.547A3.374 3.374 0 0 0 14 18.469V19a2 2 0 1 1-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
-                    <span>Consejos</span>
+                <li><a href="electronica.html" class="nav__link nav__link--tab" data-page="electronica">
+                    <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    <span>4. Electrónica</span>
                 </a></li>
-                <li><a href="acerca.html" class="nav__link nav__link--tab" data-page="acerca">
-                    <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-                    <span>Proyecto</span>
+                <li><a href="video.html" class="nav__link nav__link--tab" data-page="video">
+                    <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2.18" ry="2.18"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+                    <span>Video y Capturas</span>
                 </a></li>
             </ul>
         </nav>
     </header>
 
-    <main class="main">
-        <!-- INICIO Section -->
-        <section id="inicio" class="section section--hero" aria-labelledby="inicio-title">
-            <div class="hero__space" aria-hidden="true">
-                <span class="hero__stars hero__stars--far"></span>
-                <span class="hero__stars hero__stars--near"></span>
-                <span class="hero__nebula"></span>
-                <span class="hero__shooting hero__shooting--1"></span>
-                <span class="hero__shooting hero__shooting--2"></span>
-            </div>
-            <div class="container">
-                <div class="hero">
-                    <div class="hero__content">
-                        <span class="hero__badge">Ciudadanía digital · Guía práctica</span>
-                        <h1 id="inicio-title" class="hero__title">Tu vida digital, más segura</h1>
-                        <p class="hero__description">
-                            Aprende a reconocer riesgos, cuidar tus datos y tomar mejores decisiones en internet.
-                        </p>
-                        <a href="aprende.html" class="btn btn--primary btn--large hero__cta">
-                            <span>Explorar la guía</span>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                                <path d="M5 12h14M12 5l7 7-7 7"/>
-                            </svg>
-                        </a>
+    <main>
+        <!-- Hero Formal -->
+        <section class="hero-section" id="hero">
+            <div class="container hero-grid">
+                <div class="hero-content">
+                    <div class="hero-badges-wrapper">
+                        <span class="badge badge-green">Proyecto Formal de Grado 11</span>
+                        <span class="badge badge-no-arduino">100% Control Analógico Discreto</span>
                     </div>
-                    <div class="hero__visual">
-                        <div class="hero__illustration">
-                            <p class="hero__bubble">
-                                <span class="hero__bubble-default">¡Hola! Soy Navia</span>
-                                <span class="hero__bubble-hover">¿Quieres hablar conmigo? ¡Da clic!</span>
-                            </p>
-                            <svg class="hero__svg" aria-hidden="true" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-                                <defs>
-                                    <radialGradient id="naviaHalo" cx="50%" cy="46%" r="52%">
-                                        <stop offset="0%" stop-color="#d5ed69" stop-opacity="0.3"/>
-                                        <stop offset="55%" stop-color="#398a6c" stop-opacity="0.14"/>
-                                        <stop offset="100%" stop-color="#26745c" stop-opacity="0"/>
-                                    </radialGradient>
-                                </defs>
-                                <circle class="hero__halo" cx="200" cy="190" r="152" fill="url(#naviaHalo)"/>
-                                <g class="hero__orbit">
-                                    <circle cx="200" cy="190" r="150" fill="none" stroke="#d5ed69" stroke-width="1" stroke-dasharray="3 11" opacity="0.3"/>
-                                    <circle cx="200" cy="40" r="3.5" fill="#e7f4aa"/>
-                                    <circle cx="200" cy="340" r="2.5" fill="#d5ed69"/>
-                                </g>
-                                <g class="hero-navia__follow">
-                                <g class="hero-navia__drift">
-                                    <g class="hero__navia" transform="translate(200 190) scale(2.35) translate(-60 -51.5)">
-                                        <g class="hero-navia__inner">
-                                            <g class="hero-navia__antenna">
-                                                <path d="M60 27V15" fill="none" stroke="#d5ed69" stroke-width="4" stroke-linecap="round"/>
-                                                <path d="m60 4 8 9-8 8-8-8z" fill="#ef9b65" stroke="#17352f" stroke-width="2"/>
-                                            </g>
-                                            <g class="hero-navia__body">
-                                                <path d="M30 47V41a7 7 0 0 1 7-7h46a7 7 0 0 1 7 7v6" fill="#398a6c" stroke="#17352f" stroke-width="3"/>
-                                                <path d="M31 49c0-12 10-22 22-22h14c12 0 22 10 22 22v28c0 13-10 23-23 23H54c-13 0-23-10-23-23z" fill="#26745c" stroke="#17352f" stroke-width="3"/>
-                                                <path d="M29 55h-5a7 7 0 0 0 0 14h5m62-14h5a7 7 0 0 1 0 14h-5" fill="#d5ed69" stroke="#17352f" stroke-width="3" stroke-linecap="round"/>
-                                                <rect x="38" y="43" width="44" height="34" rx="15" fill="#f5f8f4" stroke="#17352f" stroke-width="2.5"/>
-                                                <g class="hero-navia__gaze">
-                                                    <g class="hero-navia__eyes" fill="#17352f">
-                                                        <ellipse cx="51" cy="58" rx="3.5" ry="4.5"/>
-                                                        <ellipse cx="69" cy="58" rx="3.5" ry="4.5"/>
-                                                    </g>
-                                                </g>
-                                                <path d="M53 68q7 7 14 0" fill="none" stroke="#26745c" stroke-width="2.5" stroke-linecap="round"/>
-                                                <path d="M43 91h14l3 8H45zm20 0h14l2 8H65z" fill="#ef9b65" stroke="#17352f" stroke-width="2.5" stroke-linejoin="round"/>
-                                                <g class="hero-navia__badge">
-                                                    <path d="m60 79 10 4v7c0 6-6 10-10 12-4-2-10-6-10-12v-7z" fill="#d5ed69" stroke="#17352f" stroke-width="2" stroke-linejoin="round"/>
-                                                    <path d="m56 89 3 3 5-6" fill="none" stroke="#17352f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                                </g>
-                                                <path class="hero-navia__arm hero-navia__arm--left" d="M33 73q-12 5-10 16" fill="none" stroke="#26745c" stroke-width="7" stroke-linecap="round"/>
-                                                <path class="hero-navia__arm hero-navia__arm--right" d="M87 73q12 5 10 16" fill="none" stroke="#26745c" stroke-width="7" stroke-linecap="round"/>
-                                            </g>
-                                        </g>
-                                    </g>
-                                </g>
-                                </g>
-                                <g transform="translate(112 118)"><path class="hero__spark hero__spark--1" d="M0 -11 L2.8 -2.8 L11 0 L2.8 2.8 L0 11 L-2.8 2.8 L-11 0 L-2.8 -2.8 Z" fill="#e7f4aa"/></g>
-                                <g transform="translate(316 156)"><path class="hero__spark hero__spark--2" d="M0 -9 L2.3 -2.3 L9 0 L2.3 2.3 L0 9 L-2.3 2.3 L-9 0 L-2.3 -2.3 Z" fill="#d5ed69"/></g>
-                                <g transform="translate(118 296)"><path class="hero__spark hero__spark--3" d="M0 -8 L2 -2 L8 0 L2 2 L0 8 L-2 2 L-8 0 L-2 -2 Z" fill="#e7f4aa"/></g>
-                                <circle cx="100" cy="80" r="3" fill="#d5ed69" opacity="0.6">
-                                    <animate attributeName="cy" values="80;60;80" dur="3s" repeatCount="indefinite"/>
-                                    <animate attributeName="opacity" values="0.6;0.15;0.6" dur="3s" repeatCount="indefinite"/>
-                                </circle>
-                                <circle cx="300" cy="120" r="2" fill="#d5ed69" opacity="0.5">
-                                    <animate attributeName="cy" values="120;100;120" dur="2.5s" repeatCount="indefinite"/>
-                                    <animate attributeName="opacity" values="0.5;0.1;0.5" dur="2.5s" repeatCount="indefinite"/>
-                                </circle>
-                                <circle cx="80" cy="300" r="2.5" fill="#b9d95a" opacity="0.5">
-                                    <animate attributeName="cx" values="80;90;80" dur="4s" repeatCount="indefinite"/>
-                                </circle>
-                                <circle cx="340" cy="280" r="2" fill="#b9d95a" opacity="0.4">
-                                    <animate attributeName="cx" values="340;330;340" dur="3.5s" repeatCount="indefinite"/>
-                                </circle>
-                            </svg>
-                            <button class="hero__navia-trigger" type="button" aria-label="Hablar con Navia: abre un chat con preguntas sobre seguridad digital"></button>
+
+                    <h1 class="hero-title">
+                        Robot Seguidor de Línea <br>
+                        <span class="hero-title-highlight">Fundamentos de Robótica Autónoma</span>
+                    </h1>
+
+                    <p class="hero-description">
+                        Plataforma pedagógica e investigación técnica dedicada al estudio, diseño esquemático y comprensión profunda de un móvil terrestre de lazo cerrado gobernado exclusivamente por física de semiconductores, amplificadores comparadores y control de potencia, sin microcontroladores programables.
+                    </p>
+
+                    <div class="hero-callouts">
+                        <div class="callout-card">
+                            <span class="callout-num">4 Secciones</span>
+                            <span class="callout-label">Estructura Curricular Obligatoria</span>
+                        </div>
+                        <div class="callout-card">
+                            <span class="callout-num">0 Líneas de Código</span>
+                            <span class="callout-label">Lógica Binaria en Hardware Puro</span>
+                        </div>
+                        <div class="callout-card">
+                            <span class="callout-num">100% Teórico</span>
+                            <span class="callout-label">Investigación y Presentación</span>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.5rem;">
+                        <a href="materiales.html" class="btn btn-primary">Iniciar: 1. Materiales &rarr;</a>
+                        <a href="funciones.html" class="btn btn-secondary">Simulador de Trayectoria ↗</a>
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <div class="hero-illustration-wrapper">
+                        <img src="imagenes/robot-hero.svg" alt="Ilustración técnica de robot seguidor de línea analógico sobre pista" width="400" height="320">
+                        <div class="floating-tag">
+                            <span style="font-size: 1.1rem;">🔬</span>
+                            <span>Modelo de Control LM393 + 2N2222</span>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="hero__scroll-indicator" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M12 5v14M19 12l-7 7-7-7"/>
-                </svg>
-            </div>
         </section>
-        <section class="section home-journey" aria-labelledby="home-journey-title">
+
+        <!-- Ficha Técnica Resumen Formal -->
+        <section class="section">
             <div class="container">
-                <header class="section__header">
-                    <span class="section__eyebrow">Un recorrido en tres pasos</span>
-                    <h2 id="home-journey-title" class="section__title">Aprende. Practica. Decide mejor.</h2>
-                    <p class="section__subtitle">Avanza a tu ritmo con herramientas breves para situaciones reales de la vida digital.</p>
-                </header>
-                <div class="journey-grid">
-                    <article class="journey-card">
-                        <span class="journey-card__number">01 / APRENDE</span>
-                        <h3>Reconoce los riesgos</h3>
-                        <p>Conoce señales de alerta, privacidad y formas de cuidar tus cuentas.</p>
-                        <a href="aprende.html">Explorar temas <span aria-hidden="true">&#8594;</span></a>
-                    </article>
-                    <article class="journey-card">
-                        <span class="journey-card__number">02 / PRACTICA</span>
-                        <h3>Decide en contexto</h3>
-                        <p>Analiza escenarios cotidianos y descubre qué opciones te protegen mejor.</p>
-                        <a href="reto.html">Probar el reto <span aria-hidden="true">&#8594;</span></a>
-                    </article>
-                    <article class="journey-card">
-                        <span class="journey-card__number">03 / COMPRUEBA</span>
-                        <h3>Pon a prueba tu criterio</h3>
-                        <p>Responde preguntas y recibe explicaciones para afianzar lo aprendido.</p>
-                        <a href="quiz.html">Ir al cuestionario <span aria-hidden="true">&#8594;</span></a>
-                    </article>
+                <div class="section-header">
+                    <span class="section-number">Marco del Proyecto</span>
+                    <h2 class="section-title">Estructura Académica y Objetivos</h2>
+                    <p class="section-subtitle">
+                        El proyecto se organiza en cuatro áreas temáticas obligatorias según los lineamientos curriculares del área de Tecnología e Informática.
+                    </p>
                 </div>
-                <aside class="home-note" aria-label="Consejos prácticos">
-                    <div>
-                        <h3>La seguridad también se construye con pequeños hábitos.</h3>
-                        <p>Consulta acciones sencillas que puedes aplicar desde hoy.</p>
-                    </div>
-                    <a href="consejos.html">Ver consejos <span aria-hidden="true">&#8594;</span></a>
-                </aside>
+
+                <div class="functions-flow" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+                    <a href="materiales.html" class="flow-step-card" style="text-decoration: none; color: inherit; transition: transform var(--transition-fast);">
+                        <div class="flow-step-number">01</div>
+                        <h4 class="flow-step-title" style="color: var(--color-cyan);">Sección 1: Materiales</h4>
+                        <p style="font-size: 0.88rem; color: var(--text-secondary);">Inventario técnico de componentes mecánicos, ópticos, pasivos y activos con especificaciones nominales y notas de taller.</p>
+                        <span style="font-size: 0.82rem; color: var(--color-accent-green-bright); font-weight: 700; margin-top: auto;">Ver Sección 1 &rarr;</span>
+                    </a>
+
+                    <a href="concepto.html" class="flow-step-card" style="text-decoration: none; color: inherit; transition: transform var(--transition-fast);">
+                        <div class="flow-step-number">02</div>
+                        <h4 class="flow-step-title" style="color: var(--color-cyan);">Sección 2: Concepto</h4>
+                        <p style="font-size: 0.88rem; color: var(--text-secondary);">Definición de sistema autónomo, reflectancia óptica, geometría de trayectoria y estudio comparativo vs microcontroladores.</p>
+                        <span style="font-size: 0.82rem; color: var(--color-accent-green-bright); font-weight: 700; margin-top: auto;">Ver Sección 2 &rarr;</span>
+                    </a>
+
+                    <a href="funciones.html" class="flow-step-card" style="text-decoration: none; color: inherit; transition: transform var(--transition-fast);">
+                        <div class="flow-step-number">03</div>
+                        <h4 class="flow-step-title" style="color: var(--color-cyan);">Sección 3: Funciones</h4>
+                        <p style="font-size: 0.88rem; color: var(--text-secondary);">Comportamiento dinámico, tabla lógica de decisión, corrección de rumbo con simulador interactivo y aplicaciones industriales.</p>
+                        <span style="font-size: 0.82rem; color: var(--color-accent-green-bright); font-weight: 700; margin-top: auto;">Ver Sección 3 &rarr;</span>
+                    </a>
+
+                    <a href="electronica.html" class="flow-step-card" style="text-decoration: none; color: inherit; transition: transform var(--transition-fast);">
+                        <div class="flow-step-number">04</div>
+                        <h4 class="flow-step-title" style="color: var(--color-cyan);">Sección 4: Electrónica</h4>
+                        <p style="font-size: 0.88rem; color: var(--text-secondary);">Análisis de la etapa sensora, comparador de voltaje LM393, transistores de potencia, diodos flyback y esquema normado.</p>
+                        <span style="font-size: 0.82rem; color: var(--color-accent-green-bright); font-weight: 700; margin-top: auto;">Ver Sección 4 &rarr;</span>
+                    </a>
+                </div>
+
+                <!-- Tabla Formal de Ficha Técnica General -->
+                <div class="table-responsive">
+                    <h3 style="font-size: 1.35rem; margin-bottom: 1rem; color: #ffffff;">Ficha Técnica Formal del Prototipo Analógico</h3>
+                    <table class="formal-table">
+                        <thead>
+                            <tr>
+                                <th>Parámetro de Ingeniería</th>
+                                <th>Especificación Nominal</th>
+                                <th>Criterio de Diseño y Justificación</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Arquitectura de Control</strong></td>
+                                <td>Lazo cerrado por hardware analógico discreto</td>
+                                <td>Sin microcontrolador; elimina latencia de procesamiento y costos de programación.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tensión de Alimentación (\(V_{cc}\))</strong></td>
+                                <td>6.0V DC nominal (4 pilas AA de 1.5V) o 7.4V Li-Ion</td>
+                                <td>Rango óptimo para garantizar saturación de transistores y umbral del comparador LM393.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Sensores Ópticos</strong></td>
+                                <td>2 módulos reflectivos infrarrojos (TCRT5000 / CNY70)</td>
+                                <td>Longitud de onda de emisión en 950 nm (inmune a luz visible ambiental estándar).</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Circuito Comparador</strong></td>
+                                <td>LM393 Dual Differential Comparator</td>
+                                <td>Conversión brusca de niveles analógicos continuos a salidas binarias limpias.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Etapa de Potencia</strong></td>
+                                <td>Transistores BJT NPN (2N2222A / TIP120) en saturación</td>
+                                <td>Aislamiento de corriente: soporta de 200 mA a 800 mA demandados por los motores.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Protección Contra Inducción</strong></td>
+                                <td>Diodos de conmutación rápida 1N4007 en antiparalelo</td>
+                                <td>Supresión de sobretensiones inversas (f.c.e.m.) causadas por la inductancia del devanado del motor.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tracción y Dirección</strong></td>
+                                <td>Diferencial 2WD con motorreductores 1:48</td>
+                                <td>Permite giros sobre el eje central sin necesidad de servos mecánicos de dirección.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="footer" id="footer" role="contentinfo">
+    <!-- Footer Formal Estilo TecnoSafe -->
+    <footer class="site-footer">
         <div class="container">
-            <div class="footer__grid">
-                <div class="footer__brand">
-                    <a href="index.html" class="footer__logo" aria-label="TecnoSafe - Inicio">
-                        <img class="footer__logo-icon brand-mark" src="navia.svg" alt="" aria-hidden="true">
-                        <span class="footer__logo-text">TecnoSafe</span>
-                    </a>
-                    <p class="footer__tagline">Tu seguridad digital comienza contigo</p>
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="brand-logo" style="margin-bottom: 1rem;">
+                        <div class="brand-icon-wrapper" aria-hidden="true">🤖</div>
+                        <span>RobotLab 11°</span>
+                    </div>
+                    <p style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem;">
+                        Proyecto educativo formal de Tecnología e Informática (Grado 11). Documentación técnica y análisis riguroso de sistemas robóticos móviles autónomos sin microcontroladores.
+                    </p>
+                    <span class="badge badge-green">Estándares Web • Arquitectura Multipágina</span>
                 </div>
-                <nav class="footer__nav" aria-label="Navegación del pie de página">
-                    <h4 class="footer__nav-title">Secciones</h4>
-                    <ul role="list">
-                        <li><a href="index.html" class="footer__link">Inicio</a></li>
-                        <li><a href="aprende.html" class="footer__link">Aprende</a></li>
-                        <li><a href="quiz.html" class="footer__link">Cuestionario</a></li>
-                        <li><a href="reto.html" class="footer__link">Reto Digital</a></li>
-                        <li><a href="consejos.html" class="footer__link">Consejos</a></li>
-                        <li><a href="acerca.html" class="footer__link">Acerca</a></li>
+
+                <div class="footer-col">
+                    <h4>Secciones del Proyecto</h4>
+                    <ul class="footer-links">
+                        <li><a href="materiales.html" class="footer-link">1. Materiales y Ficha BOM</a></li>
+                        <li><a href="concepto.html" class="footer-link">2. Concepto y Autonomía</a></li>
+                        <li><a href="funciones.html" class="footer-link">3. Funciones y Simulador</a></li>
+                        <li><a href="electronica.html" class="footer-link">4. Parte Electrónica Completa</a></li>
+                        <li><a href="video.html" class="footer-link">Video y Evidencias</a></li>
                     </ul>
-                </nav>
-                <div class="footer__info">
-                    <h4 class="footer__nav-title">Proyecto Escolar</h4>
-                    <p class="footer__text">Desarrollado para la asignatura de Tecnología - Grado 11</p>
-                    <p class="footer__text">Enfoque: Ciudadanía digital y ciberseguridad</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Componentes Clave</h4>
+                    <ul class="footer-links">
+                        <li><span class="footer-link">Comparador Dual LM393</span></li>
+                        <li><span class="footer-link">Sensor Infrarrojo TCRT5000</span></li>
+                        <li><span class="footer-link">Transistores BJT NPN 2N2222A</span></li>
+                        <li><span class="footer-link">Motorreductores DC TT 1:48</span></li>
+                        <li><span class="footer-link">Diodos de Protección 1N4007</span></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Documentación Técnica</h4>
+                    <ul class="footer-links">
+                        <li><span class="footer-link">Texas Instruments LM393 Datasheet</span></li>
+                        <li><span class="footer-link">Vishay Semiconductors TCRT5000</span></li>
+                        <li><span class="footer-link">Guía Pedagógica MEN Tecnología 11°</span></li>
+                        <li><span class="footer-link">Boylestad - Dispositivos Electrónicos</span></li>
+                    </ul>
                 </div>
             </div>
-            <div class="footer__bottom">
-                <p class="footer__copyright">&copy; 2026 TecnoSafe. Proyecto educativo sin fines de lucro.</p>
-                <p class="footer__disclaimer">No recopilamos datos personales. Todos los contenidos son con fines educativos.</p>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Proyecto Escolar de Robótica y Tecnología - Grado 11. Desarrollado con estándares web modernos.</p>
+                <p>Sin fines comerciales • Exclusivamente Educativo</p>
             </div>
         </div>
     </footer>
-
-    <button class="back-to-top" id="back-to-top" aria-label="Volver arriba" hidden>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <path d="M18 15l-6-6-6 6"/>
-        </svg>
-    </button>
-
-    <button class="navia-launcher" id="navia-launcher" type="button" aria-label="Abrir el chat de Navia" aria-expanded="false" aria-controls="navia-chat">
-        <img src="navia.svg" alt="" aria-hidden="true">
-    </button>
-
-    <div class="navia-chat" id="navia-chat" role="dialog" aria-label="Chat con Navia" hidden>
-        <div class="navia-chat__head">
-            <span class="navia-chat__avatar"><img src="navia.svg" alt="" aria-hidden="true"></span>
-            <span class="navia-chat__id">
-                <strong>Navia</strong>
-                <small>Guía de TecnoSafe</small>
-            </span>
-            <button class="navia-chat__close" type="button" aria-label="Cerrar chat">&times;</button>
-        </div>
-        <div class="navia-chat__log" id="navia-chat-log" role="log" aria-live="polite"></div>
-        <div class="navia-chat__quick" id="navia-chat-quick"></div>
-    </div>
 
     <script src="script.js"></script>
 </body>

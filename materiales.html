@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sección 1: Materiales y componentes utilizados en el Robot Seguidor de Línea sin Arduino. Proyecto Grado 11.">
+    <title>Sección 1: Materiales | Robot Seguidor de Línea</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Header / Navigation Estilo TecnoSafe -->
+    <header class="site-header" id="header">
+        <nav class="nav container" aria-label="Navegación principal">
+            <a href="index.html" class="nav__logo" aria-label="RobotLab 11° - Inicio">
+                <div class="nav__logo-icon brand-mark">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                        <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+                        <circle cx="12" cy="5" r="2"></circle>
+                        <path d="M12 7v4"></path>
+                        <line x1="8" y1="16" x2="8" y2="16"></line>
+                        <line x1="16" y1="16" x2="16" y2="16"></line>
+                    </svg>
+                </div>
+                <div class="nav__logo-text-group">
+                    <span class="nav__logo-text">ROBOTLAB</span>
+                    <span class="nav__logo-sub">Grado 11 • Sin Arduino</span>
+                </div>
+            </a>
+
+            <div class="nav__actions">
+                <div class="nav__academic-badge">
+                    <span class="badge__icon">⚡</span>
+                    <span class="badge__title">Sección 01 de 04</span>
+                    <span class="badge__tag">Hardware Discreto</span>
+                </div>
+            </div>
+
+            <button class="nav__toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menú">
+                <span class="nav__toggle-icon">☰</span>
+            </button>
+
+            <ul class="nav__menu" id="nav-menu" role="menubar">
+                <li><a href="index.html" class="nav__link nav__link--tab" data-page="inicio">
+                    <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    <span>Inicio</span>
+                </a></li>
+                <li><a href="materiales.html" class="nav__link nav__link--tab active" data-page="materiales" aria-current="page">
+                    <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                    <span>1. Materiales</span>
+                </a></li>
+                <li><a href="concepto.html" class="nav__link nav__link--tab" data-page="concepto">
+                    <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    <span>2. Concepto</span>
+                </a></li>
+                <li><a href="funciones.html" class="nav__link nav__link--tab" data-page="funciones">
+                    <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22 8.5 12 15.5 2 8.5"/></svg>
+                    <span>3. Funciones</span>
+                </a></li>
+                <li><a href="electronica.html" class="nav__link nav__link--tab" data-page="electronica">
+                    <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    <span>4. Electrónica</span>
+                </a></li>
+                <li><a href="video.html" class="nav__link nav__link--tab" data-page="video">
+                    <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2.18" ry="2.18"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+                    <span>Video y Capturas</span>
+                </a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Encabezado de Página Formal -->
+        <header class="page-header-formal">
+            <div class="container">
+                <nav class="breadcrumb-nav" aria-label="Ruta de navegación">
+                    <a href="index.html">Inicio</a>
+                    <span class="breadcrumb-separator">/</span>
+                    <span aria-current="page">Sección 1: Materiales</span>
+                </nav>
+                <span class="page-eyebrow">SECCIÓN 01 • CURRICULAR OBLIGATORIA</span>
+                <h1 style="font-size: clamp(2.2rem, 3.8vw, 3rem); font-weight: 800; color: #ffffff;">
+                    Materiales y Componentes del Robot
+                </h1>
+                <p style="font-size: 1.1rem; color: var(--text-secondary); max-width: 780px; margin-top: 0.75rem;">
+                    Despiece técnico formal, funciones electromecánicas y observaciones técnicas de cada elemento utilizado para ensamblar el robot sin Arduino ni microcontroladores programables.
+                </p>
+            </div>
+        </header>
+
+        <section class="section">
+            <div class="container">
+                
+                <!-- Barra de Filtros -->
+                <div class="materials-filter">
+                    <button class="filter-btn active" data-filter="all">Todos los Componentes (11)</button>
+                    <button class="filter-btn" data-filter="sensores">Sensores Ópticos</button>
+                    <button class="filter-btn" data-filter="control">Control y Potencia</button>
+                    <button class="filter-btn" data-filter="actuadores">Actuadores y Mecánica</button>
+                    <button class="filter-btn" data-filter="energia">Alimentación y Conexión</button>
+                </div>
+
+                <!-- Tarjetas Detalladas de Materiales -->
+                <div class="materials-grid">
+                    
+                    <!-- 1. Chasis -->
+                    <article class="material-card" data-category="actuadores">
+                        <span class="material-category-tag">Estructura Mecánica</span>
+                        <div class="material-img-container">
+                            <img src="imagenes/chasis.svg" alt="Chasis acrílico 2WD cortado con láser" class="material-svg">
+                        </div>
+                        <div class="material-body">
+                            <h3 class="material-title">1. Chasis o Base Estructural</h3>
+                            <div class="material-function">
+                                <span>🛠️ Soporte estructural integral</span>
+                            </div>
+                            <p class="material-desc">
+                                Plataforma liviana de material dieléctrico (acrílico de 3 mm o fibra de vidrio) que provee rigidez torsional y orificios de montaje para motores, portapilas, protoboard y sensores.
+                            </p>
+                            <div class="material-tech-note">
+                                <strong>Observación Técnica:</strong> La altura de montaje de los sensores respecto a la superficie debe fijarse entre 3 mm y 8 mm. Una altura mayor reduce el contraste óptico y provoca falsas conmutaciones.
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 2. Motores DC -->
+                    <article class="material-card" data-category="actuadores">
+                        <span class="material-category-tag">Actuadores</span>
+                        <div class="material-img-container">
+                            <img src="imagenes/motor-dc.svg" alt="Motorreductor DC TT amarillo con caja reductora" class="material-svg">
+                        </div>
+                        <div class="material-body">
+                            <h3 class="material-title">2. Motores Eléctricos DC (Tipo TT)</h3>
+                            <div class="material-function">
+                                <span>⚙️ Tracción y viraje diferencial</span>
+                            </div>
+                            <p class="material-desc">
+                                Dos micromotores de corriente continua con caja reductora de engranajes rectos plásticos (relación 1:48), que reducen las altas revoluciones del motor para multiplicar el par motriz (fuerza de empuje).
+                            </p>
+                            <div class="material-tech-note">
+                                <strong>Observación Técnica:</strong> Consumo de corriente nominal: ~150 mA sin carga; pico en arranque o bloqueo de hasta 800 mA por motor a 6V. Requieren etapa de potencia dedicada.
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 3. Ruedas -->
+                    <article class="material-card" data-category="actuadores">
+                        <span class="material-category-tag">Tracción Mecánica</span>
+                        <div class="material-img-container">
+                            <img src="imagenes/rueda.svg" alt="Ruedas de goma con llanta plástica y rueda loca esférica" class="material-svg">
+                        </div>
+                        <div class="material-body">
+                            <h3 class="material-title">3. Ruedas Motrices + Rueda Loca (Caster)</h3>
+                            <div class="material-function">
+                                <span>🔘 Adherencia al suelo y soporte libre</span>
+                            </div>
+                            <p class="material-desc">
+                                Dos ruedas motrices con neumáticos de caucho sintético de alto coeficiente de fricción para evitar derrapes, más una rueda loca omnidireccional que actúa como tercer punto de apoyo sin frenar el giro.
+                            </p>
+                            <div class="material-tech-note">
+                                <strong>Observación Técnica:</strong> La rueda loca debe encontrarse perfectamente libre de polvo y con lubricación en su esfera; si se traba, desviará al robot hacia uno de los lados.
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 4. Sensores IR -->
+                    <article class="material-card" data-category="sensores">
+                        <span class="material-category-tag">Detección Óptica</span>
+                        <div class="material-img-container">
+                            <img src="imagenes/sensor-ir.svg" alt="Módulo sensor infrarrojo reflectivo TCRT5000" class="material-svg">
+                        </div>
+                        <div class="material-body">
+                            <h3 class="material-title">4. Sensores Infrarrojos (TCRT5000 / CNY70)</h3>
+                            <div class="material-function">
+                                <span>👁️ Transducción óptica del contraste de pista</span>
+                            </div>
+                            <p class="material-desc">
+                                Módulos reflectivos que combinan un LED emisor de infrarrojos en 950 nm y un fototransistor receptor de silicio acoplados ópticamente para detectar diferencias de reflectancia entre la línea y el piso.
+                            </p>
+                            <div class="material-tech-note">
+                                <strong>Observación Técnica:</strong> El haz IR no es visible al ojo humano. Puede comprobarse su funcionamiento enfocando el emisor con la cámara de un celular (se verá como una tenue luz violeta).
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 5. Resistencias -->
+                    <article class="material-card" data-category="control">
+                        <span class="material-category-tag">Componentes Pasivos</span>
+                        <div class="material-img-container">
+                            <img src="imagenes/resistencias.svg" alt="Resistencias de película de carbón de 220Ω, 1kΩ y 10kΩ" class="material-svg">
+                        </div>
+                        <div class="material-body">
+                            <h3 class="material-title">5. Resistencias Fijas y Potenciómetros</h3>
+                            <div class="material-function">
+                                <span>🛡️ Polarización y división de tensión</span>
+                            </div>
+                            <p class="material-desc">
+                                Resistencias de 220Ω (limitadoras de corriente para los LEDs emisores IR), resistencias de 10kΩ (polarización del divisor de tensión del fototransistor), resistencias de 1kΩ (base de transistores) y trimpots para calibrar umbrales.
+                            </p>
+                            <div class="material-tech-note">
+                                <strong>Observación Técnica:</strong> El cálculo de la resistencia de base \(R_B = \frac{V_{salida} - V_{BE}}{I_B}\) debe asegurar que el transistor trabaje en la región de saturación profunda (\(V_{CE} < 0.2V\)).
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 6. Transistores -->
+                    <article class="material-card" data-category="control">
+                        <span class="material-category-tag">Etapa de Potencia</span>
+                        <div class="material-img-container">
+                            <img src="imagenes/transistor.svg" alt="Transistores BJT NPN 2N2222A en cápsula TO-92" class="material-svg">
+                        </div>
+                        <div class="material-body">
+                            <h3 class="material-title">6. Transistores NPN (2N2222A / TIP120)</h3>
+                            <div class="material-function">
+                                <span>⚡ Conmutación electrónica de alta corriente</span>
+                            </div>
+                            <p class="material-desc">
+                                Dispositivos semiconductores bipolares (BJT) configurados como interruptores en emisor común. Conmutan entre estado de corte (motor apagado) y estado de saturación (motor conectado a masa a máxima potencia).
+                            </p>
+                            <div class="material-tech-note">
+                                <strong>Observación Técnica:</strong> Corriente máxima de colector (\(I_C\)): 2N2222A soporta hasta 800 mA de pico; si se usan motores de mayor demanda, se recomienda el par Darlington TIP120 (5A).
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 7. Comparadores -->
+                    <article class="material-card" data-category="control">
+                        <span class="material-category-tag">Cerebro Analógico</span>
+                        <div class="material-img-container">
+                            <img src="imagenes/comparador.svg" alt="Circuito Integrado Comparador Doble LM393 DIP-8" class="material-svg">
+                        </div>
+                        <div class="material-body">
+                            <h3 class="material-title">7. Comparador de Voltaje (LM393)</h3>
+                            <div class="material-function">
+                                <span>🧠 Discriminación y decisión lógica analógica</span>
+                            </div>
+                            <p class="material-desc">
+                                Circuito integrado lineal compuesto por dos comparadores diferenciales independientes de bajo consumo. Compara la tensión analógica continua del sensor con el nivel de referencia fijado por el potenciómetro.
+                            </p>
+                            <div class="material-tech-note">
+                                <strong>Observación Técnica:</strong> Salidas en colector abierto: requieren una resistencia de pull-up (1kΩ a 10kΩ) a \(V_{cc}\) para entregar un nivel lógico alto estable hacia la base del transistor.
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 8. Batería -->
+                    <article class="material-card" data-category="energia">
+                        <span class="material-category-tag">Alimentación</span>
+                        <div class="material-img-container">
+                            <img src="imagenes/bateria.svg" alt="Portapilas para 4 baterías AA o 2 baterías de litio 18650" class="material-svg">
+                        </div>
+                        <div class="material-body">
+                            <h3 class="material-title">8. Batería o Fuente de Alimentación</h3>
+                            <div class="material-function">
+                                <span>🔋 Suministro electroquímico continuo</span>
+                            </div>
+                            <p class="material-desc">
+                                Paquete de alimentación conformado por 4 baterías AA alcalinas o recargables (6.0V / 4.8V) o 2 celdas de iones de litio 18650 (7.4V nominales) con suficiente tasa de descarga en corriente.
+                            </p>
+                            <div class="material-tech-note">
+                                <strong>Observación Técnica:</strong> Nunca emplear una pila cuadrada de 9V (6F22) para alimentar motores: su resistencia interna es excesivamente alta y colapsará el voltaje a menos de 4V en segundos.
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 9. Cables y Placa -->
+                    <article class="material-card" data-category="energia">
+                        <span class="material-category-tag">Interconexión</span>
+                        <div class="material-img-container">
+                            <img src="imagenes/cables.svg" alt="Cables Dupont y protoboard mini para pruebas" class="material-svg">
+                        </div>
+                        <div class="material-body">
+                            <h3 class="material-title">9. Cables Dupont y Placa de Conexión</h3>
+                            <div class="material-function">
+                                <span>🔌 Conducción de señales y bus de potencia</span>
+                            </div>
+                            <p class="material-desc">
+                                Conductores de cobre flexibles con terminales macho-macho y macho-hembra, y placa de pruebas (protoboard de 400 puntos) para el ensamble ordenado del circuito sin soldaduras.
+                            </p>
+                            <div class="material-tech-note">
+                                <strong>Observación Técnica:</strong> Los cables hacia los motores deben ser lo más cortos posible para minimizar la resistencia parásita y reducir la radiación electromagnética hacia los comparadores.
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 10. Interruptor -->
+                    <article class="material-card" data-category="energia">
+                        <span class="material-category-tag">Control Eléctrico</span>
+                        <div class="material-img-container">
+                            <img src="imagenes/interruptor.svg" alt="Interruptor deslizante SPST para corte general" class="material-svg">
+                        </div>
+                        <div class="material-body">
+                            <h3 class="material-title">10. Interruptor General (Switch SPST)</h3>
+                            <div class="material-function">
+                                <span>🔴 Seccionamiento de energía del sistema</span>
+                            </div>
+                            <p class="material-desc">
+                                Interruptor mecánico de tipo deslizante o basculante de un polo y un tiro (SPST), conectado en serie con la línea positiva principal para energizar o desenergizar el circuito instantáneamente.
+                            </p>
+                            <div class="material-tech-note">
+                                <strong>Observación Técnica:</strong> Debe estar dimensionado para soportar al menos 2A de corriente continua para evitar caídas de tensión por calentamiento en sus contactos internos.
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 11. Tornillos y Soportes -->
+                    <article class="material-card" data-category="actuadores">
+                        <span class="material-category-tag">Fijación</span>
+                        <div class="material-img-container">
+                            <img src="imagenes/tornillos.svg" alt="Separadores hexagonales de nylon y tornillería métrica M3" class="material-svg">
+                        </div>
+                        <div class="material-body">
+                            <h3 class="material-title">11. Tornillería y Separadores de Nylon</h3>
+                            <div class="material-function">
+                                <span>🔩 Ensamble mecánico y aislamiento eléctrico</span>
+                            </div>
+                            <p class="material-desc">
+                                Tornillos, tuercas M3 y postes separadores aislantes de nylon que elevan las placas de circuito sobre el chasis plástico, amortiguando vibraciones mecánicas y previniendo cortocircuitos.
+                            </p>
+                            <div class="material-tech-note">
+                                <strong>Observación Técnica:</strong> Es fundamental el uso de separadores de material dieléctrico (nylon o plástico) en lugar de tornillos metálicos para no perforar las pistas de la baquela.
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+
+                <!-- Tabla Formal BOM (Bill of Materials) -->
+                <div class="table-responsive">
+                    <h3 style="font-size: 1.35rem; margin-bottom: 0.5rem; color: #ffffff;">Lista Formal de Despiece Técnico (BOM)</h3>
+                    <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 1.25rem;">
+                        Cuadro normalizado de componentes con cantidades, encapsulados y funciones específicas dentro del circuito.
+                    </p>
+                    <table class="formal-table">
+                        <thead>
+                            <tr>
+                                <th>Ítem</th>
+                                <th>Componente</th>
+                                <th>Designador</th>
+                                <th>Cantidad</th>
+                                <th>Encapsulado / Tipo</th>
+                                <th>Parámetro Clave</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>01</td>
+                                <td>Chasis 2WD</td>
+                                <td>MEC-1</td>
+                                <td>1 ud.</td>
+                                <td>Acrílico cortado en láser</td>
+                                <td>Estructura base biciclo</td>
+                            </tr>
+                            <tr>
+                                <td>02</td>
+                                <td>Motorreductor TT</td>
+                                <td>M1, M2</td>
+                                <td>2 uds.</td>
+                                <td>Caja reductora 1:48</td>
+                                <td>3V - 6V DC / 200 RPM</td>
+                            </tr>
+                            <tr>
+                                <td>03</td>
+                                <td>Ruedas de Goma</td>
+                                <td>W1, W2</td>
+                                <td>2 uds.</td>
+                                <td>Diámetro 65 mm / Eje en D</td>
+                                <td>Alto agarre lateral</td>
+                            </tr>
+                            <tr>
+                                <td>04</td>
+                                <td>Rueda Loca (Caster)</td>
+                                <td>W3</td>
+                                <td>1 ud.</td>
+                                <td>Rueda esférica metálica/nylon</td>
+                                <td>Punto de apoyo omnidireccional</td>
+                            </tr>
+                            <tr>
+                                <td>05</td>
+                                <td>Módulo Sensor IR</td>
+                                <td>SEN1, SEN2</td>
+                                <td>2 uds.</td>
+                                <td>TCRT5000 / CNY70</td>
+                                <td>\(\lambda = 950\text{ nm}\)</td>
+                            </tr>
+                            <tr>
+                                <td>06</td>
+                                <td>Comparador de Voltaje</td>
+                                <td>U1</td>
+                                <td>1 ud.</td>
+                                <td>DIP-8 (LM393 / LM358)</td>
+                                <td>Doble canal diferencial</td>
+                            </tr>
+                            <tr>
+                                <td>07</td>
+                                <td>Transistor BJT NPN</td>
+                                <td>Q1, Q2</td>
+                                <td>2 uds.</td>
+                                <td>TO-92 (2N2222A)</td>
+                                <td>\(I_{C\max} = 800\text{ mA}, h_{FE} \ge 100\)</td>
+                            </tr>
+                            <tr>
+                                <td>08</td>
+                                <td>Diodos de Protección</td>
+                                <td>D1, D2</td>
+                                <td>2 uds.</td>
+                                <td>DO-41 (1N4007)</td>
+                                <td>Protección f.c.e.m. inductiva</td>
+                            </tr>
+                            <tr>
+                                <td>09</td>
+                                <td>Resistencias de Película</td>
+                                <td>R1 a R6</td>
+                                <td>6 uds.</td>
+                                <td>Axial 1/4W (\(220\Omega, 1\text{k}\Omega, 10\text{k}\Omega\))</td>
+                                <td>Tolerancia 5%</td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td>Potenciómetro Trimpot</td>
+                                <td>P1, P2</td>
+                                <td>2 uds.</td>
+                                <td>3362P Horizontal (\(10\text{k}\Omega\))</td>
+                                <td>Calibración fina de umbral \(V_{ref}\)</td>
+                            </tr>
+                            <tr>
+                                <td>11</td>
+                                <td>Portapilas y Switch</td>
+                                <td>BAT1, SW1</td>
+                                <td>1 pack</td>
+                                <td>Portapilas 4xAA + SPST</td>
+                                <td>Tensión nominal 6.0V</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Paginación Formal entre Secciones -->
+                <div class="page-navigation-footer">
+                    <a href="index.html" class="nav-prev-btn">
+                        <span class="nav-direction-label">&larr; Volver al Portal</span>
+                        <span class="nav-page-title">Página Principal</span>
+                    </a>
+                    <a href="concepto.html" class="nav-next-btn" style="text-align: right;">
+                        <span class="nav-direction-label">Siguiente Sección Curricular &rarr;</span>
+                        <span class="nav-page-title">Sección 2: Concepto del Robot</span>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Formal -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="brand-logo" style="margin-bottom: 1rem;">
+                        <div class="brand-icon-wrapper" aria-hidden="true">🤖</div>
+                        <span>RobotLab 11°</span>
+                    </div>
+                    <p style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem;">
+                        Documentación técnica de despiece y especificaciones para el área de Tecnología e Informática.
+                    </p>
+                    <span class="badge badge-green">Hardware Discreto • BOM Normalizada</span>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Navegación</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html" class="footer-link">Inicio del Proyecto</a></li>
+                        <li><a href="materiales.html" class="footer-link">1. Materiales (Actual)</a></li>
+                        <li><a href="concepto.html" class="footer-link">2. Concepto y Autonomía</a></li>
+                        <li><a href="funciones.html" class="footer-link">3. Funciones y Simulador</a></li>
+                        <li><a href="electronica.html" class="footer-link">4. Parte Electrónica</a></li>
+                        <li><a href="video.html" class="footer-link">Video y Capturas</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Componentes Clave</h4>
+                    <ul class="footer-links">
+                        <li><span class="footer-link">Comparador Dual LM393</span></li>
+                        <li><span class="footer-link">Sensor Infrarrojo TCRT5000</span></li>
+                        <li><span class="footer-link">Transistores BJT NPN 2N2222A</span></li>
+                        <li><span class="footer-link">Motorreductores TT 1:48</span></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Fuentes Técnicas</h4>
+                    <ul class="footer-links">
+                        <li><span class="footer-link">Texas Instruments LM393 Datasheet</span></li>
+                        <li><span class="footer-link">Vishay Semiconductors TCRT5000</span></li>
+                        <li><span class="footer-link">Manual de Taller de Robótica 11°</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Proyecto Escolar de Robótica y Tecnología - Grado 11. Desarrollado con estándares web modernos.</p>
+                <p>Sin fines comerciales • Exclusivamente Educativo</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

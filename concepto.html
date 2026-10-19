@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sección 2: Concepto del Robot Seguidor de Línea, principio de autonomía y física de reflectancia óptica. Grado 11.">
+    <title>Sección 2: Concepto | Robot Seguidor de Línea</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Header / Navigation Estilo TecnoSafe -->
+    <header class="site-header" id="header">
+        <nav class="nav container" aria-label="Navegación principal">
+            <a href="index.html" class="nav__logo" aria-label="RobotLab 11° - Inicio">
+                <div class="nav__logo-icon brand-mark">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                        <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+                        <circle cx="12" cy="5" r="2"></circle>
+                        <path d="M12 7v4"></path>
+                        <line x1="8" y1="16" x2="8" y2="16"></line>
+                        <line x1="16" y1="16" x2="16" y2="16"></line>
+                    </svg>
+                </div>
+                <div class="nav__logo-text-group">
+                    <span class="nav__logo-text">ROBOTLAB</span>
+                    <span class="nav__logo-sub">Grado 11 • Sin Arduino</span>
+                </div>
+            </a>
+
+            <div class="nav__actions">
+                <div class="nav__academic-badge">
+                    <span class="badge__icon">⚡</span>
+                    <span class="badge__title">Sección 02 de 04</span>
+                    <span class="badge__tag">Teoría y Control</span>
+                </div>
+            </div>
+
+            <button class="nav__toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menú">
+                <span class="nav__toggle-icon">☰</span>
+            </button>
+
+            <ul class="nav__menu" id="nav-menu" role="menubar">
+                <li><a href="index.html" class="nav__link nav__link--tab" data-page="inicio">
+                    <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    <span>Inicio</span>
+                </a></li>
+                <li><a href="materiales.html" class="nav__link nav__link--tab" data-page="materiales">
+                    <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                    <span>1. Materiales</span>
+                </a></li>
+                <li><a href="concepto.html" class="nav__link nav__link--tab active" data-page="concepto" aria-current="page">
+                    <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    <span>2. Concepto</span>
+                </a></li>
+                <li><a href="funciones.html" class="nav__link nav__link--tab" data-page="funciones">
+                    <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22 8.5 12 15.5 2 8.5"/></svg>
+                    <span>3. Funciones</span>
+                </a></li>
+                <li><a href="electronica.html" class="nav__link nav__link--tab" data-page="electronica">
+                    <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    <span>4. Electrónica</span>
+                </a></li>
+                <li><a href="video.html" class="nav__link nav__link--tab" data-page="video">
+                    <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2.18" ry="2.18"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+                    <span>Video y Capturas</span>
+                </a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Encabezado de Página Formal -->
+        <header class="page-header-formal">
+            <div class="container">
+                <nav class="breadcrumb-nav" aria-label="Ruta de navegación">
+                    <a href="index.html">Inicio</a>
+                    <span class="breadcrumb-separator">/</span>
+                    <span aria-current="page">Sección 2: Concepto</span>
+                </nav>
+                <span class="page-eyebrow">SECCIÓN 02 • CURRICULAR OBLIGATORIA</span>
+                <h1 style="font-size: clamp(2.2rem, 3.8vw, 3rem); font-weight: 800; color: #ffffff;">
+                    Concepto del Robot Seguidor de Línea
+                </h1>
+                <p style="font-size: 1.1rem; color: var(--text-secondary); max-width: 780px; margin-top: 0.75rem;">
+                    Definición técnica de autonomía en robótica móvil, principios físicos de la transducción óptica y análisis comparativo entre control analógico discreto y microcontroladores programables.
+                </p>
+            </div>
+        </header>
+
+        <section class="section">
+            <div class="container">
+                
+                <div class="concept-grid">
+                    <div class="concept-article">
+                        <div class="concept-point">
+                            <div class="point-icon">🤖</div>
+                            <div class="point-content">
+                                <h4>Definición y Propósito del Robot</h4>
+                                <p>
+                                    Un robot seguidor de línea es un sistema mecatrónico móvil terrestre clasificado como un <strong>vehículo de guiado autónomo básico</strong>. Su propósito primordial es rastrear una trayectoria física continua delimitada sobre una superficie mediante un contraste óptico marcado (generalmente una franja de color negro sobre fondo blanco mate o viceversa).
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="concept-point">
+                            <div class="point-icon">🧭</div>
+                            <div class="point-content">
+                                <h4>¿Qué significa exactamente que sea "Autónomo"?</h4>
+                                <p>
+                                    En teoría de control, la autonomía implica que el dispositivo opera bajo una estructura de <strong>lazo cerrado (closed-loop)</strong> sin requerir intervención ni comandos de un operador humano en tiempo real. El robot adquiere información del estado del entorno mediante sus sensores, la procesa a través de su circuitería interna y acciona sus motores para corregir su trayectoria instantáneamente.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="concept-point">
+                            <div class="point-icon">💡</div>
+                            <div class="point-content">
+                                <h4>Reconocimiento de la Línea: Física de Reflectancia Óptica</h4>
+                                <p>
+                                    La discriminación de la trayectoria no requiere cámaras ni visión computacional compleja. Se fundamenta en el <strong>coeficiente de reflexión de la radiación electromagnética infrarroja (\(\lambda \approx 950\text{ nm}\))</strong>:
+                                </p>
+                                <ul style="margin-top: 0.6rem; padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.9rem;">
+                                    <li><strong>Superficie Blanca (Fondo):</strong> Presenta alta reflectancia espectral. La radiación emitida por el LED IR rebota e incide directamente sobre la base fotosensible del fototransistor, provocando su conducción eléctrica (estado de baja impedancia).</li>
+                                    <li><strong>Franja Negra (Línea):</strong> Presenta un coeficiente de absorción muy elevado (el pigmento negro absorbe casi la totalidad de fotones infrarrojos). La radiación dispersada es mínima, manteniendo al fototransistor en estado de corte (alta impedancia).</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="concept-point">
+                            <div class="point-icon">〰️</div>
+                            <div class="point-content">
+                                <h4>Geometría de Trayectorias y Limitaciones Físicas</h4>
+                                <p>
+                                    El robot puede navegar por circuitos abiertos o cerrados que presenten rectas y curvas. El radio de curvatura mínimo admisible (\(R_{\min}\)) está determinado por tres factores físicos: la distancia entre los dos sensores frontales, la inercia rotacional del chasis y la rapidez con la que los transistores conmutan la corriente de los motores. Si la curva es demasiado cerrada o la velocidad muy alta, la inercia puede expulsar los sensores fuera de la pista antes de que el circuito alcance a frenar la rueda interna.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; gap: 2rem;">
+                        <!-- Ilustración del Robot Siguiendo la Pista -->
+                        <div style="background: var(--gradient-card); border: 1px solid var(--border-bright); border-radius: var(--radius-xl); padding: 2rem; box-shadow: var(--shadow-lg);">
+                            <div style="text-align: center; margin-bottom: 1.5rem;">
+                                <span class="badge badge-green">Principio de Operación</span>
+                                <h3 style="font-size: 1.35rem; color: #ffffff; margin-top: 0.5rem;">Geometría Óptica de Pista</h3>
+                            </div>
+                            <img src="imagenes/robot-hero.svg" alt="Diagrama de robot seguidor sobre pista con línea negra y contraste óptico" width="400" height="320" style="margin: 0 auto;">
+                            <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(7, 13, 24, 0.75); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); font-size: 0.85rem; color: var(--text-secondary);">
+                                <strong>Configuración Clásica de Dos Sensores:</strong> La línea negra transcurre por el espacio central entre los dos sensores. Ambos sensores ven superficie blanca durante el avance recto. Al aproximarse una curva, la línea entra bajo uno de los sensores, desequilibrando la tensión de entrada y activando el viraje.
+                            </div>
+                        </div>
+
+                        <!-- Explicación Intuitiva para Estudiantes -->
+                        <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: var(--radius-xl); padding: 1.75rem;">
+                            <h4 style="font-size: 1.15rem; color: var(--color-accent-green-bright); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+                                <span>📖</span> Comprensión Intuitiva (Sin Prerrequisitos Técnicos)
+                            </h4>
+                            <p style="font-size: 0.92rem; color: #f1f5f9; line-height: 1.6;">
+                                Imagina un vagón de tren con dos motores independientes en sus ruedas. En vez de rieles metálicos, utiliza "rieles de luz": dos pequeñas linternas infrarrojas apuntan al suelo. Cuando una rueda se desvía y pisa la cinta negra, el sensor correspondiente detecta que la luz "se apagó" (porque el negro se la tragó). Al faltarle luz, el circuito corta la electricidad de ese motor de inmediato. Como el otro motor sigue empujando, el vagón se dobla automáticamente hacia adentro y regresa a la línea.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comparativa Formal y Rigurosa: Control Directo vs Arduino -->
+                <div class="comparison-container" style="margin-top: 4.5rem;">
+                    <div class="comparison-header">
+                        <span class="badge badge-green">Evaluación de Arquitecturas de Control</span>
+                        <h2 style="font-size: 2rem; margin-top: 0.5rem; color: #ffffff;">Control Electrónico Directo vs. Microcontrolador (Arduino)</h2>
+                        <p style="color: var(--text-secondary); max-width: 720px; margin: 0.5rem auto 0;">
+                            Fundamentación epistemológica de por qué construir un robot analógico en grado 11 ofrece una formación técnica más sólida en ciencias de la ingeniería.
+                        </p>
+                    </div>
+
+                    <div class="comparison-columns">
+                        
+                        <!-- Columna Nuestro Enfoque: Control Directo -->
+                        <div class="comparison-card direct">
+                            <div class="comp-title">
+                                <h3 style="font-size: 1.3rem; color: var(--color-accent-green-bright);">Control Electrónico Directo (Analógico)</h3>
+                                <span class="badge badge-green">Nuestra Elección</span>
+                            </div>
+                            <p style="font-size: 0.88rem; color: var(--text-secondary);">
+                                El lazo de control se resuelve directamente en el plano físico mediante componentes semiconductores discretos y circuitos integrados lineales.
+                            </p>
+                            <ul class="comp-list">
+                                <li class="comp-item">
+                                    <span class="comp-icon" style="color: var(--color-accent-green-bright);">✓</span>
+                                    <div><strong>Tiempo de Respuesta Ultrarrápido:</strong> La velocidad de respuesta depende únicamente de los tiempos de conmutación de los semiconductores (\(t_{on} \approx 50\text{ ns}\) en el 2N2222), sin retardos de reloj de software.</div>
+                                </li>
+                                <li class="comp-item">
+                                    <span class="comp-icon" style="color: var(--color-accent-green-bright);">✓</span>
+                                    <div><strong>Comprensión Real de la Electrónica:</strong> El estudiante aprende a calcular divisores de tensión, polarización de transistores en corte y saturación, y tensiones de referencia con amplificadores operacionales.</div>
+                                </li>
+                                <li class="comp-item">
+                                    <span class="comp-icon" style="color: var(--color-accent-green-bright);">✓</span>
+                                    <div><strong>Eficiencia Energética y Costo:</strong> No consume corriente en inicialización de bootloaders, módulos ADC internos ni microprocesadores ociosos. Costo total de materiales significativamente menor.</div>
+                                </li>
+                                <li class="comp-item">
+                                    <span class="comp-icon" style="color: var(--color-accent-green-bright);">✓</span>
+                                    <div><strong>Inmunidad a Fallas de Software:</strong> No sufre de desbordamiento de variables, cuelgues por bucles infinitos ni corrupción de memoria Flash.</div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Columna Microcontrolador: Arduino -->
+                        <div class="comparison-card arduino">
+                            <div class="comp-title">
+                                <h3 style="font-size: 1.3rem; color: #f87171;">Microcontrolador Programable (Arduino)</h3>
+                                <span class="badge" style="background: rgba(239, 68, 68, 0.15); color: #fca5a5; border-color: rgba(239, 68, 68, 0.3);">Enfoque Basado en Software</span>
+                            </div>
+                            <p style="font-size: 0.88rem; color: var(--text-secondary);">
+                                Un procesador digital ejecuta un bucle iterativo (`loop()`) que muestrea puertos analógicos/digitales y actualiza salidas por modulación de ancho de pulso (PWM).
+                            </p>
+                            <ul class="comp-list">
+                                <li class="comp-item">
+                                    <span class="comp-icon" style="color: #f87171;">✕</span>
+                                    <div><strong>Efecto "Caja Negra" Pedagógico:</strong> Para un estudiante principiante, el hardware se vuelve invisible; se tiende a creer erróneamente que "el software lo hace todo", desconociendo las leyes de Ohm y Kirchhoff.</div>
+                                </li>
+                                <li class="comp-item">
+                                    <span class="comp-icon" style="color: #f87171;">✕</span>
+                                    <div><strong>Latencia de Muestreo y Conversión:</strong> La lectura de `analogRead()` en un microcontrolador ATmega328P toma aproximadamente 100 microsegundos por canal debido a la conversión analógico-digital (ADC).</div>
+                                </li>
+                                <li class="comp-item">
+                                    <span class="comp-icon" style="color: #f87171;">✕</span>
+                                    <div><strong>Sobredimensionamiento del Sistema:</strong> Emplear un procesador de 16 MHz de 8 o 32 bits para evaluar dos señales lógicas básicas es un desperdicio injustificado de potencia de cálculo.</div>
+                                </li>
+                                <li class="comp-item">
+                                    <span class="comp-icon" style="color: #f87171;">✕</span>
+                                    <div><strong>Sensibilidad a Ruido en Alimentación:</strong> Los motores DC generan ruido electromagnético inductivo que frecuentemente resetea microcontroladores mal aislados.</div>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Paginación Formal entre Secciones -->
+                <div class="page-navigation-footer">
+                    <a href="materiales.html" class="nav-prev-btn">
+                        <span class="nav-direction-label">&larr; Sección Anterior</span>
+                        <span class="nav-page-title">Sección 1: Materiales</span>
+                    </a>
+                    <a href="funciones.html" class="nav-next-btn" style="text-align: right;">
+                        <span class="nav-direction-label">Siguiente Sección Curricular &rarr;</span>
+                        <span class="nav-page-title">Sección 3: Funciones y Simulador</span>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Formal -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="brand-logo" style="margin-bottom: 1rem;">
+                        <div class="brand-icon-wrapper" aria-hidden="true">🤖</div>
+                        <span>RobotLab 11°</span>
+                    </div>
+                    <p style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem;">
+                        Fundamentación teórica y principios de lazo cerrado para proyectos de Tecnología e Informática.
+                    </p>
+                    <span class="badge badge-green">Física Óptica • Control Analógico Puro</span>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Navegación</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html" class="footer-link">Inicio del Proyecto</a></li>
+                        <li><a href="materiales.html" class="footer-link">1. Materiales</a></li>
+                        <li><a href="concepto.html" class="footer-link">2. Concepto (Actual)</a></li>
+                        <li><a href="funciones.html" class="footer-link">3. Funciones y Simulador</a></li>
+                        <li><a href="electronica.html" class="footer-link">4. Parte Electrónica</a></li>
+                        <li><a href="video.html" class="footer-link">Video y Capturas</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Fundamentos</h4>
+                    <ul class="footer-links">
+                        <li><span class="footer-link">Lazo Cerrado de Control</span></li>
+                        <li><span class="footer-link">Reflectancia Óptica Infrarroja</span></li>
+                        <li><span class="footer-link">Cinemática Diferencial</span></li>
+                        <li><span class="footer-link">Histéresis Analógica</span></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Fuentes Técnicas</h4>
+                    <ul class="footer-links">
+                        <li><span class="footer-link">Kuo, B. - Sistemas de Control Automático</span></li>
+                        <li><span class="footer-link">Ogata, K. - Ingeniería de Control Moderna</span></li>
+                        <li><span class="footer-link">Estándares Curriculares MEN Grado 11</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Proyecto Escolar de Robótica y Tecnología - Grado 11. Desarrollado con estándares web modernos.</p>
+                <p>Sin fines comerciales • Exclusivamente Educativo</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

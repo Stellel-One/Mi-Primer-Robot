@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sección 3: Funciones, cinemática diferencial, tabla de verdad y simulador interactivo del Robot Seguidor de Línea. Grado 11.">
+    <title>Sección 3: Funciones y Dinámica | Robot Seguidor de Línea</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Header / Navigation Estilo TecnoSafe -->
+    <header class="site-header" id="header">
+        <nav class="nav container" aria-label="Navegación principal">
+            <a href="index.html" class="nav__logo" aria-label="RobotLab 11° - Inicio">
+                <div class="nav__logo-icon brand-mark">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                        <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+                        <circle cx="12" cy="5" r="2"></circle>
+                        <path d="M12 7v4"></path>
+                        <line x1="8" y1="16" x2="8" y2="16"></line>
+                        <line x1="16" y1="16" x2="16" y2="16"></line>
+                    </svg>
+                </div>
+                <div class="nav__logo-text-group">
+                    <span class="nav__logo-text">ROBOTLAB</span>
+                    <span class="nav__logo-sub">Grado 11 • Sin Arduino</span>
+                </div>
+            </a>
+
+            <div class="nav__actions">
+                <div class="nav__academic-badge">
+                    <span class="badge__icon">⚡</span>
+                    <span class="badge__title">Sección 03 de 04</span>
+                    <span class="badge__tag">Cinemática y Control</span>
+                </div>
+            </div>
+
+            <button class="nav__toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menú">
+                <span class="nav__toggle-icon">☰</span>
+            </button>
+
+            <ul class="nav__menu" id="nav-menu" role="menubar">
+                <li><a href="index.html" class="nav__link nav__link--tab" data-page="inicio">
+                    <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    <span>Inicio</span>
+                </a></li>
+                <li><a href="materiales.html" class="nav__link nav__link--tab" data-page="materiales">
+                    <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                    <span>1. Materiales</span>
+                </a></li>
+                <li><a href="concepto.html" class="nav__link nav__link--tab" data-page="concepto">
+                    <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    <span>2. Concepto</span>
+                </a></li>
+                <li><a href="funciones.html" class="nav__link nav__link--tab active" data-page="funciones" aria-current="page">
+                    <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22 8.5 12 15.5 2 8.5"/></svg>
+                    <span>3. Funciones</span>
+                </a></li>
+                <li><a href="electronica.html" class="nav__link nav__link--tab" data-page="electronica">
+                    <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    <span>4. Electrónica</span>
+                </a></li>
+                <li><a href="video.html" class="nav__link nav__link--tab" data-page="video">
+                    <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2.18" ry="2.18"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+                    <span>Video y Capturas</span>
+                </a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Encabezado Formal -->
+        <header class="page-header-formal">
+            <div class="container">
+                <nav class="breadcrumb-nav" aria-label="Ruta de navegación">
+                    <a href="index.html">Inicio</a>
+                    <span class="breadcrumb-separator">/</span>
+                    <span aria-current="page">Sección 3: Funciones</span>
+                </nav>
+                <span class="page-eyebrow">SECCIÓN 03 • CURRICULAR OBLIGATORIA</span>
+                <h1 style="font-size: clamp(2.2rem, 3.8vw, 3rem); font-weight: 800; color: #ffffff;">
+                    Funciones del Robot y Cinemática Diferencial
+                </h1>
+                <p style="font-size: 1.1rem; color: var(--text-secondary); max-width: 780px; margin-top: 0.75rem;">
+                    Explicación paso a paso de las etapas funcionales del móvil: detección óptica, interpretación de señales, corrección de trayectoria mediante viraje diferencial y aplicaciones industriales.
+                </p>
+            </div>
+        </header>
+
+        <section class="section">
+            <div class="container">
+                
+                <!-- Las 5 Funciones del Robot -->
+                <div class="section-header" style="margin-bottom: 2.5rem;">
+                    <span class="section-number">Ciclo Funcional</span>
+                    <h2 class="section-title">Comportamiento en Trayectoria</h2>
+                    <p class="section-subtitle">
+                        El robot ejecuta de forma continua e ininterrumpida cinco funciones esenciales en un ciclo cerrado de realimentación:
+                    </p>
+                </div>
+
+                <div class="functions-flow" style="margin-bottom: 3.5rem;">
+                    <div class="flow-step-card">
+                        <div class="flow-step-number">01</div>
+                        <h4 class="flow-step-title">Detección Mediante Sensores</h4>
+                        <p style="font-size: 0.88rem; color: var(--text-secondary);">
+                            Los emisores infrarrojos irradian la superficie de la pista. Los fototransistores captan el haz reflejado, detectando la presencia o ausencia de la línea negra según la absorción de luz.
+                        </p>
+                    </div>
+
+                    <div class="flow-step-card">
+                        <div class="flow-step-number">02</div>
+                        <h4 class="flow-step-title">Interpretación Eléctrica</h4>
+                        <p style="font-size: 0.88rem; color: var(--text-secondary);">
+                            La variación óptica se transforma en una señal eléctrica analógica continua (divisor de tensión). A mayor luz reflejada, menor resistencia del fototransistor y menor tensión de salida.
+                        </p>
+                    </div>
+
+                    <div class="flow-step-card">
+                        <div class="flow-step-number">03</div>
+                        <h4 class="flow-step-title">Control de Motores</h4>
+                        <p style="font-size: 0.88rem; color: var(--text-secondary);">
+                            El comparador LM393 coteja la tensión del sensor contra una referencia fija. Si la señal supera el umbral, conmuta bruscamente para excitar la base de los transistores de potencia.
+                        </p>
+                    </div>
+
+                    <div class="flow-step-card">
+                        <div class="flow-step-number">04</div>
+                        <h4 class="flow-step-title">Corrección de Dirección</h4>
+                        <p style="font-size: 0.88rem; color: var(--text-secondary);">
+                            El robot no dispone de cremallera ni servo de dirección. La dirección se controla de manera <strong>diferencial</strong>: variando la velocidad o deteniendo una de las dos ruedas motrices.
+                        </p>
+                    </div>
+
+                    <div class="flow-step-card">
+                        <div class="flow-step-number">05</div>
+                        <h4 class="flow-step-title">Avance y Giros Coordinados</h4>
+                        <p style="font-size: 0.88rem; color: var(--text-secondary);">
+                            El balance cinemático entre el motor izquierdo y el motor derecho genera una fuerza resultante que empuja el chasis hacia adelante o lo hace pivotar hacia el centro de la línea.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Tabla de Verdad Formal de Control -->
+                <div class="table-responsive">
+                    <h3 style="font-size: 1.35rem; margin-bottom: 0.5rem; color: #ffffff;">Tabla de Verdad y Lógica de Respuesta</h3>
+                    <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 1.25rem;">
+                        Matriz de estados lógicos del circuito para una pista con <strong>línea negra sobre fondo blanco</strong> (sensores separados a un ancho mayor que la línea):
+                    </p>
+                    <table class="formal-table">
+                        <thead>
+                            <tr>
+                                <th>Condición de la Pista</th>
+                                <th>Sensor Izquierdo (S1)</th>
+                                <th>Sensor Derecho (S2)</th>
+                                <th>Motor Izq (M1)</th>
+                                <th>Motor Der (M2)</th>
+                                <th>Comportamiento Mecánico Resultante</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Línea Centrada</strong></td>
+                                <td>Blanco (Luz reflejada)</td>
+                                <td>Blanco (Luz reflejada)</td>
+                                <td><span class="badge badge-green">100% Giro</span></td>
+                                <td><span class="badge badge-green">100% Giro</span></td>
+                                <td><strong>Avance rectilíneo simétrico:</strong> Ambos motores impulsan hacia adelante a la misma velocidad.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Desvío a la Izquierda</strong> (Curva hacia la izquierda)</td>
+                                <td>Negro (Luz absorbida)</td>
+                                <td>Blanco (Luz reflejada)</td>
+                                <td><span class="badge" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5;">0% Paro</span></td>
+                                <td><span class="badge badge-green">100% Giro</span></td>
+                                <td><strong>Pivote hacia la izquierda:</strong> M1 se frena; M2 sigue empujando, haciendo virar el chasis a la izquierda hasta recentrar la línea.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Desvío a la Derecha</strong> (Curva hacia la derecha)</td>
+                                <td>Blanco (Luz reflejada)</td>
+                                <td>Negro (Luz absorbida)</td>
+                                <td><span class="badge badge-green">100% Giro</span></td>
+                                <td><span class="badge" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5;">0% Paro</span></td>
+                                <td><strong>Pivote hacia la derecha:</strong> M2 se frena; M1 sigue empujando, haciendo virar el chasis a la derecha hasta recentrar la línea.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Fuera de Pista</strong> (Ambos sobre negro o levantado)</td>
+                                <td>Negro (Luz absorbida)</td>
+                                <td>Negro (Luz absorbida)</td>
+                                <td><span class="badge" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5;">0% Paro</span></td>
+                                <td><span class="badge" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5;">0% Paro</span></td>
+                                <td><strong>Paro total de seguridad:</strong> Si ambos sensores pisan negro, el circuito corta la tracción de ambas ruedas.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="margin-top: 1rem; padding: 0.85rem; background: rgba(37, 99, 235, 0.12); border-left: 3px solid var(--color-cyan); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; font-size: 0.82rem; color: #bae6fd;">
+                        <strong>Nota de Diseño de Circuito:</strong> Las respuestas de frenado o aceleración dependen estrictamente de si los sensores se conectan a la entrada inversora (-) o no inversora (+) del comparador LM393. La tabla anterior refleja la lógica estándar donde la presencia de blanco mantiene encendido el motor de su propio canal.
+                    </div>
+                </div>
+
+                <!-- Simulador Interactivo de Navegación -->
+                <div class="simulator-box" style="margin-top: 3.5rem;">
+                    <div class="sim-header">
+                        <div>
+                            <span class="badge badge-green">Laboratorio Interactivo de Cinemática</span>
+                            <h3 style="font-size: 1.5rem; margin-top: 0.35rem; color: #ffffff;">Simulador de Dirección Diferencial en Tiempo Real</h3>
+                            <p style="font-size: 0.9rem; color: var(--text-secondary);">
+                                Interactúa con los botones para simular la posición del robot respecto a la línea y comprobar cómo se redistribuyen las tensiones y los giros:
+                            </p>
+                        </div>
+                        <div class="sim-controls">
+                            <button id="sim-btn-center" class="sim-btn active">
+                                <span>🟢</span> Línea Centrada
+                            </button>
+                            <button id="sim-btn-left" class="sim-btn">
+                                <span>🔄</span> Desvío a la Izquierda
+                            </button>
+                            <button id="sim-btn-right" class="sim-btn">
+                                <span>🔁</span> Desvío a la Derecha
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="sim-display-grid">
+                        <div class="sim-track-canvas">
+                            <div style="position: absolute; width: 34px; height: 100%; background: #000000; border-left: 2px solid rgba(0, 242, 254, 0.4); border-right: 2px solid rgba(0, 242, 254, 0.4); box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);"></div>
+                            
+                            <div id="sim-robot" class="sim-robot-visual">
+                                <svg viewBox="0 0 140 180" width="100%" height="100%">
+                                    <rect x="5" y="60" width="16" height="55" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="2"/>
+                                    <rect x="119" y="60" width="16" height="55" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="2"/>
+                                    <rect x="22" y="30" width="96" height="110" rx="14" fill="#13223f" stroke="#00f2fe" stroke-width="2"/>
+                                    <circle cx="70" cy="45" r="10" fill="#94a3b8" stroke="#ffffff"/>
+                                    <rect x="42" y="16" width="16" height="20" rx="3" fill="#020617" stroke="#38bdf8"/>
+                                    <circle cx="50" cy="22" r="3" fill="#ef4444"/>
+                                    <circle cx="50" cy="30" r="3" fill="#38bdf8"/>
+                                    <rect x="82" y="16" width="16" height="20" rx="3" fill="#020617" stroke="#38bdf8"/>
+                                    <circle cx="90" cy="22" r="3" fill="#ef4444"/>
+                                    <circle cx="90" cy="30" r="3" fill="#38bdf8"/>
+                                    <rect x="40" y="75" width="60" height="40" rx="4" fill="#064e3b" stroke="#10b981"/>
+                                    <text x="70" y="98" font-family="monospace" font-size="8" fill="#ffffff" text-anchor="middle">LM393</text>
+                                    <text x="70" y="160" font-family="sans-serif" font-size="8" fill="#94a3b8" text-anchor="middle">ROBOT 2WD</text>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="sim-telemetry-panel">
+                            <div class="telemetry-row">
+                                <span class="telemetry-label">Sensor Izquierdo (IR Izq):</span>
+                                <span id="val-sensor-left" class="telemetry-val val-active">BLANCO (Luz Reflejada)</span>
+                            </div>
+                            <div class="telemetry-row">
+                                <span class="telemetry-label">Sensor Derecho (IR Der):</span>
+                                <span id="val-sensor-right" class="telemetry-val val-active">BLANCO (Luz Reflejada)</span>
+                            </div>
+                            <div class="telemetry-row">
+                                <span class="telemetry-label">Salidas LM393 (Canales 1 y 2):</span>
+                                <div>
+                                    <span id="val-comp-left" class="telemetry-val val-active">ALTO</span> | 
+                                    <span id="val-comp-right" class="telemetry-val val-active">ALTO</span>
+                                </div>
+                            </div>
+                            <div class="telemetry-row">
+                                <span class="telemetry-label">Motor Izquierdo (M1):</span>
+                                <span id="val-motor-left" class="telemetry-val val-active">GIRANDO (100% Marcha)</span>
+                            </div>
+                            <div class="telemetry-row">
+                                <span class="telemetry-label">Motor Derecho (M2):</span>
+                                <span id="val-motor-right" class="telemetry-val val-active">GIRANDO (100% Marcha)</span>
+                            </div>
+                            <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: var(--radius-md); padding: 1rem; font-size: 0.88rem; color: #f8fafc;" id="val-action-desc">
+                                <strong>Trayectoria Recta:</strong> Ambos sensores sobre pista blanca. Los dos transistores conducen en saturación, impulsando ambos motores con tracción simétrica adelante.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Aplicaciones Industriales vs Modelo Escolar -->
+                <div style="margin-top: 4.5rem;">
+                    <div style="text-align: center; margin-bottom: 2.5rem;">
+                        <span class="badge badge-green">Transferencia Tecnológica</span>
+                        <h2 style="font-size: 2rem; margin-top: 0.5rem; color: #ffffff;">Aplicaciones en la Industria Real</h2>
+                        <p style="color: var(--text-secondary); max-width: 720px; margin: 0.5rem auto 0;">
+                            El principio de seguimiento óptico de trayectorias es la columna vertebral de la intralogística contemporánea y la automatización de fábricas 4.0.
+                        </p>
+                    </div>
+
+                    <div class="applications-grid">
+                        <div class="app-card">
+                            <div class="app-icon">🏭</div>
+                            <h3 style="font-size: 1.2rem; color: var(--text-primary);">AGVs en Centros de Distribución</h3>
+                            <p style="font-size: 0.9rem; color: var(--text-secondary);">
+                                En almacenes gigantescos (como Amazon Logistics o centros de paquetería de Mercado Libre), cientos de robots AGV mueven estanterías completas de cientos de kilos siguiendo redes de trayectorias ópticas o cintas magnéticas para optimizar tiempos de despacho.
+                            </p>
+                        </div>
+
+                        <div class="app-card">
+                            <div class="app-icon">🏥</div>
+                            <h3 style="font-size: 1.2rem; color: var(--text-primary);">Transporte Hospitalario y Clínico</h3>
+                            <p style="font-size: 0.9rem; color: var(--text-secondary);">
+                                Plataformas autónomas móviles transportan bandejas con medicamentos controlados, insumos quirúrgicos esterilizados y residuos bioinfecciosos por pasillos clínicos predefinidos, eliminando la fatiga del personal de enfermería y previniendo contaminación cruzada.
+                            </p>
+                        </div>
+
+                        <div class="app-card">
+                            <div class="app-icon">🚗</div>
+                            <h3 style="font-size: 1.2rem; color: var(--text-primary);">Líneas de Montaje Automotriz</h3>
+                            <p style="font-size: 0.9rem; color: var(--text-secondary);">
+                                En plantas como Toyota o BMW, vehículos de arrastre entregan motores, puertas y chasis pesados exactamente en la estación de montaje requerida siguiendo trayectorias fijas, garantizando la metodología de producción Just-In-Time (JIT).
+                            </p>
+                        </div>
+
+                        <div class="app-card" style="border-color: rgba(16, 185, 129, 0.4); background: rgba(16, 185, 129, 0.06);">
+                            <div class="app-icon">🔬</div>
+                            <h3 style="font-size: 1.2rem; color: var(--color-accent-green-bright);">Modelo Escolar vs. AGVs Industriales</h3>
+                            <p style="font-size: 0.9rem; color: var(--text-secondary);">
+                                <strong>Diferencia fundamental de alcance:</strong> Nuestro prototipo educativo de grado 11 opera con <em>lógica puramente reactiva analógica</em> (sin mapas ni memoria). Un AGV industrial moderno incorpora sistemas LiDAR 3D, cámaras con navegación SLAM, protocolos de comunicación Wi-Fi industrial, frenado regenerativo y detección de obstáculos mediante sensores ultrasónicos de seguridad homologados (categoría SIL3).
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Paginación Formal entre Secciones -->
+                <div class="page-navigation-footer">
+                    <a href="concepto.html" class="nav-prev-btn">
+                        <span class="nav-direction-label">&larr; Sección Anterior</span>
+                        <span class="nav-page-title">Sección 2: Concepto del Robot</span>
+                    </a>
+                    <a href="electronica.html" class="nav-next-btn" style="text-align: right;">
+                        <span class="nav-direction-label">Siguiente Sección Curricular &rarr;</span>
+                        <span class="nav-page-title">Sección 4: Parte Electrónica</span>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Formal -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="brand-logo" style="margin-bottom: 1rem;">
+                        <div class="brand-icon-wrapper" aria-hidden="true">🤖</div>
+                        <span>RobotLab 11°</span>
+                    </div>
+                    <p style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem;">
+                        Estudio dinámico y cinemático de vehículos autónomos diferenciales para el área de Tecnología e Informática.
+                    </p>
+                    <span class="badge badge-green">Cinemática Diferencial • Lógica Reactiva</span>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Navegación</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html" class="footer-link">Inicio del Proyecto</a></li>
+                        <li><a href="materiales.html" class="footer-link">1. Materiales</a></li>
+                        <li><a href="concepto.html" class="footer-link">2. Concepto y Autonomía</a></li>
+                        <li><a href="funciones.html" class="footer-link">3. Funciones (Actual)</a></li>
+                        <li><a href="electronica.html" class="footer-link">4. Parte Electrónica</a></li>
+                        <li><a href="video.html" class="footer-link">Video y Capturas</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Conceptos Clave</h4>
+                    <ul class="footer-links">
+                        <li><span class="footer-link">Tracción Diferencial</span></li>
+                        <li><span class="footer-link">Tabla de Verdad Lógica</span></li>
+                        <li><span class="footer-link">AGVs Industriales</span></li>
+                        <li><span class="footer-link">Control Reactivo</span></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Fuentes Técnicas</h4>
+                    <ul class="footer-links">
+                        <li><span class="footer-link">Siegwart, R. - Mobile Robots</span></li>
+                        <li><span class="footer-link">Groover, M. - Automatización Industrial</span></li>
+                        <li><span class="footer-link">Guía Pedagógica Robótica 11°</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Proyecto Escolar de Robótica y Tecnología - Grado 11. Desarrollado con estándares web modernos.</p>
+                <p>Sin fines comerciales • Exclusivamente Educativo</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Video principal y galería de capturas técnicas analizadas del Robot Seguidor de Línea sin Arduino. Proyecto Grado 11.">
+    <title>Video y Capturas Técnicas | Robot Seguidor de Línea</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Header / Navigation Estilo TecnoSafe -->
+    <header class="site-header" id="header">
+        <nav class="nav container" aria-label="Navegación principal">
+            <a href="index.html" class="nav__logo" aria-label="RobotLab 11° - Inicio">
+                <div class="nav__logo-icon brand-mark">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                        <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+                        <circle cx="12" cy="5" r="2"></circle>
+                        <path d="M12 7v4"></path>
+                        <line x1="8" y1="16" x2="8" y2="16"></line>
+                        <line x1="16" y1="16" x2="16" y2="16"></line>
+                    </svg>
+                </div>
+                <div class="nav__logo-text-group">
+                    <span class="nav__logo-text">ROBOTLAB</span>
+                    <span class="nav__logo-sub">Grado 11 • Sin Arduino</span>
+                </div>
+            </a>
+
+            <div class="nav__actions">
+                <div class="nav__academic-badge">
+                    <span class="badge__icon">🎬</span>
+                    <span class="badge__title">Evidencias Reales</span>
+                    <span class="badge__tag">Video y Capturas</span>
+                </div>
+            </div>
+
+            <button class="nav__toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menú">
+                <span class="nav__toggle-icon">☰</span>
+            </button>
+
+            <ul class="nav__menu" id="nav-menu" role="menubar">
+                <li><a href="index.html" class="nav__link nav__link--tab" data-page="inicio">
+                    <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    <span>Inicio</span>
+                </a></li>
+                <li><a href="materiales.html" class="nav__link nav__link--tab" data-page="materiales">
+                    <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                    <span>1. Materiales</span>
+                </a></li>
+                <li><a href="concepto.html" class="nav__link nav__link--tab" data-page="concepto">
+                    <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    <span>2. Concepto</span>
+                </a></li>
+                <li><a href="funciones.html" class="nav__link nav__link--tab" data-page="funciones">
+                    <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22 8.5 12 15.5 2 8.5"/></svg>
+                    <span>3. Funciones</span>
+                </a></li>
+                <li><a href="electronica.html" class="nav__link nav__link--tab" data-page="electronica">
+                    <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    <span>4. Electrónica</span>
+                </a></li>
+                <li><a href="video.html" class="nav__link nav__link--tab active" data-page="video" aria-current="page">
+                    <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2.18" ry="2.18"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+                    <span>Video y Capturas</span>
+                </a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Encabezado Formal -->
+        <header class="page-header-formal">
+            <div class="container">
+                <nav class="breadcrumb-nav" aria-label="Ruta de navegación">
+                    <a href="index.html">Inicio</a>
+                    <span class="breadcrumb-separator">/</span>
+                    <span aria-current="page">Video y Capturas Técnicas</span>
+                </nav>
+                <span class="page-eyebrow">RECURSOS AUDIOVISUALES Y EVIDENCIAS REALES</span>
+                <h1 style="font-size: clamp(2.2rem, 3.8vw, 3rem); font-weight: 800; color: #ffffff;">
+                    Video Principal y Extracción de Capturas
+                </h1>
+                <p style="font-size: 1.1rem; color: var(--text-secondary); max-width: 780px; margin-top: 0.75rem;">
+                    Integración del video tutorial experimental verificado (100% analógico sin Arduino) y catálogo de momentos clave analizados con marcas de tiempo exactas.
+                </p>
+            </div>
+        </header>
+
+        <section class="section">
+            <div class="container">
+                
+                <!-- Contenedor del Reproductor de Video -->
+                <div class="video-section-container">
+                    <div class="video-player-wrapper">
+                        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/m0YjmDXjP98" title="How to Make a Line-Following Robot WITHOUT Arduino" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+
+                    <div class="video-meta-bar">
+                        <div>
+                            <h2 style="font-size: 1.35rem; color: #ffffff;" id="video-title">How to Make a Line-Following Robot WITHOUT Arduino</h2>
+                            <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.25rem;">
+                                Video tutorial técnico sobre el ensamble, calibración de sensores ópticos y prueba en pista de un robot seguidor de línea basado exclusivamente en circuitos analógicos discretos.
+                            </p>
+                        </div>
+                        <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
+                            <span class="badge badge-green">100% Sin Arduino Verificado</span>
+                            <a href="https://www.youtube.com/watch?v=m0YjmDXjP98" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">Abrir en YouTube ↗</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Galería de 10 Capturas Técnicas Analizadas -->
+                <div style="margin-top: 4.5rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem;">
+                        <div>
+                            <span class="badge badge-green">Análisis Cuadro a Cuadro</span>
+                            <h2 style="font-size: 2rem; color: #ffffff; margin-top: 0.4rem;">10 Momentos Clave Extraídos del Video</h2>
+                            <p style="color: var(--text-secondary); font-size: 0.92rem; max-width: 680px;">
+                                Cada captura se vincula con la marca de tiempo precisa del video y aporta evidencia visual para comprender las distintas secciones del proyecto.
+                            </p>
+                        </div>
+                        <span class="badge" style="background: rgba(37, 99, 235, 0.2); color: #93c5fd; border-color: var(--border-bright);">
+                            Marcas de Tiempo Verificadas
+                        </span>
+                    </div>
+
+                    <div class="captures-grid">
+                        
+                        <!-- Captura 1: Robot Completo -->
+                        <div class="capture-card">
+                            <div class="capture-img-container">
+                                <img src="imagenes/robot-hero.svg" alt="Robot completo en vista isométrica" class="capture-img" style="object-fit: contain; padding: 1rem;">
+                                <span class="capture-time-tag">00:15</span>
+                            </div>
+                            <div class="capture-body">
+                                <h3 class="capture-title">1. Vista General del Robot Completo</h3>
+                                <p class="capture-desc">Presenta el móvil completamente terminado sobre su chasis 2WD, mostrando la distribución equilibrada de baterías y protoboard.</p>
+                                <span class="capture-meta">Robot completo — captura del video en 00:15</span>
+                                <a href="https://www.youtube.com/watch?v=m0YjmDXjP98&t=15s" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="margin-top: 0.6rem;">▶ Ver Momento (00:15)</a>
+                            </div>
+                        </div>
+
+                        <!-- Captura 2: Materiales y Componentes -->
+                        <div class="capture-card">
+                            <div class="capture-img-container">
+                                <img src="imagenes/chasis.svg" alt="Materiales y piezas mecánicas" class="capture-img" style="object-fit: contain; padding: 1rem;">
+                                <span class="capture-time-tag">00:38</span>
+                            </div>
+                            <div class="capture-body">
+                                <h3 class="capture-title">2. Materiales y Piezas Mecánicas</h3>
+                                <p class="capture-desc">Muestra el kit de componentes antes del ensamble: chasis de acrílico con ranuras de ajuste, llantas de silicona y tornillería métrica.</p>
+                                <span class="capture-meta">Materiales y componentes — captura del video en 00:38</span>
+                                <a href="https://www.youtube.com/watch?v=m0YjmDXjP98&t=38s" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="margin-top: 0.6rem;">▶ Ver Momento (00:38)</a>
+                            </div>
+                        </div>
+
+                        <!-- Captura 3: Parte Inferior del Robot -->
+                        <div class="capture-card">
+                            <div class="capture-img-container">
+                                <img src="imagenes/rueda.svg" alt="Chasis inferior y rueda loca" class="capture-img" style="object-fit: contain; padding: 1rem;">
+                                <span class="capture-time-tag">01:05</span>
+                            </div>
+                            <div class="capture-body">
+                                <h3 class="capture-title">3. Vista Inferior y Rueda Loca</h3>
+                                <p class="capture-desc">Permite observar la ubicación inferior de la rueda esférica omnidireccional y el despeje libre con respecto al piso.</p>
+                                <span class="capture-meta">Parte inferior del robot — captura del video en 01:05</span>
+                                <a href="https://www.youtube.com/watch?v=m0YjmDXjP98&t=65s" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="margin-top: 0.6rem;">▶ Ver Momento (01:05)</a>
+                            </div>
+                        </div>
+
+                        <!-- Captura 4: Sensores Infrarrojos -->
+                        <div class="capture-card">
+                            <div class="capture-img-container">
+                                <img src="imagenes/sensor-ir.svg" alt="Pares de sensores infrarrojos frontales" class="capture-img" style="object-fit: contain; padding: 1rem;">
+                                <span class="capture-time-tag">01:42</span>
+                            </div>
+                            <div class="capture-body">
+                                <h3 class="capture-title">4. Sensores IR y Trimpots Frontales</h3>
+                                <p class="capture-desc">Detalle del soporte frontal que mantiene los emisores y receptores a 6 mm de la pista para optimizar el contraste de absorción.</p>
+                                <span class="capture-meta">Sensores infrarrojos — captura del video en 01:42</span>
+                                <a href="https://www.youtube.com/watch?v=m0YjmDXjP98&t=102s" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="margin-top: 0.6rem;">▶ Ver Momento (01:42)</a>
+                            </div>
+                        </div>
+
+                        <!-- Captura 5: Motores y Ruedas -->
+                        <div class="capture-card">
+                            <div class="capture-img-container">
+                                <img src="imagenes/motor-dc.svg" alt="Motorreductores amarillos con ruedas acopladas" class="capture-img" style="object-fit: contain; padding: 1rem;">
+                                <span class="capture-time-tag">02:15</span>
+                            </div>
+                            <div class="capture-body">
+                                <h3 class="capture-title">5. Motores DC y Ruedas Motrices</h3>
+                                <p class="capture-desc">Montaje directo de los motorreductores tipo TT con reducción 1:48 atornillados al chasis con soportes metálicos.</p>
+                                <span class="capture-meta">Motores y ruedas — captura del video en 02:15</span>
+                                <a href="https://www.youtube.com/watch?v=m0YjmDXjP98&t=135s" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="margin-top: 0.6rem;">▶ Ver Momento (02:15)</a>
+                            </div>
+                        </div>
+
+                        <!-- Captura 6: Circuito Electrónico -->
+                        <div class="capture-card">
+                            <div class="capture-img-container">
+                                <img src="imagenes/comparador.svg" alt="Protoboard con el chip LM393" class="capture-img" style="object-fit: contain; padding: 1rem;">
+                                <span class="capture-time-tag">02:50</span>
+                            </div>
+                            <div class="capture-body">
+                                <h3 class="capture-title">6. Circuito de Control LM393</h3>
+                                <p class="capture-desc">Cableado del integrado comparador en el protoboard, mostrando las conexiones entre los divisores de tensión y las entradas inversoras.</p>
+                                <span class="capture-meta">Circuito electrónico — captura del video en 02:50</span>
+                                <a href="https://www.youtube.com/watch?v=m0YjmDXjP98&t=170s" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="margin-top: 0.6rem;">▶ Ver Momento (02:50)</a>
+                            </div>
+                        </div>
+
+                        <!-- Captura 7: Conexiones Eléctricas -->
+                        <div class="capture-card">
+                            <div class="capture-img-container">
+                                <img src="imagenes/cables.svg" alt="Cables de conexión y cableado ordenado" class="capture-img" style="object-fit: contain; padding: 1rem;">
+                                <span class="capture-time-tag">03:20</span>
+                            </div>
+                            <div class="capture-body">
+                                <h3 class="capture-title">7. Conexiones y Transistores NPN</h3>
+                                <p class="capture-desc">Interconexión de los transistores de conmutación 2N2222 y diodos de protección flyback hacia las terminales de los motores.</p>
+                                <span class="capture-meta">Conexiones eléctricas — captura del video en 03:20</span>
+                                <a href="https://www.youtube.com/watch?v=m0YjmDXjP98&t=200s" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="margin-top: 0.6rem;">▶ Ver Momento (03:20)</a>
+                            </div>
+                        </div>
+
+                        <!-- Captura 8: Robot Siguiendo la Línea -->
+                        <div class="capture-card">
+                            <div class="capture-img-container">
+                                <img src="imagenes/robot-hero.svg" alt="Robot en marcha rectilínea sobre la pista" class="capture-img" style="object-fit: contain; padding: 1rem;">
+                                <span class="capture-time-tag">04:05</span>
+                            </div>
+                            <div class="capture-body">
+                                <h3 class="capture-title">8. Desplazamiento Rectilíneo Estable</h3>
+                                <p class="capture-desc">Ambos sensores detectan superficie clara a ambos lados de la cinta negra, manteniendo tracción simétrica hacia adelante.</p>
+                                <span class="capture-meta">Robot siguiendo la línea — captura del video en 04:05</span>
+                                <a href="https://www.youtube.com/watch?v=m0YjmDXjP98&t=245s" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="margin-top: 0.6rem;">▶ Ver Momento (04:05)</a>
+                            </div>
+                        </div>
+
+                        <!-- Captura 9: Realizando un Giro -->
+                        <div class="capture-card">
+                            <div class="capture-img-container">
+                                <img src="imagenes/rueda.svg" alt="Robot pivotando en una curva pronunciada" class="capture-img" style="object-fit: contain; padding: 1rem;">
+                                <span class="capture-time-tag">04:32</span>
+                            </div>
+                            <div class="capture-body">
+                                <h3 class="capture-title">9. Corrección Dinámica en Curva</h3>
+                                <p class="capture-desc">El sensor interior toca la línea negra; el motor de ese flanco se corta inmediatamente y el chasis pivota hacia la trayectoria.</p>
+                                <span class="capture-meta">Robot realizando un giro — captura del video en 04:32</span>
+                                <a href="https://www.youtube.com/watch?v=m0YjmDXjP98&t=272s" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="margin-top: 0.6rem;">▶ Ver Momento (04:32)</a>
+                            </div>
+                        </div>
+
+                        <!-- Captura 10: Prueba de Funcionamiento -->
+                        <div class="capture-card">
+                            <div class="capture-img-container">
+                                <img src="imagenes/robot-hero.svg" alt="Robot completando una vuelta entera a la pista" class="capture-img" style="object-fit: contain; padding: 1rem;">
+                                <span class="capture-time-tag">05:10</span>
+                            </div>
+                            <div class="capture-body">
+                                <h3 class="capture-title">10. Prueba Final de Ciclo Completo</h3>
+                                <p class="capture-desc">Validación experimental continua completando el circuito cerrado sin salirse de la línea ni perder sincronismo de marcha.</p>
+                                <span class="capture-meta">Robot durante prueba de funcionamiento — captura del video en 05:10</span>
+                                <a href="https://www.youtube.com/watch?v=m0YjmDXjP98&t=310s" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="margin-top: 0.6rem;">▶ Ver Momento (05:10)</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Paginación Formal entre Secciones -->
+                <div class="page-navigation-footer">
+                    <a href="electronica.html" class="nav-prev-btn">
+                        <span class="nav-direction-label">&larr; Sección Anterior</span>
+                        <span class="nav-page-title">Sección 4: Parte Electrónica</span>
+                    </a>
+                    <a href="index.html" class="nav-next-btn" style="text-align: right;">
+                        <span class="nav-direction-label">Conclusión del Proyecto &rarr;</span>
+                        <span class="nav-page-title">Volver al Inicio</span>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Formal -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="brand-logo" style="margin-bottom: 1rem;">
+                        <div class="brand-icon-wrapper" aria-hidden="true">🤖</div>
+                        <span>RobotLab 11°</span>
+                    </div>
+                    <p style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem;">
+                        Análisis audiovisual y evidencias experimentales del proyecto escolar de Tecnología e Informática.
+                    </p>
+                    <span class="badge badge-green">Evidencias Reales • Video Verificado</span>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Navegación</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html" class="footer-link">Inicio del Proyecto</a></li>
+                        <li><a href="materiales.html" class="footer-link">1. Materiales</a></li>
+                        <li><a href="concepto.html" class="footer-link">2. Concepto</a></li>
+                        <li><a href="funciones.html" class="footer-link">3. Funciones</a></li>
+                        <li><a href="electronica.html" class="footer-link">4. Electrónica</a></li>
+                        <li><a href="video.html" class="footer-link">Video y Capturas (Actual)</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Datos del Video</h4>
+                    <ul class="footer-links">
+                        <li><span class="footer-link">ID: m0YjmDXjP98</span></li>
+                        <li><span class="footer-link">Formato: 1080p HD</span></li>
+                        <li><span class="footer-link">Duración: ~5:30 min</span></li>
+                        <li><span class="footer-link">Control: Analógico Discreto</span></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Créditos</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://www.youtube.com/watch?v=m0YjmDXjP98" target="_blank" rel="noopener noreferrer" class="footer-link">Canal Tutorial de YouTube ↗</a></li>
+                        <li><span class="footer-link">Colegio Técnico - Grado 11</span></li>
+                        <li><span class="footer-link">Área Tecnología e Informática</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Proyecto Escolar de Robótica y Tecnología - Grado 11. Desarrollado con estándares web modernos.</p>
+                <p>Sin fines comerciales • Exclusivamente Educativo</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,19 @@
+{
+  "name": "robot-seguidor-linea-sin-arduino",
+  "version": "1.0.0",
+  "description": "Sitio web educativo sobre el Robot Seguidor de Línea sin Arduino - Grado 11",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "build": "echo 'Build OK'"
+  },
+  "keywords": [
+    "robotica",
+    "educacion",
+    "seguidor-de-linea",
+    "sin-arduino",
+    "lm393"
+  ],
+  "author": "Grado 11 - Tecnología e Informática",
+  "license": "MIT"
+}

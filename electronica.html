@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sección 4: Análisis electrónico detallado del Robot Seguidor de Línea sin Arduino. Sensores, comparadores LM393, potencia y esquema normado.">
+    <title>Sección 4: Parte Electrónica | Robot Seguidor de Línea</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Header / Navigation Estilo TecnoSafe -->
+    <header class="site-header" id="header">
+        <nav class="nav container" aria-label="Navegación principal">
+            <a href="index.html" class="nav__logo" aria-label="RobotLab 11° - Inicio">
+                <div class="nav__logo-icon brand-mark">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                        <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+                        <circle cx="12" cy="5" r="2"></circle>
+                        <path d="M12 7v4"></path>
+                        <line x1="8" y1="16" x2="8" y2="16"></line>
+                        <line x1="16" y1="16" x2="16" y2="16"></line>
+                    </svg>
+                </div>
+                <div class="nav__logo-text-group">
+                    <span class="nav__logo-text">ROBOTLAB</span>
+                    <span class="nav__logo-sub">Grado 11 • Sin Arduino</span>
+                </div>
+            </a>
+
+            <div class="nav__actions">
+                <div class="nav__academic-badge">
+                    <span class="badge__icon">⚡</span>
+                    <span class="badge__title">Sección 04 de 04</span>
+                    <span class="badge__tag">Ingeniería de Circuitos</span>
+                </div>
+            </div>
+
+            <button class="nav__toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menú">
+                <span class="nav__toggle-icon">☰</span>
+            </button>
+
+            <ul class="nav__menu" id="nav-menu" role="menubar">
+                <li><a href="index.html" class="nav__link nav__link--tab" data-page="inicio">
+                    <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    <span>Inicio</span>
+                </a></li>
+                <li><a href="materiales.html" class="nav__link nav__link--tab" data-page="materiales">
+                    <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                    <span>1. Materiales</span>
+                </a></li>
+                <li><a href="concepto.html" class="nav__link nav__link--tab" data-page="concepto">
+                    <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    <span>2. Concepto</span>
+                </a></li>
+                <li><a href="funciones.html" class="nav__link nav__link--tab" data-page="funciones">
+                    <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22 8.5 12 15.5 2 8.5"/></svg>
+                    <span>3. Funciones</span>
+                </a></li>
+                <li><a href="electronica.html" class="nav__link nav__link--tab active" data-page="electronica" aria-current="page">
+                    <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    <span>4. Electrónica</span>
+                </a></li>
+                <li><a href="video.html" class="nav__link nav__link--tab" data-page="video">
+                    <svg class="nav__link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2.18" ry="2.18"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+                    <span>Video y Capturas</span>
+                </a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Encabezado Formal -->
+        <header class="page-header-formal">
+            <div class="container">
+                <nav class="breadcrumb-nav" aria-label="Ruta de navegación">
+                    <a href="index.html">Inicio</a>
+                    <span class="breadcrumb-separator">/</span>
+                    <span aria-current="page">Sección 4: Parte Electrónica</span>
+                </nav>
+                <span class="page-eyebrow">SECCIÓN 04 • CURRICULAR OBLIGATORIA (DETALLE MÁXIMO)</span>
+                <h1 style="font-size: clamp(2.2rem, 3.8vw, 3rem); font-weight: 800; color: #ffffff;">
+                    Parte Electrónica del Robot Seguidor de Línea
+                </h1>
+                <p style="font-size: 1.1rem; color: var(--text-secondary); max-width: 780px; margin-top: 0.75rem;">
+                    Análisis riguroso de la interconexión entre subsistemas: transducción óptica por divisor de tensión, comparadores analógicos LM393, conmutación de transistores en saturación y esquema esquemático normado.
+                </p>
+            </div>
+        </header>
+
+        <section class="section">
+            <div class="container">
+                
+                <!-- Grilla de los 4 Apartados Técnicos (A, B, C, D) -->
+                <div class="electronics-grid">
+                    
+                    <!-- Apartado A: Sensores Infrarrojos -->
+                    <div class="electronics-card">
+                        <div class="electronics-card-header">
+                            <div class="elec-letter">A</div>
+                            <div>
+                                <h3 style="font-size: 1.3rem;">Sensores Infrarrojos y Divisor de Tensión</h3>
+                                <span style="font-size: 0.85rem; color: var(--color-cyan-dim);">Módulos TCRT5000 / CNY70</span>
+                            </div>
+                        </div>
+                        <p style="font-size: 0.92rem; color: var(--text-secondary);">
+                            El módulo sensor actúa como el transductor primario del sistema. Contiene dos componentes optoelectrónicos encapsulados con un filtro que bloquea la luz visible externa:
+                        </p>
+                        <div style="background: rgba(12, 23, 42, 0.75); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.15rem; font-size: 0.88rem;">
+                            <strong>1. Diodo Emisor IR (GaAs):</strong>
+                            <p style="color: var(--text-secondary); margin-top: 0.25rem;">
+                                Se polariza en directa desde \(V_{cc}\) a través de una resistencia limitadora de \(220\Omega\) (\(I_F = \frac{V_{cc} - V_D}{R_1} \approx \frac{5\text{V} - 1.2\text{V}}{220\Omega} \approx 17.2\text{ mA}\)), emitiendo una longitud de onda constante de 950 nm.
+                            </p>
+                            <strong style="display: block; margin-top: 0.75rem;">2. Fototransistor Receptor (Silicio NPN):</strong>
+                            <p style="color: var(--text-secondary); margin-top: 0.25rem;">
+                                Se conecta en serie con una resistencia de carga (\(R_L = 10\text{k}\Omega\)). Cuando inciden fotones reflejados por la superficie blanca, se liberan pares electrón-hueco en la juntura base-colector, haciendo conducir el transistor. La tensión de salida del divisor se desploma a niveles cercanos a 0.2V (nivel BAJO). En cambio, sobre la línea negra no hay fotones, el transistor entra en corte y la salida se eleva hacia \(V_{cc}\) (nivel ALTO).
+                            </p>
+                        </div>
+                        <div style="font-size: 0.82rem; color: var(--color-accent-green-bright); background: rgba(16, 185, 129, 0.08); padding: 0.65rem; border-radius: var(--radius-sm);">
+                            📍 <strong>Ubicación física:</strong> Montados en el extremo delantero inferior del chasis, separados a una distancia ligeramente mayor al ancho de la línea de prueba (\(\approx 20\text{ mm} - 25\text{ mm}\)).
+                        </div>
+                    </div>
+
+                    <!-- Apartado B: Circuito de Control -->
+                    <div class="electronics-card">
+                        <div class="electronics-card-header">
+                            <div class="elec-letter">B</div>
+                            <div>
+                                <h3 style="font-size: 1.3rem;">Circuito de Control y Comparación</h3>
+                                <span style="font-size: 0.85rem; color: var(--color-cyan-dim);">Circuito Integrado LM393</span>
+                            </div>
+                        </div>
+                        <p style="font-size: 0.92rem; color: var(--text-secondary);">
+                            El LM393 es un circuito integrado que contiene <strong>dos comparadores de tensión independientes</strong>. Su misión es eliminar la incertidumbre analógica convirtiendo voltajes variables continuos en decisiones lógicas cuadradas y definidas:
+                        </p>
+                        <div style="background: rgba(12, 23, 42, 0.75); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.15rem; font-size: 0.88rem;">
+                            <strong>Mecanismo de Discriminación de Tensión:</strong>
+                            <p style="color: var(--text-secondary); margin-top: 0.25rem;">
+                                Cada comparador tiene una entrada no inversora (\(V_+\)) y una inversora (\(V_-\)):
+                            </p>
+                            <ul style="margin-top: 0.5rem; padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.35rem; color: var(--text-secondary);">
+                                <li>En una entrada fijamos la tensión de referencia \(V_{ref}\) mediante un potenciómetro calibrador (típicamente ajustado en \(\approx 2.5\text{V}\)).</li>
+                                <li>En la otra entrada conectamos la señal analógica variable \(V_{in}\) proveniente del sensor IR.</li>
+                            </ul>
+                            <p style="margin-top: 0.75rem; color: var(--text-secondary);">
+                                <strong>Regla de Conmutación:</strong><br>
+                                Si \(V_+ > V_-\), la salida del comparador pasa a estado ALTO (+Vcc).<br>
+                                Si \(V_+ < V_-\), la salida cae a estado BAJO (0V / GND).
+                            </p>
+                        </div>
+                        <div style="font-size: 0.82rem; color: #bae6fd; background: rgba(37, 99, 235, 0.12); padding: 0.65rem; border-radius: var(--radius-sm);">
+                            💡 <strong>Resistencia de Pull-Up:</strong> Las salidas del LM393 son de colector abierto. Esto significa que necesitan una resistencia de pull-up a \(V_{cc}\) para entregar corriente hacia la siguiente etapa.
+                        </div>
+                    </div>
+
+                    <!-- Apartado C: Transistores y Control de Motores -->
+                    <div class="electronics-card">
+                        <div class="electronics-card-header">
+                            <div class="elec-letter">C</div>
+                            <div>
+                                <h3 style="font-size: 1.3rem;">Etapa de Potencia y Transistores NPN</h3>
+                                <span style="font-size: 0.85rem; color: var(--color-cyan-dim);">Conmutación 2N2222A + Diodos Flyback</span>
+                            </div>
+                        </div>
+                        <p style="font-size: 0.92rem; color: var(--text-secondary);">
+                            <strong>¿Por qué es estrictamente prohibitivo conectar los motores a la salida del comparador?</strong>
+                        </p>
+                        <div style="background: rgba(12, 23, 42, 0.75); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.15rem; font-size: 0.88rem;">
+                            <p style="color: #f87171; font-weight: 700; margin-bottom: 0.5rem;">
+                                ⚠️ Sobrecarga Térmica Destructiva:
+                            </p>
+                            <p style="color: var(--text-secondary);">
+                                El comparador LM393 es un circuito de baja potencia cuya salida soporta un límite máximo absoluto de <strong>20 mA</strong>. Un motorreductor DC de corriente continua exige entre <strong>150 mA (en vacío) y hasta 800 mA en el arranque</strong>. Conectar el motor directo al integrado provocaría su destrucción instantánea por sobrecalentamiento.
+                            </p>
+                            <strong style="display: block; margin-top: 0.85rem; color: #ffffff;">La Solución: El Transistor como Conmutador</strong>
+                            <p style="color: var(--text-secondary); margin-top: 0.25rem;">
+                                El transistor NPN (2N2222A o TIP120) se polariza para trabajar exclusivamente en <strong>Corte</strong> (interruptor abierto, motor sin masa) y <strong>Saturación</strong> (interruptor cerrado, mínima caída \(V_{CE} \approx 0.1V - 0.2V\)). La corriente de base requerida para garantizar saturación profunda es:
+                                \[ I_B \ge \frac{I_C}{\beta_{\min}} \approx \frac{400\text{ mA}}{50} \approx 8\text{ mA} \]
+                                Calculando la resistencia de base: \(R_B = \frac{V_{salida} - V_{BE}}{I_B} = \frac{5\text{V} - 0.7\text{V}}{8\text{ mA}} \approx 537\Omega\) (se adopta valor estándar normalizado de \(1\text{k}\Omega\)).
+                            </p>
+                            <strong style="display: block; margin-top: 0.85rem; color: #ffffff;">Diodo de Protección Flyback (1N4007):</strong>
+                            <p style="color: var(--text-secondary); margin-top: 0.25rem;">
+                                Toda bobina de motor almacena energía magnética (\(E = \frac{1}{2} L I^2\)). Al apagarse el transistor, la inductancia del motor produce una sobretensión inversa destructiva (\(V = -L \frac{di}{dt}\)) de más de 50V. El diodo 1N4007 conectado en paralelo inverso drena ese pico recirculando la corriente en la bobina sin dañar el transistor.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Apartado D: Alimentación Eléctrica -->
+                    <div class="electronics-card">
+                        <div class="electronics-card-header">
+                            <div class="elec-letter">D</div>
+                            <div>
+                                <h3 style="font-size: 1.3rem;">Alimentación Eléctrica y Desacoplo</h3>
+                                <span style="font-size: 0.85rem; color: var(--color-cyan-dim);">Estabilidad de Tensión y Corriente</span>
+                            </div>
+                        </div>
+                        <p style="font-size: 0.92rem; color: var(--text-secondary);">
+                            El suministro de energía debe mantener simultáneamente la precisión de los comparadores y la alta demanda de los motores:
+                        </p>
+                        <div style="background: rgba(12, 23, 42, 0.75); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.15rem; font-size: 0.88rem;">
+                            <strong>Tensiones y Corrientes de Operación:</strong>
+                            <ul style="margin-top: 0.5rem; padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.35rem; color: var(--text-secondary);">
+                                <li><strong>Tensión Recomendada:</strong> 6.0V DC (pack de 4 pilas AA) o 7.4V DC (2 celdas de litio 18650 recargables).</li>
+                                <li><strong>Fenómeno de Brownout (Caída de Tensión):</strong> Al arrancar los motores, la resistencia interna de la batería provoca una caída momentánea del voltaje general. Si cae por debajo de 3.5V, la referencia del comparador oscilará erráticamente.</li>
+                                <li><strong>Capacitor de Desacoplo:</strong> Es obligatorio instalar un capacitor electrolítico de \(100\mu\text{F}\) a \(470\mu\text{F}\) (16V) en paralelo con los rieles de alimentación para actuar como reserva instantánea de energía en los arranques.</li>
+                                <li><strong>Plano Común de Masa (GND):</strong> La masa de los sensores, comparadores y motores debe estar rígidamente unificada en un solo punto para evitar diferencias de potencial espurias.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Apartado E: Funcionamiento Conjunto (Diagrama de Bloques) -->
+                <div class="block-diagram-container" style="margin-top: 4rem;">
+                    <div style="text-align: center; max-width: 720px; margin: 0 auto;">
+                        <span class="badge badge-green">Apartado E</span>
+                        <h2 style="font-size: 2rem; margin-top: 0.5rem; color: #ffffff;">Diagrama de Funcionamiento Conjunto</h2>
+                        <p style="color: var(--text-secondary); font-size: 0.95rem;">
+                            Cadena de bloques funcional que describe el viaje de la información física desde el suelo hasta el movimiento mecánico. Pasa el cursor por cada bloque:
+                        </p>
+                    </div>
+
+                    <div class="block-chain">
+                        <div class="block-node" data-block="sensors">
+                            <h5>1. Sensores IR</h5>
+                            <span>TCRT5000 / Reflexión</span>
+                        </div>
+                        <div class="block-arrow">&rarr;</div>
+                        <div class="block-node" data-block="control">
+                            <h5>2. Control LM393</h5>
+                            <span>Comparador Analógico</span>
+                        </div>
+                        <div class="block-arrow">&rarr;</div>
+                        <div class="block-node" data-block="power">
+                            <h5>3. Potencia NPN</h5>
+                            <span>Transistores 2N2222</span>
+                        </div>
+                        <div class="block-arrow">&rarr;</div>
+                        <div class="block-node" data-block="motors">
+                            <h5>4. Motores DC</h5>
+                            <span>Motorreductores TT</span>
+                        </div>
+                        <div class="block-arrow">&rarr;</div>
+                        <div class="block-node" data-block="movement">
+                            <h5>5. Movimiento</h5>
+                            <span>Viraje Diferencial</span>
+                        </div>
+                    </div>
+
+                    <div id="block-inspector-info" style="margin-top: 2rem; padding: 1.25rem 1.5rem; background: rgba(15, 27, 49, 0.85); border: 1px solid var(--border-bright); border-radius: var(--radius-md); font-size: 0.92rem; color: #e2e8f0; min-height: 75px; display: flex; align-items: center;">
+                        <strong>Pasa el cursor sobre cualquier bloque del diagrama</strong> para inspeccionar cómo viaja y se transforma la energía eléctrica en cada fase del robot.
+                    </div>
+                </div>
+
+                <!-- Apartado F: Esquema Electrónico Completo y Normado -->
+                <div class="schematic-wrapper" style="margin-top: 4rem;">
+                    <div style="text-align: center; max-width: 750px; margin: 0 auto 2rem;">
+                        <span class="badge badge-green">Apartado F</span>
+                        <h2 style="font-size: 2rem; margin-top: 0.5rem; color: #ffffff;">Esquema Eléctrico Analógico Completo</h2>
+                        <p style="color: var(--text-secondary); font-size: 0.95rem;">
+                            Plano circuital normalizado de dos canales simétricos e independientes (Canal Izquierdo y Canal Derecho). Valores calculados y normalizados listos para montaje en protoboard o baquela.
+                        </p>
+                    </div>
+
+                    <div class="schematic-svg-container">
+                        <svg viewBox="0 0 850 480" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="850" height="480" fill="#080f1e" rx="12" stroke="#1e3a8a" stroke-width="2"/>
+                            
+                            <!-- Rieles de Alimentación -->
+                            <line x1="50" y1="40" x2="800" y2="40" stroke="#ef4444" stroke-width="3"/>
+                            <text x="50" y="30" font-family="monospace" font-size="12" fill="#ef4444" font-weight="bold">+VCC (+5V a +6V DC)</text>
+                            
+                            <line x1="50" y1="440" x2="800" y2="440" stroke="#38bdf8" stroke-width="3"/>
+                            <text x="50" y="460" font-family="monospace" font-size="12" fill="#38bdf8" font-weight="bold">GND (Masa Común 0V)</text>
+
+                            <!-- CANAL IZQUIERDO -->
+                            <rect x="70" y="60" width="340" height="350" rx="10" fill="rgba(30, 58, 138, 0.15)" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="6,4"/>
+                            <text x="85" y="85" font-family="sans-serif" font-size="11" fill="#38bdf8" font-weight="bold">CANAL 1 (Sensor Izquierdo &rarr; Motor Izquierdo)</text>
+
+                            <line x1="120" y1="40" x2="120" y2="100" stroke="#ef4444" stroke-width="2"/>
+                            <rect x="112" y="100" width="16" height="30" fill="#d97706" stroke="#ffffff"/>
+                            <text x="135" y="120" font-family="monospace" font-size="9" fill="#fde047">R1 220Ω</text>
+                            <line x1="120" y1="130" x2="120" y2="155" stroke="#94a3b8" stroke-width="2"/>
+                            <polygon points="112,155 128,155 120,170" fill="#38bdf8"/>
+                            <line x1="112" y1="170" x2="128" y2="170" stroke="#38bdf8" stroke-width="2"/>
+                            <line x1="120" y1="170" x2="120" y2="440" stroke="#38bdf8" stroke-width="2"/>
+                            <text x="75" y="165" font-family="sans-serif" font-size="8" fill="#94a3b8">LED IR 1</text>
+
+                            <line x1="180" y1="40" x2="180" y2="100" stroke="#ef4444" stroke-width="2"/>
+                            <rect x="172" y="100" width="16" height="30" fill="#d97706" stroke="#ffffff"/>
+                            <text x="195" y="120" font-family="monospace" font-size="9" fill="#fde047">R2 10kΩ</text>
+                            <circle cx="180" cy="145" r="4" fill="#00f2fe"/>
+                            <line x1="180" y1="130" x2="180" y2="160" stroke="#94a3b8" stroke-width="2"/>
+                            <circle cx="180" cy="175" r="14" fill="none" stroke="#64748b" stroke-width="1.5"/>
+                            <line x1="180" y1="189" x2="180" y2="440" stroke="#38bdf8" stroke-width="2"/>
+
+                            <!-- Comparador 1 -->
+                            <polygon points="230,120 230,200 290,160" fill="#0f172a" stroke="#00f2fe" stroke-width="2"/>
+                            <text x="245" y="165" font-family="monospace" font-size="10" fill="#00f2fe" font-weight="bold">LM393</text>
+                            <text x="233" y="140" font-family="sans-serif" font-size="9" fill="#ffffff">+</text>
+                            <text x="233" y="185" font-family="sans-serif" font-size="9" fill="#ffffff">-</text>
+
+                            <line x1="180" y1="145" x2="230" y2="145" stroke="#00f2fe" stroke-width="2"/>
+                            <line x1="210" y1="40" x2="210" y2="440" stroke="#64748b" stroke-width="1.5" stroke-dasharray="2,2"/>
+                            <line x1="210" y1="180" x2="230" y2="180" stroke="#f59e0b" stroke-width="2"/>
+                            <text x="200" y="210" font-family="sans-serif" font-size="8" fill="#f59e0b">Vref (Trimpot)</text>
+
+                            <line x1="290" y1="160" x2="315" y2="160" stroke="#00f2fe" stroke-width="2"/>
+                            <rect x="315" y="153" width="25" height="14" fill="#d97706" stroke="#ffffff"/>
+                            <text x="317" y="145" font-family="monospace" font-size="8" fill="#fde047">Rb 1kΩ</text>
+
+                            <line x1="340" y1="160" x2="355" y2="160" stroke="#94a3b8" stroke-width="2"/>
+                            <circle cx="365" cy="160" r="14" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5"/>
+                            <text x="355" y="190" font-family="monospace" font-size="8" fill="#38bdf8">Q1 2N2222</text>
+                            <line x1="365" y1="174" x2="365" y2="440" stroke="#38bdf8" stroke-width="2"/>
+
+                            <line x1="365" y1="40" x2="365" y2="90" stroke="#ef4444" stroke-width="2"/>
+                            <circle cx="365" cy="115" r="15" fill="#eab308" stroke="#ca8a04" stroke-width="2"/>
+                            <text x="365" y="119" font-family="sans-serif" font-size="9" fill="#713f12" font-weight="bold" text-anchor="middle">M1</text>
+                            <line x1="395" y1="90" x2="395" y2="140" stroke="#94a3b8" stroke-width="1.5"/>
+                            <polygon points="390,120 400,120 395,105" fill="#10b981"/>
+                            <line x1="390" y1="105" x2="400" y2="105" stroke="#10b981" stroke-width="2"/>
+                            <text x="403" y="115" font-family="sans-serif" font-size="7" fill="#10b981">1N4007</text>
+                            <line x1="365" y1="90" x2="395" y2="90" stroke="#ef4444" stroke-width="1.5"/>
+                            <line x1="365" y1="140" x2="395" y2="140" stroke="#94a3b8" stroke-width="1.5"/>
+                            <line x1="365" y1="130" x2="365" y2="146" stroke="#94a3b8" stroke-width="2"/>
+
+                            <!-- CANAL DERECHO -->
+                            <rect x="440" y="60" width="340" height="350" rx="10" fill="rgba(16, 185, 129, 0.1)" stroke="#10b981" stroke-width="1.5" stroke-dasharray="6,4"/>
+                            <text x="455" y="85" font-family="sans-serif" font-size="11" fill="#34d399" font-weight="bold">CANAL 2 (Sensor Derecho &rarr; Motor Derecho)</text>
+
+                            <line x1="490" y1="40" x2="490" y2="100" stroke="#ef4444" stroke-width="2"/>
+                            <rect x="482" y="100" width="16" height="30" fill="#d97706" stroke="#ffffff"/>
+                            <text x="505" y="120" font-family="monospace" font-size="9" fill="#fde047">R3 220Ω</text>
+                            <line x1="490" y1="130" x2="490" y2="155" stroke="#94a3b8" stroke-width="2"/>
+                            <polygon points="482,155 498,155 490,170" fill="#38bdf8"/>
+                            <line x1="482" y1="170" x2="498" y2="170" stroke="#38bdf8" stroke-width="2"/>
+                            <line x1="490" y1="170" x2="490" y2="440" stroke="#38bdf8" stroke-width="2"/>
+
+                            <line x1="550" y1="40" x2="550" y2="100" stroke="#ef4444" stroke-width="2"/>
+                            <rect x="542" y="100" width="16" height="30" fill="#d97706" stroke="#ffffff"/>
+                            <text x="565" y="120" font-family="monospace" font-size="9" fill="#fde047">R4 10kΩ</text>
+                            <circle cx="550" cy="145" r="4" fill="#00f2fe"/>
+                            <circle cx="550" cy="175" r="14" fill="none" stroke="#64748b" stroke-width="1.5"/>
+                            <line x1="550" y1="189" x2="550" y2="440" stroke="#38bdf8" stroke-width="2"/>
+
+                            <!-- Comparador 2 -->
+                            <polygon points="600,120 600,200 660,160" fill="#0f172a" stroke="#10b981" stroke-width="2"/>
+                            <text x="615" y="165" font-family="monospace" font-size="10" fill="#34d399" font-weight="bold">LM393</text>
+                            <text x="603" y="140" font-family="sans-serif" font-size="9" fill="#ffffff">+</text>
+                            <text x="603" y="185" font-family="sans-serif" font-size="9" fill="#ffffff">-</text>
+                            <line x1="550" y1="145" x2="600" y2="145" stroke="#00f2fe" stroke-width="2"/>
+                            <line x1="580" y1="180" x2="600" y2="180" stroke="#f59e0b" stroke-width="2"/>
+                            <line x1="210" y1="180" x2="580" y2="180" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="3,3"/>
+
+                            <line x1="660" y1="160" x2="685" y2="160" stroke="#10b981" stroke-width="2"/>
+                            <rect x="685" y="153" width="25" height="14" fill="#d97706" stroke="#ffffff"/>
+                            <text x="687" y="145" font-family="monospace" font-size="8" fill="#fde047">Rb 1kΩ</text>
+
+                            <line x1="710" y1="160" x2="725" y2="160" stroke="#94a3b8" stroke-width="2"/>
+                            <circle cx="735" cy="160" r="14" fill="#0f172a" stroke="#10b981" stroke-width="1.5"/>
+                            <text x="725" y="190" font-family="monospace" font-size="8" fill="#10b981">Q2 2N2222</text>
+                            <line x1="735" y1="174" x2="735" y2="440" stroke="#38bdf8" stroke-width="2"/>
+
+                            <line x1="735" y1="40" x2="735" y2="90" stroke="#ef4444" stroke-width="2"/>
+                            <circle cx="735" cy="115" r="15" fill="#eab308" stroke="#ca8a04" stroke-width="2"/>
+                            <text x="735" y="119" font-family="sans-serif" font-size="9" fill="#713f12" font-weight="bold" text-anchor="middle">M2</text>
+                            <line x1="735" y1="130" x2="735" y2="146" stroke="#94a3b8" stroke-width="2"/>
+                            <line x1="765" y1="90" x2="765" y2="140" stroke="#94a3b8" stroke-width="1.5"/>
+                            <polygon points="760,120 770,120 765,105" fill="#10b981"/>
+                            <line x1="760" y1="105" x2="770" y2="105" stroke="#10b981" stroke-width="2"/>
+                            <line x1="735" y1="90" x2="765" y2="90" stroke="#ef4444" stroke-width="1.5"/>
+                            <line x1="735" y1="140" x2="765" y2="140" stroke="#94a3b8" stroke-width="1.5"/>
+                        </svg>
+                    </div>
+
+                    <div class="schematic-legend">
+                        <div class="legend-item">
+                            <span class="legend-color-dot" style="background: #ef4444;"></span>
+                            <span><strong>Rojo:</strong> Riel positivo (+5V a +6V DC)</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color-dot" style="background: #38bdf8;"></span>
+                            <span><strong>Cian:</strong> Tierra común (0V GND)</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color-dot" style="background: #f59e0b;"></span>
+                            <span><strong>Ámbar:</strong> Tensión de referencia \(V_{ref}\)</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color-dot" style="background: #10b981;"></span>
+                            <span><strong>Verde:</strong> Señal de control y diodos flyback</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Paginación Formal entre Secciones -->
+                <div class="page-navigation-footer">
+                    <a href="funciones.html" class="nav-prev-btn">
+                        <span class="nav-direction-label">&larr; Sección Anterior</span>
+                        <span class="nav-page-title">Sección 3: Funciones del Robot</span>
+                    </a>
+                    <a href="video.html" class="nav-next-btn" style="text-align: right;">
+                        <span class="nav-direction-label">Siguiente Módulo &rarr;</span>
+                        <span class="nav-page-title">Video Principal y Capturas</span>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Formal -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="brand-logo" style="margin-bottom: 1rem;">
+                        <div class="brand-icon-wrapper" aria-hidden="true">🤖</div>
+                        <span>RobotLab 11°</span>
+                    </div>
+                    <p style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem;">
+                        Análisis circuital y diseño esquemático para el área de Tecnología e Informática.
+                    </p>
+                    <span class="badge badge-green">Esquema Eléctrico Normado • Sin Arduino</span>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Navegación</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html" class="footer-link">Inicio del Proyecto</a></li>
+                        <li><a href="materiales.html" class="footer-link">1. Materiales</a></li>
+                        <li><a href="concepto.html" class="footer-link">2. Concepto y Autonomía</a></li>
+                        <li><a href="funciones.html" class="footer-link">3. Funciones y Simulador</a></li>
+                        <li><a href="electronica.html" class="footer-link">4. Parte Electrónica (Actual)</a></li>
+                        <li><a href="video.html" class="footer-link">Video y Capturas</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Componentes</h4>
+                    <ul class="footer-links">
+                        <li><span class="footer-link">Comparador Dual LM393</span></li>
+                        <li><span class="footer-link">Sensor Infrarrojo TCRT5000</span></li>
+                        <li><span class="footer-link">Transistores BJT NPN 2N2222A</span></li>
+                        <li><span class="footer-link">Diodos de Protección 1N4007</span></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Hojas de Datos</h4>
+                    <ul class="footer-links">
+                        <li><span class="footer-link">Texas Instruments LM393</span></li>
+                        <li><span class="footer-link">Vishay TCRT5000</span></li>
+                        <li><span class="footer-link">ON Semiconductor 2N2222A</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Proyecto Escolar de Robótica y Tecnología - Grado 11. Desarrollado con estándares web modernos.</p>
+                <p>Sin fines comerciales • Exclusivamente Educativo</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

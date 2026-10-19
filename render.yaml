@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: robot-seguidor-linea
+    runtime: static
+    buildCommand: ""
+    staticPublishPath: ./
+    pullRequestPreviewsEnabled: true
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: public, max-age=3600
