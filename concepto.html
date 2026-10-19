@@ -145,23 +145,23 @@
 
                     <div style="display: flex; flex-direction: column; gap: 2rem;">
                         <!-- Ilustración del Robot Siguiendo la Pista -->
-                        <div style="background: var(--gradient-card); border: 1px solid var(--border-bright); border-radius: var(--radius-xl); padding: 2rem; box-shadow: var(--shadow-lg);">
+                        <div style="background: var(--color-white); border: 1px solid var(--color-gray-200); border-radius: var(--radius-xl); padding: 2rem; box-shadow: var(--shadow-sm);">
                             <div style="text-align: center; margin-bottom: 1.5rem;">
                                 <span class="badge badge-green">Principio de Operación</span>
-                                <h3 style="font-size: 1.35rem; color: #ffffff; margin-top: 0.5rem;">Geometría Óptica de Pista</h3>
+                                <h3 style="font-size: 1.35rem; color: var(--color-dark-blue); margin-top: 0.5rem;">Geometría Óptica de Pista</h3>
                             </div>
                             <img src="imagenes/robot-hero.svg" alt="Diagrama de robot seguidor sobre pista con línea negra y contraste óptico" width="400" height="320" style="margin: 0 auto;">
-                            <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(7, 13, 24, 0.75); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); font-size: 0.85rem; color: var(--text-secondary);">
-                                <strong>Configuración Clásica de Dos Sensores:</strong> La línea negra transcurre por el espacio central entre los dos sensores. Ambos sensores ven superficie blanca durante el avance recto. Al aproximarse una curva, la línea entra bajo uno de los sensores, desequilibrando la tensión de entrada y activando el viraje.
+                            <div style="margin-top: 1.5rem; padding: 1rem; background: var(--color-gray-50); border: 1px solid var(--color-gray-200); border-radius: var(--radius-md); font-size: 0.88rem; color: var(--color-gray-700);">
+                                <strong style="color: var(--color-dark-blue);">Configuración Clásica de Dos Sensores:</strong> La línea negra transcurre por el espacio central entre los dos sensores. Ambos sensores ven superficie blanca durante el avance recto. Al aproximarse una curva, la línea entra bajo uno de los sensores, desequilibrando la tensión de entrada y activando el viraje.
                             </div>
                         </div>
 
                         <!-- Explicación Intuitiva para Estudiantes -->
-                        <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: var(--radius-xl); padding: 1.75rem;">
-                            <h4 style="font-size: 1.15rem; color: var(--color-accent-green-bright); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <div style="background: rgba(38, 116, 92, 0.06); border: 1px solid rgba(38, 116, 92, 0.25); border-radius: var(--radius-xl); padding: 1.75rem;">
+                            <h4 style="font-size: 1.15rem; color: var(--color-electric-blue-dark); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
                                 <span>📖</span> Comprensión Intuitiva (Sin Prerrequisitos Técnicos)
                             </h4>
-                            <p style="font-size: 0.92rem; color: #f1f5f9; line-height: 1.6;">
+                            <p style="font-size: 0.94rem; color: var(--color-gray-700); line-height: 1.65;">
                                 Imagina un vagón de tren con dos motores independientes en sus ruedas. En vez de rieles metálicos, utiliza "rieles de luz": dos pequeñas linternas infrarrojas apuntan al suelo. Cuando una rueda se desvía y pisa la cinta negra, el sensor correspondiente detecta que la luz "se apagó" (porque el negro se la tragó). Al faltarle luz, el circuito corta la electricidad de ese motor de inmediato. Como el otro motor sigue empujando, el vagón se dobla automáticamente hacia adentro y regresa a la línea.
                             </p>
                         </div>
@@ -172,7 +172,7 @@
                 <div class="comparison-container reveal" style="margin-top: 4.5rem;">
                     <div class="comparison-header">
                         <span class="badge badge-green">Evaluación de Arquitecturas de Control</span>
-                        <h2 style="font-size: 2rem; margin-top: 0.5rem; color: #ffffff;">Control Electrónico Directo vs. Microcontrolador (Arduino)</h2>
+                        <h2 style="font-size: 2rem; margin-top: 0.5rem; color: var(--color-dark-blue);">Control Electrónico Directo vs. Microcontrolador (Arduino)</h2>
                         <p style="color: var(--text-secondary); max-width: 720px; margin: 0.5rem auto 0;">
                             Fundamentación epistemológica de por qué construir un robot analógico en grado 11 ofrece una formación técnica más sólida en ciencias de la ingeniería.
                         </p>

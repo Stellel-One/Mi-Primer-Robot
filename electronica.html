@@ -111,17 +111,17 @@
                         <p style="font-size: 0.92rem; color: var(--text-secondary);">
                             El módulo sensor actúa como el transductor primario del sistema. Contiene dos componentes optoelectrónicos encapsulados con un filtro que bloquea la luz visible externa:
                         </p>
-                        <div style="background: rgba(12, 23, 42, 0.75); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.15rem; font-size: 0.88rem;">
-                            <strong>1. Diodo Emisor IR (GaAs):</strong>
-                            <p style="color: var(--text-secondary); margin-top: 0.25rem;">
+                        <div style="background: var(--color-gray-50); border: 1px solid var(--color-gray-200); border-radius: var(--radius-md); padding: 1.15rem; font-size: 0.88rem; color: var(--color-gray-700);">
+                            <strong style="color: var(--color-dark-blue);">1. Diodo Emisor IR (GaAs):</strong>
+                            <p style="color: var(--color-gray-700); margin-top: 0.25rem;">
                                 Se polariza en directa desde \(V_{cc}\) a través de una resistencia limitadora de \(220\Omega\) (\(I_F = \frac{V_{cc} - V_D}{R_1} \approx \frac{5\text{V} - 1.2\text{V}}{220\Omega} \approx 17.2\text{ mA}\)), emitiendo una longitud de onda constante de 950 nm.
                             </p>
-                            <strong style="display: block; margin-top: 0.75rem;">2. Fototransistor Receptor (Silicio NPN):</strong>
-                            <p style="color: var(--text-secondary); margin-top: 0.25rem;">
+                            <strong style="display: block; margin-top: 0.75rem; color: var(--color-dark-blue);">2. Fototransistor Receptor (Silicio NPN):</strong>
+                            <p style="color: var(--color-gray-700); margin-top: 0.25rem;">
                                 Se conecta en serie con una resistencia de carga (\(R_L = 10\text{k}\Omega\)). Cuando inciden fotones reflejados por la superficie blanca, se liberan pares electrón-hueco en la juntura base-colector, haciendo conducir el transistor. La tensión de salida del divisor se desploma a niveles cercanos a 0.2V (nivel BAJO). En cambio, sobre la línea negra no hay fotones, el transistor entra en corte y la salida se eleva hacia \(V_{cc}\) (nivel ALTO).
                             </p>
                         </div>
-                        <div style="font-size: 0.82rem; color: var(--color-accent-green-bright); background: rgba(16, 185, 129, 0.08); padding: 0.65rem; border-radius: var(--radius-sm);">
+                        <div style="font-size: 0.82rem; color: var(--color-electric-blue-dark); background: rgba(38, 116, 92, 0.08); padding: 0.65rem; border-radius: var(--radius-sm); border-left: 3px solid var(--color-electric-blue);">
                             📍 <strong>Ubicación física:</strong> Montados en el extremo delantero inferior del chasis, separados a una distancia ligeramente mayor al ancho de la línea de prueba (\(\approx 20\text{ mm} - 25\text{ mm}\)).
                         </div>
                     </div>
@@ -138,22 +138,22 @@
                         <p style="font-size: 0.92rem; color: var(--text-secondary);">
                             El LM393 es un circuito integrado que contiene <strong>dos comparadores de tensión independientes</strong>. Su misión es eliminar la incertidumbre analógica convirtiendo voltajes variables continuos en decisiones lógicas cuadradas y definidas:
                         </p>
-                        <div style="background: rgba(12, 23, 42, 0.75); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.15rem; font-size: 0.88rem;">
-                            <strong>Mecanismo de Discriminación de Tensión:</strong>
-                            <p style="color: var(--text-secondary); margin-top: 0.25rem;">
+                        <div style="background: var(--color-gray-50); border: 1px solid var(--color-gray-200); border-radius: var(--radius-md); padding: 1.15rem; font-size: 0.88rem; color: var(--color-gray-700);">
+                            <strong style="color: var(--color-dark-blue);">Mecanismo de Discriminación de Tensión:</strong>
+                            <p style="color: var(--color-gray-700); margin-top: 0.25rem;">
                                 Cada comparador tiene una entrada no inversora (\(V_+\)) y una inversora (\(V_-\)):
                             </p>
-                            <ul style="margin-top: 0.5rem; padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.35rem; color: var(--text-secondary);">
+                            <ul style="margin-top: 0.5rem; padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.35rem; color: var(--color-gray-700);">
                                 <li>En una entrada fijamos la tensión de referencia \(V_{ref}\) mediante un potenciómetro calibrador (típicamente ajustado en \(\approx 2.5\text{V}\)).</li>
                                 <li>En la otra entrada conectamos la señal analógica variable \(V_{in}\) proveniente del sensor IR.</li>
                             </ul>
-                            <p style="margin-top: 0.75rem; color: var(--text-secondary);">
-                                <strong>Regla de Conmutación:</strong><br>
+                            <p style="margin-top: 0.75rem; color: var(--color-gray-700);">
+                                <strong style="color: var(--color-dark-blue);">Regla de Conmutación:</strong><br>
                                 Si \(V_+ > V_-\), la salida del comparador pasa a estado ALTO (+Vcc).<br>
                                 Si \(V_+ < V_-\), la salida cae a estado BAJO (0V / GND).
                             </p>
                         </div>
-                        <div style="font-size: 0.82rem; color: #bae6fd; background: rgba(37, 99, 235, 0.12); padding: 0.65rem; border-radius: var(--radius-sm);">
+                        <div style="font-size: 0.82rem; color: var(--color-electric-blue-dark); background: rgba(38, 116, 92, 0.08); padding: 0.65rem; border-radius: var(--radius-sm); border-left: 3px solid var(--color-electric-blue);">
                             💡 <strong>Resistencia de Pull-Up:</strong> Las salidas del LM393 son de colector abierto. Esto significa que necesitan una resistencia de pull-up a \(V_{cc}\) para entregar corriente hacia la siguiente etapa.
                         </div>
                     </div>
@@ -170,21 +170,21 @@
                         <p style="font-size: 0.92rem; color: var(--text-secondary);">
                             <strong>¿Por qué es estrictamente prohibitivo conectar los motores a la salida del comparador?</strong>
                         </p>
-                        <div style="background: rgba(12, 23, 42, 0.75); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.15rem; font-size: 0.88rem;">
-                            <p style="color: #f87171; font-weight: 700; margin-bottom: 0.5rem;">
+                        <div style="background: var(--color-gray-50); border: 1px solid var(--color-gray-200); border-radius: var(--radius-md); padding: 1.15rem; font-size: 0.88rem; color: var(--color-gray-700);">
+                            <p style="color: #dc2626; font-weight: 700; margin-bottom: 0.5rem;">
                                 ⚠️ Sobrecarga Térmica Destructiva:
                             </p>
-                            <p style="color: var(--text-secondary);">
+                            <p style="color: var(--color-gray-700);">
                                 El comparador LM393 es un circuito de baja potencia cuya salida soporta un límite máximo absoluto de <strong>20 mA</strong>. Un motorreductor DC de corriente continua exige entre <strong>150 mA (en vacío) y hasta 800 mA en el arranque</strong>. Conectar el motor directo al integrado provocaría su destrucción instantánea por sobrecalentamiento.
                             </p>
-                            <strong style="display: block; margin-top: 0.85rem; color: #ffffff;">La Solución: El Transistor como Conmutador</strong>
-                            <p style="color: var(--text-secondary); margin-top: 0.25rem;">
+                            <strong style="display: block; margin-top: 0.85rem; color: var(--color-dark-blue);">La Solución: El Transistor como Conmutador</strong>
+                            <p style="color: var(--color-gray-700); margin-top: 0.25rem;">
                                 El transistor NPN (2N2222A o TIP120) se polariza para trabajar exclusivamente en <strong>Corte</strong> (interruptor abierto, motor sin masa) y <strong>Saturación</strong> (interruptor cerrado, mínima caída \(V_{CE} \approx 0.1V - 0.2V\)). La corriente de base requerida para garantizar saturación profunda es:
                                 \[ I_B \ge \frac{I_C}{\beta_{\min}} \approx \frac{400\text{ mA}}{50} \approx 8\text{ mA} \]
                                 Calculando la resistencia de base: \(R_B = \frac{V_{salida} - V_{BE}}{I_B} = \frac{5\text{V} - 0.7\text{V}}{8\text{ mA}} \approx 537\Omega\) (se adopta valor estándar normalizado de \(1\text{k}\Omega\)).
                             </p>
-                            <strong style="display: block; margin-top: 0.85rem; color: #ffffff;">Diodo de Protección Flyback (1N4007):</strong>
-                            <p style="color: var(--text-secondary); margin-top: 0.25rem;">
+                            <strong style="display: block; margin-top: 0.85rem; color: var(--color-dark-blue);">Diodo de Protección Flyback (1N4007):</strong>
+                            <p style="color: var(--color-gray-700); margin-top: 0.25rem;">
                                 Toda bobina de motor almacena energía magnética (\(E = \frac{1}{2} L I^2\)). Al apagarse el transistor, la inductancia del motor produce una sobretensión inversa destructiva (\(V = -L \frac{di}{dt}\)) de más de 50V. El diodo 1N4007 conectado en paralelo inverso drena ese pico recirculando la corriente en la bobina sin dañar el transistor.
                             </p>
                         </div>
@@ -202,9 +202,9 @@
                         <p style="font-size: 0.92rem; color: var(--text-secondary);">
                             El suministro de energía debe mantener simultáneamente la precisión de los comparadores y la alta demanda de los motores:
                         </p>
-                        <div style="background: rgba(12, 23, 42, 0.75); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.15rem; font-size: 0.88rem;">
-                            <strong>Tensiones y Corrientes de Operación:</strong>
-                            <ul style="margin-top: 0.5rem; padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.35rem; color: var(--text-secondary);">
+                        <div style="background: var(--color-gray-50); border: 1px solid var(--color-gray-200); border-radius: var(--radius-md); padding: 1.15rem; font-size: 0.88rem; color: var(--color-gray-700);">
+                            <strong style="color: var(--color-dark-blue);">Tensiones y Corrientes de Operación:</strong>
+                            <ul style="margin-top: 0.5rem; padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.35rem; color: var(--color-gray-700);">
                                 <li><strong>Tensión Recomendada:</strong> 6.0V DC (pack de 4 pilas AA) o 7.4V DC (2 celdas de litio 18650 recargables).</li>
                                 <li><strong>Fenómeno de Brownout (Caída de Tensión):</strong> Al arrancar los motores, la resistencia interna de la batería provoca una caída momentánea del voltaje general. Si cae por debajo de 3.5V, la referencia del comparador oscilará erráticamente.</li>
                                 <li><strong>Capacitor de Desacoplo:</strong> Es obligatorio instalar un capacitor electrolítico de \(100\mu\text{F}\) a \(470\mu\text{F}\) (16V) en paralelo con los rieles de alimentación para actuar como reserva instantánea de energía en los arranques.</li>
@@ -219,7 +219,7 @@
                 <div class="block-diagram-container reveal" style="margin-top: 4rem;">
                     <div style="text-align: center; max-width: 720px; margin: 0 auto;">
                         <span class="badge badge-green">Apartado E</span>
-                        <h2 style="font-size: 2rem; margin-top: 0.5rem; color: #ffffff;">Diagrama de Funcionamiento Conjunto</h2>
+                        <h2 style="font-size: 2rem; margin-top: 0.5rem; color: var(--color-dark-blue);">Diagrama de Funcionamiento Conjunto</h2>
                         <p style="color: var(--text-secondary); font-size: 0.95rem;">
                             Cadena de bloques funcional que describe el viaje de la información física desde el suelo hasta el movimiento mecánico. Pasa el cursor por cada bloque:
                         </p>
@@ -252,7 +252,7 @@
                         </div>
                     </div>
 
-                    <div id="block-inspector-info" style="margin-top: 2rem; padding: 1.25rem 1.5rem; background: rgba(15, 27, 49, 0.85); border: 1px solid var(--border-bright); border-radius: var(--radius-md); font-size: 0.92rem; color: #e2e8f0; min-height: 75px; display: flex; align-items: center;">
+                    <div id="block-inspector-info" style="margin-top: 2rem; padding: 1.25rem 1.5rem; background: var(--color-gray-50); border: 2px solid var(--color-electric-blue); border-radius: var(--radius-md); font-size: 0.92rem; color: var(--color-dark-blue); min-height: 75px; display: flex; align-items: center;">
                         <strong>Pasa el cursor sobre cualquier bloque del diagrama</strong> para inspeccionar cómo viaja y se transforma la energía eléctrica en cada fase del robot.
                     </div>
                 </div>
