@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initSimulator();
     initCircuitInspector();
     initVideoControls();
+    initNaviaChat();
+    initBackToTop();
 });
 
 /* 1. Navegación y Menú Responsive */
@@ -251,5 +253,182 @@ function initScrollReveal() {
         reveals.forEach(el => el.classList.add('active'));
     }
 }
+
+/* 7. Navia - Asistente & Mascota Interactiva de Robótica */
+const NAVIA_FAQ = [
+    {
+        q: '¿Por qué no usamos Arduino ni código?',
+        a: '¡Excelente pregunta! Este proyecto demuestra que la robótica básica se resuelve con física y hardware puro (comparadores analógicos LM393 y transistores 2N2222). Esto reduce costos, elimina la latencia de procesamiento del software y enseña a calcular divisores de tensión y polarización sin depender de una "caja negra".'
+    },
+    {
+        q: '¿Cómo calibro el potenciómetro del LM393?',
+        a: 'Colocá el robot sobre la pista: poné un sensor sobre la superficie blanca y ajustá el potenciómetro (trimpot) hasta que el LED indicador del módulo se encienda. Luego movelo sobre la línea negra y verificá que se apague. La tensión de referencia óptima suele quedar en torno a 2.5V.'
+    },
+    {
+        q: '¿Para qué sirve el diodo 1N4007 (Flyback)?',
+        a: 'Todo motor eléctrico tiene bobinas que almacenan energía magnética. Al cortar la corriente bruscamente, la bobina produce un pico de sobretensión inversa destructiva de más de 50V. El diodo 1N4007 en antiparalelo drena esa energía recirculándola en la bobina sin dañar el transistor.'
+    },
+    {
+        q: '¿Qué pasa si invierto la polaridad de los motores?',
+        a: 'Un motor DC gira en sentido contrario si invertís sus cables. Si tu robot retrocede en lugar de avanzar, o gira en dirección contraria al desvío, simplemente intercambiá los dos cables positivo y negativo de ese motor.'
+    },
+    {
+        q: '¿A qué altura colocar los sensores TCRT5000?',
+        a: 'La distancia óptima entre los sensores infrarrojos y el suelo es de entre 3 mm y 8 mm. Si están muy altos, la luz infrarroja se dispersa y no detecta el contraste; si están muy bajos, pueden raspar contra irregularidades de la pista.'
+    },
+    {
+        q: '¿Por qué una rueda se detiene en las curvas?',
+        a: 'El robot utiliza dirección diferencial: no tiene cremallera ni volante mecánico. Al desviarse hacia un lado, el circuito corta la alimentación del motor de ese lado, provocando que el chasis pivote sobre la rueda detenida y retorne al centro de la línea.'
+    },
+    {
+        q: '¿Qué baterías son las recomendadas?',
+        a: 'Recomendamos 4 pilas AA de 1.5V en serie (6.0V en total) o 2 celdas de litio 18650 (7.4V). Es fundamental incluir un capacitor electrolítico de desacoplo de 100µF a 470µF en paralelo con la batería para amortiguar las caídas de tensión al arrancar los motores.'
+    },
+    {
+        q: '¿Cómo funciona el transistor 2N2222?',
+        a: 'Funciona como un interruptor electrónico. La salida del comparador entrega apenas unos miliamperios a la base del transistor; al recibir esa pequeña señal, el transistor entra en saturación y permite el paso de los 200 a 800 mA que necesita el motor para girar con fuerza.'
+    }
+];
+
+function initNaviaChat() {
+    const launcher = document.getElementById('navia-launcher');
+    const panel = document.getElementById('navia-chat');
+    if (!launcher || !panel) return;
+
+    const log = document.getElementById('navia-chat-log');
+    const quick = document.getElementById('navia-chat-quick');
+    const closeBtn = panel.querySelector('.navia-chat__close');
+    const form = document.getElementById('navia-chat-form');
+    const input = document.getElementById('navia-chat-input');
+    let greeted = false;
+    let lastFocused = null;
+
+    const makeMessage = (role, text) => {
+        const node = document.createElement('div');
+        node.className = 'navia-msg navia-msg--' + role;
+        node.textContent = text;
+        return node;
+    };
+
+    const scrollToEnd = () => {
+        if (log) log.scrollTop = log.scrollHeight;
+    };
+
+    const reply = (text) => {
+        const typing = makeMessage('typing', 'Navia está respondiendo...');
+        log.appendChild(typing);
+        scrollToEnd();
+        setTimeout(() => {
+            typing.remove();
+            log.appendChild(makeMessage('bot', text));
+            scrollToEnd();
+        }, 450);
+    };
+
+    const renderQuickReplies = () => {
+        if (!quick) return;
+        quick.innerHTML = '';
+        NAVIA_FAQ.forEach(item => {
+            const chip = document.createElement('button');
+            chip.type = 'button';
+            chip.className = 'navia-chip';
+            chip.textContent = item.q;
+            chip.addEventListener('click', () => {
+                log.appendChild(makeMessage('user', item.q));
+                scrollToEnd();
+                chip.disabled = true;
+                reply(item.a);
+            });
+            quick.appendChild(chip);
+        });
+    };
+
+    const openChat = (opener) => {
+        lastFocused = opener || launcher;
+        panel.hidden = false;
+        launcher.hidden = true;
+        launcher.setAttribute('aria-expanded', 'true');
+        if (!greeted) {
+            greeted = true;
+            log.appendChild(makeMessage('bot', '¡Hola! Soy Navia, tu asistente técnica en robótica de grado 11. ¿En qué duda sobre el robot seguidor de línea te puedo ayudar?'));
+            renderQuickReplies();
+            scrollToEnd();
+        }
+        if (input) input.focus();
+    };
+
+    const closeChat = () => {
+        panel.hidden = true;
+        launcher.hidden = false;
+        launcher.setAttribute('aria-expanded', 'false');
+        if (lastFocused) lastFocused.focus();
+    };
+
+    launcher.addEventListener('click', () => openChat(launcher));
+    if (closeBtn) closeBtn.addEventListener('click', closeChat);
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !panel.hidden) closeChat();
+    });
+
+    if (form && input) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const query = input.value.trim();
+            if (!query) return;
+
+            log.appendChild(makeMessage('user', query));
+            input.value = '';
+            scrollToEnd();
+
+            const queryLower = query.toLowerCase();
+            let matchedAnswer = null;
+
+            if (queryLower.includes('arduino') || queryLower.includes('código') || queryLower.includes('programar')) {
+                matchedAnswer = 'Este robot es 100% analógico: no lleva Arduino ni microcontrolador. Todo el lazo de control se realiza con el comparador LM393 y transistores NPN. Podés ver el análisis en la Sección 2 (Concepto).';
+            } else if (queryLower.includes('motor') || queryLower.includes('rueda') || queryLower.includes('giro')) {
+                matchedAnswer = 'Utiliza dos motorreductores TT con reducción 1:48 acoplados a ruedas de goma. La dirección es diferencial: cuando un sensor entra a la línea, detiene el motor de ese lado para pivotar.';
+            } else if (queryLower.includes('sensor') || queryLower.includes('ir') || queryLower.includes('tcrt') || queryLower.includes('infrarrojo')) {
+                matchedAnswer = 'Los sensores infrarrojos (TCRT5000 o CNY70) emiten luz en 950 nm. La superficie blanca la refleja hacia el fototransistor y la línea negra la absorbe. La altura ideal es entre 3 y 8 mm.';
+            } else if (queryLower.includes('lm393') || queryLower.includes('comparador') || queryLower.includes('voltaje')) {
+                matchedAnswer = 'El circuito integrado LM393 compara el voltaje analógico del sensor contra un umbral de referencia (fijado por potenciómetro) y entrega una salida digital limpia a los transistores.';
+            } else if (queryLower.includes('transistor') || queryLower.includes('2n2222') || queryLower.includes('potencia')) {
+                matchedAnswer = 'Los transistores NPN 2N2222A actúan como interruptores electrónicos de potencia (saturación y corte) suministrando la corriente que el comparador no puede entregar a los motores.';
+            } else if (queryLower.includes('diodo') || queryLower.includes('flyback') || queryLower.includes('1n4007')) {
+                matchedAnswer = 'El diodo 1N4007 en antiparalelo con cada motor absorbe la fuerza contraelectromotriz inductiva cuando el transistor se apaga, protegiéndolo de picos destructivos de alta tensión.';
+            } else if (queryLower.includes('bateria') || queryLower.includes('pila') || queryLower.includes('alimentacion')) {
+                matchedAnswer = 'Se alimenta típicamente con 4 pilas AA (6.0V) o 2 baterías de litio 18650 (7.4V). Recordá poner un capacitor de desacoplo de 100µF a 470µF en paralelo con la batería.';
+            } else if (queryLower.includes('material') || queryLower.includes('componente') || queryLower.includes('lista')) {
+                matchedAnswer = 'En la Sección 1 tenés la lista formal completa (BOM) con chasis, motores, ruedas, sensores IR, resistencias, transistores, LM393, diodos, potenciómetros y portapilas.';
+            } else {
+                matchedAnswer = 'Como asistente de robótica te sugiero explorar las secciones curriculares: 1. Materiales, 2. Concepto, 3. Funciones o 4. Electrónica. También podés tocar una de las preguntas frecuentes aquí arriba.';
+            }
+
+            reply(matchedAnswer);
+        });
+    }
+}
+
+/* 8. Botón Volver Arriba (Back to Top) */
+function initBackToTop() {
+    const btn = document.getElementById('back-to-top');
+    if (!btn) return;
+
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 320) {
+            btn.hidden = false;
+        } else {
+            btn.hidden = true;
+        }
+    });
+
+    btn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
+
 
 
