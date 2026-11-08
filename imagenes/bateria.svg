@@ -1,1 +1,53 @@
-﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 160"><rect x="45" y="45" width="105" height="70" rx="8" fill="#0f172a" stroke="#10b981" stroke-width="2"/><rect x="150" y="65" width="10" height="30" rx="2" fill="#94a3b8"/><text x="95" y="80" font-family="monospace" font-size="13" fill="#10b981" font-weight="bold" text-anchor="middle">6V - 7.4V</text><text x="95" y="98" font-family="sans-serif" font-size="8" fill="#64748b" text-anchor="middle">4x AA / 2x 18650</text><text x="60" y="65" font-family="sans-serif" font-size="14" fill="#ef4444" font-weight="bold">+</text><text x="130" y="65" font-family="sans-serif" font-size="14" fill="#38bdf8" font-weight="bold">-</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" width="100%" height="100%">
+  <defs>
+    <linearGradient id="cellAqua" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5eead4"/>
+      <stop offset="50%" stop-color="#2dd4bf"/>
+      <stop offset="100%" stop-color="#0f766e"/>
+    </linearGradient>
+    <linearGradient id="holderCase" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2d1354"/>
+      <stop offset="50%" stop-color="#18092e"/>
+      <stop offset="100%" stop-color="#0e031a"/>
+    </linearGradient>
+    <linearGradient id="goldCap" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fde047"/>
+      <stop offset="100%" stop-color="#ca8a04"/>
+    </linearGradient>
+    <filter id="batShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#0c0418" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Portapilas Plástico de Alto Impacto -->
+  <g filter="url(#batShadow)">
+    <rect x="35" y="32" width="170" height="116" rx="12" fill="url(#holderCase)" stroke="#3b1a6c" stroke-width="2"/>
+    <line x1="120" y1="36" x2="120" y2="144" stroke="#3b1a6c" stroke-width="2" stroke-dasharray="4,4"/>
+  </g>
+
+  <!-- Celda 1 (Izquierda) - Batería Li-Ion / AA en Aguamarina Tecnológico -->
+  <rect x="47" y="44" width="62" height="92" rx="6" fill="url(#cellAqua)" stroke="#110524" stroke-width="1.5"/>
+  <rect x="68" y="36" width="20" height="8" rx="2" fill="url(#goldCap)"/>
+  <!-- Resorte polo negativo -->
+  <line x1="57" y1="130" x2="99" y2="130" stroke="#cfc0ab" stroke-width="2"/>
+  <path d="M 67 132 Q 78 126 89 132" fill="none" stroke="#cfc0ab" stroke-width="2"/>
+  <text x="78" y="75" font-family="'IBM Plex Mono', monospace" font-size="10" fill="#110524" font-weight="700" text-anchor="middle">3.7V</text>
+  <text x="78" y="90" font-family="'DM Sans', sans-serif" font-size="7" fill="#110524" font-weight="700" text-anchor="middle">LI-ION</text>
+  <text x="78" y="58" font-family="'IBM Plex Mono', monospace" font-size="12" fill="#110524" font-weight="700" text-anchor="middle">+</text>
+
+  <!-- Celda 2 (Derecha) -->
+  <rect x="131" y="44" width="62" height="92" rx="6" fill="url(#cellAqua)" stroke="#110524" stroke-width="1.5"/>
+  <rect x="152" y="36" width="20" height="8" rx="2" fill="url(#goldCap)"/>
+  <line x1="141" y1="130" x2="183" y2="130" stroke="#cfc0ab" stroke-width="2"/>
+  <path d="M 151 132 Q 162 126 173 132" fill="none" stroke="#cfc0ab" stroke-width="2"/>
+  <text x="162" y="75" font-family="'IBM Plex Mono', monospace" font-size="10" fill="#110524" font-weight="700" text-anchor="middle">3.7V</text>
+  <text x="162" y="90" font-family="'DM Sans', sans-serif" font-size="7" fill="#110524" font-weight="700" text-anchor="middle">LI-ION</text>
+  <text x="162" y="58" font-family="'IBM Plex Mono', monospace" font-size="12" fill="#110524" font-weight="700" text-anchor="middle">+</text>
+
+  <!-- Cables de Salida con polaridad clara -->
+  <path d="M 205 60 C 220 58 230 45 235 35" stroke="#ef4444" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M 205 110 C 220 112 230 125 235 135" stroke="#110524" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+  <!-- Rótulo del pack de energía -->
+  <text x="120" y="164" font-family="'IBM Plex Mono', monospace" font-size="9" fill="#2dd4bf" font-weight="700" text-anchor="middle" letter-spacing="1">ALIMENTACIÓN: 6V - 7.4V DC</text>
+</svg>

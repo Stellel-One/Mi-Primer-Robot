@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Proyecto Académico de Robótica y Electrónica Básica: Robot Seguidor de Línea sin Arduino. Grado 11 - Tecnología e Informática.">
-    <title>Robot Seguidor de Línea (Sin Arduino) | Proyecto Escolar 11°</title>
+    <meta name="description" content="Proyecto Académico de Robótica y Programación: Carro Robot Seguidor de Línea con BBC Micro:bit, Puente H L298N y Sensores Infrarrojos HW-511. Grado 11.">
+    <title>Robot Seguidor de Línea con Micro:bit | Proyecto Escolar 11°</title>
     <link rel="icon" href="navia.svg" type="image/svg+xml">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,27 +19,17 @@
     <header class="site-header" id="header">
         <nav class="nav container" aria-label="Navegación principal">
             <div class="nav__brand-wrapper">
-                <a href="index.html" class="nav__logo" aria-label="ROBOTLAB - Inicio">
-                    <div class="nav__logo-icon" aria-hidden="true">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect width="18" height="12" x="3" y="9" rx="3"/>
-                            <circle cx="9" cy="15" r="1.5"/>
-                            <circle cx="15" cy="15" r="1.5"/>
-                            <path d="M12 9V5"/>
-                            <circle cx="12" cy="3" r="1.5"/>
-                            <line x1="2" y1="15" x2="3" y2="15"/>
-                            <line x1="21" y1="15" x2="22" y2="15"/>
-                        </svg>
-                    </div>
+                <a href="index.html" class="nav__logo" aria-label="INACEGO - RobotLab">
+                    <img src="imagenes/escudo-colegio.jpg" alt="Escudo Oficial INACEGO" class="nav__school-crest" width="40" height="40">
                     <div class="nav__logo-text-group">
-                        <span class="nav__logo-title"><span class="logo-robot">ROBOT</span><span class="logo-lab">LAB</span></span>
-                        <span class="nav__logo-sub">PROYECTO TECNOLÓGICO · GRADO 11</span>
+                        <span class="nav__logo-title"><span class="logo-robot">INACEGO</span> · <span class="logo-lab">ROBOTLAB</span></span>
+                        <span class="nav__logo-sub">I.E. ACEVEDO Y GÓMEZ · PUERTO RICO, CAQUETÁ</span>
                     </div>
                 </a>
 
                 <div class="nav__badge-compact">
                     <span class="badge-tag">MODALIDAD</span>
-                    <span class="badge-text">Electrónica Pura</span>
+                    <span class="badge-text">Micro:bit & L298N</span>
                 </div>
             </div>
 
@@ -81,47 +71,56 @@
         <section class="hero-section" id="hero">
             <div class="container hero-grid">
                 <div class="hero-content reveal">
+                    <div class="school-hero-badge">
+                        <img src="imagenes/escudo-colegio.jpg" alt="Escudo Oficial INACEGO" class="hero-crest-img">
+                        <div class="school-hero-text">
+                            <span class="school-name">Institución Educativa Acevedo y Gómez</span>
+                            <span class="school-motto">“Servimos a la Comunidad y Formamos para la Vida”</span>
+                            <span class="school-location">Puerto Rico, Caquetá · Grado 11° · Tecnología e Informática</span>
+                        </div>
+                    </div>
+
                     <div class="hero-badges-wrapper">
                         <span class="badge badge-green">Proyecto Formal de Grado 11</span>
-                        <span class="badge badge-no-arduino">100% Control Analógico Discreto</span>
+                        <span class="badge" style="background: rgba(45, 212, 191, 0.2); border: 1px solid var(--color-turquoise); color: var(--color-turquoise);">Carro Robot con BBC Micro:bit</span>
                     </div>
 
                     <h1 class="hero-title">
                         Robot Seguidor de Línea <br>
-                        <span class="hero-title-highlight">Fundamentos de Robótica Autónoma</span>
+                        <span class="hero-title-highlight">Autonomía con BBC Micro:bit & L298N</span>
                     </h1>
 
                     <p class="hero-description">
-                        Plataforma pedagógica e investigación técnica dedicada al estudio, diseño esquemático y comprensión profunda de un móvil terrestre de lazo cerrado gobernado exclusivamente por física de semiconductores, amplificadores comparadores y control de potencia, sin microcontroladores programables.
+                        Plataforma pedagógica e ingeniería técnica dedicada al diseño, ensamblaje y programación de un robot móvil seguidor de línea basado en el chasis Rover Mini, la tarjeta BBC Micro:bit, el controlador de potencia Puente H L298N y sensores infrarrojos HW-511.
                     </p>
 
                     <div class="hero-callouts">
                         <div class="callout-card">
-                            <span class="callout-num">4 Secciones</span>
-                            <span class="callout-label">Estructura Curricular Obligatoria</span>
+                            <span class="callout-num">6 Fases</span>
+                            <span class="callout-label">Guía de Ensamblaje Paso a Paso</span>
                         </div>
                         <div class="callout-card">
-                            <span class="callout-num">0 Líneas de Código</span>
-                            <span class="callout-label">Lógica Binaria en Hardware Puro</span>
+                            <span class="callout-num">Puente H L298N</span>
+                            <span class="callout-label">Control PWM de Velocidad y Giro</span>
                         </div>
                         <div class="callout-card">
-                            <span class="callout-num">100% Teórico</span>
-                            <span class="callout-label">Investigación y Presentación</span>
+                            <span class="callout-num">3 Fuentes</span>
+                            <span class="callout-label">Alimentación Tri-Partita y GND Común</span>
                         </div>
                     </div>
 
                     <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.5rem;">
                         <a href="materiales.html" class="btn btn-primary">Iniciar: 1. Materiales &rarr;</a>
-                        <a href="funciones.html" class="btn btn-secondary">Simulador de Trayectoria ↗</a>
+                        <a href="video.html" class="btn btn-secondary">Ver Videos en Pista ↗</a>
                     </div>
                 </div>
 
                 <div class="hero-visual reveal reveal-delay-2">
                     <div class="hero-illustration-wrapper">
-                        <img src="imagenes/robot-hero.svg" alt="Ilustración técnica de robot seguidor de línea analógico sobre pista" width="400" height="320">
+                        <img src="imagenes/robot-hero.jpg" alt="Carro Robot Seguidor de Línea con BBC Micro:bit y Chasis Rover Mini" width="400" height="320" style="width: 100%; height: auto; object-fit: contain; border-radius: 14px;">
                         <div class="floating-tag">
-                            <span style="font-size: 1.1rem;">🔬</span>
-                            <span>Modelo de Control LM393 + 2N2222</span>
+                            <span style="font-size: 1.1rem;">⚡</span>
+                            <span>BBC Micro:bit + Puente H L298N</span>
                         </div>
                     </div>
                 </div>
@@ -157,7 +156,7 @@
                     <a href="funciones.html" class="flow-step-card reveal reveal-delay-3" style="text-decoration: none; color: inherit; transition: transform var(--transition-fast);">
                         <div class="flow-step-number">03</div>
                         <h4 class="flow-step-title" style="color: var(--color-cyan);">Sección 3: Funciones</h4>
-                        <p style="font-size: 0.88rem; color: var(--text-secondary);">Comportamiento dinámico, tabla lógica de decisión, corrección de rumbo con simulador interactivo y aplicaciones industriales.</p>
+                        <p style="font-size: 0.88rem; color: var(--text-secondary);">Comportamiento dinámico, matriz lógica de decisión, corrección de rumbo y aplicaciones industriales.</p>
                         <span style="font-size: 0.82rem; color: var(--color-accent-green-bright); font-weight: 700; margin-top: auto;">Ver Sección 3 &rarr;</span>
                     </a>
 
@@ -229,14 +228,18 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
-                    <div class="brand-logo" style="margin-bottom: 1rem;">
-                        <div class="brand-icon-wrapper" aria-hidden="true">🤖</div>
-                        <span>RobotLab 11°</span>
+                    <div class="brand-logo" style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem;">
+                        <img src="imagenes/escudo-colegio.jpg" alt="Escudo INACEGO" style="width: 46px; height: 46px; border-radius: 50%; border: 2px solid var(--color-turquoise); object-fit: cover; background: #ffffff;">
+                        <div>
+                            <strong style="color: #ffffff; display: block; font-size: 1.05rem;">I.E. Acevedo y Gómez</strong>
+                            <small style="color: var(--color-turquoise); font-size: 0.76rem; font-family: var(--font-mono);">Puerto Rico, Caquetá · Grado 11°</small>
+                        </div>
                     </div>
-                    <p style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem;">
-                        Proyecto educativo formal de Tecnología e Informática (Grado 11). Documentación técnica y análisis riguroso de sistemas robóticos móviles autónomos sin microcontroladores.
+                    <p style="font-size: 0.88rem; line-height: 1.6; margin-bottom: 1rem; color: #cfc0ab;">
+                        <em>“Servimos a la Comunidad y Formamos para la Vida”</em>.<br>
+                        Proyecto educativo curricular de Robótica Móvil y Pensamiento Computacional con BBC Micro:bit y Puente H L298N.
                     </p>
-                    <span class="badge badge-green">Estándares Web • Arquitectura Multipágina</span>
+                    <span class="badge badge-green">INACEGO · Grado 11° · 2026</span>
                 </div>
 
                 <div class="footer-col">
@@ -244,7 +247,7 @@
                     <ul class="footer-links">
                         <li><a href="materiales.html" class="footer-link">1. Materiales y Ficha BOM</a></li>
                         <li><a href="concepto.html" class="footer-link">2. Concepto y Autonomía</a></li>
-                        <li><a href="funciones.html" class="footer-link">3. Funciones y Simulador</a></li>
+                        <li><a href="funciones.html" class="footer-link">3. Funciones y Cinemática</a></li>
                         <li><a href="electronica.html" class="footer-link">4. Parte Electrónica Completa</a></li>
                         <li><a href="video.html" class="footer-link">Video y Evidencias</a></li>
                     </ul>

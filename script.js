@@ -116,64 +116,64 @@ function initSimulator() {
             btnCenter.classList.add('active');
             robotVisual.style.transform = 'translateY(0px) rotate(0deg)';
             
-            sensorLeftVal.textContent = 'BLANCO (Luz Reflejada)';
+            sensorLeftVal.textContent = '0 (0V · BLANCO)';
             sensorLeftVal.className = 'telemetry-val val-active';
-            sensorRightVal.textContent = 'BLANCO (Luz Reflejada)';
+            sensorRightVal.textContent = '0 (0V · BLANCO)';
             sensorRightVal.className = 'telemetry-val val-active';
 
-            compLeftVal.textContent = 'ALTO (+5V / Sat)';
+            compLeftVal.textContent = 'PWM 700 (Nominal)';
             compLeftVal.className = 'telemetry-val val-active';
-            compRightVal.textContent = 'ALTO (+5V / Sat)';
+            compRightVal.textContent = 'PWM 700 (Nominal)';
             compRightVal.className = 'telemetry-val val-active';
 
-            motorLeftVal.textContent = 'GIRANDO (100% Marcha)';
+            motorLeftVal.textContent = 'AVANCE (Velocidad Nominal)';
             motorLeftVal.className = 'telemetry-val val-active';
-            motorRightVal.textContent = 'GIRANDO (100% Marcha)';
+            motorRightVal.textContent = 'AVANCE (Velocidad Nominal)';
             motorRightVal.className = 'telemetry-val val-active';
 
-            actionText.innerHTML = '<strong>Trayectoria Recta:</strong> Ambos sensores sobre pista blanca. Los dos transistores conducen en saturación, impulsando ambos motores con tracción simétrica adelante.';
+            actionText.innerHTML = '<strong>Trayectoria Recta:</strong> Ambos sensores HW-511 detectan superficie blanca (0V). La Micro:bit genera pulsos PWM balanceados en Pines 0 y 1 hacia el L298N, manteniendo avance rectilíneo estable.';
         } 
         else if (state === 'left') {
             btnLeft.classList.add('active');
             robotVisual.style.transform = 'translateX(-28px) rotate(-18deg)';
 
-            sensorLeftVal.textContent = 'NEGRO (Absorción / Sin Reflejo)';
+            sensorLeftVal.textContent = '1 (5V · NEGRO)';
             sensorLeftVal.className = 'telemetry-val val-off';
-            sensorRightVal.textContent = 'BLANCO (Luz Reflejada)';
+            sensorRightVal.textContent = '0 (0V · BLANCO)';
             sensorRightVal.className = 'telemetry-val val-active';
 
-            compLeftVal.textContent = 'BAJO (0V / Corte)';
+            compLeftVal.textContent = 'PWM 0 (Frenado)';
             compLeftVal.className = 'telemetry-val val-off';
-            compRightVal.textContent = 'ALTO (+5V / Sat)';
+            compRightVal.textContent = 'PWM 900 (Aceleración)';
             compRightVal.className = 'telemetry-val val-active';
 
             motorLeftVal.textContent = 'DETENIDO (0% Paro)';
             motorLeftVal.className = 'telemetry-val val-off';
-            motorRightVal.textContent = 'GIRANDO (100% Marcha)';
+            motorRightVal.textContent = 'IMPULSO (Viraje Rápido)';
             motorRightVal.className = 'telemetry-val val-active';
 
-            actionText.innerHTML = '<strong>Corrección hacia Izquierda:</strong> Sensor izquierdo detecta línea negra. Su comparador corta la base del transistor Q1; el motor izquierdo frena mientras el derecho sigue empujando, pivotando el robot hacia la línea.';
+            actionText.innerHTML = '<strong>Corrección hacia la Izquierda:</strong> El sensor izquierdo pisó la cinta negra (5V). La Micro:bit apaga el motor izquierdo (PWM 0) y acelera el motor derecho (PWM 900) a través del L298N para recentrar la línea.';
         } 
         else if (state === 'right') {
             btnRight.classList.add('active');
             robotVisual.style.transform = 'translateX(28px) rotate(18deg)';
 
-            sensorLeftVal.textContent = 'BLANCO (Luz Reflejada)';
+            sensorLeftVal.textContent = '0 (0V · BLANCO)';
             sensorLeftVal.className = 'telemetry-val val-active';
-            sensorRightVal.textContent = 'NEGRO (Absorción / Sin Reflejo)';
+            sensorRightVal.textContent = '1 (5V · NEGRO)';
             sensorRightVal.className = 'telemetry-val val-off';
 
-            compLeftVal.textContent = 'ALTO (+5V / Sat)';
+            compLeftVal.textContent = 'PWM 900 (Aceleración)';
             compLeftVal.className = 'telemetry-val val-active';
-            compRightVal.textContent = 'BAJO (0V / Corte)';
+            compRightVal.textContent = 'PWM 0 (Frenado)';
             compRightVal.className = 'telemetry-val val-off';
 
-            motorLeftVal.textContent = 'GIRANDO (100% Marcha)';
+            motorLeftVal.textContent = 'IMPULSO (Viraje Rápido)';
             motorLeftVal.className = 'telemetry-val val-active';
             motorRightVal.textContent = 'DETENIDO (0% Paro)';
             motorRightVal.className = 'telemetry-val val-off';
 
-            actionText.innerHTML = '<strong>Corrección hacia Derecha:</strong> Sensor derecho detecta línea negra. Su comparador corta el transistor Q2; el motor derecho para mientras el izquierdo empuja, virando el chasis hacia el centro de la pista.';
+            actionText.innerHTML = '<strong>Corrección hacia la Derecha:</strong> El sensor derecho detecta la línea negra (5V). La Micro:bit corta el motor derecho y da par al motor izquierdo, pivotando el chasis Rover hacia la derecha.';
         }
     }
 
@@ -206,21 +206,126 @@ function initCircuitInspector() {
 }
 
 /* 5. Control de Video y Salto a Marcas de Tiempo */
+/* 5. Reproductor de Video Secuencial (Serie 6 Partes Alex7 Tutoriales) */
 function initVideoControls() {
-    const jumpButtons = document.querySelectorAll('.btn-jump-time');
-    const videoElement = document.getElementById('main-project-video');
+    const videoData = [
+        {
+            part: 1,
+            id: '34xOcgIWpsU',
+            title: 'PARTE 1 — Introducción General y Componentes del Robot',
+            desc: 'Presentación del kit de robótica educativa British Council, la tarjeta BBC Micro:bit y el inventario de materiales para construir el robot móvil autónomo.',
+            topic: 'Kit British Council',
+            progress: 'Paso 1/6: Fundamentos e Inventario'
+        },
+        {
+            part: 2,
+            id: 'hj2Lx7jDiCc',
+            title: 'PARTE 2 — Sensores Infrarrojos HW-511 y Calibración',
+            desc: 'Caracterización de los estados lógicos del sensor (0V blanco con LED encendido / 5V negro con LED apagado) y ajuste del potenciómetro para 2-20mm de altura.',
+            topic: 'Detección Óptica y Umbrales',
+            progress: 'Paso 2/6: Caracterización de Sensores'
+        },
+        {
+            part: 3,
+            id: '9-Pfo9fqfNA',
+            title: 'PARTE 3 — Controlador de Potencia Puente H L298N',
+            desc: 'Conexión de la etapa de potencia a 9V, compatibilidad con niveles lógicos de 3.3V de la Micro:bit y masa compartida (GND común obligatorio).',
+            topic: 'Etapa de Potencia y Motores',
+            progress: 'Paso 3/6: Drivers de Potencia'
+        },
+        {
+            part: 4,
+            id: 'atuZydTlraM',
+            title: 'PARTE 4 — Ensamble Mecánico del Chasis Rover Mini',
+            desc: 'Montaje del chasis de acrílico, fijación de motores TT con pletinas metálicas, instalación de ruedas motrices de goma y rueda loca con extensores.',
+            topic: 'Estructura y Cinemática',
+            progress: 'Paso 4/6: Montaje Mecánico'
+        },
+        {
+            part: 5,
+            id: 'Foi85VfqKJk',
+            title: 'PARTE 5 — Conexión de Elementos y Distribución Eléctrica',
+            desc: 'Instalación del shield sobre el chasis, aislamiento de baterías de 9V con foami, interruptores de corte independientes y cableado pin a pin.',
+            topic: 'Cableado y Fuentes Tri-Partitas',
+            progress: 'Paso 5/6: Interconexión Eléctrica'
+        },
+        {
+            part: 6,
+            id: '-jA-Nnl1UqI',
+            title: 'PARTE 6 — Programación, Calibración y Funcionamiento en Pista',
+            desc: 'Carga del algoritmo seguidor en MakeCode/Python, validación en pista con línea negra de 3.5 cm y calibración final de velocidad PWM y virajes.',
+            topic: 'Pruebas en Pista y Autonomía',
+            progress: 'Paso 6/6: Lógica y Pruebas en Pista'
+        }
+    ];
 
-    jumpButtons.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            const timeSeconds = parseFloat(btn.getAttribute('data-time'));
+    const iframe = document.getElementById('main-video-iframe');
+    const titleEl = document.getElementById('video-title');
+    const descEl = document.getElementById('video-desc');
+    const partBadgeEl = document.getElementById('video-seq-part-badge');
+    const progressEl = document.getElementById('video-seq-progress');
+    const topicTagEl = document.getElementById('video-topic-tag');
+    const ytLinkEl = document.getElementById('video-yt-link');
+    const btnPrev = document.getElementById('video-seq-prev');
+    const btnNext = document.getElementById('video-seq-next');
+    const tabs = document.querySelectorAll('.playlist-tab');
+    const playChapterBtns = document.querySelectorAll('.btn-play-chapter');
+    const playerContainer = document.getElementById('video-player-container');
 
-            if (videoElement && !isNaN(timeSeconds)) {
-                videoElement.currentTime = timeSeconds;
-                videoElement.play();
-                videoElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            } else {
-                console.log(`Salto solicitado a: ${timeSeconds}s`);
+    if (!iframe && !tabs.length) return;
+
+    let currentPartIndex = 0; // 0-based (0 = Parte 1)
+
+    function setVideoPart(index, shouldScroll = false) {
+        if (index < 0 || index >= videoData.length) return;
+        currentPartIndex = index;
+        const current = videoData[index];
+
+        if (iframe) {
+            iframe.src = `https://www.youtube.com/embed/${current.id}?autoplay=1&rel=0`;
+        }
+        if (titleEl) titleEl.textContent = current.title;
+        if (descEl) descEl.textContent = current.desc;
+        if (partBadgeEl) partBadgeEl.textContent = `PARTE ${current.part} DE 6`;
+        if (progressEl) progressEl.textContent = current.progress;
+        if (topicTagEl) topicTagEl.textContent = current.topic;
+        if (ytLinkEl) {
+            ytLinkEl.href = `https://youtu.be/${current.id}`;
+            ytLinkEl.textContent = `Ver en YouTube ↗`;
+        }
+
+        // Actualizar botones de navegación
+        if (btnPrev) btnPrev.disabled = (index === 0);
+        if (btnNext) btnNext.disabled = (index === videoData.length - 1);
+
+        // Actualizar pestañas activas
+        tabs.forEach((tab, i) => {
+            const isMatch = (i === index);
+            tab.classList.toggle('active', isMatch);
+            tab.setAttribute('aria-selected', isMatch);
+        });
+
+        if (shouldScroll && playerContainer) {
+            playerContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }
+
+    if (btnPrev) {
+        btnPrev.addEventListener('click', () => setVideoPart(currentPartIndex - 1));
+    }
+    if (btnNext) {
+        btnNext.addEventListener('click', () => setVideoPart(currentPartIndex + 1));
+    }
+
+    tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => setVideoPart(index));
+    });
+
+    playChapterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const partNum = parseInt(btn.getAttribute('data-part'), 10);
+            if (!isNaN(partNum)) {
+                setVideoPart(partNum - 1, true);
             }
         });
     });

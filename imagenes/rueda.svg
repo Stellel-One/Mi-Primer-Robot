@@ -1,1 +1,66 @@
-﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 160"><circle cx="100" cy="80" r="55" fill="#0f172a" stroke="#334155" stroke-width="12"/><circle cx="100" cy="80" r="46" fill="#eab308" stroke="#ca8a04" stroke-width="3"/><circle cx="100" cy="80" r="18" fill="#0f172a" stroke="#ffffff" stroke-width="2"/><rect x="96" y="74" width="8" height="12" rx="2" fill="#ffffff"/><line x1="100" y1="20" x2="100" y2="30" stroke="#64748b" stroke-width="4"/><line x1="100" y1="130" x2="100" y2="140" stroke="#64748b" stroke-width="4"/><line x1="45" y1="80" x2="55" y2="80" stroke="#64748b" stroke-width="4"/><line x1="145" y1="80" x2="155" y2="80" stroke="#64748b" stroke-width="4"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" width="100%" height="100%">
+  <defs>
+    <linearGradient id="tireRubber" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2d1354"/>
+      <stop offset="50%" stop-color="#18092e"/>
+      <stop offset="100%" stop-color="#0a0214"/>
+    </linearGradient>
+    <linearGradient id="rimAqua" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2dd4bf"/>
+      <stop offset="50%" stop-color="#14b8a6"/>
+      <stop offset="100%" stop-color="#0f766e"/>
+    </linearGradient>
+    <linearGradient id="casterChrome" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="50%" stop-color="#cfc0ab"/>
+      <stop offset="100%" stop-color="#766485"/>
+    </linearGradient>
+    <filter id="wheelShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#0c0418" flood-opacity="0.38"/>
+    </filter>
+  </defs>
+
+  <!-- Rueda Principal Motorizada (Izquierda) -->
+  <g id="mainWheel" filter="url(#wheelShadow)">
+    <!-- Neumático de Goma Antideslizante con Huella -->
+    <circle cx="85" cy="90" r="62" fill="url(#tireRubber)" stroke="#3b1a6c" stroke-width="2.5"/>
+
+    <!-- Tacos de tracción perimetrales -->
+    <line x1="85" y1="28" x2="85" y2="38" stroke="#2dd4bf" stroke-width="3"/>
+    <line x1="85" y1="142" x2="85" y2="152" stroke="#2dd4bf" stroke-width="3"/>
+    <line x1="23" y1="90" x2="33" y2="90" stroke="#2dd4bf" stroke-width="3"/>
+    <line x1="137" y1="90" x2="147" y2="90" stroke="#2dd4bf" stroke-width="3"/>
+    <line x1="41" y1="46" x2="48" y2="53" stroke="#2dd4bf" stroke-width="3"/>
+    <line x1="122" y1="127" x2="129" y2="134" stroke="#2dd4bf" stroke-width="3"/>
+    <line x1="41" y1="134" x2="48" y2="127" stroke="#2dd4bf" stroke-width="3"/>
+    <line x1="122" y1="53" x2="129" y2="46" stroke="#2dd4bf" stroke-width="3"/>
+
+    <!-- Llanta Deportiva Aguamarina -->
+    <circle cx="85" cy="90" r="46" fill="url(#rimAqua)" stroke="#042f2e" stroke-width="2"/>
+    <circle cx="85" cy="90" r="32" fill="#18092e" stroke="#2dd4bf" stroke-width="1.8"/>
+
+    <!-- Rayos de la llanta -->
+    <line x1="85" y1="44" x2="85" y2="76" stroke="#2dd4bf" stroke-width="3"/>
+    <line x1="85" y1="104" x2="85" y2="136" stroke="#2dd4bf" stroke-width="3"/>
+    <line x1="39" y1="90" x2="71" y2="90" stroke="#2dd4bf" stroke-width="3"/>
+    <line x1="99" y1="90" x2="131" y2="90" stroke="#2dd4bf" stroke-width="3"/>
+
+    <!-- Buje central con acople D-Shaft -->
+    <circle cx="85" cy="90" r="14" fill="#18092e" stroke="#ffffff" stroke-width="1.5"/>
+    <rect x="81" y="84" width="8" height="12" rx="2" fill="#ffffff"/>
+  </g>
+
+  <!-- Rueda Loca Esférica / Caster Metal (Derecha) -->
+  <g id="casterWheel" filter="url(#wheelShadow)">
+    <rect x="165" y="48" width="54" height="42" rx="8" fill="#271147" stroke="#cfc0ab" stroke-width="2"/>
+    <!-- Orificios de sujeción -->
+    <circle cx="174" cy="56" r="3" fill="#cfc0ab"/>
+    <circle cx="210" cy="56" r="3" fill="#cfc0ab"/>
+    <!-- Esfera de acero inoxidable con brillo -->
+    <circle cx="192" cy="108" r="28" fill="url(#casterChrome)" stroke="#18092e" stroke-width="2"/>
+    <ellipse cx="184" cy="100" rx="9" ry="6" fill="#ffffff" opacity="0.75"/>
+    <text x="192" y="152" font-family="'DM Sans', sans-serif" font-size="7.5" fill="#cfc0ab" text-anchor="middle" font-weight="700">CASTER BALL</text>
+  </g>
+
+  <text x="85" y="168" font-family="'IBM Plex Mono', monospace" font-size="8" fill="#2dd4bf" text-anchor="middle" font-weight="700">RUEDA DE GOMA 65MM</text>
+</svg>

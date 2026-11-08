@@ -1,1 +1,50 @@
-﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 160"><path d="M 30 50 Q 80 20 120 70 T 170 60" fill="none" stroke="#ef4444" stroke-width="4"/><path d="M 30 80 Q 70 120 130 90 T 170 110" fill="none" stroke="#00f2fe" stroke-width="4"/><path d="M 30 110 Q 90 70 110 130 T 170 80" fill="none" stroke="#10b981" stroke-width="4"/><rect x="20" y="45" width="15" height="10" rx="2" fill="#0f172a" stroke="#ffffff"/><rect x="165" y="55" width="15" height="10" rx="2" fill="#0f172a" stroke="#ffffff"/><text x="100" y="145" font-family="sans-serif" font-size="9" fill="#94a3b8" text-anchor="middle">Jumpers Dupont M-M / M-H</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" width="100%" height="100%">
+  <defs>
+    <linearGradient id="protoBase" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="60%" stop-color="#f5efe6"/>
+      <stop offset="100%" stop-color="#e7dccb"/>
+    </linearGradient>
+    <filter id="cableShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#0c0418" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Mini Protoboard de Pruebas de Fondo -->
+  <g filter="url(#cableShadow)">
+    <rect x="36" y="96" width="168" height="58" rx="8" fill="url(#protoBase)" stroke="#cfc0ab" stroke-width="1.8"/>
+    <!-- Canal central de separación de CI -->
+    <rect x="36" y="122" width="168" height="6" fill="#cfc0ab" opacity="0.6"/>
+
+    <!-- Puntos de inserción (Tie-points) -->
+    <!-- Fila A -->
+    <circle cx="56" cy="106" r="2" fill="#18092e"/><circle cx="76" cy="106" r="2" fill="#18092e"/><circle cx="96" cy="106" r="2" fill="#18092e"/><circle cx="116" cy="106" r="2" fill="#18092e"/><circle cx="136" cy="106" r="2" fill="#18092e"/><circle cx="156" cy="106" r="2" fill="#18092e"/><circle cx="176" cy="106" r="2" fill="#18092e"/>
+    <!-- Fila B -->
+    <circle cx="56" cy="115" r="2" fill="#18092e"/><circle cx="76" cy="115" r="2" fill="#18092e"/><circle cx="96" cy="115" r="2" fill="#18092e"/><circle cx="116" cy="115" r="2" fill="#18092e"/><circle cx="136" cy="115" r="2" fill="#18092e"/><circle cx="156" cy="115" r="2" fill="#18092e"/><circle cx="176" cy="115" r="2" fill="#18092e"/>
+    <!-- Fila C -->
+    <circle cx="56" cy="135" r="2" fill="#18092e"/><circle cx="76" cy="135" r="2" fill="#18092e"/><circle cx="96" cy="135" r="2" fill="#18092e"/><circle cx="116" cy="135" r="2" fill="#18092e"/><circle cx="136" cy="135" r="2" fill="#18092e"/><circle cx="156" cy="135" r="2" fill="#18092e"/><circle cx="176" cy="135" r="2" fill="#18092e"/>
+    <!-- Fila D -->
+    <circle cx="56" cy="144" r="2" fill="#18092e"/><circle cx="76" cy="144" r="2" fill="#18092e"/><circle cx="96" cy="144" r="2" fill="#18092e"/><circle cx="116" cy="144" r="2" fill="#18092e"/><circle cx="136" cy="144" r="2" fill="#18092e"/><circle cx="156" cy="144" r="2" fill="#18092e"/><circle cx="176" cy="144" r="2" fill="#18092e"/>
+  </g>
+
+  <!-- Cables Jumpers Dupont Flexibles en Cinta -->
+  <!-- Cable 1: Morado -->
+  <path d="M 40 40 C 70 15 130 65 170 30" fill="none" stroke="#3b1a6c" stroke-width="4.5" stroke-linecap="round"/>
+  <!-- Cable 2: Aguamarina -->
+  <path d="M 40 52 C 80 80 120 20 180 50" fill="none" stroke="#2dd4bf" stroke-width="4.5" stroke-linecap="round"/>
+  <!-- Cable 3: Verde azulado -->
+  <path d="M 40 64 C 90 30 130 90 190 70" fill="none" stroke="#0d9488" stroke-width="4.5" stroke-linecap="round"/>
+  <!-- Cable 4: Crema / Dorado -->
+  <path d="M 40 76 C 75 105 135 45 180 90" fill="none" stroke="#cfc0ab" stroke-width="4.5" stroke-linecap="round"/>
+
+  <!-- Conectores Terminales Dupont Macho/Hembra en los extremos -->
+  <rect x="26" y="32" width="16" height="52" rx="3" fill="#18092e" stroke="#2dd4bf" stroke-width="1.2"/>
+  <rect x="178" y="24" width="16" height="35" rx="3" fill="#18092e" stroke="#2dd4bf" stroke-width="1.2"/>
+  <!-- Pines dorados salientes -->
+  <line x1="20" y1="44" x2="26" y2="44" stroke="#fde047" stroke-width="2.5"/>
+  <line x1="20" y1="56" x2="26" y2="56" stroke="#fde047" stroke-width="2.5"/>
+  <line x1="20" y1="68" x2="26" y2="68" stroke="#fde047" stroke-width="2.5"/>
+
+  <!-- Rótulo técnico -->
+  <text x="120" y="168" font-family="'IBM Plex Mono', monospace" font-size="8.5" fill="#2dd4bf" font-weight="700" text-anchor="middle">JUMPERS DUPONT Y MINI PROTOBOARD</text>
+</svg>
