@@ -1,349 +1,232 @@
-# ROBOTLAB: Robot Seguidor de Línea (Sin Arduino)
-> **Proyecto Tecnológico y Académico · Grado 11 — Tecnología e Informática**  
-> *Plataforma web educativa, interactiva y documentación técnica integral de robótica autónoma con control analógico discreto.*
+# 🤖 Robot Seguidor de Línea Móvil Rover Mini — BBC Micro:bit v2 & L298N
+> **Institución Educativa Acevedo y Gómez (INACEGO) — Puerto Rico, Caquetá**  
+> *Lema Institucional:* *"Servimos a la Comunidad y Formamos para la Vida"*  
+> **Área:** Tecnología e Informática · Grado 11° de Educación Media Técnica  
+> **🌐 Sitio Web Oficial en Producción:** [https://mi-primer-robot.onrender.com](https://mi-primer-robot.onrender.com)  
+> **📦 Repositorio GitHub:** [https://github.com/Stellel-One/Mi-Primer-Robot](https://github.com/Stellel-One/Mi-Primer-Robot)
 
 ---
 
 ## 📑 Tabla de Contenidos
 
-- [Parte I: Arquitectura y Explicación Detallada del Código Web](#parte-i-arquitectura-y-explicación-detallada-del-código-web)
-  - [1. Estructura General del Repositorio](#1-estructura-general-del-repositorio)
-  - [2. Estructura Semántica de las Páginas HTML](#2-estructura-semántica-de-las-páginas-html)
-  - [3. Sistema de Diseño y Hoja de Estilos (`styles.css`)](#3-sistema-de-diseño-y-hoja-de-estilos-stylescss)
-  - [4. Lógica del Cliente e Interactividad (`script.js`)](#4-lógica-del-cliente-e-interactividad-scriptjs)
-  - [5. Servidor Web y Configuración de Despliegue (`server.js` y `render.yaml`)](#5-servidor-web-y-configuración-de-despliegue-serverjs-y-renderyaml)
-- [Parte II: Fundamentos Técnicos y Electrónica del Robot](#parte-ii-fundamentos-técnicos-y-electrónica-del-robot)
-  - [1. Principio de Autonomía de Lazo Cerrado](#1-principio-de-autonomía-de-lazo-cerrado)
-  - [2. Etapa de Detección Óptica (TCRT5000)](#2-etapa-de-detección-óptica-tcrt5000)
-  - [3. Etapa de Comparación y Calibración (LM393)](#3-etapa-de-comparación-y-calibración-lm393)
-  - [4. Etapa de Conmutación y Potencia (2N2222 + 1N4007)](#4-etapa-de-conmutación-y-potencia-2n2222--1n4007)
-  - [5. Cinemática Diferencial y Tabla de Verdad](#5-cinemática-diferencial-y-tabla-de-verdad)
-  - [6. Lista de Componentes y Despiece (BOM)](#6-lista-de-componentes-y-despiece-bom)
-- [Parte III: Instrucciones de Ejecución Local](#parte-iii-instrucciones-de-ejecución-local)
+1. [Presentación del Proyecto](#-presentación-del-proyecto)
+2. [Arquitectura General del Sistema](#-arquitectura-general-del-sistema)
+3. [Lista de Materiales y Componentes (BOM)](#-lista-de-materiales-y-componentes-bom)
+4. [Mapa de Conexiones y Pinout](#-mapa-de-conexiones-y-pinout)
+5. [Distribución Eléctrica y Masa Común](#-distribución-eléctrica-y-masa-común)
+6. [Lógica de Control y Algoritmo de Decisión](#-lógica-de-control-y-algoritmo-de-decisión)
+7. [Guía de Ensamblaje Paso a Paso](#-guía-de-ensamblaje-paso-a-paso)
+8. [Arquitectura de la Plataforma Web](#-arquitectura-de-la-plataforma-web)
+9. [Instrucciones de Ejecución Local y Despliegue](#-instrucciones-de-ejecución-local-y-despliegue)
+10. [Créditos e Identidad Institucional](#-créditos-e-identidad-institucional)
 
 ---
 
-# Parte I: Arquitectura y Explicación Detallada del Código Web
+## 🏫 Presentación del Proyecto
 
-Esta primera sección detalla la arquitectura de software, patrones de diseño y cada módulo que compone el aplicativo web de ROBOTLAB.
+Este proyecto pedagógico y técnico documenta el diseño, ensamblaje, calibración y programación de un **Robot Seguidor de Línea Móvil Autónomo de Tracción Diferencial**. 
 
-```mermaid
-graph TD
-    Client[Navegador del Usuario] --> Router[Enrutamiento HTML / Servidor HTTP]
-    Router --> P0[index.html - Inicio]
-    Router --> P1[materiales.html - Sección 01]
-    Router --> P2[concepto.html - Sección 02]
-    Router --> P3[funciones.html - Sección 03]
-    Router --> P4[electronica.html - Sección 04]
-    Router --> P5[video.html - Evidencias]
-    
-    subgraph Capa Frontend
-        Styles[styles.css: Tokens, Manrope, Grid, Lucide]
-        Script[script.js: Motor de Interacción]
-        NaviaBot[Asistente Navia: NLP ligero & FAQ]
-        Simulator[Simulador Cinemático Diferencial]
-    end
-    
-    P0 & P1 & P2 & P3 & P4 & P5 --> Styles
-    P0 & P1 & P2 & P3 & P4 & P5 --> Script
-    Script --> NaviaBot
-    Script --> Simulator
-```
+El vehículo utiliza como cerebro de procesamiento una tarjeta **BBC Micro:bit v2** montada sobre una placa de expansión (*shield* tipo Sensor:bit con conectores de triple pin **G-V-S**), una etapa de potencia basada en el controlador **Puente H L298N**, y dos sensores ópticos infrarrojos de contraste **HW-511 (KY-033)** montados sobre un chasis acrílico **Rover Mini**.
+
+Acompañando al prototipo físico, este repositorio aloja la plataforma web educativa de alta fidelidad desarrollada para guiar a los estudiantes de Grado 11° en cada fase del proceso de robótica.
 
 ---
 
-## 1. Estructura General del Repositorio
-
-El proyecto está diseñado bajo una arquitectura modular desacoplada, sin dependencias pesadas ni frameworks de empaquetado (cero overhead), optimizando la velocidad de carga (First Contentful Paint < 0.4s):
-
-| Archivo / Carpeta | Propósito | Responsabilidad Técnica |
-|---|---|---|
-| `index.html` | Página de Inicio | Portal institucional, resumen ejecutivo de grado 11 y acceso a módulos. |
-| `materiales.html` | Módulo 01: Materiales | Catálogo técnico de piezas, notas de taller y lista BOM estructurada. |
-| `concepto.html` | Módulo 02: Concepto | Física de reflectancia óptica (\(\lambda = 950\text{ nm}\)) y comparativa Analógica vs Arduino. |
-| `funciones.html` | Módulo 03: Funciones | Cinemática diferencial, tabla de verdad y simulador dinámico en tiempo real. |
-| `electronica.html` | Módulo 04: Electrónica | Estudio esquemático, cálculo de divisores, comparador LM393 y transistores. |
-| `video.html` | Evidencias y Video | Reproductor integrado con marcas de tiempo sincronizadas y catálogo de capturas. |
-| `styles.css` | Hoja de Estilos Central | Variables CSS, sistema tipográfico, diseño responsivo y efectos visuales. |
-| `script.js` | Lógica de Interacción | Navegación, asistente virtual Navia, simulador cinemático y scrollspy. |
-| `server.js` | Servidor Node.js | Servidor HTTP estático nativo con manejo MIME y protección de rutas. |
-| `render.yaml` | Infraestructura como Código | Manifiesto de despliegue automático para la nube de Render. |
-| `package.json` | Metadatos y scripts | Definición del servicio y comando `npm start` para producción. |
-| `navia.svg` | Identidad Gráfica | Vector escalable de la mascota y asistente técnico escolar. |
-
----
-
-## 2. Estructura Semántica de las Páginas HTML
-
-Todas las páginas comparten un estándar semántico riguroso para maximizar la accesibilidad (WCAG 2.1 AA) y el SEO técnico:
-
-1. **`<head>` optimizado:**
-   - Preconexión DNS a Google Fonts (`preconnect`).
-   - Carga de las familias tipográficas seleccionadas: **Manrope** (encabezados principales y marca), **DM Sans** (cuerpo y navegación) e **IBM Plex Mono** (indicadores técnicos).
-   - Metadatos `viewport`, `description` y enlace canónico de favicon SVG.
-2. **Encabezado Global (`<header class="site-header">`):**
-   - **Logotipo ROBOTLAB:** Emblema con icono geométrico estilizado en SVG, nombre con cambio cromático deliberado (`ROBOT` en `#17352f` y `LAB` en `#287E64`), junto al subtítulo técnico `PROYECTO TECNOLÓGICO · GRADO 11`.
-   - **Badge de Estado / Sección:** Etiqueta compacta en `IBM Plex Mono` que indica la fase del curso sin quebrar la línea visual.
-   - **Barra de Navegación (`.nav__menu`):** Lista horizontal en pantallas de escritorio con los 6 apartados oficiales e iconos lineales **Lucide** uniformes (`stroke-width: 1.8`, `18px`).
-   - **Botón Hamburguesa (`.nav__toggle`):** Control accesible (`aria-expanded`, `aria-controls`) para dispositivos móviles.
-3. **Cuerpo Principal (`<main>`):**
-   - Encabezados de sección con breadcrumbs, título formal, badges de categorización y contenedor `.container` centrado a `1200px`.
-4. **Pie de Página (`<footer class="site-footer">`):**
-   - Resumen institucional, enlaces directos a las 6 secciones, fichas técnicas de referencia (datasheets de Texas Instruments y Vishay) y derechos educativos.
-5. **Componentes Flotantes Globales:**
-   - Botón interactivo de retorno al inicio (`#back-to-top`).
-   - Lanzador flotante y modal conversacional de **Navia** (`#navia-launcher`, `#navia-chat`).
-
----
-
-## 3. Sistema de Diseño y Hoja de Estilos (`styles.css`)
-
-El archivo `styles.css` contiene más de 1900 líneas de reglas estructuradas en módulos independientes:
-
-### 3.1 Tokens de Diseño y Variables CSS (`:root`)
-
-```css
-:root {
-    /* Paleta Oficial ROBOTLAB */
-    --color-dark-blue: #17352f;          /* Verde Pino Oscuro (texto principal / fondos oscuros) */
-    --color-electric-blue: #287E64;      /* Verde Esmeralda Formal (marca y acento principal) */
-    --color-electric-blue-dark: #1e634e; /* Sombra y hover interactivo */
-    --color-turquoise: #D9F56B;          /* Amarillo Lima Tecnológico (contraste y llamadas) */
-    --color-gray-50: #f5f8f4;            /* Fondo general claro de alta legibilidad */
-    --color-gray-200: #dce5dc;           /* Bordes sutiles y separadores */
-
-    /* Sistema Tipográfico Jerárquico */
-    --font-heading: 'Manrope', system-ui, sans-serif;   /* Títulos principales y marca (peso 700) */
-    --font-primary: 'DM Sans', system-ui, sans-serif;   /* Lectura general, botones y tabs */
-    --font-mono: 'IBM Plex Mono', monospace;            /* Cintas técnicas, pines y fórmulas */
-}
-```
-
-### 3.2 La Barra de Navegación y los Estados de Pestañas
-
-Para cumplir con la especificación visual sin saltos de línea forzados:
-- **Contenedor `.nav`:** `display: flex; white-space: nowrap; height: 4.6rem; align-items: center; justify-content: space-between;`.
-- **Apartados inactivos:** Fondo `transparent`, texto en gris verdoso (`#4b5e53`) e iconos en verde pino (`#17352f`). Al pasar el cursor (`:hover`), adquieren un fondo tenue `rgba(40, 126, 100, 0.08)`.
-- **Apartado activo (`.active`):** Fondo verde esmeralda `#287E64`, texto `#ffffff`, icono amarillo lima `#D9F56B` y bordes moderados redondeados a `8px`.
-- **Transición:** `0.2s cubic-bezier(0.16, 1, 0.3, 1)` para un cambio suave y consistente en toda la interfaz.
-
-### 3.3 Técnicas de Maquetación y Efectos Visuales
-
-1. **CSS Grid y Flexbox Avanzado:**
-   - Cuadrículas fluidas (`grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))`) para las tarjetas de materiales, electrónica y comparaciones.
-2. **Glassmorphism:**
-   - La barra superior y el encabezado del chat emplean `backdrop-filter: blur(16px); background: rgba(255, 255, 255, 0.96);` para garantizar contraste sobre cualquier elemento en scroll.
-3. **Efectos de Revelación al Desplazamiento (`.reveal`):**
-   - Transiciones desacopladas mediante `transform: translateY(24px)` y `opacity: 0` que se activan con la clase `.active` asignada por JavaScript.
-
----
-
-## 4. Lógica del Cliente e Interactividad (`script.js`)
-
-El código JavaScript cliente está escrito en JavaScript estándar (ES6+), completamente modular y organizado en funciones con propósitos únicos:
+## 🔬 Arquitectura General del Sistema
 
 ```mermaid
 flowchart TD
-    Init[DOMContentLoaded] --> N1[initNavigation: Menú responsivo & Aria]
-    Init --> N2[initMaterialsFilter: Filtro dinámico de componentes]
-    Init --> N3[initSimulator: Cinemática y telemetría de viraje]
-    Init --> N4[initCircuitInspector: Bloques del esquemático]
-    Init --> N5[initVideoControls: Timestamps sincronizados de YouTube]
-    Init --> N6[initScrollReveal: IntersectionObserver para animaciones]
-    Init --> N7[initNaviaChat: Asistente interactivo con NLP de reglas]
-    Init --> N8[initBackToTop: Retorno suave superior]
+    subgraph Sensores ["1. Etapa de Sensado Óptico"]
+        IR_L["Sensor IR Izquierdo (HW-511)<br/>Pin S: 0V Blanco / 5V Negro"]
+        IR_R["Sensor IR Derecho (HW-511)<br/>Pin S: 0V Blanco / 5V Negro"]
+    end
+
+    subgraph Control ["2. Etapa de Procesamiento Lógico"]
+        Shield["Placa de Expansión (Shield G-V-S)"]
+        Microbit["BBC Micro:bit v2<br/>Algoritmo de Corrección Diferencial"]
+        Shield --- Microbit
+    end
+
+    subgraph Potencia ["3. Etapa de Accionamiento y Potencia"]
+        L298N["Módulo Controlador Puente H L298N<br/>Modulación PWM y Sentido de Giro"]
+        M_L["Motor DC Izquierdo TT 9V"]
+        M_R["Motor DC Derecho TT 9V"]
+    end
+
+    subgraph Fuentes ["4. Sistema de Alimentación Tri-Partita"]
+        Bat_Pot["2x Baterías 9V en Paralelo<br/>(Alimentación L298N y Motores)"]
+        Bat_Sens["Portapilas 5V / 4.5V Dedicado<br/>(Alimentación Sensores HW-511)"]
+        Bat_Ubic["Portapilas 3V Micro:bit<br/>(Kit British Council)"]
+        GND_Comun["MASA UNIFICADA (GND COMÚN)<br/>Referencia de potencial compartida"]
+    end
+
+    IR_L -->|Señal Digital| Shield
+    IR_R -->|Señal Digital| Shield
+    Shield -->|Pin 0 PWM| L298N
+    Shield -->|Pin 1 PWM| L298N
+
+    L298N -->|OUT1 / OUT2| M_L
+    L298N -->|OUT3 / OUT4| M_R
+
+    Bat_Pot -->|VCC +9V vía Switch| L298N
+    Bat_Sens -->|VCC +5V vía Switch| IR_L & IR_R
+    Bat_Ubic -->|3V JST| Microbit
+
+    Bat_Pot -.-> GND_Comun
+    Bat_Sens -.-> GND_Comun
+    Bat_Ubic -.-> GND_Comun
+    GND_Comun -.-> L298N
+    GND_Comun -.-> Shield
 ```
-
-### 4.1 Desglose de Funciones
-
-1. **`initNavigation()`:**
-   - Controla el menú móvil en pantallas pequeñas.
-   - Alterna la clase `.open` sobre el contenedor `.nav__menu` y sincroniza dinámicamente `aria-expanded` entre `true` y `false`.
-   - Cierra automáticamente el menú móvil cuando el usuario hace clic en cualquiera de las opciones de navegación.
-
-2. **`initMaterialsFilter()`:**
-   - En `materiales.html`, escucha los botones de categorías (Todos, Sensores, Potencia, Chasis, Pasivos).
-   - Oculta o muestra dinámicamente las tarjetas mediante el atributo `data-category` sin recargar la página.
-
-3. **`initSimulator()`:**
-   - En `funciones.html`, gobierna el banco de pruebas interactivo del robot.
-   - La función interna `setSimulationState(state)` acepta cuatro estados operacionales:
-     * `'centrado'`: Ambos sensores leen blanco; ambos motores giran al 100% hacia adelante.
-     * `'desviado-izquierda'`: El sensor izquierdo detecta la línea negra; el motor izquierdo se apaga (0 RPM) y el derecho empuja al 100%, forzando un pivote corrector a la derecha.
-     * `'desviado-derecha'`: El sensor derecho detecta la línea; el motor derecho frena y el izquierdo tracciona.
-     * `'fuera-pista'`: Pérdida de línea (ambos sensores en negro); parada de emergencia preventiva de ambos motores.
-   - Actualiza en el DOM la telemetría en tiempo real: voltaje analógico, estado lógico del comparador (HIGH / LOW) y porcentaje de velocidad angular.
-
-4. **`initCircuitInspector()`:**
-   - En `electronica.html`, asocia eventos de selección a las diferentes etapas del circuito (Sensado, Comparación, Conmutación, Alimentación), resaltando la zona correspondiente del plano técnico y mostrando su explicación teórica.
-
-5. **`initVideoControls()`:**
-   - En `video.html`, sincroniza el reproductor `iframe` de YouTube con las 10 tarjetas de capturas técnicas.
-   - Al pulsar "Ver en el Video", reescribe el parámetro `?start=SS&autoplay=1` del reproductor y realiza un desplazamiento suave (`scrollIntoView`) hacia el monitor de video.
-
-6. **`initScrollReveal()`:**
-   - Implementa un `IntersectionObserver` moderno para observar elementos con la clase `.reveal`.
-   - Cuando un elemento entra al 15% del viewport, le inyecta la clase `.active`, activando la aceleración por hardware de la animación CSS.
-
-7. **`initNaviaChat()`:**
-   - Instancia el asistente escolar virtual flotante.
-   - Posee una base de conocimiento estructurada (`NAVIA_FAQ`) con temas de electrónica, cinemática, polarización y resolución de fallas comunes en taller.
-   - Aplica tokenización de texto y análisis de palabras clave para responder preguntas libres del estudiante, o despliega respuestas instantáneas mediante chips interactivos (`navia-chip`).
-
-8. **`initBackToTop()`:**
-   - Monitoriza el evento `scroll` de la ventana mediante un umbral de `300px` para mostrar u ocultar el botón flotante mediante el atributo booleano `hidden`.
 
 ---
 
-## 5. Servidor Web y Configuración de Despliegue (`server.js` y `render.yaml`)
+## 📋 Lista de Materiales y Componentes (BOM)
 
-### 5.1 Servidor HTTP Nativo (`server.js`)
-Para posibilitar la ejecución tanto como aplicación estática como servicio web en contenedores Node.js:
-- Emplea el módulo nativo `http` de Node.js (cero dependencias externas en producción).
-- Implementa una tabla de correspondencia MIME completa (`.html`, `.css`, `.js`, `.svg`, `.png`, `.json`).
-- Previene vulnerabilidades de cruce de directorios (*Directory Traversal*) limpiando la ruta con `path.normalize()`.
-- Soporta *Clean URLs* (si se solicita `/concepto`, resuelve automáticamente a `concepto.html`).
-- Emite cabeceras de caché HTTP (`Cache-Control: public, max-age=3600`) para optimizar el rendimiento de red.
+El prototipo consta de **15 componentes esenciales**, seleccionados para garantizar robustez mecánica y fiabilidad eléctrica:
 
-### 5.2 Manifiesto para Render (`render.yaml`)
-
-```yaml
-services:
-  - type: web
-    name: robotlab-grado11
-    env: static
-    buildCommand: ""
-    publishDir: "./"
-    pullRequestPreviewsEnabled: false
-```
-Esta directiva instruye a Render para desplegar el proyecto como un **Static Site** de alto rendimiento con CDN global inmediata.
+| # | Componente | Denominación / Referencia Exacta | Cant. | Función en el Robot |
+|:---:|:---|:---|:---:|:---|
+| **01** | **Tarjeta Controladora** | BBC Micro:bit v2 (Kit British Council) | 1 | Microcontrolador principal; procesa la lógica de control, lee los sensores y genera señales PWM de velocidad. |
+| **02** | **Placa de Expansión** | Shield Breakout para Micro:bit (Sensor:bit G-V-S) | 1 | Expande los pads pequeños de la Micro:bit a hileras ordenadas de pines GND, VCC y Señal. |
+| **03** | **Controlador de Motores** | Módulo Driver Puente H L298N | 1 | Etapa de potencia que regula la velocidad y el sentido de giro de los dos motores DC. |
+| **04** | **Sensores Infrarrojos** | Módulos seguidores de línea HW-511 (o KY-033) | 2 | Detección óptica de la línea negra sobre fondo blanco mediante emisor IR y fototransistor con comparador LM393. |
+| **05** | **Chasis del Robot** | Kit Chasis "Rover Mini" de acrílico | 1 | Plataforma estructural que aloja los motores, baterías, placas electrónicas y tornillería. |
+| **06** | **Motores de Tracción** | Motores DC tipo TT 9V con caja reductora | 2 | Proporcionan el par motor y movimiento independiente a las ruedas laterales. |
+| **07** | **Ruedas Principales** | Ruedas de goma de alta adherencia para chasis Rover | 2 | Transmiten la tracción mecánica de los motores hacia la pista de prueba. |
+| **08** | **Rueda Trasera** | Rueda loca pivotante (*Caster Wheel*) | 1 | Otorga estabilidad estática y rotación libre omnidireccional en la parte trasera del chasis. |
+| **09** | **Accesorios Rueda Loca** | 4 extensores cilíndricos metálicos + 8 tornillos | 1 set | Ajustan la altura y nivelación de la rueda loca respecto al plano del chasis. |
+| **10** | **Encoders Ópticos** | Discos ranurados de codificación para eje de motor | 2 | Medición opcional de odometría, distancia y revoluciones por minuto. |
+| **11** | **Fuente Motores** | 2 baterías de 9V (conectadas en paralelo) | 2 | Suministran corriente continua de 9V al Puente H y motores con mayor autonomía de corriente. |
+| **12** | **Fuente Sensores IR** | Portapilas independiente (~4.5V a 5V) | 1 | Energiza exclusivamente los sensores IR a 5V para garantizar lecturas estables y fiables. |
+| **13** | **Fuente Micro:bit** | Portapilas de 3V propio del kit Micro:bit (2x AAA) | 1 | Alimentación dedicada para la tarjeta lógica Micro:bit vía conector JST. |
+| **14** | **Interruptores** | Interruptores basculantes (*Toggle Switch*) | 2 | Control de encendido/apagado independiente para el circuito de motores y el de sensores. |
+| **15** | **Cableado y Ferretería** | Jumpers Dupont H-H / M-H, caimanes, tornillos M3, tuercas, arandelas y foami aislante | 1 set | Interconexión eléctrica flexible, sujeción mecánica y aislamiento galvánico de baterías. |
 
 ---
 
-# Parte II: Fundamentos Técnicos y Electrónica del Robot
+## 🔌 Mapa de Conexiones y Pinout
 
-Esta sección contiene la base teórica y la ingeniería de hardware que describe el funcionamiento físico del robot seguidor de línea móvil.
+### Tabla de Interconexión Pin a Pin
+
+| Origen (Micro:bit / Shield) | Destino (Módulo / Componente) | Pin Destino | Descripción de la Señal |
+|:---|:---|:---|:---|
+| **Pin 0** | Puente H L298N | Entrada PWM ENA / IN1 | Señal analógica/PWM para control de velocidad rueda izquierda. |
+| **Pin 1** | Puente H L298N | Entrada PWM ENB / IN3 | Señal analógica/PWM para control de velocidad rueda derecha. |
+| **Pin Digital de Entrada** | Sensor IR Izquierdo | Pin `S` (Señal) | Entrada digital: 0V (Blanco / Reflexión), 5V (Negro / Absorción). |
+| **Pin Digital de Entrada** | Sensor IR Derecho | Pin `S` (Señal) | Entrada digital: 0V (Blanco / Reflexión), 5V (Negro / Absorción). |
+| **+9V (2x Baterías 9V)** | Puente H L298N | Bornera VCC (+9V) | Alimentación de potencia principal vía interruptor basculante. |
+| **+5V (Portapilas 5V)** | Sensores IR HW-511 | Pin `VCC` / `V+` | Alimentación de 5V para comparador LM393 y LEDs de sensado. |
+| **Masa Común (GND)** | GND Puente H, Sensores y Micro:bit | Pin `G` / `GND` | **Masa Unificada obligatoria**: retorno de referencia eléctrica común. |
+
+---
+
+## ⚡ Distribución Eléctrica y Masa Común
+
+El proyecto resuelve un problema de ingeniería crítico en robótica educativa: la **incompatibilidad de voltajes y la estabilidad lógica**.
+
+```
+  [2x 9V en Paralelo] -------- (+9V) -------> [Interruptor 1] ----> [L298N Bornera 9V]
+          |
+  [Portapilas 5V] ------------ (+5V) -------> [Interruptor 2] ----> [Sensores IR VCC]
+          |
+  [Portapilas 3V AAA] -------- (+3V) -----------------------------> [Micro:bit JST]
+          |
+          +=================== MASA COMÚN UNIFICADA (GND) ========+
+          |                         |                             |
+     [GND L298N]              [GND Sensores]              [GND Micro:bit]
+```
+
+### Principios Eléctricos Fundamentales:
+1. **Etapa de Motores (9V):** Se utilizan dos pilas de 9V en paralelo para duplicar la capacidad de corriente (mAh), impidiendo caídas bruscas de tensión (*brownouts*) cuando los motores arrancan.
+2. **Etapa de Sensores (5V Dedicados):** Los sensores HW-511 incorporan comparadores que requieren 5V. Si se conectasen a los 3V de la Micro:bit, la salida lógica alta entregaría apenas **1.3V**, un valor en la zona de incertidumbre digital. Con 5V externos, entregan una señal nítida de 0V (LOW) y 5V (HIGH).
+3. **Masa Común Obligatoria (GND Unificado):** Todos los polos negativos (GND de baterías de 9V, GND del portapilas de 5V y GND de la Micro:bit) deben estar físicamente interconectados. Sin esta masa unificada, no existe una referencia cero de voltaje, provocando lecturas erráticas y fallos de conmutación en el L298N.
+
+---
+
+## 🧠 Lógica de Control y Algoritmo de Decisión
+
+### Respuesta Óptica del Sensor HW-511:
+- **Superficie Blanca (Reflejo IR):** El fototransistor conduce luz. Salida `S` = **0V (LOW / `0`)**. El LED indicador del módulo se **enciende**.
+- **Línea Negra (Absorción IR):** La luz es absorbida. Salida `S` = **5V (HIGH / `1`)**. El LED indicador del módulo se **apaga**.
+
+### Matriz de Decisión Cinemática:
+
+| Sensor Izquierdo | Sensor Derecho | Estado del Robot | Motor Izquierdo | Motor Derecho | Acción Cinemática |
+|:---:|:---:|:---|:---:|:---:|:---|
+| **0 (Blanco)** | **0 (Blanco)** | Centrado sobre la pista | **Avance (PWM)** | **Avance (PWM)** | Marcha rectilínea constante hacia adelante. |
+| **0 (Blanco)** | **1 (Negro)** | Desviado hacia la izquierda | **Acelera / Tracciona** | **Frena / Reduce** | Viraje correctivo rápido hacia la derecha. |
+| **1 (Negro)** | **0 (Blanco)** | Desviado hacia la derecha | **Frena / Reduce** | **Acelera / Tracciona** | Viraje correctivo rápido hacia la izquierda. |
+| **1 (Negro)** | **1 (Negro)** | Fuera de pista / Intersección | **STOP / Mantener** | **STOP / Mantener** | Parada de seguridad o mantener última acción. |
+
+---
+
+## 🛠️ Guía de Ensamblaje Paso a Paso
+
+1. **Fase 1: Caracterización y Pruebas Previas:**
+   - Probar los módulos HW-511 con 5V regulados. Ajustar los potenciómetros (*presets*) hasta que el LED responda nítidamente al cambio entre papel blanco y cinta aislante negra.
+   - Probar el módulo L298N alimentándolo a 9V y comprobando que active las salidas de motor al recibir pulsos lógicos compartiendo masa.
+2. **Fase 2: Montaje Estructural del Chasis Rover Mini:**
+   - Instalar el interruptor basculante en el calado superior del acrílico.
+   - Sujetar los dos motorreductores TT con sus pletinas metálicas y tornillos pasantes largos.
+   - Instalar las dos ruedas de goma en los ejes estriados y los discos encoders.
+   - Montar la rueda loca trasera acoplando los 4 extensores cilíndricos metálicos con sus 8 tornillos M3 para calibrar la altura.
+3. **Fase 3: Montaje de la Micro:bit y Placa de Expansión:**
+   - Fijar el portapilas de 3V de la Micro:bit en la parte posterior del chasis.
+   - Montar el shield de expansión con tornillos y arandelas plásticas para evitar roces con el portapilas inferior.
+   - Insertar la tarjeta BBC Micro:bit v2 en la ranura de 80 pines del shield.
+4. **Fase 4: Fijación del Puente H y Cableado de Potencia:**
+   - Instalar las baterías de 9V en la bahía inferior del chasis con una lámina de foami aislante que previene cortocircuitos bajo el L298N.
+   - Conectar los bornes de los motores a las clemas OUT1/OUT2 y OUT3/OUT4 pasando los cables por las ranuras del acrílico.
+   - Conectar el interruptor en serie con el positivo de 9V hacia la entrada VCC del L298N.
+5. **Fase 5: Montaje de Sensores Infrarrojos:**
+   - Instalar los dos sensores HW-511 en el frontal inferior del chasis usando tornillos largos y tuercas dobles para regular su inclinación y distancia al piso (3 mm a 5 mm).
+   - Conectar la alimentación de 5V y unificar el cable negativo a la masa común.
+6. **Fase 6: Interconexión Lógica y Puesta a Punto:**
+   - Llevar cables Dupont desde los Pines 0 y 1 de la Micro:bit a las entradas de control del L298N.
+   - Conectar las salidas de señal `S` de los sensores a los pines digitales de entrada de la Micro:bit.
+   - Ordenar y precintar los mazos de cables con bridas y cinta para evitar interferencias mecánicas con las ruedas.
+
+---
+
+## 💻 Arquitectura de la Plataforma Web
+
+La plataforma web educativa está construida con tecnologías nativas (HTML5 semántico, CSS3 moderno y Vanilla JavaScript ES6+), sin sobrecargas de librerías ni frameworks:
 
 ```mermaid
-flowchart LR
-    Suelo[Pista: Línea Negra / Fondo Blanco] -->|Reflexión IR| TCRT[Sensores TCRT5000]
-    TCRT -->|Voltaje Variable 0V a 5V| Comp[Comparador Dual LM393]
-    Pot[Potenciómetros Calibración Vref] -->|Voltaje Umbral| Comp
-    Comp -->|Señal Lógica 0V / 5V| Trans[Transistores 2N2222]
-    Bateria[Batería 6V - 9V DC] --> Trans
-    Trans -->|Corriente de Potencia| Motores[Motorreductores DC + Ruedas]
-    Motores -->|Corrección Cinemática| Suelo
+graph TD
+    User([Navegador Web / Estudiante]) --> Host[Servidor Web / CDN Render]
+    
+    subgraph Paginas ["Páginas Web Educativas"]
+        P1["index.html<br/>Portal Institucional INACEGO"]
+        P2["materiales.html<br/>Catálogo de 15 Componentes"]
+        P3["concepto.html<br/>Física IR y Micro:bit vs Analógico"]
+        P4["funciones.html<br/>Cinemática y Lógica Digital"]
+        P5["electronica.html<br/>Distribución Eléctrica y Masa"]
+        P6["video.html<br/>Secuencia de Video Interactiva"]
+    end
+
+    subgraph Recursos ["Capa de Presentación y Comportamiento"]
+        CSS["styles.css<br/>Deep Midnight Purple & Vibrant Aquamarine"]
+        JS["script.js<br/>Stepper de Videos, Navia FAQ y Filtros"]
+        IMG["imagenes/<br/>Fotografía de Estudio y Escudo Oficial"]
+    end
+
+    Host --> P1 & P2 & P3 & P4 & P5 & P6
+    P1 & P2 & P3 & P4 & P5 & P6 --> CSS
+    P1 & P2 & P3 & P4 & P5 & P6 --> JS
+    P1 & P2 & P3 & P4 & P5 & P6 --> IMG
 ```
 
----
-
-## 1. Principio de Autonomía de Lazo Cerrado
-
-El robot es un sistema mecatrónico móvil terrestre de **lazo cerrado analógico (*closed-loop*)**.  
-A diferencia de un sistema gobernado por microcontrolador que requiere ciclos de reloj, muestreo por interrupciones y código cargado en memoria Flash, este vehículo opera por **equilibrio de magnitudes físicas continuas**:
-
-$$\text{Error de Posición } e(t) = V_{\text{sensor\_izq}}(t) - V_{\text{sensor\_der}}(t)$$
-
-La señal de error se procesa instantáneamente por comparación de potencial, logrando un tiempo de respuesta de conmutación en el orden de los **microsegundos (\(\mu\text{s}\))**, superando la latencia de muestreo de muchos sistemas digitales programables de bajo costo.
+### Paleta de Color Institucional y Tokens CSS:
+- **Púrpura Medianoche Profundo (`#18092e`, `#271147`, `#3b1a6c`):** Utilizado en fondos de navegación, pie de página, tarjetas y elementos de estructura formal.
+- **Aguamarina Vibrante (`#0d9488`, `#14b8a6`, `#2dd4bf`):** Color de acento tecnológico, estados activos, badges y enlaces interactivos.
+- **Neutros Cálidos Crema (`#faf7f2`, `#f3ece1`, `#e7dccb`):** Fondo general de alta legibilidad y confort visual.
+- **Tipografía:** *Manrope* (encabezados y marca), *DM Sans* (lectura general y navegación) e *IBM Plex Mono* (cintas de pinout, código y telemetría).
 
 ---
 
-## 2. Etapa de Detección Óptica (TCRT5000)
-
-El robot utiliza dos sensores reflectivos ópticos **Vishay TCRT5000** montados en la parte inferior frontal a una distancia de \(3\text{ mm} \pm 1\text{ mm}\) de la superficie.
-
-```
-      +5V
-       |
-      [R1: 220Ω]
-       |
-     (LED IR) ---> [Luz Infrarroja λ = 950 nm]
-       |                      |
-      GND                     v
-                      Superficie de Pista
-                              | (Reflexión)
-      +5V                     v
-       |               (Fototransistor NPN)
-     [Colector] <-------------+
-       |
-       +-----> V_out (Hacia Entrada Inversora LM393)
-       |
-      [R2: 10 kΩ]
-       |
-      GND
-```
-
-### Física de la Reflectancia:
-1. **Fondo Blanco:** Coeficiente de reflexión elevado (\(\rho \approx 0.85\)). Los fotones infrarrojos rebotan e inciden en la base del fototransistor, polarizándolo en **saturación**. La corriente fluye a través de \(R_2\), elevando \(V_{\text{out}}\) a un valor alto (\(\approx 3.8\text{ V} - 4.5\text{ V}\)).
-2. **Línea Negra:** La cinta aislante o pintura negra absorbe la longitud de onda infrarroja (\(\rho \approx 0.05\)). El fototransistor pasa a **corte**, la corriente cesa y el resistor pull-down drena la salida hacia tierra (\(V_{\text{out}} \approx 0.2\text{ V} - 0.6\text{ V}\)).
-
----
-
-## 3. Etapa de Comparación y Calibración (LM393)
-
-El circuito integrado **LM393** cuenta con dos comparadores de voltaje independientes de alta precisión en un encapsulado DIP-8:
-
-$$V_{\text{out\_comp}} = \begin{cases} V_{CC} \text{ (a través de pull-up)} & \text{si } V_{(+)} > V_{(-)} \\ 0\text{ V (GND)} & \text{si } V_{(+)} < V_{(-)} \end{cases}$$
-
-- La entrada inversora (\(V_{(-)}\)) recibe la señal analógica variable del sensor TCRT5000.
-- La entrada no inversora (\(V_{(+)}\)) se conecta al terminal central de un potenciómetro multivuelta de \(10\text{ k}\Omega\), estableciendo un **voltaje de referencia (\(V_{\text{ref}}\))** ajustable entre \(0\text{ V}\) y \(5\text{ V}\).
-- **Ajuste de Umbral:** Se ajusta \(V_{\text{ref}}\) al punto medio exacto de la ventana de transición:
-  
-  $$V_{\text{ref}} = \frac{V_{\text{blanco}} + V_{\text{negro}}}{2} \approx \frac{4.2\text{ V} + 0.4\text{ V}}{2} = 2.3\text{ V}$$
-
----
-
-## 4. Etapa de Conmutación y Potencia (2N2222 + 1N4007)
-
-Los comparadores LM393 no pueden suministrar la corriente directa requerida por los motores (típicamente \(150\text{ mA}\) a \(350\text{ mA}\) en carga). Por ello se utiliza una etapa amplificadora de conmutación:
-
-1. **Resistor de Base (\(1\text{ k}\Omega\)):** Limita la corriente suministrada a la base del transistor NPN bipolar **2N2222A**, garantizando su entrada en la región de saturación profunda:
-   
-   $$I_B = \frac{V_{CC} - V_{BE}}{R_B} = \frac{5\text{ V} - 0.7\text{ V}}{1000\,\Omega} = 4.3\text{ mA}$$
-
-   Con un \(h_{FE}\) mínimo de 100, el transistor soporta holgadamente hasta \(430\text{ mA}\) de corriente de colector (\(I_C\)).
-2. **Diodo Flyback (1N4007):** Conectado en paralelo inverso a los bornes del motor inductivo. Al cortar la corriente de forma abrupta, la bobina del motor genera una fuerza contraelectromotriz (\(V = -L \frac{di}{dt}\)) que puede superar los \(60\text{ V}\). El diodo recircula este pulso destructivo a masa, salvaguardando la juntura semiconductora del transistor.
-
----
-
-## 5. Cinemática Diferencial y Tabla de Verdad
-
-El vehículo posee tracción diferencial compuesta por dos ruedas independientes con motorreductor y una rueda loca (*caster wheel*) pasiva libre en el extremo trasero o delantero.
-
-### Matriz Lógica de Viraje
-
-| Sensor Izq. (Pista) | Sensor Der. (Pista) | Motor Izquierdo | Motor Derecho | Acción Cinemática Resultante |
-|:---:|:---:|:---:|:---:|:---|
-| **Blanco** (\(V > V_{\text{ref}}\)) | **Blanco** (\(V > V_{\text{ref}}\)) | **ACTIVO** (100%) | **ACTIVO** (100%) | **Avance rectilíneo** (\(v_L = v_R\), radio de curvatura \(R = \infty\)) |
-| **Negro** (\(V < V_{\text{ref}}\)) | **Blanco** (\(V > V_{\text{ref}}\)) | **APAGADO** (0%) | **ACTIVO** (100%) | **Pivote Izquierdo**: corrección angular hacia la línea |
-| **Blanco** (\(V > V_{\text{ref}}\)) | **Negro** (\(V < V_{\text{ref}}\)) | **ACTIVO** (100%) | **APAGADO** (0%) | **Pivote Derecho**: corrección angular hacia la línea |
-| **Negro** (\(V < V_{\text{ref}}\)) | **Negro** (\(V < V_{\text{ref}}\)) | **APAGADO** (0%) | **APAGADO** (0%) | **Parada de Seguridad**: robot fuera de la pista o cruce perpendicular |
-
----
-
-## 6. Lista de Componentes y Despiece (BOM)
-
-| Ítem | Componente | Denominación Técnica | Cantidad | Función en el Sistema |
-|:---:|---|---|:---:|---|
-| 1 | Sensor Óptico Infrarrojo | Vishay TCRT5000 | 2 | Detección de contraste de reflectancia en el suelo. |
-| 2 | Circuito Integrado | LM393N (DIP-8) | 1 | Comparador analógico dual de alta precisión. |
-| 3 | Transistor NPN | 2N2222A (TO-92) | 2 | Conmutador de potencia para activación de motores. |
-| 4 | Diodo de Protección | 1N4007 (DO-41) | 2 | Supresión de corrientes inversas y f.c.e.m. inductiva. |
-| 5 | Potenciómetro | Multivuelta \(10\text{ k}\Omega\) | 2 | Ajuste milimétrico de la tensión de umbral (\(V_{\text{ref}}\)). |
-| 6 | Resistores de Polarización | \(220\,\Omega\) (1/4 W) | 2 | Limitadores de corriente para los emisores LED IR. |
-| 7 | Resistores Pull-Down | \(10\text{ k}\Omega\) (1/4 W) | 2 | Divisor de tensión para fototransistores de sensado. |
-| 8 | Resistores de Base | \(1\text{ k}\Omega\) (1/4 W) | 2 | Polarización en saturación de la base de los 2N2222. |
-| 9 | Motorreductores DC | Tipo TT relación 48:1 (3V-6V) | 2 | Generación de par y tracción mecánica diferencial. |
-| 10 | Ruedas de Goma | Diámetro 65 mm | 2 | Adherencia y transferencia cinemática al suelo. |
-| 11 | Rueda Loca (Caster) | Esfera metálica / nylon | 1 | Soporte del tercer punto de equilibrio estático. |
-| 12 | Portapilas / Batería | 4 pilas AA (6V) o Li-ion 7.4V | 1 | Fuente de energía electroquímica del sistema. |
-| 13 | Chasis Acrílico | Corte láser 2 ruedas | 1 | Estructura mecánica portante del conjunto. |
-
----
-
-# Parte III: Instrucciones de Ejecución Local
-
-Para probar o continuar el desarrollo de este proyecto en tu entorno local:
+## 🚀 Instrucciones de Ejecución Local y Despliegue
 
 ### 1. Clonar el Repositorio
 ```bash
@@ -352,19 +235,36 @@ cd Mi-Primer-Robot
 ```
 
 ### 2. Ejecutar con Servidor Local Node.js
+El repositorio incluye un servidor HTTP estático nativo sin dependencias de terceros (`server.js`):
 ```bash
-# Iniciar el servidor nativo configurado en package.json
+# Iniciar el servidor
 npm start
 ```
 Abre tu navegador en: `http://localhost:10000`
 
-### 3. Ejecutar como Archivos Estáticos
-También puedes abrir directamente cualquiera de los archivos `.html` (por ejemplo `index.html`) en tu navegador web de preferencia, o utilizar extensiones como **Live Server** de VSCode / Neovim.
+### 3. Ejecución Directa en Navegador
+Al ser una plataforma estática pura, puedes abrir directamente `index.html` en cualquier navegador web o utilizar la extensión **Live Server** de VS Code.
+
+### 4. Despliegue en la Nube (Render)
+El proyecto está configurado mediante `render.yaml` como un **Static Site** vinculado a la rama principal (`master`):
+```yaml
+services:
+  - type: web
+    name: robot-seguidor-linea
+    runtime: static
+    buildCommand: ""
+    staticPublishPath: ./
+    pullRequestPreviewsEnabled: true
+```
+Cada `git push` a `master` dispara automáticamente el despliegue en CDN global en [https://mi-primer-robot.onrender.com](https://mi-primer-robot.onrender.com).
 
 ---
 
-## 🎓 Créditos y Marco Académico
-- **Institución:** Colegio Técnico - Área de Tecnología e Informática.
-- **Grado:** 11° de Educación Media Técnica.
-- **Enfoque Pedagógico:** Comprensión de electrónica analógica fundamental, física del estado sólido y lógica de control sin dependencia de microcontroladores programables.
-- **Licencia:** Proyecto abierto con fines estrictamente pedagógicos y formativos.
+## 🎓 Créditos e Identidad Institucional
+
+- **Institución:** Institución Educativa Acevedo y Gómez (INACEGO)
+- **Municipio y Departamento:** Puerto Rico, Caquetá — Colombia
+- **Lema Institucional:** *"Servimos a la Comunidad y Formamos para la Vida"*
+- **Área:** Tecnología e Informática
+- **Nivel:** Grado 11° de Educación Media Técnica
+- **Licencia:** Proyecto educativo de código abierto bajo licencia MIT.

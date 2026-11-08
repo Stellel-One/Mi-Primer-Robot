@@ -1,7 +1,7 @@
 {
-  "name": "robot-seguidor-linea-sin-arduino",
+  "name": "robot-seguidor-linea-microbit",
   "version": "1.0.0",
-  "description": "Sitio web educativo sobre el Robot Seguidor de Línea sin Arduino - Grado 11",
+  "description": "Sitio web educativo sobre el Robot Seguidor de Línea Rover Mini con BBC Micro:bit v2 y L298N - INACEGO Grado 11",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -11,9 +11,12 @@
     "robotica",
     "educacion",
     "seguidor-de-linea",
-    "sin-arduino",
-    "lm393"
+    "microbit",
+    "l298n",
+    "hw-511",
+    "rover-mini",
+    "inacego"
   ],
-  "author": "Grado 11 - Tecnología e Informática",
+  "author": "INACEGO - Grado 11 - Tecnología e Informática",
   "license": "MIT"
 }
