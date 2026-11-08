@@ -139,62 +139,7 @@
                     </div>
                 </div>
 
-                <!-- Tabla de Verdad Formal de Control -->
-                <div class="table-responsive reveal">
-                    <h3 style="font-size: 1.35rem; margin-bottom: 0.5rem; color: var(--color-dark-blue);">Tabla de Decisiones Algorítmicas y Verdad Digital</h3>
-                    <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 1.25rem;">
-                        Matriz de estados lógicos procesada por la BBC Micro:bit para una pista de alto contraste con <strong>línea negra de 3.5 cm</strong>:
-                    </p>
-                    <table class="formal-table">
-                        <thead>
-                            <tr>
-                                <th>Condición del Robot</th>
-                                <th>Sensor Izquierdo (HW-511)</th>
-                                <th>Sensor Derecho (HW-511)</th>
-                                <th>Pin 0 Micro:bit (Motor Izq)</th>
-                                <th>Pin 1 Micro:bit (Motor Der)</th>
-                                <th>Acción Mecánica Resultante</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Centrado en la Línea</strong></td>
-                                <td><span class="badge badge-green">0 (0V · Blanco)</span></td>
-                                <td><span class="badge badge-green">0 (0V · Blanco)</span></td>
-                                <td><span class="badge badge-green">PWM Nominal</span></td>
-                                <td><span class="badge badge-green">PWM Nominal</span></td>
-                                <td><strong>Avance rectilíneo:</strong> Ambos motores impulsan hacia adelante a velocidad balanceada.</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Desviado a la Izquierda</strong> (Línea hacia la derecha)</td>
-                                <td><span class="badge badge-green">0 (0V · Blanco)</span></td>
-                                <td><span class="badge" style="background: rgba(220, 38, 38, 0.12); color: #dc2626; border: 1px solid rgba(220, 38, 38, 0.3); font-weight: 700;">1 (5V · Negro)</span></td>
-                                <td><span class="badge badge-green">PWM Aceleración</span></td>
-                                <td><span class="badge" style="background: rgba(220, 38, 38, 0.12); color: #dc2626; border: 1px solid rgba(220, 38, 38, 0.3); font-weight: 700;">PWM 0 (Frenado)</span></td>
-                                <td><strong>Viraje a la derecha:</strong> El motor izquierdo empuja mientras el derecho reduce marcha para reorientar el morro.</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Desviado a la Derecha</strong> (Línea hacia la izquierda)</td>
-                                <td><span class="badge" style="background: rgba(220, 38, 38, 0.12); color: #dc2626; border: 1px solid rgba(220, 38, 38, 0.3); font-weight: 700;">1 (5V · Negro)</span></td>
-                                <td><span class="badge badge-green">0 (0V · Blanco)</span></td>
-                                <td><span class="badge" style="background: rgba(220, 38, 38, 0.12); color: #dc2626; border: 1px solid rgba(220, 38, 38, 0.3); font-weight: 700;">PWM 0 (Frenado)</span></td>
-                                <td><span class="badge badge-green">PWM Aceleración</span></td>
-                                <td><strong>Viraje a la izquierda:</strong> El motor derecho empuja mientras el izquierdo frena para centrar la trayectoria.</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Intersección o Fuera de Pista</strong></td>
-                                <td><span class="badge" style="background: rgba(220, 38, 38, 0.12); color: #dc2626; border: 1px solid rgba(220, 38, 38, 0.3); font-weight: 700;">1 (5V · Negro)</span></td>
-                                <td><span class="badge" style="background: rgba(220, 38, 38, 0.12); color: #dc2626; border: 1px solid rgba(220, 38, 38, 0.3); font-weight: 700;">1 (5V · Negro)</span></td>
-                                <td><span class="badge" style="background: rgba(220, 38, 38, 0.12); color: #dc2626; border: 1px solid rgba(220, 38, 38, 0.3); font-weight: 700;">PWM 0 (Paro)</span></td>
-                                <td><span class="badge" style="background: rgba(220, 38, 38, 0.12); color: #dc2626; border: 1px solid rgba(220, 38, 38, 0.3); font-weight: 700;">PWM 0 (Paro)</span></td>
-                                <td><strong>Parada de seguridad:</strong> Detención inmediata de ambos motores para evitar colisiones fuera del circuito.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div style="margin-top: 1rem; padding: 0.85rem; background: rgba(13, 148, 136, 0.08); border-left: 3px solid var(--color-electric-blue); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; font-size: 0.85rem; color: var(--color-gray-700); line-height: 1.6;">
-                        <strong>Principio del Sensor HW-511:</strong> Cuando detecta superficie blanca refleja la radiación infrarroja, el LED verde del sensor se enciende y la salida <code>S</code> cae a <strong>0V (LOW / '0')</strong>. Al ingresar en la línea negra absorbe la luz, el LED se apaga y la salida sube a <strong>5V (HIGH / '1')</strong>.
-                    </div>
-                </div>
+
 
                 <!-- Demostración y Evidencia en Video Real del Robot -->
                 <div class="reveal" style="margin-top: 3.5rem; background: var(--color-white); border: 1.5px solid var(--color-gray-200); border-radius: var(--radius-xl); padding: 2.2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; box-shadow: var(--shadow-sm);">
