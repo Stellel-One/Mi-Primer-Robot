@@ -3,7 +3,8 @@
 > **Institución Educativa Acevedo y Gómez (INACEGO) — Puerto Rico, Caquetá**  
 > *Lema Institucional:* *"Servimos a la Comunidad y Formamos para la Vida"*  
 > **Área:** Tecnología e Informática · Grado 11° de Educación Media Técnica  
-> **🌐 Sitio Web en Producción:** [https://mi-primer-robot.onrender.com](https://mi-primer-robot.onrender.com)  
+> **🌐 Producción (Render):** [https://mi-primer-robot.onrender.com](https://mi-primer-robot.onrender.com)  
+> **🖥️ Producción (Servidor Asus · Dokploy):** [https://minargi.stellel.com](https://minargi.stellel.com)  
 > **📦 Repositorio GitHub:** [https://github.com/Stellel-One/Mi-Primer-Robot](https://github.com/Stellel-One/Mi-Primer-Robot)  
 > **🎥 Tutorial Base de Referencia:** [El Profe García — Robot Seguidor de Línea Negra](https://youtu.be/W9Uy-wgD5Vc)
 
@@ -83,6 +84,9 @@ Minargi/
 ├── server.js           # Servidor HTTP estático local en puerto 10000
 ├── navia.svg           # Icono del asistente educativo Navia
 ├── package.json        # Metadatos del proyecto y script npm start
+├── Dockerfile          # Contenedor Nginx Alpine para despliegue en Dokploy
+├── nginx.conf          # Enrutamiento estático limpio para Nginx
+├── .dockerignore       # Excluye .git y archivos internos de la imagen
 ├── render.yaml         # Configuración de despliegue estático en Render
 └── imagenes/           # Fotografías de estudio del prototipo, componentes y escudo
 ```
@@ -97,4 +101,5 @@ cd Mi-Primer-Robot
 npm start   # Inicia server.js en http://localhost:10000
 ```
 
-El proyecto está configurado con `render.yaml` para desplegarse automáticamente desde la rama `master` como sitio estático en Render: [https://mi-primer-robot.onrender.com](https://mi-primer-robot.onrender.com).
+- **Render:** configurado con `render.yaml` desde `master` en [https://mi-primer-robot.onrender.com](https://mi-primer-robot.onrender.com).
+- **Servidor Asus (Dokploy):** construido con `Dockerfile` + `nginx.conf` desde `master` en [https://minargi.stellel.com](https://minargi.stellel.com).
