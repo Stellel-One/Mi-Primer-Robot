@@ -830,6 +830,7 @@ button {
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    position: relative;
     transition: all var(--transition-normal);
     box-shadow: var(--shadow-sm);
 }
@@ -841,30 +842,37 @@ button {
 }
 
 .material-img-container {
-    height: 180px;
-    background: linear-gradient(135deg, #fdfbf7 0%, #f4eee2 100%);
+    aspect-ratio: 4 / 3;
+    width: 100%;
+    background: var(--color-white);
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1.5rem;
+    padding: 2.75rem 1.25rem 1rem;
     position: relative;
     border-bottom: 1px solid var(--color-gray-200);
+    overflow: hidden;
 }
 
-.material-svg {
-    max-height: 115px;
-    width: auto;
+.material-svg,
+.material-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
     transition: transform var(--transition-bounce);
 }
 
-.material-card:hover .material-svg {
-    transform: scale(1.08);
+.material-card:hover .material-svg,
+.material-card:hover .material-img {
+    transform: scale(1.04);
 }
 
 .material-category-tag {
     position: absolute;
     top: 12px;
     left: 12px;
+    z-index: 2;
     font-size: 0.72rem;
     background: var(--color-dark-blue);
     color: var(--color-turquoise);
@@ -873,6 +881,7 @@ button {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.04em;
+    box-shadow: var(--shadow-sm);
 }
 
 .material-body {
@@ -1068,6 +1077,8 @@ button {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.65rem;
     font-size: 1.25rem;
 }
 
@@ -1602,19 +1613,35 @@ button {
 }
 
 .capture-img-container {
-    height: 185px;
-    background: var(--color-gray-50);
+    aspect-ratio: 4 / 3;
+    width: 100%;
+    background: var(--color-white);
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 1rem 1rem 2.35rem;
     border-bottom: 1px solid var(--color-gray-200);
+    overflow: hidden;
+}
+
+.capture-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    transition: transform var(--transition-normal);
+}
+
+.capture-card:hover .capture-img {
+    transform: scale(1.03);
 }
 
 .capture-time-tag {
     position: absolute;
     bottom: 10px;
     right: 10px;
+    z-index: 2;
     background: var(--color-dark-blue);
     color: var(--color-turquoise);
     font-family: var(--font-mono);
@@ -1622,6 +1649,7 @@ button {
     font-weight: 800;
     padding: 0.25rem 0.65rem;
     border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-sm);
 }
 
 .capture-body {
@@ -1824,6 +1852,30 @@ button {
 }
 
 @media (max-width: 768px) {
+    .nav {
+        gap: 0.75rem;
+    }
+    .nav__brand-wrapper {
+        flex: 1;
+        min-width: 0;
+        flex-shrink: 1;
+    }
+    .nav__logo {
+        min-width: 0;
+        gap: 0.6rem;
+    }
+    .nav__logo-text-group {
+        min-width: 0;
+    }
+    .nav__logo-sub {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 100%;
+    }
+    .nav__toggle {
+        flex-shrink: 0;
+    }
     .section {
         padding: 3rem 0;
     }
@@ -1831,7 +1883,27 @@ button {
         margin-bottom: 2.25rem;
     }
     .hero-section {
-        padding: 3.5rem 0 2.5rem;
+        padding: 2.75rem 0 2.5rem;
+    }
+    .school-hero-badge {
+        max-width: 100%;
+        padding: 0.75rem 1rem;
+        gap: 0.85rem;
+    }
+    .hero-crest-img {
+        width: 48px;
+        height: 48px;
+    }
+    .hero-illustration-wrapper {
+        padding: 1.25rem;
+        margin: 0 auto;
+    }
+    .floating-tag {
+        position: static;
+        margin-top: 0.9rem;
+        justify-content: center;
+        width: 100%;
+        text-align: center;
     }
     .page-header-formal {
         padding: 2.5rem 0 2rem;
@@ -1840,9 +1912,24 @@ button {
         grid-template-columns: 1fr;
         gap: 0.75rem;
     }
+    .hero-actions {
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
     .footer-grid {
         grid-template-columns: 1fr;
         gap: 2rem;
+    }
+    .comparison-container,
+    .block-diagram-container,
+    .schematic-wrapper,
+    .video-section-container,
+    .simulator-wrapper {
+        padding: 1.5rem 1.15rem;
+    }
+    .comparison-card,
+    .electronics-card {
+        padding: 1.4rem 1.15rem;
     }
     .formal-table {
         min-width: 580px;
@@ -1876,7 +1963,7 @@ button {
     .sim-btn {
         flex: 1;
         justify-content: center;
-        min-width: 130px;
+        min-width: 120px;
         font-size: 0.82rem;
         padding: 0.55rem 0.8rem;
     }
@@ -2192,6 +2279,64 @@ button {
 }
 
 @media (max-width: 540px) {
+    .container {
+        padding: 0 1rem;
+    }
+    .nav {
+        height: 4.1rem;
+    }
+    .nav__menu {
+        top: 4.1rem;
+        max-height: calc(100vh - 4.1rem);
+    }
+    .nav__logo-icon {
+        width: 34px;
+        height: 34px;
+    }
+    .nav__logo-title {
+        font-size: 1.05rem;
+    }
+    .nav__logo-sub {
+        font-size: 0.54rem;
+    }
+    .hero-title {
+        font-size: clamp(1.85rem, 6.8vw, 2.35rem);
+    }
+    .hero-subtitle {
+        font-size: 0.96rem;
+    }
+    .hero-actions .btn {
+        width: 100%;
+    }
+    .materials-grid,
+    .captures-grid,
+    .applications-grid,
+    .functions-flow,
+    .schematic-legend {
+        grid-template-columns: 1fr;
+        gap: 1.15rem;
+    }
+    .material-img-container {
+        padding: 2.5rem 1rem 0.85rem;
+    }
+    .material-body,
+    .capture-body {
+        padding: 1.2rem;
+    }
+    .concept-point {
+        padding: 1rem;
+        gap: 0.85rem;
+    }
+    .video-sequence-nav {
+        width: 100%;
+        justify-content: space-between;
+    }
+    .video-seq-btn {
+        flex: 1;
+        justify-content: center;
+        font-size: 0.8rem;
+        padding: 0.5rem 0.75rem;
+    }
     .navia-launcher {
         right: 1rem;
         bottom: 1rem;
