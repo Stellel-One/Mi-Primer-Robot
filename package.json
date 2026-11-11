@@ -1,7 +1,7 @@
 {
-  "name": "robot-seguidor-linea-microbit",
-  "version": "1.0.0",
-  "description": "Sitio web educativo sobre el Robot Seguidor de Línea Rover Mini con BBC Micro:bit v2 y L298N - INACEGO Grado 11",
+  "name": "robot-seguidor-linea-cny70-2n2222a",
+  "version": "2.0.0",
+  "description": "Sitio web educativo sobre el Robot Seguidor de Línea Negra 100% Analógico (CNY70 + 2N2222A en Protoboard) - INACEGO Grado 11",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -11,10 +11,10 @@
     "robotica",
     "educacion",
     "seguidor-de-linea",
-    "microbit",
-    "l298n",
-    "hw-511",
-    "rover-mini",
+    "cny70",
+    "2n2222a",
+    "protoboard",
+    "electronica-analogica",
     "inacego"
   ],
   "author": "INACEGO - Grado 11 - Tecnología e Informática",

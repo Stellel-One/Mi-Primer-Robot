@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Serie Tutorial Paso a Paso: Carro Robot Seguidor de Línea con BBC Micro:bit, Chasis Rover Mini y Puente H L298N. Guía completa en 6 partes.">
-    <title>Serie de Videos y Guía de Construcción | Robot Micro:bit</title>
-    
+    <meta name="description" content="Video tutorial completo y momentos clave con marcas de tiempo exactas del Robot Seguidor de Línea Negra (El Profe García: CNY70 + 2N2222A en Protoboard).">
+    <title>Video Tutorial y Etapas | Robot Seguidor de Línea Negra</title>
     <link rel="icon" href="navia.svg" type="image/svg+xml">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,8 +28,8 @@
                 </a>
 
                 <div class="nav__badge-compact">
-                    <span class="badge-tag">SERIE</span>
-                    <span class="badge-text">Videos 1 a 6</span>
+                    <span class="badge-tag">MULTIMEDIA</span>
+                    <span class="badge-text">Tutorial Base</span>
                 </div>
             </div>
 
@@ -74,14 +73,14 @@
                 <nav class="breadcrumb-nav" aria-label="Ruta de navegación">
                     <a href="index.html">Inicio</a>
                     <span class="breadcrumb-separator">/</span>
-                    <span aria-current="page">Video y Capturas Técnicas</span>
+                    <span aria-current="page">Video Tutorial y Etapas</span>
                 </nav>
-                <span class="page-eyebrow">RECURSOS AUDIOVISUALES · SERIE EN 6 PARTES</span>
+                <span class="page-eyebrow">RECURSO AUDIOVISUAL PRINCIPAL · EL PROFE GARCÍA (4:01)</span>
                 <h1 style="font-size: clamp(2.2rem, 3.8vw, 3rem); font-weight: 800; color: #ffffff;">
-                    Serie Tutorial y Guía de Construcción
+                    Video Tutorial y Montaje Paso a Paso
                 </h1>
                 <p style="font-size: 1.1rem; color: #f3ece1; max-width: 780px; margin-top: 0.75rem;">
-                    Aprende el ensamble mecánico, la interconexión electrónica del Puente H L298N y la programación de la BBC Micro:bit siguiendo la serie completa de videos paso a paso de Alex7 Tutoriales.
+                    Seguí paso a paso la construcción y comprobación del robot seguidor de línea negra sobre protoboard con los momentos exactos del video de referencia.
                 </p>
             </div>
         </header>
@@ -89,193 +88,185 @@
         <section class="section">
             <div class="container">
                 
-                <!-- Contenedor del Reproductor Secuencial de Video -->
+                <!-- Contenedor del Reproductor con Marcas de Tiempo -->
                 <div class="video-section-container reveal" id="video-player-container">
                     
                     <div class="video-sequence-header">
                         <div class="video-sequence-info">
-                            <span class="badge badge-green" id="video-seq-part-badge">PARTE 1 DE 6</span>
-                            <span style="font-family: var(--font-mono); font-size: 0.82rem; color: var(--color-gray-500);" id="video-seq-progress">Paso 1/6: Fundamentos</span>
+                            <span class="badge badge-green" id="video-seq-part-badge">ETAPA 1 DE 6</span>
+                            <span style="font-family: var(--font-mono); font-size: 0.82rem; color: var(--color-gray-500);" id="video-seq-progress">00:00 — Introducción y Alcance</span>
                         </div>
                         <div class="video-sequence-nav">
-                            <button id="video-seq-prev" class="video-seq-btn" disabled aria-label="Capítulo anterior">
+                            <button id="video-seq-prev" class="video-seq-btn" disabled aria-label="Etapa anterior">
                                 <span>◀</span> Anterior
                             </button>
-                            <button id="video-seq-next" class="video-seq-btn" aria-label="Siguiente capítulo">
+                            <button id="video-seq-next" class="video-seq-btn" aria-label="Siguiente etapa">
                                 Siguiente <span>▶</span>
                             </button>
                         </div>
                     </div>
 
                     <div class="video-player-wrapper">
-                        <iframe id="main-video-iframe" width="100%" height="100%" src="https://www.youtube.com/embed/34xOcgIWpsU?rel=0" title="Carro Robot Seguidor de Línea con Micro:bit - Serie Tutorial" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        <iframe id="main-video-iframe" width="100%" height="100%" src="https://www.youtube.com/embed/W9Uy-wgD5Vc?rel=0" title="Robot Seguidor de Línea Negra (Como se hace) - El Profe García" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     </div>
 
-                    <!-- Pestañas de Secuencia de Aprendizaje (Capítulos 1 a 6) -->
-                    <div class="video-playlist-tabs" role="tablist" aria-label="Lista de reproducción secuencial">
+                    <!-- Pestañas de Saltos Temporales Exactos (00:00 a 04:01) -->
+                    <div class="video-playlist-tabs" role="tablist" aria-label="Capítulos y marcas de tiempo del video">
                         <button class="playlist-tab active" data-part="1" role="tab" aria-selected="true">
-                            <span class="playlist-tab-num">PARTE 01</span>
-                            <span class="playlist-tab-title">1. Componentes</span>
+                            <span class="playlist-tab-num">00:00</span>
+                            <span class="playlist-tab-title">1. Introducción</span>
                         </button>
                         <button class="playlist-tab" data-part="2" role="tab" aria-selected="false">
-                            <span class="playlist-tab-num">PARTE 02</span>
-                            <span class="playlist-tab-title">2. Sensores IR</span>
+                            <span class="playlist-tab-num">00:31</span>
+                            <span class="playlist-tab-title">2. Sensor CNY70</span>
                         </button>
                         <button class="playlist-tab" data-part="3" role="tab" aria-selected="false">
-                            <span class="playlist-tab-num">PARTE 03</span>
-                            <span class="playlist-tab-title">3. Puente H L298N</span>
+                            <span class="playlist-tab-num">01:07</span>
+                            <span class="playlist-tab-title">3. Etapa Q1 2N2222A</span>
                         </button>
                         <button class="playlist-tab" data-part="4" role="tab" aria-selected="false">
-                            <span class="playlist-tab-num">PARTE 04</span>
-                            <span class="playlist-tab-title">4. Chasis Rover</span>
+                            <span class="playlist-tab-num">01:50</span>
+                            <span class="playlist-tab-title">4. LED y Calibración</span>
                         </button>
                         <button class="playlist-tab" data-part="5" role="tab" aria-selected="false">
-                            <span class="playlist-tab-num">PARTE 05</span>
-                            <span class="playlist-tab-title">5. Cableado y VCC</span>
+                            <span class="playlist-tab-num">02:32</span>
+                            <span class="playlist-tab-title">5. Etapa Q2 y Motor</span>
                         </button>
                         <button class="playlist-tab" data-part="6" role="tab" aria-selected="false">
-                            <span class="playlist-tab-num">PARTE 06</span>
-                            <span class="playlist-tab-title">6. Pista y Pruebas</span>
+                            <span class="playlist-tab-num">02:56</span>
+                            <span class="playlist-tab-title">6. Prueba y Cruce</span>
                         </button>
                     </div>
 
                     <div class="video-meta-bar">
                         <div style="flex: 1; min-width: 280px;">
                             <h2 style="font-size: 1.35rem; color: var(--color-dark-blue); font-weight: 800;" id="video-title">
-                                PARTE 1 — Introducción General y Componentes del Robot
+                                00:00 — Introducción y Funcionamiento del Seguidor de Línea Negra
                             </h2>
                             <p style="font-size: 0.92rem; color: var(--color-gray-700); margin-top: 0.4rem; line-height: 1.6;" id="video-desc">
-                                Presentación del kit de robótica educativa British Council, la tarjeta BBC Micro:bit y el inventario de materiales para construir el robot móvil autónomo.
+                                Presentación general del robot seguidor de línea negra, la ubicación frontal de sus sensores y sus aplicaciones tanto industriales como en torneos universitarios de velocidad y destreza.
                             </p>
                         </div>
                         <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
                             <span class="badge" style="background: rgba(13, 148, 136, 0.12); color: var(--color-electric-blue-dark); border: 1px solid var(--color-electric-blue);" id="video-topic-tag">
-                                Kit British Council
+                                El Profe García · 4:01 min
                             </span>
-                            <a href="https://youtu.be/34xOcgIWpsU" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" id="video-yt-link">
+                            <a href="https://youtu.be/W9Uy-wgD5Vc" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" id="video-yt-link">
                                 Ver en YouTube ↗
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Galería de las 6 Partes de la Serie Tutorial -->
+                <!-- Galería de Momentos Clave Sincronizados -->
                 <div style="margin-top: 4.5rem;">
                     <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem;">
                         <div>
-                            <span class="badge badge-green">Capítulos de la Serie</span>
-                            <h2 style="font-size: 2rem; color: var(--color-dark-blue); margin-top: 0.4rem;">Guía de Construcción Paso a Paso (6 Partes)</h2>
+                            <span class="badge badge-green">Guía Cronológica</span>
+                            <h2 style="font-size: 2rem; color: var(--color-dark-blue); margin-top: 0.4rem;">6 Momentos Clave del Montaje (Con Salto Directo)</h2>
                             <p style="color: var(--color-gray-700); font-size: 0.94rem; max-width: 680px;">
-                                Cada capítulo aborda una etapa de ingeniería: desde la caracterización de sensores y potencia hasta el ensamble del chasis y las pruebas de pista.
+                                Hacé clic en cualquier tarjeta para saltar exactamente al segundo donde se explica esa conexión o prueba en el video.
                             </p>
                         </div>
                         <span class="badge" style="background: rgba(45, 212, 191, 0.2); color: var(--color-electric-blue-dark); border: 1px solid var(--color-turquoise); font-weight: 700;">
-                            Serie Alex7 Tutoriales
+                            Video ID: W9Uy-wgD5Vc
                         </span>
                     </div>
 
                     <div class="captures-grid">
                         
-                        <!-- Parte 1 -->
+                        <!-- Momento 1 -->
                         <div class="capture-card reveal">
                             <div class="capture-img-container">
-                                <img src="imagenes/microbit.jpg" alt="Carro Robot Seguidor de Línea con Micro:bit - Parte 1" class="capture-img" style="object-fit: cover; width: 100%; height: 100%;">
-                                <span class="capture-time-tag">PARTE 1</span>
+                                <img src="imagenes/robot-hero.jpg" alt="Introducción del robot seguidor de línea negra" class="capture-img" style="object-fit: cover; width: 100%; height: 100%;">
+                                <span class="capture-time-tag">00:00</span>
                             </div>
                             <div class="capture-body">
-                                <h3 class="capture-title">1. Introducción General y Componentes</h3>
-                                <p class="capture-desc">Presentación del kit de robótica educativa British Council, la tarjeta BBC Micro:bit y el objetivo del proyecto seguidor de línea autónomo.</p>
-                                <span class="capture-meta">Fundamentos del sistema e inventario</span>
+                                <h3 class="capture-title">1. Introducción y Propósito</h3>
+                                <p class="capture-desc">Presentación del robot seguidor de línea, el monitoreo frontal sobre la pista negra y su aplicación en industria y competencias.</p>
+                                <span class="capture-meta">Concepto general (00:00 – 00:30)</span>
                                 <div style="display: flex; gap: 0.5rem; margin-top: 0.75rem; flex-wrap: wrap;">
-                                    <button class="btn btn-primary btn-sm btn-play-chapter" data-part="1">▶ Ver en Visor</button>
-                                    <a href="https://youtu.be/34xOcgIWpsU" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">YouTube ↗</a>
+                                    <button class="btn btn-primary btn-sm btn-play-chapter" data-part="1">▶ Ir al minuto 00:00</button>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Parte 2 -->
+                        <!-- Momento 2 -->
                         <div class="capture-card reveal">
                             <div class="capture-img-container">
-                                <img src="imagenes/sensor-ir.jpg" alt="Sensor Infrarrojo HW-511 - Parte 2" class="capture-img" style="object-fit: cover; width: 100%; height: 100%;">
-                                <span class="capture-time-tag">PARTE 2</span>
+                                <img src="imagenes/cny70.jpg" alt="Prueba del sensor CNY70" class="capture-img" style="object-fit: cover; width: 100%; height: 100%;">
+                                <span class="capture-time-tag">00:31</span>
                             </div>
                             <div class="capture-body">
-                                <h3 class="capture-title">2. Sensores Infrarrojos HW-511 y Calibración</h3>
-                                <p class="capture-desc">Caracterización de los estados lógicos del sensor (0V blanco con LED encendido / 5V negro con LED apagado) y ajuste del potenciómetro para 2-20mm.</p>
-                                <span class="capture-meta">Detección óptica y rango de conmutación</span>
+                                <h3 class="capture-title">2. Etapa del Sensor CNY70</h3>
+                                <p class="capture-desc">Extensión con cables para orientar el CNY70 hacia el suelo; el LED testigo se apaga en negro y enciende en blanco entregando la señal al cable naranja.</p>
+                                <span class="capture-meta">Detección óptica (00:31 – 01:06)</span>
                                 <div style="display: flex; gap: 0.5rem; margin-top: 0.75rem; flex-wrap: wrap;">
-                                    <button class="btn btn-primary btn-sm btn-play-chapter" data-part="2">▶ Ver en Visor</button>
-                                    <a href="https://youtu.be/hj2Lx7jDiCc" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">YouTube ↗</a>
+                                    <button class="btn btn-primary btn-sm btn-play-chapter" data-part="2">▶ Ir al minuto 00:31</button>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Parte 3 -->
+                        <!-- Momento 3 -->
                         <div class="capture-card reveal">
                             <div class="capture-img-container">
-                                <img src="imagenes/l298n.jpg" alt="Puente H L298N - Parte 3" class="capture-img" style="object-fit: cover; width: 100%; height: 100%;">
-                                <span class="capture-time-tag">PARTE 3</span>
+                                <img src="imagenes/2n2222a.jpg" alt="Transistor Q1 2N2222A y resistencias de 1k" class="capture-img" style="object-fit: cover; width: 100%; height: 100%;">
+                                <span class="capture-time-tag">01:07</span>
                             </div>
                             <div class="capture-body">
-                                <h3 class="capture-title">3. Controlador de Potencia Puente H L298N</h3>
-                                <p class="capture-desc">Conexión de la etapa de potencia a 9V, verificación de compatibilidad con niveles lógicos de 3.3V de la Micro:bit y masa compartida (GND).</p>
-                                <span class="capture-meta">Módulo de potencia y control de motores DC</span>
+                                <h3 class="capture-title">3. Primer Transistor Q1 (2N2222A)</h3>
+                                <p class="capture-desc">Pinout (Emisor izq., Base centro, Colector der.), resistencia de 1 kΩ (café-negro-rojo) a la Base, Emisor a GND y 1 kΩ del Colector a positivo.</p>
+                                <span class="capture-meta">Etapa inversora (01:07 – 01:49)</span>
                                 <div style="display: flex; gap: 0.5rem; margin-top: 0.75rem; flex-wrap: wrap;">
-                                    <button class="btn btn-primary btn-sm btn-play-chapter" data-part="3">▶ Ver en Visor</button>
-                                    <a href="https://youtu.be/9-Pfo9fqfNA" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">YouTube ↗</a>
+                                    <button class="btn btn-primary btn-sm btn-play-chapter" data-part="3">▶ Ir al minuto 01:07</button>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Parte 4 -->
+                        <!-- Momento 4 -->
                         <div class="capture-card reveal">
                             <div class="capture-img-container">
-                                <img src="imagenes/chasis.jpg" alt="Chasis Rover Mini - Parte 4" class="capture-img" style="object-fit: cover; width: 100%; height: 100%;">
-                                <span class="capture-time-tag">PARTE 4</span>
+                                <img src="imagenes/led-rojo.jpg" alt="LED rojo indicador y ajuste de velocidad" class="capture-img" style="object-fit: cover; width: 100%; height: 100%;">
+                                <span class="capture-time-tag">01:50</span>
                             </div>
                             <div class="capture-body">
-                                <h3 class="capture-title">4. Ensamble del Chasis Rover Mini</h3>
-                                <p class="capture-desc">Montaje mecánico del acrílico, fijación de motores TT con pletinas metálicas, instalación de ruedas motrices y rueda loca con extensores de altura.</p>
-                                <span class="capture-meta">Estructura mecánica y cinemática biciclo</span>
+                                <h3 class="capture-title">4. LED Rojo y Ajuste de Velocidad</h3>
+                                <p class="capture-desc">Conexión del LED rojo al colector de Q1 (pata larga +) y explicación del cambio entre 1 kΩ fija y resistencia variable de 50 kΩ para curvas.</p>
+                                <span class="capture-meta">Indicador y calibración (01:50 – 02:31)</span>
                                 <div style="display: flex; gap: 0.5rem; margin-top: 0.75rem; flex-wrap: wrap;">
-                                    <button class="btn btn-primary btn-sm btn-play-chapter" data-part="4">▶ Ver en Visor</button>
-                                    <a href="https://youtu.be/atuZydTlraM" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">YouTube ↗</a>
+                                    <button class="btn btn-primary btn-sm btn-play-chapter" data-part="4">▶ Ir al minuto 01:50</button>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Parte 5 -->
+                        <!-- Momento 5 -->
                         <div class="capture-card reveal">
                             <div class="capture-img-container">
-                                <img src="imagenes/shield-microbit.jpg" alt="Conexión de Elementos y Cableado - Parte 5" class="capture-img" style="object-fit: cover; width: 100%; height: 100%;">
-                                <span class="capture-time-tag">PARTE 5</span>
+                                <img src="imagenes/motor-dc.jpg" alt="Segundo transistor Q2 y motorreductor" class="capture-img" style="object-fit: cover; width: 100%; height: 100%;">
+                                <span class="capture-time-tag">02:32</span>
                             </div>
                             <div class="capture-body">
-                                <h3 class="capture-title">5. Conectar Elementos y Distribución Eléctrica</h3>
-                                <p class="capture-desc">Instalación de la placa de expansión sobre el portapilas, aislamiento de baterías de 9V con foami, interruptores de corte y ruteo ordenado de cables.</p>
-                                <span class="capture-meta">Cableado pin a pin y fuentes independientes</span>
+                                <h3 class="capture-title">5. Etapa Q2 y Motorreductor</h3>
+                                <p class="capture-desc">Conexión del segundo 2N2222A (Emisor a tierra, Colector al motor y otro terminal a +9V), exigiendo mínimo 1 kg de fuerza en el motorreductor.</p>
+                                <span class="capture-meta">Etapa de potencia (02:32 – 02:55)</span>
                                 <div style="display: flex; gap: 0.5rem; margin-top: 0.75rem; flex-wrap: wrap;">
-                                    <button class="btn btn-primary btn-sm btn-play-chapter" data-part="5">▶ Ver en Visor</button>
-                                    <a href="https://youtu.be/Foi85VfqKJk" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">YouTube ↗</a>
+                                    <button class="btn btn-primary btn-sm btn-play-chapter" data-part="5">▶ Ir al minuto 02:32</button>
                                 </div>
                             </div>
                         </div>
-                            </div>
-                        </div>
 
-                        <!-- Parte 6 -->
+                        <!-- Momento 6 -->
                         <div class="capture-card reveal">
                             <div class="capture-img-container">
-                                <img src="imagenes/robot-hero.jpg" alt="Funcionamiento del Robot Seguidor de Línea - Parte 6" class="capture-img" style="object-fit: cover; width: 100%; height: 100%;">
-                                <span class="capture-time-tag">PARTE 6</span>
+                                <img src="imagenes/protoboard.jpg" alt="Prueba final sobre línea negra y cruce de motores" class="capture-img" style="object-fit: cover; width: 100%; height: 100%;">
+                                <span class="capture-time-tag">02:56</span>
                             </div>
                             <div class="capture-body">
-                                <h3 class="capture-title">6. Programación, Calibración y Funcionamiento</h3>
-                                <p class="capture-desc">Carga del código de control en MakeCode, validación del algoritmo seguidor en pista de línea negra de 3.5 cm y calibración final de respuesta.</p>
-                                <span class="capture-meta">Prueba final en circuito cerrado y autonomía</span>
+                                <h3 class="capture-title">6. Prueba en Vivo y Regla del Cruce</h3>
+                                <p class="capture-desc">Comprobación de giro sobre la línea negra, paro en blanco y la regla clave: cada motor debe instalarse en el lado contrario a su sensor.</p>
+                                <span class="capture-meta">Validación en pista (02:56 – 04:01)</span>
                                 <div style="display: flex; gap: 0.5rem; margin-top: 0.75rem; flex-wrap: wrap;">
-                                    <button class="btn btn-primary btn-sm btn-play-chapter" data-part="6">▶ Ver en Visor</button>
-                                    <a href="https://youtu.be/-jA-Nnl1UqI" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">YouTube ↗</a>
+                                    <button class="btn btn-primary btn-sm btn-play-chapter" data-part="6">▶ Ir al minuto 02:56</button>
                                 </div>
                             </div>
                         </div>
@@ -313,7 +304,7 @@
                     </div>
                     <p style="font-size: 0.88rem; line-height: 1.6; margin-bottom: 1rem; color: #cfc0ab;">
                         <em>“Servimos a la Comunidad y Formamos para la Vida”</em>.<br>
-                        Serie audiovisual y evidencias experimentales del proyecto escolar de Tecnología e Informática.
+                        Guía audiovisual y marcas de tiempo sincronizadas para el proyecto de robótica analógica en Tecnología e Informática.
                     </p>
                     <span class="badge badge-green">INACEGO · Grado 11° · 2026</span>
                 </div>
@@ -323,29 +314,27 @@
                     <ul class="footer-links">
                         <li><a href="index.html" class="footer-link">Inicio del Proyecto</a></li>
                         <li><a href="materiales.html" class="footer-link">1. Materiales</a></li>
-                        <li><a href="concepto.html" class="footer-link">2. Concepto</a></li>
-                        <li><a href="funciones.html" class="footer-link">3. Funciones</a></li>
-                        <li><a href="electronica.html" class="footer-link">4. Electrónica</a></li>
-                        <li><a href="video.html" class="footer-link">Video y Capturas (Actual)</a></li>
+                        <li><a href="concepto.html" class="footer-link">2. Concepto y Autonomía</a></li>
+                        <li><a href="funciones.html" class="footer-link">3. Funciones y Control Cruzado</a></li>
+                        <li><a href="electronica.html" class="footer-link">4. Parte Electrónica</a></li>
+                        <li><a href="video.html" class="footer-link">Video Tutorial (Actual)</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-col">
-                    <h4>Datos del Video</h4>
+                    <h4>Etapas del Tutorial</h4>
                     <ul class="footer-links">
-                        <li><span class="footer-link">ID: m0YjmDXjP98</span></li>
-                        <li><span class="footer-link">Formato: 1080p HD</span></li>
-                        <li><span class="footer-link">Duración: ~5:30 min</span></li>
-                        <li><span class="footer-link">Control: Analógico Discreto</span></li>
+                        <li><span class="footer-link">00:31 Prueba Sensor CNY70</span></li>
+                        <li><span class="footer-link">01:07 Etapa Q1 (2N2222A)</span></li>
+                        <li><span class="footer-link">01:50 LED Rojo y 1kΩ / 50kΩ</span></li>
+                        <li><span class="footer-link">02:56 Prueba y Control Cruzado</span></li>
                     </ul>
                 </div>
 
                 <div class="footer-col">
-                    <h4>Créditos</h4>
+                    <h4>Enlaces Externos</h4>
                     <ul class="footer-links">
-                        <li><a href="https://www.youtube.com/watch?v=m0YjmDXjP98" target="_blank" rel="noopener noreferrer" class="footer-link">Canal Tutorial de YouTube ↗</a></li>
-                        <li><span class="footer-link">Colegio Técnico - Grado 11</span></li>
-                        <li><span class="footer-link">Área Tecnología e Informática</span></li>
+                        <li><a href="https://youtu.be/W9Uy-wgD5Vc" target="_blank" rel="noopener noreferrer" class="footer-link">Tutorial Original en YouTube ↗</a></li>
                     </ul>
                 </div>
             </div>
@@ -392,4 +381,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-

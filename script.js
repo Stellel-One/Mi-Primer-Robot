@@ -1,13 +1,12 @@
 /* ========================================================
-   Robot Seguidor de Línea sin Arduino - Script Interactivo
-   Proyecto Educativo Grado 11 - Tecnología e Informática
+   Robot Seguidor de Línea Negra (CNY70 + 2N2222A) - Script Interactivo
+   Proyecto Educativo Grado 11 - INACEGO
    ======================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
     initNavigation();
     initScrollReveal();
     initMaterialsFilter();
-    initSimulator();
     initCircuitInspector();
     initVideoControls();
     initNaviaChat();
@@ -34,33 +33,17 @@ function initNavigation() {
         });
     }
 
-    // Scrollspy activo
-    window.addEventListener('scroll', () => {
-        const sections = document.querySelectorAll('section[id]');
-        const scrollY = window.pageYOffset;
-
-        sections.forEach(current => {
-            const sectionHeight = current.offsetHeight;
-            const sectionTop = current.offsetTop - 120;
-            const sectionId = current.getAttribute('id');
-            const link = document.querySelector(`.nav-link[href*="${sectionId}"]`);
-
-            if (link) {
-                if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-                    link.classList.add('active');
-                } else {
-                    link.classList.remove('active');
-                }
-            }
-        });
-    });
-
     // Cerrar menú móvil al hacer click
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
             if (navMenu && navMenu.classList.contains('open')) {
                 navMenu.classList.remove('open');
-                if (navToggle) navToggle.innerHTML = '☰';
+                if (navToggle) {
+                    navToggle.setAttribute('aria-expanded', 'false');
+                    const iconSpan = navToggle.querySelector('.nav__toggle-icon');
+                    if (iconSpan) iconSpan.textContent = '☰';
+                    else navToggle.innerHTML = '☰';
+                }
             }
         });
     });
@@ -91,108 +74,17 @@ function initMaterialsFilter() {
     });
 }
 
-/* 3. Simulador de Navegación y Lógica de Giro */
-function initSimulator() {
-    const btnCenter = document.getElementById('sim-btn-center');
-    const btnLeft = document.getElementById('sim-btn-left');
-    const btnRight = document.getElementById('sim-btn-right');
-
-    const robotVisual = document.getElementById('sim-robot');
-    const sensorLeftVal = document.getElementById('val-sensor-left');
-    const sensorRightVal = document.getElementById('val-sensor-right');
-    const compLeftVal = document.getElementById('val-comp-left');
-    const compRightVal = document.getElementById('val-comp-right');
-    const motorLeftVal = document.getElementById('val-motor-left');
-    const motorRightVal = document.getElementById('val-motor-right');
-    const actionText = document.getElementById('val-action-desc');
-
-    if (!btnCenter || !robotVisual) return;
-
-    function setSimulationState(state) {
-        // Reset botones
-        [btnCenter, btnLeft, btnRight].forEach(b => b && b.classList.remove('active'));
-
-        if (state === 'center') {
-            btnCenter.classList.add('active');
-            robotVisual.style.transform = 'translateY(0px) rotate(0deg)';
-            
-            sensorLeftVal.textContent = '0 (0V · BLANCO)';
-            sensorLeftVal.className = 'telemetry-val val-active';
-            sensorRightVal.textContent = '0 (0V · BLANCO)';
-            sensorRightVal.className = 'telemetry-val val-active';
-
-            compLeftVal.textContent = 'PWM 700 (Nominal)';
-            compLeftVal.className = 'telemetry-val val-active';
-            compRightVal.textContent = 'PWM 700 (Nominal)';
-            compRightVal.className = 'telemetry-val val-active';
-
-            motorLeftVal.textContent = 'AVANCE (Velocidad Nominal)';
-            motorLeftVal.className = 'telemetry-val val-active';
-            motorRightVal.textContent = 'AVANCE (Velocidad Nominal)';
-            motorRightVal.className = 'telemetry-val val-active';
-
-            actionText.innerHTML = '<strong>Trayectoria Recta:</strong> Ambos sensores HW-511 detectan superficie blanca (0V). La Micro:bit genera pulsos PWM balanceados en Pines 0 y 1 hacia el L298N, manteniendo avance rectilíneo estable.';
-        } 
-        else if (state === 'left') {
-            btnLeft.classList.add('active');
-            robotVisual.style.transform = 'translateX(-28px) rotate(-18deg)';
-
-            sensorLeftVal.textContent = '1 (5V · NEGRO)';
-            sensorLeftVal.className = 'telemetry-val val-off';
-            sensorRightVal.textContent = '0 (0V · BLANCO)';
-            sensorRightVal.className = 'telemetry-val val-active';
-
-            compLeftVal.textContent = 'PWM 0 (Frenado)';
-            compLeftVal.className = 'telemetry-val val-off';
-            compRightVal.textContent = 'PWM 900 (Aceleración)';
-            compRightVal.className = 'telemetry-val val-active';
-
-            motorLeftVal.textContent = 'DETENIDO (0% Paro)';
-            motorLeftVal.className = 'telemetry-val val-off';
-            motorRightVal.textContent = 'IMPULSO (Viraje Rápido)';
-            motorRightVal.className = 'telemetry-val val-active';
-
-            actionText.innerHTML = '<strong>Corrección hacia la Izquierda:</strong> El sensor izquierdo pisó la cinta negra (5V). La Micro:bit apaga el motor izquierdo (PWM 0) y acelera el motor derecho (PWM 900) a través del L298N para recentrar la línea.';
-        } 
-        else if (state === 'right') {
-            btnRight.classList.add('active');
-            robotVisual.style.transform = 'translateX(28px) rotate(18deg)';
-
-            sensorLeftVal.textContent = '0 (0V · BLANCO)';
-            sensorLeftVal.className = 'telemetry-val val-active';
-            sensorRightVal.textContent = '1 (5V · NEGRO)';
-            sensorRightVal.className = 'telemetry-val val-off';
-
-            compLeftVal.textContent = 'PWM 900 (Aceleración)';
-            compLeftVal.className = 'telemetry-val val-active';
-            compRightVal.textContent = 'PWM 0 (Frenado)';
-            compRightVal.className = 'telemetry-val val-off';
-
-            motorLeftVal.textContent = 'IMPULSO (Viraje Rápido)';
-            motorLeftVal.className = 'telemetry-val val-active';
-            motorRightVal.textContent = 'DETENIDO (0% Paro)';
-            motorRightVal.className = 'telemetry-val val-off';
-
-            actionText.innerHTML = '<strong>Corrección hacia la Derecha:</strong> El sensor derecho detecta la línea negra (5V). La Micro:bit corta el motor derecho y da par al motor izquierdo, pivotando el chasis Rover hacia la derecha.';
-        }
-    }
-
-    btnCenter.addEventListener('click', () => setSimulationState('center'));
-    btnLeft.addEventListener('click', () => setSimulationState('left'));
-    btnRight.addEventListener('click', () => setSimulationState('right'));
-}
-
-/* 4. Inspector Interactivo de Bloques Electrónicos */
+/* 3. Inspector Interactivo de Bloques Electrónicos */
 function initCircuitInspector() {
     const blocks = document.querySelectorAll('.block-node');
     const infoBox = document.getElementById('block-inspector-info');
 
     const descriptions = {
-        'sensors': '<strong>Etapa 1 - Sensores Infrarrojos:</strong> Los LEDs emisores irradian luz en 950nm. Cuando hay superficie blanca, la luz rebota hacia el fototransistor receptor, disminuyendo su resistencia y variando la tensión analógica de salida.',
-        'control': '<strong>Etapa 2 - Comparador de Voltaje (LM393):</strong> Compara el voltaje analógico del sensor contra un umbral ajustable fijado por un potenciómetro. Convierte cambios suaves de luz en una señal lógica digital limpia y binaria.',
-        'power': '<strong>Etapa 3 - Transistores de Conmutación (2N2222/TIP120):</strong> El comparador no entrega suficiente corriente para un motor. El transistor actúa como un interruptor de potencia conmutando entre corte (paro) y saturación (marcha).',
-        'motors': '<strong>Etapa 4 - Motorreductores DC:</strong> Convierten la corriente eléctrica en par mecánico con caja reductora (1:48) para garantizar torque constante a baja velocidad.',
-        'movement': '<strong>Etapa 5 - Dirección Diferencial:</strong> La combinación de velocidades relativas entre la rueda izquierda y derecha produce avance rectilíneo o pivote sobre el eje del robot.'
+        'sensors': '<strong>Etapa 1 — Sensor Óptico CNY70 (560 Ω + 20 kΩ):</strong> El emisor IR recibe +9V limitado por 560 Ω hacia tierra. Sobre blanco la luz rebota y el fototransistor conduce; sobre línea negra la luz se absorbe y la resistencia de 20 kΩ lleva la salida a 0V.',
+        'control': '<strong>Etapa 2 — Inversor Q1 (1 kΩ + 2N2222A):</strong> La señal del CNY70 entra por 1 kΩ a la Base (centro) de Q1. Al detectar línea negra, Q1 se corta y deja subir la tensión en su Colector alimentado con otra resistencia de 1 kΩ desde +9V.',
+        'led': '<strong>Etapa 3 — LED Rojo y Ajuste de Velocidad:</strong> El LED rojo enciende cuando el sensor pisa la línea negra. A continuación va una resistencia de 1 kΩ (o potenciómetro variable de 50 kΩ) para dosificar la velocidad en curvas.',
+        'power': '<strong>Etapa 4 — Driver de Potencia Q2 (2N2222A):</strong> El segundo transistor 2N2222A recibe la corriente en su Base, entra en saturación y conecta el retorno del motorreductor a tierra (Emisor a GND) cerrando el circuito de 9V.',
+        'movement': '<strong>Etapa 5 — Motorreductor Cruzado (≥ 1 kg · 100 RPM):</strong> El motor va montado al lado contrario de su sensor. Mientras ambos pisan negro, avanzan; si uno sale al blanco se detiene su motor opuesto para girar y volver a la línea.'
     };
 
     blocks.forEach(block => {
@@ -205,57 +97,63 @@ function initCircuitInspector() {
     });
 }
 
-/* 5. Control de Video y Salto a Marcas de Tiempo */
-/* 5. Reproductor de Video Secuencial (Serie 6 Partes Alex7 Tutoriales) */
+/* 4. Reproductor Sincronizado con Marcas de Tiempo (Tutorial El Profe García) */
 function initVideoControls() {
+    const videoId = 'W9Uy-wgD5Vc';
     const videoData = [
         {
             part: 1,
-            id: '34xOcgIWpsU',
-            title: 'PARTE 1 — Introducción General y Componentes del Robot',
-            desc: 'Presentación del kit de robótica educativa British Council, la tarjeta BBC Micro:bit y el inventario de materiales para construir el robot móvil autónomo.',
-            topic: 'Kit British Council',
-            progress: 'Paso 1/6: Fundamentos e Inventario'
+            start: 0,
+            timeLabel: '00:00',
+            title: '00:00 — Introducción y Funcionamiento del Seguidor de Línea Negra',
+            desc: 'Presentación general del robot seguidor de línea negra, la ubicación frontal de sus sensores y sus aplicaciones tanto industriales como en torneos universitarios de velocidad y destreza.',
+            topic: 'El Profe García · 4:01 min',
+            progress: '00:00 — Introducción y Alcance'
         },
         {
             part: 2,
-            id: 'hj2Lx7jDiCc',
-            title: 'PARTE 2 — Sensores Infrarrojos HW-511 y Calibración',
-            desc: 'Caracterización de los estados lógicos del sensor (0V blanco con LED encendido / 5V negro con LED apagado) y ajuste del potenciómetro para 2-20mm de altura.',
-            topic: 'Detección Óptica y Umbrales',
-            progress: 'Paso 2/6: Caracterización de Sensores'
+            start: 31,
+            timeLabel: '00:31',
+            title: '00:31 — Etapa del Sensor CNY70 y Prueba Inicial',
+            desc: 'Cómo cablear el CNY70 mirando al piso: el LED testigo se apaga sobre la línea negra y se enciende sobre el blanco, enviando la señal por el cable naranja hacia los transistores.',
+            topic: 'Etapa 1: Sensor CNY70',
+            progress: '00:31 — Prueba del Sensor CNY70'
         },
         {
             part: 3,
-            id: '9-Pfo9fqfNA',
-            title: 'PARTE 3 — Controlador de Potencia Puente H L298N',
-            desc: 'Conexión de la etapa de potencia a 9V, compatibilidad con niveles lógicos de 3.3V de la Micro:bit y masa compartida (GND común obligatorio).',
-            topic: 'Etapa de Potencia y Motores',
-            progress: 'Paso 3/6: Drivers de Potencia'
+            start: 67,
+            timeLabel: '01:07',
+            title: '01:07 — Primer Transistor Q1 (2N2222A) y Resistencias de 1 kΩ',
+            desc: 'Identificación de pines del 2N2222A (Izquierda Emisor, Centro Base, Derecha Colector), código café-negro-rojo-dorado de 1 kΩ hacia la Base y 1 kΩ del Colector al bus positivo.',
+            topic: 'Etapa 2: Inversor Q1',
+            progress: '01:07 — Transistor Q1 2N2222A'
         },
         {
             part: 4,
-            id: 'atuZydTlraM',
-            title: 'PARTE 4 — Ensamble Mecánico del Chasis Rover Mini',
-            desc: 'Montaje del chasis de acrílico, fijación de motores TT con pletinas metálicas, instalación de ruedas motrices de goma y rueda loca con extensores.',
-            topic: 'Estructura y Cinemática',
-            progress: 'Paso 4/6: Montaje Mecánico'
+            start: 110,
+            timeLabel: '01:50',
+            title: '01:50 — LED Rojo Indicador y Calibración de Velocidad (1 kΩ vs 50 kΩ)',
+            desc: 'Conexión del LED rojo al colector de Q1 (pata larga positiva) y explicación del ajuste fino con resistencia variable de 50 kΩ o resistencia fija de 1 kΩ según las curvas de la pista.',
+            topic: 'Etapa 3: LED y Calibración',
+            progress: '01:50 — LED Rojo y Velocidad'
         },
         {
             part: 5,
-            id: 'Foi85VfqKJk',
-            title: 'PARTE 5 — Conexión de Elementos y Distribución Eléctrica',
-            desc: 'Instalación del shield sobre el chasis, aislamiento de baterías de 9V con foami, interruptores de corte independientes y cableado pin a pin.',
-            topic: 'Cableado y Fuentes Tri-Partitas',
-            progress: 'Paso 5/6: Interconexión Eléctrica'
+            start: 152,
+            timeLabel: '02:32',
+            title: '02:32 — Segundo Transistor Q2 (2N2222A) y Motorreductor de 1 kg',
+            desc: 'Conexión del segundo 2N2222A (Emisor a tierra, Colector al motorreductor y otro borne a +9V), remarcando usar motores de al menos 1 kg de fuerza para mover el chasis.',
+            topic: 'Etapa 4: Potencia Q2',
+            progress: '02:32 — Driver Q2 y Motorreductor'
         },
         {
             part: 6,
-            id: '-jA-Nnl1UqI',
-            title: 'PARTE 6 — Programación, Calibración y Funcionamiento en Pista',
-            desc: 'Carga del algoritmo seguidor en MakeCode/Python, validación en pista con línea negra de 3.5 cm y calibración final de velocidad PWM y virajes.',
-            topic: 'Pruebas en Pista y Autonomía',
-            progress: 'Paso 6/6: Lógica y Pruebas en Pista'
+            start: 176,
+            timeLabel: '02:56',
+            title: '02:56 — Prueba en Vivo y Regla del Control Cruzado',
+            desc: 'Validación real sobre cinta negra: el motor gira sobre la línea y se apaga al salir. Regla obligatoria de instalar cada motor en el lado contrario al de su sensor.',
+            topic: 'Etapa 5: Validación en Pista',
+            progress: '02:56 — Prueba y Cruce de Motores'
         }
     ];
 
@@ -274,7 +172,7 @@ function initVideoControls() {
 
     if (!iframe && !tabs.length) return;
 
-    let currentPartIndex = 0; // 0-based (0 = Parte 1)
+    let currentPartIndex = 0;
 
     function setVideoPart(index, shouldScroll = false) {
         if (index < 0 || index >= videoData.length) return;
@@ -282,23 +180,23 @@ function initVideoControls() {
         const current = videoData[index];
 
         if (iframe) {
-            iframe.src = `https://www.youtube.com/embed/${current.id}?autoplay=1&rel=0`;
+            iframe.src = `https://www.youtube.com/embed/${videoId}?start=${current.start}&autoplay=1&rel=0`;
         }
         if (titleEl) titleEl.textContent = current.title;
         if (descEl) descEl.textContent = current.desc;
-        if (partBadgeEl) partBadgeEl.textContent = `PARTE ${current.part} DE 6`;
+        if (partBadgeEl) partBadgeEl.textContent = `ETAPA ${current.part} DE ${videoData.length}`;
         if (progressEl) progressEl.textContent = current.progress;
         if (topicTagEl) topicTagEl.textContent = current.topic;
         if (ytLinkEl) {
-            ytLinkEl.href = `https://youtu.be/${current.id}`;
-            ytLinkEl.textContent = `Ver en YouTube ↗`;
+            ytLinkEl.href = current.start > 0
+                ? `https://youtu.be/${videoId}?t=${current.start}`
+                : `https://youtu.be/${videoId}`;
+            ytLinkEl.textContent = `Ver en YouTube (${current.timeLabel}) ↗`;
         }
 
-        // Actualizar botones de navegación
         if (btnPrev) btnPrev.disabled = (index === 0);
         if (btnNext) btnNext.disabled = (index === videoData.length - 1);
 
-        // Actualizar pestañas activas
         tabs.forEach((tab, i) => {
             const isMatch = (i === index);
             tab.classList.toggle('active', isMatch);
@@ -331,7 +229,7 @@ function initVideoControls() {
     });
 }
 
-/* 6. Animación de Elementos al Scroll (Scroll Reveal Estilo TecnoSafe) */
+/* 5. Animación de Elementos al Scroll */
 function initScrollReveal() {
     const reveals = document.querySelectorAll('.reveal');
     if (!reveals.length) return;
@@ -354,44 +252,35 @@ function initScrollReveal() {
 
         reveals.forEach(el => revealObserver.observe(el));
     } else {
-        // Fallback para navegadores antiguos
         reveals.forEach(el => el.classList.add('active'));
     }
 }
 
-/* 7. Navia - Asistente & Mascota Interactiva de Robótica */
+/* 6. Navia - Asistente & Mascota Interactiva de Robótica */
 const NAVIA_FAQ = [
     {
-        q: '¿Por qué no usamos Arduino ni código?',
-        a: '¡Excelente pregunta! Este proyecto demuestra que la robótica básica se resuelve con física y hardware puro (comparadores analógicos LM393 y transistores 2N2222). Esto reduce costos, elimina la latencia de procesamiento del software y enseña a calcular divisores de tensión y polarización sin depender de una "caja negra".'
+        q: '¿Por qué no usamos Arduino ni Micro:bit?',
+        a: 'Este robot es 100% analógico y se arma directo sobre una protoboard. Utiliza dos sensores CNY70 y cuatro transistores NPN 2N2222A (dos por canal) para responder en microsegundos con una sola batería de 9V, sin código ni placas programables.'
     },
     {
-        q: '¿Cómo calibro el potenciómetro del LM393?',
-        a: 'Colocá el robot sobre la pista: poné un sensor sobre la superficie blanca y ajustá el potenciómetro (trimpot) hasta que el LED indicador del módulo se encienda. Luego movelo sobre la línea negra y verificá que se apague. La tensión de referencia óptima suele quedar en torno a 2.5V.'
+        q: '¿Cuál es el pinout del transistor 2N2222A?',
+        a: 'Mirando el 2N2222A con la cara plana de frente y las patas hacia abajo: la pata izquierda es el Emisor (va a GND), la central es la Base (recibe la señal con resistencia de 1 kΩ) y la derecha es el Colector (conectado al LED o al motor).'
     },
     {
-        q: '¿Para qué sirve el diodo 1N4007 (Flyback)?',
-        a: 'Todo motor eléctrico tiene bobinas que almacenan energía magnética. Al cortar la corriente bruscamente, la bobina produce un pico de sobretensión inversa destructiva de más de 50V. El diodo 1N4007 en antiparalelo drena esa energía recirculándola en la bobina sin dañar el transistor.'
+        q: '¿Para qué sirve cada resistencia (560 Ω, 20 kΩ y 1 kΩ)?',
+        a: 'Las 2 de 560 Ω protegen el LED infrarrojo interno del CNY70 a 9V; las 2 de 20 kΩ fijan el nivel en el fototransistor receptor; y las 6 de 1 kΩ (café-negro-rojo-dorado) polarizan las bases de Q1 y Q2 y alimentan el colector de Q1.'
     },
     {
-        q: '¿Qué pasa si invierto la polaridad de los motores?',
-        a: 'Un motor DC gira en sentido contrario si invertís sus cables. Si tu robot retrocede en lugar de avanzar, o gira en dirección contraria al desvío, simplemente intercambiá los dos cables positivo y negativo de ese motor.'
+        q: '¿Por qué hay que cruzar los motores respecto a los sensores?',
+        a: 'Ambos sensores van sobre la línea negra. Cuando uno se sale al blanco, apaga el motor del lado contrario: así la rueda del mismo lado sigue empujando y devuelve el carrito justo encima de la línea negra.'
     },
     {
-        q: '¿A qué altura colocar los sensores TCRT5000?',
-        a: 'La distancia óptima entre los sensores infrarrojos y el suelo es de entre 3 mm y 8 mm. Si están muy altos, la luz infrarroja se dispersa y no detecta el contraste; si están muy bajos, pueden raspar contra irregularidades de la pista.'
+        q: '¿Qué hago si el robot se sale en las curvas?',
+        a: 'Podés cambiar la resistencia de 1 kΩ que llega a la base del segundo transistor (Q2) por una resistencia variable (potenciómetro) de 50 kΩ para bajar la velocidad, o reajustar la altura y separación de los sensores CNY70.'
     },
     {
-        q: '¿Por qué una rueda se detiene en las curvas?',
-        a: 'El robot utiliza dirección diferencial: no tiene cremallera ni volante mecánico. Al desviarse hacia un lado, el circuito corta la alimentación del motor de ese lado, provocando que el chasis pivote sobre la rueda detenida y retorne al centro de la línea.'
-    },
-    {
-        q: '¿Qué baterías son las recomendadas?',
-        a: 'Recomendamos 4 pilas AA de 1.5V en serie (6.0V en total) o 2 celdas de litio 18650 (7.4V). Es fundamental incluir un capacitor electrolítico de desacoplo de 100µF a 470µF en paralelo con la batería para amortiguar las caídas de tensión al arrancar los motores.'
-    },
-    {
-        q: '¿Cómo funciona el transistor 2N2222?',
-        a: 'Funciona como un interruptor electrónico. La salida del comparador entrega apenas unos miliamperios a la base del transistor; al recibir esa pequeña señal, el transistor entra en saturación y permite el paso de los 200 a 800 mA que necesita el motor para girar con fuerza.'
+        q: '¿Qué fuerza deben tener los motorreductores?',
+        a: 'Como recomienda el tutorial, usá motorreductores de mínimo 1 kg de fuerza (~100 RPM). Los motores simples sin caja reductora no tienen el torque necesario para mover la protoboard y la batería de 9V sobre el piso.'
     }
 ];
 
@@ -455,7 +344,7 @@ function initNaviaChat() {
         launcher.setAttribute('aria-expanded', 'true');
         if (!greeted) {
             greeted = true;
-            log.appendChild(makeMessage('bot', '¡Hola! Soy Navia, tu asistente técnica en robótica de grado 11. ¿En qué duda sobre el robot seguidor de línea te puedo ayudar?'));
+            log.appendChild(makeMessage('bot', '¡Hola! Soy Navia, tu asistente técnica en robótica de grado 11. ¿Qué duda tenés sobre el robot con CNY70 y 2N2222A?'));
             renderQuickReplies();
             scrollToEnd();
         }
@@ -489,24 +378,24 @@ function initNaviaChat() {
             const queryLower = query.toLowerCase();
             let matchedAnswer = null;
 
-            if (queryLower.includes('arduino') || queryLower.includes('código') || queryLower.includes('programar')) {
-                matchedAnswer = 'Este robot es 100% analógico: no lleva Arduino ni microcontrolador. Todo el lazo de control se realiza con el comparador LM393 y transistores NPN. Podés ver el análisis en la Sección 2 (Concepto).';
-            } else if (queryLower.includes('motor') || queryLower.includes('rueda') || queryLower.includes('giro')) {
-                matchedAnswer = 'Utiliza dos motorreductores TT con reducción 1:48 acoplados a ruedas de goma. La dirección es diferencial: cuando un sensor entra a la línea, detiene el motor de ese lado para pivotar.';
-            } else if (queryLower.includes('sensor') || queryLower.includes('ir') || queryLower.includes('tcrt') || queryLower.includes('infrarrojo')) {
-                matchedAnswer = 'Los sensores infrarrojos (TCRT5000 o CNY70) emiten luz en 950 nm. La superficie blanca la refleja hacia el fototransistor y la línea negra la absorbe. La altura ideal es entre 3 y 8 mm.';
-            } else if (queryLower.includes('lm393') || queryLower.includes('comparador') || queryLower.includes('voltaje')) {
-                matchedAnswer = 'El circuito integrado LM393 compara el voltaje analógico del sensor contra un umbral de referencia (fijado por potenciómetro) y entrega una salida digital limpia a los transistores.';
-            } else if (queryLower.includes('transistor') || queryLower.includes('2n2222') || queryLower.includes('potencia')) {
-                matchedAnswer = 'Los transistores NPN 2N2222A actúan como interruptores electrónicos de potencia (saturación y corte) suministrando la corriente que el comparador no puede entregar a los motores.';
-            } else if (queryLower.includes('diodo') || queryLower.includes('flyback') || queryLower.includes('1n4007')) {
-                matchedAnswer = 'El diodo 1N4007 en antiparalelo con cada motor absorbe la fuerza contraelectromotriz inductiva cuando el transistor se apaga, protegiéndolo de picos destructivos de alta tensión.';
-            } else if (queryLower.includes('bateria') || queryLower.includes('pila') || queryLower.includes('alimentacion')) {
-                matchedAnswer = 'Se alimenta típicamente con 4 pilas AA (6.0V) o 2 baterías de litio 18650 (7.4V). Recordá poner un capacitor de desacoplo de 100µF a 470µF en paralelo con la batería.';
-            } else if (queryLower.includes('material') || queryLower.includes('componente') || queryLower.includes('lista')) {
-                matchedAnswer = 'En la Sección 1 tenés la lista formal completa (BOM) con chasis, motores, ruedas, sensores IR, resistencias, transistores, LM393, diodos, potenciómetros y portapilas.';
+            if (queryLower.includes('arduino') || queryLower.includes('microbit') || queryLower.includes('código') || queryLower.includes('programar')) {
+                matchedAnswer = 'Este prototipo no usa microcontrolador ni programación: funciona 100% con electrónica analógica discreta en protoboard usando sensores CNY70 y 4 transistores 2N2222A.';
+            } else if (queryLower.includes('motor') || queryLower.includes('llanta') || queryLower.includes('rueda') || queryLower.includes('cruz') || queryLower.includes('curva')) {
+                matchedAnswer = 'Usa 2 motorreductores de mínimo 1 kg de fuerza (~100 RPM) conectados de forma cruzada al sensor opuesto. Si va muy rápido en curvas, reemplazá la resistencia de 1 kΩ en base de Q2 por un potenciómetro de 50 kΩ.';
+            } else if (queryLower.includes('cny70') || queryLower.includes('sensor') || queryLower.includes('infrarrojo') || queryLower.includes('ir')) {
+                matchedAnswer = 'Los 2 sensores CNY70 emiten luz IR (con resistencia de 560 Ω) y reciben el reflejo en un fototransistor (con resistencia de 20 kΩ). Al detectar la línea negra se enciende el LED rojo y gira el motor opuesto.';
+            } else if (queryLower.includes('2n2222') || queryLower.includes('transistor') || queryLower.includes('pata') || queryLower.includes('pin')) {
+                matchedAnswer = 'Mirando la cara plana del 2N2222A: izquierda = Emisor (GND), centro = Base (señal con 1 kΩ) y derecha = Colector (carga). Se usan 4 en total: Q1 invierte la señal del CNY70 y Q2 alimenta el motorreductor.';
+            } else if (queryLower.includes('resistencia') || queryLower.includes('560') || queryLower.includes('20k') || queryLower.includes('1k') || queryLower.includes('color') || queryLower.includes('50k')) {
+                matchedAnswer = 'Llevás 2 resistencias de 560 Ω (emisor IR), 2 de 20 kΩ (fototransistor) y 6 de 1 kΩ (café-negro-rojo-dorado, 3 por canal). Opcionalmente podés cambiar 1 kΩ de base Q2 por una variable de 50 kΩ.';
+            } else if (queryLower.includes('led') || queryLower.includes('rojo')) {
+                matchedAnswer = 'Los 2 LED rojos se conectan con su pata larga (+) al colector de Q1 y van en serie hacia la etapa de Q2. Sirven para comprobar visualmente que cada sensor detecta la línea negra.';
+            } else if (queryLower.includes('bateria') || queryLower.includes('pila') || queryLower.includes('9v') || queryLower.includes('protoboard')) {
+                matchedAnswer = 'Todo el circuito se monta directo sobre una protoboard y se alimenta con una única batería de 9V conectada a los buses positivo y negativo.';
+            } else if (queryLower.includes('material') || queryLower.includes('lista')) {
+                matchedAnswer = 'En la Sección 1 tenés los 11 materiales exactos: 2 CNY70, 4× 2N2222A, 2× 560 Ω, 2× 20 kΩ, 6× 1 kΩ, 2 LED rojos, 2 motorreductores (1 kg/100 RPM), 2 llantas, 1 batería 9V, cables y 1 protoboard.';
             } else {
-                matchedAnswer = 'Como asistente de robótica te sugiero explorar las secciones curriculares: 1. Materiales, 2. Concepto, 3. Funciones o 4. Electrónica. También podés tocar una de las preguntas frecuentes aquí arriba.';
+                matchedAnswer = 'Podés explorar las 4 secciones (Materiales, Concepto, Funciones, Electrónica) o la guía con marcas de tiempo en Video Tutorial. También podés tocar cualquiera de las preguntas rápidas arriba.';
             }
 
             reply(matchedAnswer);
@@ -514,7 +403,7 @@ function initNaviaChat() {
     }
 }
 
-/* 8. Botón Volver Arriba (Back to Top) */
+/* 7. Botón Volver Arriba (Back to Top) */
 function initBackToTop() {
     const btn = document.getElementById('back-to-top');
     if (!btn) return;
@@ -534,6 +423,3 @@ function initBackToTop() {
         });
     });
 }
-
-
-

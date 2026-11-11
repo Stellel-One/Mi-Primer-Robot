@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Sección 1: Materiales y componentes utilizados en el Robot Seguidor de Línea sin Arduino. Proyecto Grado 11.">
-    <title>Sección 1: Materiales | Robot Seguidor de Línea</title>
+    <meta name="description" content="Sección 1: Materiales y despiece exacto del Robot Seguidor de Línea Negra con CNY70, transistores 2N2222A, resistencias y protoboard. Grado 11 - INACEGO.">
+    <title>Sección 1: Materiales | Robot Seguidor de Línea Negra</title>
     <link rel="icon" href="navia.svg" type="image/svg+xml">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -77,10 +77,10 @@
                 </nav>
                 <span class="page-eyebrow">SECCIÓN 01 • CURRICULAR OBLIGATORIA</span>
                 <h1 style="font-size: clamp(2.2rem, 3.8vw, 3rem); font-weight: 800; color: #ffffff;">
-                    Materiales y Componentes del Robot Rover Mini
+                    Materiales del Robot Seguidor de Línea Negra
                 </h1>
                 <p style="font-size: 1.1rem; color: #f3ece1; max-width: 780px; margin-top: 0.75rem;">
-                    Despiece técnico formal, especificaciones electromecánicas y observaciones de montaje para construir el robot seguidor de línea con BBC Micro:bit, Puente H L298N y sensores HW-511.
+                    Lista exacta de los 11 componentes electrónicos y mecánicos empleados en el montaje sobre protoboard con sensores CNY70, transistores NPN 2N2222A y batería de 9V.
                 </p>
             </div>
         </header>
@@ -90,456 +90,343 @@
                 
                 <!-- Barra de Filtros -->
                 <div class="materials-filter">
-                    <button class="filter-btn active" data-filter="all">Todos los Componentes (15)</button>
-                    <button class="filter-btn" data-filter="control">Control y Micro:bit</button>
-                    <button class="filter-btn" data-filter="potencia">Potencia y Motores</button>
-                    <button class="filter-btn" data-filter="sensores">Sensores Ópticos</button>
-                    <button class="filter-btn" data-filter="mecanica">Chasis y Mecánica</button>
-                    <button class="filter-btn" data-filter="energia">Alimentación y Conexión</button>
+                    <button class="filter-btn active" data-filter="all">Todos los Componentes (11)</button>
+                    <button class="filter-btn" data-filter="sensores">Sensado e Indicadores</button>
+                    <button class="filter-btn" data-filter="control">Transistores y Resistencias</button>
+                    <button class="filter-btn" data-filter="mecanica">Protoboard y Tracción</button>
+                    <button class="filter-btn" data-filter="energia">Energía y Cableado</button>
                 </div>
 
                 <!-- Tarjetas Detalladas de Materiales -->
                 <div class="materials-grid">
                     
-                    <!-- 1. BBC Micro:bit -->
-                    <article class="material-card reveal" data-category="control">
-                        <span class="material-category-tag">Procesamiento Central</span>
-                        <div class="material-img-container">
-                            <img src="imagenes/microbit.jpg" alt="Tarjeta controladora BBC Micro:bit v2" class="material-svg" style="object-fit: cover; width: 100%; height: 100%;">
-                        </div>
-                        <div class="material-body">
-                            <h3 class="material-title">1. Tarjeta Controladora BBC Micro:bit</h3>
-                            <div class="material-function">
-                                <span>🧠 Cerebro y Algoritmo de Control</span>
-                            </div>
-                            <p class="material-desc">
-                                Microcontrolador principal (Kit de pensamiento computacional British Council). Procesa la lógica de control autónomo en tiempo real, lee las entradas digitales de los sensores infrarrojos y genera señales de modulación PWM para comandar la velocidad y viraje.
-                            </p>
-                            <div class="material-tech-note">
-                                <strong>Observación Técnica:</strong> Opera con niveles lógicos de 3.3V. Sus salidas digitales y analógicas son compatibles de forma nativa con los pines de control lógico del Puente H L298N compartiendo la masa común (GND).
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- 2. Placa de Expansión -->
-                    <article class="material-card reveal" data-category="control">
-                        <span class="material-category-tag">Interfaz GPIO</span>
-                        <div class="material-img-container">
-                            <img src="imagenes/shield-microbit.jpg" alt="Adaptador de pines para Micro:bit Breakout Board" class="material-svg" style="object-fit: cover; width: 100%; height: 100%;">
-                        </div>
-                        <div class="material-body">
-                            <h3 class="material-title">2. Placa de Expansión (Breakout Board / Shield)</h3>
-                            <div class="material-function">
-                                <span>🔌 Acceso y distribución de pines</span>
-                            </div>
-                            <p class="material-desc">
-                                Tarjeta adaptadora con conector de borde para insertar la Micro:bit y exponer todos sus pines pequeños (Pines 0 al 15, 16-19, 20, VCC y GND) en filas ordenadas tipo G-V-S para cablear periféricos sin complicaciones.
-                            </p>
-                            <div class="material-tech-note">
-                                <strong>Observación Técnica:</strong> Se fija al chasis con tornillos largos y arandelas; es crucial calibrar su altura para evitar que las puntas de soldadura inferiores rocen el portapilas de 3V.
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- 3. Puente H L298N -->
-                    <article class="material-card reveal" data-category="potencia">
-                        <span class="material-category-tag">Etapa de Potencia</span>
-                        <div class="material-img-container">
-                            <img src="imagenes/l298n.jpg" alt="Módulo controlador de motores dual Puente H L298N" class="material-svg" style="object-fit: cover; width: 100%; height: 100%;">
-                        </div>
-                        <div class="material-body">
-                            <h3 class="material-title">3. Controlador de Motores Puente H L298N</h3>
-                            <div class="material-function">
-                                <span>⚡ Conmutación y Control de Velocidad PWM</span>
-                            </div>
-                            <p class="material-desc">
-                                Módulo de potencia integrado con disipador de aluminio y doble puente H. Permite gobernar el sentido de rotación y la velocidad de los dos motores DC independientes de tracción mediante señales PWM desde los Pines 0 y 1.
-                            </p>
-                            <div class="material-tech-note">
-                                <strong>Observación Técnica:</strong> Capacidad de hasta 2A por canal con caída de tensión interna de ~1.5V a 2V. Se alimenta directamente de la fuente de 9V a través de su bornera de potencia.
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- 4. Sensores IR HW-511 -->
+                    <!-- 1. Sensores CNY70 -->
                     <article class="material-card reveal" data-category="sensores">
-                        <span class="material-category-tag">Detección Óptica</span>
+                        <span class="material-category-tag">Detección Óptica · ×2 uds.</span>
                         <div class="material-img-container">
-                            <img src="imagenes/sensor-ir.jpg" alt="Módulos sensores infrarrojos HW-511 / KY-033" class="material-svg" style="object-fit: cover; width: 100%; height: 100%;">
+                            <img src="imagenes/cny70.jpg" alt="Sensores reflectivos infrarrojos CNY70" class="material-svg" style="object-fit: cover; width: 100%; height: 100%;">
                         </div>
                         <div class="material-body">
-                            <h3 class="material-title">4. Sensores Infrarrojos HW-511 (o KY-033)</h3>
+                            <h3 class="material-title">1. Sensores Ópticos CNY70 (×2)</h3>
                             <div class="material-function">
-                                <span>👁️ Detección de contraste de línea reflectiva</span>
+                                <span>👁️ Emisor IR + Fototransistor en un bloque</span>
                             </div>
                             <p class="material-desc">
-                                Dos módulos ópticos dotados de diodo emisor IR azul y fototransistor receptor oscuro. Incorporan comparador analógico y preset para calibrar la distancia y reflectancia del haz óptico.
+                                Sensor reflexivo compacto de 4 pines que integra un diodo emisor infrarrojo y un fototransistor receptor. Se cablean apuntando hacia el piso en la parte frontal para diferenciar la línea negra de la superficie blanca.
                             </p>
                             <div class="material-tech-note">
-                                <strong>Observación Técnica:</strong> Deben alimentarse obligatoriamente a 5V con fuente externa independiente; alimentarlos a 3V entrega sólo 1.3V en estado alto, provocando lecturas inestables en la zona lógica indeterminada.
+                                <strong>Observación Técnica:</strong> Sobre la línea negra, el pigmento absorbe la luz infrarroja y el fototransistor deja de conducir; sobre el blanco la refleja y conduce corriente hacia la etapa de control.
                             </div>
                         </div>
                     </article>
 
-                    <!-- 5. Chasis Rover Mini -->
+                    <!-- 2. Transistores 2N2222A -->
+                    <article class="material-card reveal" data-category="control">
+                        <span class="material-category-tag">Amplificación y Potencia · ×4 uds.</span>
+                        <div class="material-img-container">
+                            <img src="imagenes/2n2222a.jpg" alt="Transistores bipolares NPN 2N2222A" class="material-svg" style="object-fit: cover; width: 100%; height: 100%;">
+                        </div>
+                        <div class="material-body">
+                            <h3 class="material-title">2. Transistores NPN 2N2222A (×4)</h3>
+                            <div class="material-function">
+                                <span>⚡ Dos etapas en cascada por canal</span>
+                            </div>
+                            <p class="material-desc">
+                                Cuatro transistores bipolares NPN (dos por cada rueda). El primer transistor (Q1) invierte la señal del CNY70 y el segundo (Q2) actúa como interruptor de potencia para alimentar el motorreductor.
+                            </p>
+                            <div class="material-tech-note">
+                                <strong>Pinout clave (cara plana de frente):</strong> Izquierda = <strong>Emisor</strong> (a GND), Centro = <strong>Base</strong> (entrada de señal), Derecha = <strong>Colector</strong> (carga / motor).
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 3. Resistencias de 560 ohmios -->
+                    <article class="material-card reveal" data-category="control">
+                        <span class="material-category-tag">Protección Emisor IR · ×2 uds.</span>
+                        <div class="material-img-container">
+                            <img src="imagenes/resistencias.jpg" alt="Resistencias de carbón de 560 ohmios" class="material-svg" style="object-fit: cover; width: 100%; height: 100%;">
+                        </div>
+                        <div class="material-body">
+                            <h3 class="material-title">3. Resistencias de 560 Ω (×2)</h3>
+                            <div class="material-function">
+                                <span>🛡️ Limitación del LED Infrarrojo</span>
+                            </div>
+                            <p class="material-desc">
+                                Dos resistencias fijas (código de colores: verde, azul, café, dorado) conectadas en serie con el ánodo del diodo emisor infrarrojo de cada CNY70 hacia el riel positivo de 9V.
+                            </p>
+                            <div class="material-tech-note">
+                                <strong>Observación Técnica:</strong> Sin estas resistencias de 560 Ω, los 9V directos de la batería quemarían instantáneamente el LED emisor interno del CNY70.
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 4. Resistencias de 20 kΩ -->
+                    <article class="material-card reveal" data-category="sensores">
+                        <span class="material-category-tag">Polarización Receptor · ×2 uds.</span>
+                        <div class="material-img-container">
+                            <img src="imagenes/resistencias.jpg" alt="Resistencias de 20 kiloohmios" class="material-svg" style="object-fit: cover; width: 100%; height: 100%;">
+                        </div>
+                        <div class="material-body">
+                            <h3 class="material-title">4. Resistencias de 20 kΩ (×2)</h3>
+                            <div class="material-function">
+                                <span>⚖️ Pull-down del Fototransistor CNY70</span>
+                            </div>
+                            <p class="material-desc">
+                                Dos resistencias de 20 kiloohmios (código: rojo, negro, naranja, dorado) conectadas entre la salida del fototransistor receptor del CNY70 y el riel negativo (GND).
+                            </p>
+                            <div class="material-tech-note">
+                                <strong>Observación Técnica:</strong> Fijan el nivel de voltaje de referencia en 0V cuando el sensor pasa sobre la línea negra, asegurando un corte limpio del primer transistor.
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 5. Resistencias de 1 kΩ -->
+                    <article class="material-card reveal" data-category="control">
+                        <span class="material-category-tag">Red de Disparo · ×6 uds.</span>
+                        <div class="material-img-container">
+                            <img src="imagenes/resistencias.jpg" alt="Resistencias de 1 kiloohmio café negro rojo" class="material-svg" style="object-fit: cover; width: 100%; height: 100%;">
+                        </div>
+                        <div class="material-body">
+                            <h3 class="material-title">5. Resistencias de 1 kΩ (×6)</h3>
+                            <div class="material-function">
+                                <span>🎛️ Polarización de Bases Q1/Q2 y Colector Q1</span>
+                            </div>
+                            <p class="material-desc">
+                                Seis resistencias de 1 kΩ (código: <strong>café, negro, rojo, dorado</strong>), tres por cada canal: base de Q1, carga de colector en Q1 hacia positivo y base del transistor de potencia Q2.
+                            </p>
+                            <div class="material-tech-note">
+                                <strong>Calibración Opcional (50 kΩ):</strong> Como indica el tutorial, la resistencia de 1 kΩ hacia la base de Q2 puede reemplazarse por un <strong>potenciómetro variable de 50 kΩ</strong> para regular la velocidad en curvas.
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 6. Diodos LED Rojos -->
+                    <article class="material-card reveal" data-category="sensores">
+                        <span class="material-category-tag">Telemetría Visual · ×2 uds.</span>
+                        <div class="material-img-container">
+                            <img src="imagenes/led-rojo.jpg" alt="Diodos LED rojos indicadores de 5 mm" class="material-svg" style="object-fit: cover; width: 100%; height: 100%;">
+                        </div>
+                        <div class="material-body">
+                            <h3 class="material-title">6. Diodos LED Rojos (×2)</h3>
+                            <div class="material-function">
+                                <span>🔴 Indicadores de Activación por Canal</span>
+                            </div>
+                            <p class="material-desc">
+                                Dos LEDs de color rojo de 5 mm instalados entre el colector del transistor Q1 (pata positiva larga / ánodo) y la etapa de salida hacia Q2. Se iluminan cuando el sensor correspondiente detecta la línea negra.
+                            </p>
+                            <div class="material-tech-note">
+                                <strong>Observación Técnica:</strong> Permiten diagnosticar en segundos si la etapa sensora e inversora está funcionando antes de conectar el peso de los motores en pista.
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 7. Protoboard -->
                     <article class="material-card reveal" data-category="mecanica">
-                        <span class="material-category-tag">Estructura Mecánica</span>
+                        <span class="material-category-tag">Chasis y Placa Base · ×1 ud.</span>
                         <div class="material-img-container">
-                            <img src="imagenes/chasis.jpg" alt="Kit Chasis Rover Mini de acrílico cortado en láser" class="material-svg" style="object-fit: cover; width: 100%; height: 100%;">
+                            <img src="imagenes/protoboard.jpg" alt="Protoboard estándar de prototipado" class="material-svg" style="object-fit: cover; width: 100%; height: 100%;">
                         </div>
                         <div class="material-body">
-                            <h3 class="material-title">5. Chasis de Acrílico "Rover Mini"</h3>
+                            <h3 class="material-title">7. Protoboard (×1)</h3>
                             <div class="material-function">
-                                <span>🛠️ Soporte estructural rígido y liviano</span>
+                                <span>📐 Matriz de Conexiones y Chasis del Robot</span>
                             </div>
                             <p class="material-desc">
-                                Plataforma de acrílico cortada con láser con perforaciones estandarizadas para fijar los motores DC, sujetar el L298N, montar la rueda loca trasera y alojar los interruptores de potencia.
+                                Placa de pruebas sin soldadura que cumple una doble función: aloja todos los transistores, resistencias y cables en sus buses positivos/negativos, y sirve como chasis liviano donde se fijan los motores y la batería.
                             </p>
                             <div class="material-tech-note">
-                                <strong>Observación Técnica:</strong> Su diseño compacto biciclo con rueda loca posterior asegura un radio de giro mínimo en curvas pronunciadas.
+                                <strong>Observación Técnica:</strong> Permite depurar, ajustar resistencias o probar un potenciómetro de 50 kΩ en segundos sin necesidad de cautín ni soldadura definitiva.
                             </div>
                         </div>
                     </article>
 
-                    <!-- 6. Motores DC 9V -->
-                    <article class="material-card reveal" data-category="potencia">
-                        <span class="material-category-tag">Actuadores de Tracción</span>
-                        <div class="material-img-container">
-                            <img src="imagenes/motor-dc.jpg" alt="Motores DC de 9V con caja reductora tipo TT" class="material-svg" style="object-fit: cover; width: 100%; height: 100%;">
-                        </div>
-                        <div class="material-body">
-                            <h3 class="material-title">6. Motores DC de 9V con Caja Reductora</h3>
-                            <div class="material-function">
-                                <span>⚙️ Tracción y viraje diferencial</span>
-                            </div>
-                            <p class="material-desc">
-                                Dos motorreductores tipo TT con caja de engranajes 1:48 acoplados directamente al Puente H L298N. Multiplican el torque para desplazar el peso total del chasis y las tres fuentes de energía.
-                            </p>
-                            <div class="material-tech-note">
-                                <strong>Observación Técnica:</strong> Se fijan al acrílico mediante pletinas metálicas cuadradas y tornillos pasantes largos apretados con tuercas autoblocantes.
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- 7. Ruedas Principales -->
+                    <!-- 8. Motorreductores -->
                     <article class="material-card reveal" data-category="mecanica">
-                        <span class="material-category-tag">Tracción Terrestre</span>
+                        <span class="material-category-tag">Tracción Mecánica · ×2 uds.</span>
                         <div class="material-img-container">
-                            <img src="imagenes/rueda.jpg" alt="Ruedas de goma de alto agarre para chasis Rover" class="material-svg" style="object-fit: cover; width: 100%; height: 100%;">
+                            <img src="imagenes/motor-dc.jpg" alt="Motorreductores DC de mínimo 1 kg de fuerza y 100 RPM" class="material-svg" style="object-fit: cover; width: 100%; height: 100%;">
                         </div>
                         <div class="material-body">
-                            <h3 class="material-title">7. Ruedas Principales de Goma Rover</h3>
+                            <h3 class="material-title">8. Motorreductores DC (×2)</h3>
                             <div class="material-function">
-                                <span>🔘 Transmisión de fuerza al suelo</span>
+                                <span>⚙️ Mínimo 1 kg de fuerza · ~100 RPM</span>
                             </div>
                             <p class="material-desc">
-                                Dos ruedas con neumáticos de goma de alto coeficiente de rozamiento montadas a presión sobre el eje con ranura en D de los motorreductores, garantizando tracción sin derrapes en pistas lisas.
+                                Dos motores DC con caja reductora de engranajes conectados entre el positivo de la fuente (9V) y el colector del transistor de salida Q2. Impulsan independientemente cada rueda motriz.
                             </p>
                             <div class="material-tech-note">
-                                <strong>Observación Técnica:</strong> Diámetro de 65 mm. Proporcionan un excelente equilibrio entre velocidad lineal de avance y precisión de frenado diferencial.
+                                <strong>Requisito Crítico del Tutorial:</strong> Deben tener al menos <strong>1 kg de torque</strong> (~100 RPM). Motores sin caja reductora no tienen la fuerza suficiente para mover el peso de la batería de 9V y la protoboard.
                             </div>
                         </div>
                     </article>
 
-                    <!-- 8. Rueda Loca con Extensores -->
+                    <!-- 9. Llantas -->
                     <article class="material-card reveal" data-category="mecanica">
-                        <span class="material-category-tag">Estabilidad y Apoyo</span>
+                        <span class="material-category-tag">Rodamiento · ×2 uds.</span>
                         <div class="material-img-container">
-                            <img src="imagenes/rueda-loca.jpg" alt="Rueda loca Caster Wheel con extensores metálicos" class="material-svg" style="object-fit: cover; width: 100%; height: 100%;">
+                            <img src="imagenes/rueda.jpg" alt="Llantas de goma para motorreductor" class="material-svg" style="object-fit: cover; width: 100%; height: 100%;">
                         </div>
                         <div class="material-body">
-                            <h3 class="material-title">8. Rueda Loca Trasera (Caster) y Extensores</h3>
+                            <h3 class="material-title">9. Llantas para Motorreductor (×2)</h3>
                             <div class="material-function">
-                                <span>🔄 Punto de apoyo omnidireccional y balance</span>
+                                <span>🛞 Tracción y Adherencia al Suelo</span>
                             </div>
                             <p class="material-desc">
-                                Rueda esférica metálica/nylon montada en la parte posterior del chasis utilizando 4 extensores metálicos y 8 tornillos métricos para igualar la altura horizontal exacta respecto a las ruedas motrices delanteras.
+                                Dos ruedas con banda de rodadura en caucho acopladas directamente a los ejes de salida de los motorreductores, brindando fricción firme sobre cartulina o superficie de pista.
                             </p>
                             <div class="material-tech-note">
-                                <strong>Observación Técnica:</strong> Los extensores son obligatorios: sin ellos el chasis queda inclinado hacia atrás y los sensores frontales pierden el foco focal óptico.
+                                <strong>Observación Técnica:</strong> Cada llanta corresponde al motor accionado por el sensor del lado contrario, ejecutando el pivote corrector en las curvas.
                             </div>
                         </div>
                     </article>
 
-                    <!-- 9. Encoders -->
-                    <article class="material-card reveal" data-category="mecanica">
-                        <span class="material-category-tag">Instrumentación</span>
-                        <div class="material-img-container">
-                            <img src="imagenes/rueda.svg" alt="Discos encoders de velocidad y odometría" class="material-svg">
-                        </div>
-                        <div class="material-body">
-                            <h3 class="material-title">9. Discos Encoders de Velocidad (Opcionales)</h3>
-                            <div class="material-function">
-                                <span>📊 Medición opcional de odometría y RPM</span>
-                            </div>
-                            <p class="material-desc">
-                                Dos discos ranurados de plástico montados en el eje posterior de los motores TT para medir revoluciones por minuto mediante fotointérruptores ópticos opcionales.
-                            </p>
-                            <div class="material-tech-note">
-                                <strong>Observación Técnica:</strong> En la modalidad básica de seguidor de línea analítico no requieren conexión eléctrica activa; forman parte del kit de montaje mecánico.
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- 10. Fuente Motores 9V en Paralelo -->
+                    <!-- 10. Batería de 9V -->
                     <article class="material-card reveal" data-category="energia">
-                        <span class="material-category-tag">Alimentación de Potencia</span>
+                        <span class="material-category-tag">Fuente Única · ×1 ud.</span>
                         <div class="material-img-container">
-                            <img src="imagenes/bateria-9v.jpg" alt="Baterías de 9V en paralelo para alimentación de motores" class="material-svg" style="object-fit: cover; width: 100%; height: 100%;">
+                            <img src="imagenes/bateria-9v.jpg" alt="Batería alcalina rectangular de 9 voltios" class="material-svg" style="object-fit: cover; width: 100%; height: 100%;">
                         </div>
                         <div class="material-body">
-                            <h3 class="material-title">10. Fuente Motores: 2 Baterías 9V en Paralelo</h3>
+                            <h3 class="material-title">10. Batería de 9 Voltios (×1)</h3>
                             <div class="material-function">
-                                <span>🔋 Suministro de alta corriente para el L298N</span>
+                                <span>🔋 Alimentación Única de 9V DC</span>
                             </div>
                             <p class="material-desc">
-                                Dos baterías de 9V conectadas en paralelo (mismo voltaje, suma de capacidades en corriente). Energizan exclusivamente la bornera VCC de potencia del Puente H para mover los motores sin caída de tensión.
+                                Una sola batería de 9V conectada a los buses de alimentación superior e inferior de la protoboard. Energiza tanto los emisores infrarrojos como las etapas de amplificación 2N2222A y los motorreductores.
                             </p>
                             <div class="material-tech-note">
-                                <strong>Observación Técnica:</strong> La conexión en paralelo duplica la autonomía y evita que la demanda de corriente de los motores apague la lógica del robot.
+                                <strong>Observación Técnica:</strong> Verificar la carga real de la pila antes de probar en pista; por debajo de 7.5V bajo carga disminuye notablemente el par de los motorreductores.
                             </div>
                         </div>
                     </article>
 
-                    <!-- 11. Fuente Sensores 5V -->
+                    <!-- 11. Cables para conectar -->
                     <article class="material-card reveal" data-category="energia">
-                        <span class="material-category-tag">Alimentación Óptica</span>
+                        <span class="material-category-tag">Interconexión · Varios</span>
                         <div class="material-img-container">
-                            <img src="imagenes/portapilas-5v.jpg" alt="Portapilas independiente de 5V para sensores infrarrojos" class="material-svg" style="object-fit: cover; width: 100%; height: 100%;">
+                            <img src="imagenes/cables.jpg" alt="Cables rígidos y jumpers para conexión en protoboard" class="material-svg" style="object-fit: cover; width: 100%; height: 100%;">
                         </div>
                         <div class="material-body">
-                            <h3 class="material-title">11. Fuente Sensores: Portapilas 5V / 4.5V</h3>
+                            <h3 class="material-title">11. Cables para Conectar (Varios)</h3>
                             <div class="material-function">
-                                <span>🔋 Polarización aislada de transductores IR</span>
+                                <span>🔌 Ruteo en Protoboard y Extensión de Sensores</span>
                             </div>
                             <p class="material-desc">
-                                Portapilas independiente (3 pilas de 1.5V o banco de 5V) dedicado a alimentar exclusivamente los dos sensores HW-511, asegurando que la salida lógica entregue un 5V limpio para estado negro y 0V para blanco.
+                                Puentes de alambre rígido o jumpers macho-macho para interconectar los nodos en la protoboard, extender los cuatro pines de cada sensor CNY70 hacia el frente mirando al piso y cablear los motores en cruce.
                             </p>
                             <div class="material-tech-note">
-                                <strong>Observación Técnica:</strong> Su polo negativo (GND) se conecta obligatoriamente a la masa común del sistema para que la Micro:bit pueda leer el voltaje de la señal.
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- 12. Fuente Micro:bit 3V -->
-                    <article class="material-card reveal" data-category="energia">
-                        <span class="material-category-tag">Alimentación Lógica</span>
-                        <div class="material-img-container">
-                            <img src="imagenes/portapilas-microbit.jpg" alt="Portapilas de 3V propio del kit Micro:bit" class="material-svg" style="object-fit: cover; width: 100%; height: 100%;">
-                        </div>
-                        <div class="material-body">
-                            <h3 class="material-title">12. Fuente Micro:bit: Portapilas 3V Dedicado</h3>
-                            <div class="material-function">
-                                <span>🔋 Alimentación protegida del microcontrolador</span>
-                            </div>
-                            <p class="material-desc">
-                                Portapilas original con conector JST propio del kit British Council Micro:bit (2 pilas AAA de 1.5V = 3V). Energiza el procesador de forma aislada, evitando reinicios indeseados causados por ruido inductivo de los motores.
-                            </p>
-                            <div class="material-tech-note">
-                                <strong>Observación Técnica:</strong> Se ubica en la parte trasera del chasis, bajo la placa de expansión.
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- 13. Interruptores Basculantes -->
-                    <article class="material-card reveal" data-category="energia">
-                        <span class="material-category-tag">Seguridad Eléctrica</span>
-                        <div class="material-img-container">
-                            <img src="imagenes/interruptor.jpg" alt="Interruptores basculantes Toggle Switch para corte general" class="material-svg" style="object-fit: cover; width: 100%; height: 100%;">
-                        </div>
-                        <div class="material-body">
-                            <h3 class="material-title">13. Interruptores Basculantes (Toggle Switch)</h3>
-                            <div class="material-function">
-                                <span>🔴 Seccionamiento independiente de potencia</span>
-                            </div>
-                            <p class="material-desc">
-                                Dos interruptores mecánicos instalados en el acrílico. Permiten encender o cortar de manera independiente la alimentación de los motores (9V) y de los sensores (5V), facilitando pruebas seguras sin que el robot escape.
-                            </p>
-                            <div class="material-tech-note">
-                                <strong>Observación Técnica:</strong> Conectados en serie en el cable positivo (VCC) entre las baterías y los módulos receptores.
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- 14. Cables Jumpers -->
-                    <article class="material-card reveal" data-category="energia">
-                        <span class="material-category-tag">Interconexión</span>
-                        <div class="material-img-container">
-                            <img src="imagenes/cables.jpg" alt="Cables jumpers Dupont H-H y M-H" class="material-svg" style="object-fit: cover; width: 100%; height: 100%;">
-                        </div>
-                        <div class="material-body">
-                            <h3 class="material-title">14. Cableado Jumpers Dupont (H-H / M-H)</h3>
-                            <div class="material-function">
-                                <span>🔌 Conducción de señales y bus de masa común</span>
-                            </div>
-                            <p class="material-desc">
-                                Cables flexibles con conectores hembra-hembra y macho-hembra para enlazar los pines GPIO de la Micro:bit con el L298N, las salidas 'S' de los sensores y unir las masas (GND unificado).
-                            </p>
-                            <div class="material-tech-note">
-                                <strong>Observación Técnica:</strong> El cableado debe guiarse a través de las ranuras del chasis para no enredarse en las ruedas motrices ni obstaculizar los sensores.
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- 15. Ferretería y Foami -->
-                    <article class="material-card reveal" data-category="mecanica">
-                        <span class="material-category-tag">Aislamiento y Fijación</span>
-                        <div class="material-img-container">
-                            <img src="imagenes/tornillos.jpg" alt="Ferretería M3, separadores y foami aislante" class="material-svg" style="object-fit: cover; width: 100%; height: 100%;">
-                        </div>
-                        <div class="material-body">
-                            <h3 class="material-title">15. Ferretería M3 y Lámina de Foami Aislante</h3>
-                            <div class="material-function">
-                                <span>🛡️ Fijación mecánica y protección dieléctrica</span>
-                            </div>
-                            <p class="material-desc">
-                                Tornillos largos M3, tuercas, arandelas de ajuste de altura para sensores y una lámina de foami aislante colocada bajo el L298N para evitar cortocircuitos con la carcasa metálica de las baterías de 9V.
-                            </p>
-                            <div class="material-tech-note">
-                                <strong>Observación Técnica:</strong> La lámina de foami es indispensable: las pistas de soldadura de la parte inferior del L298N pueden tocar las baterías de 9V y provocar chispas sin este aislante.
+                                <strong>Observación Técnica:</strong> Usar alambres flexibles pero firmes en los sensores CNY70 permite ajustar manualmente su altura y separación respecto al ancho de la línea negra.
                             </div>
                         </div>
                     </article>
 
                 </div>
 
-                <!-- Tabla Formal BOM (Bill of Materials) -->
-                <div class="table-responsive reveal">
-                    <h3 style="font-size: 1.35rem; margin-bottom: 0.5rem; color: var(--color-dark-blue);">Lista Formal de Despiece Técnico (BOM)</h3>
-                    <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 1.25rem;">
-                        Cuadro normalizado de componentes con cantidades, referencias exactas y funciones dentro del robot seguidor de línea Rover Mini con Micro:bit.
+                <!-- Tabla Resumen BOM -->
+                <div class="table-responsive reveal" style="margin-top: 4.5rem;">
+                    <h2 style="font-size: 1.6rem; color: var(--color-dark-blue); margin-bottom: 0.5rem;">Lista de Materiales Exacta (BOM Oficial)</h2>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.25rem;">
+                        Inventario completo verificado según el tutorial base de El Profe García (<em>Robot Seguidor de Línea Negra</em>):
                     </p>
                     <table class="formal-table">
                         <thead>
                             <tr>
-                                <th>Ítem</th>
+                                <th>#</th>
                                 <th>Componente</th>
-                                <th>Modelo / Referencia Exacta</th>
+                                <th>Valor / Especificación</th>
                                 <th>Cantidad</th>
-                                <th>Encapsulado / Tipo</th>
-                                <th>Función en el Robot</th>
+                                <th>Código / Detalle</th>
+                                <th>Función en el Circuito</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>01</td>
-                                <td><strong>Tarjeta Controladora</strong></td>
-                                <td>BBC Micro:bit v2 (British Council)</td>
-                                <td>1 ud.</td>
-                                <td>SoC ARM Cortex-M4 con Edge Connector</td>
-                                <td>Microcontrolador principal; procesa la lógica, lee sensores y genera PWM.</td>
+                                <td><strong>Sensores Ópticos</strong></td>
+                                <td>CNY70</td>
+                                <td>2 uds.</td>
+                                <td>LED IR + Fototransistor</td>
+                                <td>Detectan línea negra vs fondo blanco en el frente.</td>
                             </tr>
                             <tr>
                                 <td>02</td>
-                                <td><strong>Placa de Expansión</strong></td>
-                                <td>Breakout Board / Shield para Micro:bit</td>
-                                <td>1 ud.</td>
-                                <td>Slot de borde + triple pinheader G-V-S</td>
-                                <td>Facilita acceso a pines 0-20, VCC y GND para periféricos.</td>
+                                <td><strong>Resistencias IR</strong></td>
+                                <td>560 Ω (1/4 W)</td>
+                                <td>2 uds.</td>
+                                <td>Verde - Azul - Café</td>
+                                <td>Limitan la corriente del LED emisor dentro del CNY70.</td>
                             </tr>
                             <tr>
                                 <td>03</td>
-                                <td><strong>Controlador de Motores</strong></td>
-                                <td>Módulo Puente H L298N</td>
-                                <td>1 ud.</td>
-                                <td>Módulo disipado con borneras</td>
-                                <td>Etapa de potencia que regula velocidad (PWM) y sentido de giro.</td>
+                                <td><strong>Resistencias Sensor</strong></td>
+                                <td>20 kΩ (1/4 W)</td>
+                                <td>2 uds.</td>
+                                <td>Rojo - Negro - Naranja</td>
+                                <td>Polarización pull-down del fototransistor receptor.</td>
                             </tr>
                             <tr>
                                 <td>04</td>
-                                <td><strong>Sensores Infrarrojos</strong></td>
-                                <td>Módulo seguidor HW-511 (o KY-033)</td>
-                                <td>2 uds.</td>
-                                <td>Módulo reflexivo con preset y comparador</td>
-                                <td>Detectan la línea negra (absorción) y fondo blanco (reflexión).</td>
+                                <td><strong>Resistencias Base / Colector</strong></td>
+                                <td>1 kΩ (1/4 W)</td>
+                                <td>6 uds.</td>
+                                <td>Café - Negro - Rojo</td>
+                                <td>Polarizan bases de Q1 y Q2, y colector de Q1 (3 por canal).</td>
                             </tr>
                             <tr>
                                 <td>05</td>
-                                <td><strong>Chasis del Robot</strong></td>
-                                <td>Kit Chasis "Rover Mini"</td>
-                                <td>1 ud.</td>
-                                <td>Acrílico cortado en láser</td>
-                                <td>Estructura mecánica que soporta motores, placas y baterías.</td>
+                                <td><strong>Transistores NPN</strong></td>
+                                <td>2N2222A (TO-92)</td>
+                                <td>4 uds.</td>
+                                <td>Izq: E · Centro: B · Der: C</td>
+                                <td>2 etapas por canal: inversor Q1 + driver de potencia Q2.</td>
                             </tr>
                             <tr>
                                 <td>06</td>
-                                <td><strong>Motores de Tracción</strong></td>
-                                <td>Motores DC 9V con caja reductora 1:48</td>
+                                <td><strong>Indicadores Luminosos</strong></td>
+                                <td>LED Rojo 5 mm</td>
                                 <td>2 uds.</td>
-                                <td>Motorreductor TT amarillo</td>
-                                <td>Proporcionan movimiento y torque a las dos ruedas principales.</td>
+                                <td>Ánodo al colector de Q1</td>
+                                <td>Encienden cuando el sensor correspondiente pisa línea negra.</td>
                             </tr>
                             <tr>
                                 <td>07</td>
-                                <td><strong>Ruedas Principales</strong></td>
-                                <td>Ruedas de goma chasis Rover (65 mm)</td>
+                                <td><strong>Motores de Tracción</strong></td>
+                                <td>Motorreductores DC</td>
                                 <td>2 uds.</td>
-                                <td>Neumático de caucho + llanta con eje en D</td>
-                                <td>Transmiten la tracción motriz al suelo evitando derrapes.</td>
+                                <td>Mín. 1 kg fuerza · 100 RPM</td>
+                                <td>Impulsan las ruedas venciendo el peso total del prototipo.</td>
                             </tr>
                             <tr>
                                 <td>08</td>
-                                <td><strong>Rueda Trasera</strong></td>
-                                <td>Rueda loca (Caster Wheel)</td>
-                                <td>1 ud.</td>
-                                <td>Rueda omnidireccional libre</td>
-                                <td>Otorga estabilidad y libre rotación en la parte posterior.</td>
+                                <td><strong>Ruedas Motrices</strong></td>
+                                <td>Llantas para motorreductor</td>
+                                <td>2 uds.</td>
+                                <td>Banda de caucho antideslizante</td>
+                                <td>Transmiten el giro diferencial de los motores a la pista.</td>
                             </tr>
                             <tr>
                                 <td>09</td>
-                                <td><strong>Accesorios Rueda Loca</strong></td>
-                                <td>Extensores metálicos con 8 tornillos</td>
-                                <td>4 uds.</td>
-                                <td>Postes extensores de altura M3</td>
-                                <td>Nivelan la altura horizontal de la rueda loca respecto al chasis.</td>
+                                <td><strong>Fuente de Energía</strong></td>
+                                <td>Batería de 9 Voltios</td>
+                                <td>1 ud.</td>
+                                <td>6F22 alcalina o recargable</td>
+                                <td>Alimentación general única de sensores, lógica y motores.</td>
                             </tr>
                             <tr>
                                 <td>10</td>
-                                <td><strong>Encoders (Opcionales)</strong></td>
-                                <td>Discos de codificación ranurados</td>
-                                <td>2 uds.</td>
-                                <td>Discos plásticos de 20 ranuras</td>
-                                <td>Medición opcional de velocidad y distancia recorrida.</td>
+                                <td><strong>Placa y Chasis</strong></td>
+                                <td>Protoboard</td>
+                                <td>1 ud.</td>
+                                <td>400 u 830 puntos</td>
+                                <td>Soporte mecánico estructural y conexión sin soldadura.</td>
                             </tr>
                             <tr>
                                 <td>11</td>
-                                <td><strong>Fuente Motores</strong></td>
-                                <td>Baterías alcalinas 9V (en paralelo)</td>
-                                <td>2 uds.</td>
-                                <td>Bloques 9V 6F22 conectados en paralelo</td>
-                                <td>Suministran corriente y voltaje suficiente al Puente H y motores.</td>
-                            </tr>
-                            <tr>
-                                <td>12</td>
-                                <td><strong>Fuente Sensores IR</strong></td>
-                                <td>Portapilas independiente 4.5V - 5V</td>
-                                <td>1 ud.</td>
-                                <td>Portapilas 3x AA / AAA (4.5V)</td>
-                                <td>Energiza los sensores a 5V para lecturas estables fuera de zona gris.</td>
-                            </tr>
-                            <tr>
-                                <td>13</td>
-                                <td><strong>Fuente Micro:bit</strong></td>
-                                <td>Portapilas 3V propio del kit Micro:bit</td>
-                                <td>1 ud.</td>
-                                <td>Portapilas 2x AAA con conector JST</td>
-                                <td>Alimentación limpia y dedicada para la tarjeta Micro:bit.</td>
-                            </tr>
-                            <tr>
-                                <td>14</td>
-                                <td><strong>Interruptores</strong></td>
-                                <td>Interruptores basculantes (Toggle Switch)</td>
-                                <td>2 uds.</td>
-                                <td>Switch SPST de corte mecánico</td>
-                                <td>Control de encendido/apagado independiente para motores y sensores.</td>
-                            </tr>
-                            <tr>
-                                <td>15</td>
-                                <td><strong>Cableado y Ferretería</strong></td>
-                                <td>Jumpers Dupont, foami, tornillos largos M3</td>
+                                <td><strong>Cableado</strong></td>
+                                <td>Cables para conectar</td>
                                 <td>Varios</td>
-                                <td>Cables H-H/M-H, lámina aislante foami</td>
-                                <td>Conexión eléctrica, aislamiento de batería y sujeción rígida.</td>
+                                <td>Puentes rígidos y flexibles</td>
+                                <td>Conexiones en buses, cruce de motores y bajada de CNY70.</td>
                             </tr>
                         </tbody>
                     </table>
@@ -575,7 +462,7 @@
                     </div>
                     <p style="font-size: 0.88rem; line-height: 1.6; margin-bottom: 1rem; color: #cfc0ab;">
                         <em>“Servimos a la Comunidad y Formamos para la Vida”</em>.<br>
-                        Despiece técnico y especificaciones de componentes electromecánicos para el robot seguidor de línea Rover Mini con BBC Micro:bit.
+                        Despiece exacto de los 11 componentes electrónicos y mecánicos para el robot seguidor de línea negra en protoboard.
                     </p>
                     <span class="badge badge-green">INACEGO · Grado 11° · 2026</span>
                 </div>
@@ -586,28 +473,28 @@
                         <li><a href="index.html" class="footer-link">Inicio del Proyecto</a></li>
                         <li><a href="materiales.html" class="footer-link">1. Materiales (Actual)</a></li>
                         <li><a href="concepto.html" class="footer-link">2. Concepto y Autonomía</a></li>
-                        <li><a href="funciones.html" class="footer-link">3. Funciones y Cinemática</a></li>
+                        <li><a href="funciones.html" class="footer-link">3. Funciones y Control Cruzado</a></li>
                         <li><a href="electronica.html" class="footer-link">4. Parte Electrónica</a></li>
-                        <li><a href="video.html" class="footer-link">Video y Capturas</a></li>
+                        <li><a href="video.html" class="footer-link">Video Tutorial</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-col">
                     <h4>Componentes Clave</h4>
                     <ul class="footer-links">
-                        <li><span class="footer-link">Comparador Dual LM393</span></li>
-                        <li><span class="footer-link">Sensor Infrarrojo TCRT5000</span></li>
-                        <li><span class="footer-link">Transistores BJT NPN 2N2222A</span></li>
-                        <li><span class="footer-link">Motorreductores TT 1:48</span></li>
+                        <li><span class="footer-link">Sensor Óptico CNY70</span></li>
+                        <li><span class="footer-link">Transistores NPN 2N2222A</span></li>
+                        <li><span class="footer-link">Resistencias 560 Ω / 1 kΩ / 20 kΩ</span></li>
+                        <li><span class="footer-link">Motorreductores ≥ 1 kg · 100 RPM</span></li>
                     </ul>
                 </div>
 
                 <div class="footer-col">
                     <h4>Fuentes Técnicas</h4>
                     <ul class="footer-links">
-                        <li><span class="footer-link">Texas Instruments LM393 Datasheet</span></li>
-                        <li><span class="footer-link">Vishay Semiconductors TCRT5000</span></li>
-                        <li><span class="footer-link">Manual de Taller de Robótica 11°</span></li>
+                        <li><span class="footer-link">Vishay Semiconductors CNY70 Datasheet</span></li>
+                        <li><span class="footer-link">ON Semiconductor 2N2222A Datasheet</span></li>
+                        <li><span class="footer-link">Tutorial Base: El Profe García</span></li>
                     </ul>
                 </div>
             </div>
@@ -654,4 +541,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-

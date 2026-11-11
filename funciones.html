@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Sección 3: Funciones, cinemática diferencial, matriz lógica de decisión y pruebas en pista del Robot Seguidor de Línea. Grado 11.">
-    <title>Sección 3: Funciones y Dinámica | Robot Seguidor de Línea</title>
+    <meta name="description" content="Sección 3: Funciones, control cruzado sensor-motor, calibración de velocidad y comportamiento en pista del Robot Seguidor de Línea Negra (CNY70 + 2N2222A). Grado 11.">
+    <title>Sección 3: Funciones y Dinámica | Robot Seguidor de Línea Negra</title>
     <link rel="icon" href="navia.svg" type="image/svg+xml">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -77,10 +77,10 @@
                 </nav>
                 <span class="page-eyebrow">SECCIÓN 03 • CURRICULAR OBLIGATORIA</span>
                 <h1 style="font-size: clamp(2.2rem, 3.8vw, 3rem); font-weight: 800; color: #ffffff;">
-                    Funciones del Robot y Cinemática Diferencial
+                    Funciones del Robot y Control Cruzado
                 </h1>
                 <p style="font-size: 1.1rem; color: #f3ece1; max-width: 780px; margin-top: 0.75rem;">
-                    Explicación paso a paso de las etapas funcionales del móvil: detección óptica, interpretación de señales, corrección de trayectoria mediante viraje diferencial y aplicaciones industriales.
+                    Explicación paso a paso de las cinco etapas funcionales del circuito analógico: detección en el CNY70, inversión en Q1, calibración de velocidad, activación de potencia en Q2 y corrección de rumbo.
                 </p>
             </div>
         </header>
@@ -90,70 +90,74 @@
                 
                 <!-- Las 5 Funciones del Robot -->
                 <div class="section-header" style="margin-bottom: 2.5rem;">
-                    <span class="section-number">Ciclo Funcional</span>
+                    <span class="section-number">Ciclo Funcional Analógico</span>
                     <h2 class="section-title">Comportamiento en Trayectoria</h2>
                     <p class="section-subtitle">
-                        El robot ejecuta de forma continua e ininterrumpida cinco funciones esenciales en un ciclo cerrado de realimentación:
+                        El robot ejecuta de forma instantánea y continua cinco procesos eléctricos y mecánicos acoplados en cada canal:
                     </p>
                 </div>
 
                 <div class="functions-flow" style="margin-bottom: 3.5rem;">
                     <div class="flow-step-card reveal">
                         <div class="flow-step-number">01</div>
-                        <h4 class="flow-step-title">Detección Óptica HW-511</h4>
+                        <h4 class="flow-step-title">Detección Óptica CNY70</h4>
                         <p style="font-size: 0.88rem; color: var(--text-secondary);">
-                            Los diodos infrarrojos emiten un haz continuo hacia el suelo. El fototransistor capta la radiación reflejada según el contraste entre la pista blanca y la cinta negra de 3.5 cm.
+                            Los sensores apuntan hacia el piso desde el frente de la protoboard. Al estar sobre la línea negra absorben la luz IR y cortan el fototransistor; al pisar superficie blanca reflejan el haz y conducen.
                         </p>
                     </div>
 
                     <div class="flow-step-card reveal">
                         <div class="flow-step-number">02</div>
-                        <h4 class="flow-step-title">Umbral y Señal Digital</h4>
+                        <h4 class="flow-step-title">Etapa Inversora (Q1 2N2222A)</h4>
                         <p style="font-size: 0.88rem; color: var(--text-secondary);">
-                            El circuito comparador del módulo HW-511 convierte la lectura óptica en una señal lógica nítida: 0V (LOW / '0') en blanco y 5V (HIGH / '1') en negro, calibrada por su potenciómetro preset.
+                            La señal del CNY70 ingresa por una resistencia de 1 kΩ a la base de Q1. Cuando el sensor pisa negro, Q1 deja de conducir y permite que la tensión suba hacia su colector (alimentado con 1 kΩ desde +9V).
                         </p>
                     </div>
 
                     <div class="flow-step-card reveal">
                         <div class="flow-step-number">03</div>
-                        <h4 class="flow-step-title">Lógica en BBC Micro:bit</h4>
+                        <h4 class="flow-step-title">LED Rojo y Control de Velocidad</h4>
                         <p style="font-size: 0.88rem; color: var(--text-secondary);">
-                            La tarjeta Micro:bit muestrea los pines digitales en tiempo real, procesa la matriz de decisiones algorítmica y genera comandos de modulación por ancho de pulsos (PWM).
+                            Desde el colector de Q1 la corriente enciende el LED rojo indicador y atraviesa 1 kΩ (o un potenciómetro de 50 kΩ si deseamos reducir velocidad en curvas cerradas para que no se salga).
                         </p>
                     </div>
 
                     <div class="flow-step-card reveal">
                         <div class="flow-step-number">04</div>
-                        <h4 class="flow-step-title">Etapa de Potencia L298N</h4>
+                        <h4 class="flow-step-title">Driver de Potencia (Q2 2N2222A)</h4>
                         <p style="font-size: 0.88rem; color: var(--text-secondary);">
-                            El módulo Puente H recibe las señales lógicas PWM desde los Pines 0 y 1 de la Micro:bit y conmuta la alimentación de 9V hacia los motores DC sin sobrecargar el microcontrolador.
+                            El segundo transistor 2N2222A recibe la señal en su base y conmuta la corriente de 9V entre el colector y tierra (emisor), poniendo en marcha el motorreductor de ≥ 1 kg de fuerza (100 RPM).
                         </p>
                     </div>
 
                     <div class="flow-step-card reveal">
                         <div class="flow-step-number">05</div>
-                        <h4 class="flow-step-title">Tracción y Giro Diferencial</h4>
+                        <h4 class="flow-step-title">Disposición Cruzada Sensor–Motor</h4>
                         <p style="font-size: 0.88rem; color: var(--text-secondary);">
-                            La diferencia de velocidad y par motor entre las dos ruedas del chasis Rover Mini corrige la trayectoria instantáneamente, apoyándose en la rueda loca trasera.
+                            Cada motor va ubicado al lado contrario de su sensor. Mientras ambos sensores pisan la línea negra avanzan las dos llantas; si uno se sale al blanco, se apaga ese motor y la llanta opuesta lo devuelve a la línea.
                         </p>
                     </div>
                 </div>
 
-
+                <!-- Nota de Calibración en Pista (del video) -->
+                <div class="reveal" style="margin-bottom: 3rem; padding: 1.5rem 1.75rem; background: rgba(13, 148, 136, 0.08); border-left: 4px solid var(--color-electric-blue); border-radius: 0 var(--radius-md) var(--radius-md) 0; color: var(--color-gray-700); font-size: 0.94rem; line-height: 1.65;">
+                    <strong style="color: var(--color-dark-blue); display: block; margin-bottom: 0.35rem;">🎛️ Tip de Calibración en Curvas (Resistencia de 1 kΩ vs. Potenciómetro de 50 kΩ):</strong>
+                    En el tutorial se explica que colocar una resistencia fija de <strong>1 kΩ</strong> en la base del segundo transistor (Q2) hace que el carro avance a máxima velocidad. Si en curvas cerradas el prototipo tiende a salirse por inercia, se sustituye esa resistencia de 1 kΩ por una <strong>resistencia variable de 50 kΩ</strong> o se ajusta ligeramente el ángulo/altura de los sensores CNY70 hasta lograr un seguimiento suave y estable.
+                </div>
 
                 <!-- Demostración y Evidencia en Video Real del Robot -->
-                <div class="reveal" style="margin-top: 3.5rem; background: var(--color-white); border: 1.5px solid var(--color-gray-200); border-radius: var(--radius-xl); padding: 2.2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; box-shadow: var(--shadow-sm);">
+                <div class="reveal" style="margin-top: 2.5rem; background: var(--color-white); border: 1.5px solid var(--color-gray-200); border-radius: var(--radius-xl); padding: 2.2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; box-shadow: var(--shadow-sm);">
                     <div style="max-width: 650px;">
                         <span class="badge badge-green">Evidencia Experimental en Video</span>
                         <h3 style="font-size: 1.45rem; color: var(--color-dark-blue); margin-top: 0.4rem; font-weight: 800;">
-                            Demostración Real de Navegación y Pruebas en Pista
+                            Demostración de Montaje y Prueba en Vivo en Pista
                         </h3>
                         <p style="font-size: 0.94rem; color: var(--color-gray-700); margin-top: 0.4rem; line-height: 1.6;">
-                            El comportamiento dinámico, la corrección de giro diferencial y la respuesta de los sensores HW-511 sobre la línea negra de 3.5 cm se aprecian directamente en acción en la serie audiovisual tutorial del proyecto.
+                            Observá el montaje completo sobre protoboard paso a paso, la verificación de los transistores 2N2222A, el encendido del motorreductor al detectar la línea negra y la explicación del cruce mecánico en el tutorial de El Profe García.
                         </p>
                     </div>
                     <a href="video.html" class="btn btn-primary" style="white-space: nowrap;">
-                        ▶ Ver Videos de Funcionamiento &rarr;
+                        ▶ Ver Video Tutorial &rarr;
                     </a>
                 </div>
 
@@ -161,9 +165,9 @@
                 <div style="margin-top: 4.5rem;">
                     <div style="text-align: center; margin-bottom: 2.5rem;">
                         <span class="badge badge-green">Transferencia Tecnológica</span>
-                        <h2 style="font-size: 2rem; margin-top: 0.5rem; color: var(--color-dark-blue);">Aplicaciones en la Industria Real</h2>
+                        <h2 style="font-size: 2rem; margin-top: 0.5rem; color: var(--color-dark-blue);">Aplicaciones en la Industria y Competencias</h2>
                         <p style="color: var(--text-secondary); max-width: 720px; margin: 0.5rem auto 0;">
-                            El principio de seguimiento óptico de trayectorias es la columna vertebral de la intralogística contemporánea y la automatización de fábricas 4.0.
+                            Como destaca el video de referencia, este circuito es la puerta de entrada tanto a torneos universitarios de velocidad y destreza como a la automatización industrial moderna.
                         </p>
                     </div>
 
@@ -172,23 +176,23 @@
                             <div class="app-icon">🏭</div>
                             <h3 style="font-size: 1.2rem; color: var(--text-primary);">AGVs en Centros de Distribución</h3>
                             <p style="font-size: 0.9rem; color: var(--text-secondary);">
-                                En almacenes gigantescos (como Amazon Logistics o centros de paquetería de Mercado Libre), cientos de robots AGV mueven estanterías completas de cientos de kilos siguiendo redes de trayectorias ópticas o cintas magnéticas para optimizar tiempos de despacho.
+                                En almacenes gigantescos de logística y comercio electrónico, vehículos autónomos guiados (AGV) transportan cargas pesadas siguiendo rutas ópticas o cintas de contraste demarcadas en el suelo de la planta.
                             </p>
                         </div>
 
                         <div class="app-card reveal">
                             <div class="app-icon">🏥</div>
-                            <h3 style="font-size: 1.2rem; color: var(--text-primary);">Transporte Hospitalario y Clínico</h3>
+                            <h3 style="font-size: 1.2rem; color: var(--text-primary);">Transporte Hospitalario</h3>
                             <p style="font-size: 0.9rem; color: var(--text-secondary);">
-                                Plataformas autónomas móviles transportan bandejas con medicamentos controlados, insumos quirúrgicos esterilizados y residuos bioinfecciosos por pasillos clínicos predefinidos, eliminando la fatiga del personal de enfermería y previniendo contaminación cruzada.
+                                Plataformas móviles automatizadas trasladan insumos quirúrgicos, medicamentos y ropa clínica por pasillos predefinidos, optimizando tiempos del personal médico.
                             </p>
                         </div>
 
                         <div class="app-card reveal">
-                            <div class="app-icon">🚗</div>
-                            <h3 style="font-size: 1.2rem; color: var(--text-primary);">Líneas de Montaje Automotriz</h3>
+                            <div class="app-icon">🏆</div>
+                            <h3 style="font-size: 1.2rem; color: var(--text-primary);">Competencias Universitarias</h3>
                             <p style="font-size: 0.9rem; color: var(--text-secondary);">
-                                En plantas como Toyota o BMW, vehículos de arrastre entregan motores, puertas y chasis pesados exactamente en la estación de montaje requerida siguiendo trayectorias fijas, garantizando la metodología de producción Just-In-Time (JIT).
+                                Las categorías de velocistas seguidores de línea en eventos académicos de ingeniería ponen a prueba exactamente estos principios: relación torque/RPM, ajuste óptico de sensores y tiempo de respuesta de giro.
                             </p>
                         </div>
 
@@ -196,7 +200,7 @@
                             <div class="app-icon">🔬</div>
                             <h3 style="font-size: 1.2rem; color: var(--color-accent-green-bright);">Modelo Escolar vs. AGVs Industriales</h3>
                             <p style="font-size: 0.9rem; color: var(--text-secondary);">
-                                <strong>Diferencia fundamental de alcance:</strong> Nuestro prototipo educativo de grado 11 opera con <em>lógica puramente reactiva analógica</em> (sin mapas ni memoria). Un AGV industrial moderno incorpora sistemas LiDAR 3D, cámaras con navegación SLAM, protocolos de comunicación Wi-Fi industrial, frenado regenerativo y detección de obstáculos mediante sensores ultrasónicos de seguridad homologados (categoría SIL3).
+                                <strong>Diferencia de alcance:</strong> Nuestro prototipo escolar de grado 11 opera con <em>electrónica analógica discreta en protoboard</em> (CNY70 + transistores 2N2222A, sin memoria ni programación). Un AGV industrial añade control PID digital, sensores LiDAR 3D, mapeo SLAM y protocolos inalámbricos de flota.
                             </p>
                         </div>
                     </div>
@@ -232,7 +236,7 @@
                     </div>
                     <p style="font-size: 0.88rem; line-height: 1.6; margin-bottom: 1rem; color: #cfc0ab;">
                         <em>“Servimos a la Comunidad y Formamos para la Vida”</em>.<br>
-                        Estudio dinámico y cinemático de vehículos autónomos diferenciales para el área de Tecnología e Informática.
+                        Estudio dinámico de control cruzado con sensores CNY70 y transistores 2N2222A para el área de Tecnología e Informática.
                     </p>
                     <span class="badge badge-green">INACEGO · Grado 11° · 2026</span>
                 </div>
@@ -245,25 +249,25 @@
                         <li><a href="concepto.html" class="footer-link">2. Concepto y Autonomía</a></li>
                         <li><a href="funciones.html" class="footer-link">3. Funciones (Actual)</a></li>
                         <li><a href="electronica.html" class="footer-link">4. Parte Electrónica</a></li>
-                        <li><a href="video.html" class="footer-link">Video y Capturas</a></li>
+                        <li><a href="video.html" class="footer-link">Video Tutorial</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-col">
                     <h4>Conceptos Clave</h4>
                     <ul class="footer-links">
-                        <li><span class="footer-link">Tracción Diferencial</span></li>
-                        <li><span class="footer-link">Tabla de Verdad Lógica</span></li>
-                        <li><span class="footer-link">AGVs Industriales</span></li>
-                        <li><span class="footer-link">Control Reactivo</span></li>
+                        <li><span class="footer-link">Control Cruzado Sensor-Motor</span></li>
+                        <li><span class="footer-link">Etapas Q1 + Q2 en Cascada</span></li>
+                        <li><span class="footer-link">Calibración 1 kΩ / 50 kΩ</span></li>
+                        <li><span class="footer-link">AGVs y Robótica Móvil</span></li>
                     </ul>
                 </div>
 
                 <div class="footer-col">
                     <h4>Fuentes Técnicas</h4>
                     <ul class="footer-links">
+                        <li><span class="footer-link">Tutorial Oficial El Profe García</span></li>
                         <li><span class="footer-link">Siegwart, R. - Mobile Robots</span></li>
-                        <li><span class="footer-link">Groover, M. - Automatización Industrial</span></li>
                         <li><span class="footer-link">Guía Pedagógica Robótica 11°</span></li>
                     </ul>
                 </div>
@@ -311,4 +315,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-

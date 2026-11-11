@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Sección 2: Concepto del Robot Seguidor de Línea, principio de autonomía y física de reflectancia óptica. Grado 11.">
-    <title>Sección 2: Concepto | Robot Seguidor de Línea</title>
+    <meta name="description" content="Sección 2: Concepto del Robot Seguidor de Línea Negra analógico con sensores CNY70 y transistores 2N2222A. Grado 11 - INACEGO.">
+    <title>Sección 2: Concepto | Robot Seguidor de Línea Negra</title>
     <link rel="icon" href="navia.svg" type="image/svg+xml">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -77,10 +77,10 @@
                 </nav>
                 <span class="page-eyebrow">SECCIÓN 02 • CURRICULAR OBLIGATORIA</span>
                 <h1 style="font-size: clamp(2.2rem, 3.8vw, 3rem); font-weight: 800; color: #ffffff;">
-                    Concepto del Robot Seguidor de Línea
+                    Concepto del Robot Seguidor de Línea Negra
                 </h1>
                 <p style="font-size: 1.1rem; color: #f3ece1; max-width: 780px; margin-top: 0.75rem;">
-                    Definición técnica de autonomía en robótica móvil, principios físicos de la transducción óptica y análisis comparativo entre control analógico discreto y microcontroladores programables.
+                    Definición de autonomía analógica de lazo cerrado, física de reflectancia infrarroja en sensores CNY70 y fundamentación frente a arquitecturas con microcontroladores.
                 </p>
             </div>
         </header>
@@ -95,7 +95,7 @@
                             <div class="point-content">
                                 <h4>Definición y Propósito del Robot</h4>
                                 <p>
-                                    Un robot seguidor de línea es un sistema mecatrónico móvil terrestre clasificado como un <strong>vehículo de guiado autónomo básico</strong>. Su propósito primordial es rastrear una trayectoria física continua delimitada sobre una superficie mediante un contraste óptico marcado (generalmente una franja de color negro sobre fondo blanco mate o viceversa).
+                                    Un robot seguidor de línea es un sistema mecatrónico móvil terrestre clasificado como un <strong>vehículo de guiado autónomo básico</strong>. Su objetivo es recorrer automáticamente una trayectoria continua demarcada mediante contraste óptico (una cinta o línea negra sobre superficie blanca mate).
                                 </p>
                             </div>
                         </div>
@@ -103,9 +103,9 @@
                         <div class="concept-point reveal">
                             <div class="point-icon">🧭</div>
                             <div class="point-content">
-                                <h4>¿Qué significa exactamente que sea "Autónomo"?</h4>
+                                <h4>Autonomía en Lazo Cerrado Analógico</h4>
                                 <p>
-                                    En teoría de control, la autonomía implica que el dispositivo opera bajo una estructura de <strong>lazo cerrado (closed-loop)</strong> sin requerir intervención ni comandos de un operador humano en tiempo real. El robot adquiere información del estado del entorno mediante sus sensores, la procesa a través de su circuitería interna y acciona sus motores para corregir su trayectoria instantáneamente.
+                                    La autonomía significa que el robot toma decisiones físicas por sí solo sin control remoto ni código programado. Opera en <strong>lazo cerrado (closed-loop)</strong> mediante equilibrio eléctrico continuo: los sensores CNY70 leen la pista, los transistores 2N2222A invierten y amplifican la señal en microsegundos, y los motorreductores corrigen el rumbo al instante.
                                 </p>
                             </div>
                         </div>
@@ -113,13 +113,13 @@
                         <div class="concept-point reveal">
                             <div class="point-icon">💡</div>
                             <div class="point-content">
-                                <h4>Reconocimiento de la Línea: Física de Reflectancia Óptica</h4>
+                                <h4>Física de Reflectancia en el CNY70</h4>
                                 <p>
-                                    La discriminación de la trayectoria no requiere cámaras ni visión computacional compleja. Se fundamenta en el <strong>coeficiente de reflexión de la radiación electromagnética infrarroja (\(\lambda \approx 950\text{ nm}\))</strong>:
+                                    Cada sensor <strong>CNY70</strong> integra un LED emisor infrarrojo (\(\lambda \approx 950\text{ nm}\)) protegido con una resistencia de 560 Ω y un fototransistor receptor con resistencia pull-down de 20 kΩ:
                                 </p>
                                 <ul style="margin-top: 0.6rem; padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.9rem;">
-                                    <li><strong>Superficie Blanca (Fondo):</strong> Presenta alta reflectancia espectral. La radiación emitida por el LED IR rebota e incide directamente sobre la base fotosensible del fototransistor, provocando su conducción eléctrica (estado de baja impedancia).</li>
-                                    <li><strong>Franja Negra (Línea):</strong> Presenta un coeficiente de absorción muy elevado (el pigmento negro absorbe casi la totalidad de fotones infrarrojos). La radiación dispersada es mínima, manteniendo al fototransistor en estado de corte (alta impedancia).</li>
+                                    <li><strong>Sobre Superficie Blanca:</strong> La luz infrarroja rebota intensamente hacia el fototransistor, haciéndolo conducir. Esto activa el primer transistor Q1, que drena la corriente a tierra y <strong>apaga</strong> el LED rojo y el motor asociado.</li>
+                                    <li><strong>Sobre Línea Negra:</strong> El pigmento negro absorbe la radiación infrarroja; el fototransistor deja de conducir y corta al primer transistor Q1, permitiendo que la corriente encienda el LED rojo y active el transistor de potencia Q2 para <strong>encender</strong> el motor.</li>
                                 </ul>
                             </div>
                         </div>
@@ -127,9 +127,9 @@
                         <div class="concept-point reveal">
                             <div class="point-icon">〰️</div>
                             <div class="point-content">
-                                <h4>Geometría de Trayectorias y Limitaciones Físicas</h4>
+                                <h4>Geometría Cruzada sobre la Pista</h4>
                                 <p>
-                                    El robot puede navegar por circuitos abiertos o cerrados que presenten rectas y curvas. El radio de curvatura mínimo admisible (\(R_{\min}\)) está determinado por tres factores físicos: la distancia entre los dos sensores frontales, la inercia rotacional del chasis y la rapidez con la que los transistores conmutan la corriente de los motores. Si la curva es demasiado cerrada o la velocidad muy alta, la inercia puede expulsar los sensores fuera de la pista antes de que el circuito alcance a frenar la rueda interna.
+                                    En el diseño de <strong>El Profe García</strong>, ambos sensores apuntan hacia la línea negra por el frente. Mientras los dos sensores ven negro, <strong>ambas llantas avanzan</strong>. Para lograr la autocorrección, cada sensor gobierna el motor del <strong>lado contrario</strong>: cuando un lado se sale al blanco, frena la rueda opuesta para que la rueda activa devuelva el carro al carril negro.
                                 </p>
                             </div>
                         </div>
@@ -140,11 +140,11 @@
                         <div style="background: var(--color-white); border: 1px solid var(--color-gray-200); border-radius: var(--radius-xl); padding: 2rem; box-shadow: var(--shadow-sm);">
                             <div style="text-align: center; margin-bottom: 1.5rem;">
                                 <span class="badge badge-green">Principio de Operación</span>
-                                <h3 style="font-size: 1.35rem; color: var(--color-dark-blue); margin-top: 0.5rem;">Geometría Óptica de Pista</h3>
+                                <h3 style="font-size: 1.35rem; color: var(--color-dark-blue); margin-top: 0.5rem;">Montaje Compacto en Protoboard</h3>
                             </div>
-                            <img src="imagenes/robot-hero.jpg" alt="Carro robot seguidor de línea con Micro:bit y sensores HW-511" width="400" height="320" style="margin: 0 auto; width: 100%; max-width: 400px; height: auto; object-fit: contain; border-radius: 12px;">
+                            <img src="imagenes/robot-hero.jpg" alt="Robot seguidor de línea negra sobre protoboard con sensores CNY70 y transistores 2N2222A" width="400" height="320" style="margin: 0 auto; width: 100%; max-width: 400px; height: auto; object-fit: contain; border-radius: 12px;">
                             <div style="margin-top: 1.5rem; padding: 1rem; background: var(--color-gray-50); border: 1px solid var(--color-gray-200); border-radius: var(--radius-md); font-size: 0.88rem; color: var(--color-gray-700);">
-                                <strong style="color: var(--color-dark-blue);">Configuración Clásica de Dos Sensores:</strong> La línea negra transcurre por el espacio central entre los dos sensores. Ambos sensores ven superficie blanca durante el avance recto. Al aproximarse una curva, la línea entra bajo uno de los sensores, desequilibrando la tensión de entrada y activando el viraje.
+                                <strong style="color: var(--color-dark-blue);">Detección Directa de Línea Negra:</strong> Al detectar la línea negra, el LED rojo del canal se enciende y el motor contrario tracciona. Si un sensor pisa superficie blanca, se apaga ese motor y la llanta opuesta reorienta el prototipo.
                             </div>
                         </div>
 
@@ -154,78 +154,78 @@
                                 <span>📖</span> Comprensión Intuitiva (Sin Prerrequisitos Técnicos)
                             </h4>
                             <p style="font-size: 0.94rem; color: var(--color-gray-700); line-height: 1.65;">
-                                Imagina un vagón de tren con dos motores independientes en sus ruedas. En vez de rieles metálicos, utiliza "rieles de luz": dos pequeñas linternas infrarrojas apuntan al suelo. Cuando una rueda se desvía y pisa la cinta negra, el sensor correspondiente detecta que la luz "se apagó" (porque el negro se la tragó). Al faltarle luz, el circuito corta la electricidad de ese motor de inmediato. Como el otro motor sigue empujando, el vagón se dobla automáticamente hacia adentro y regresa a la línea.
+                                Imaginá dos linternas invisibles (CNY70) mirando la cinta negra en el suelo. Cuando las dos "ven" la cinta negra, los dos transistores principales dejan pasar energía de la pila de 9V y el carrito avanza derecho. Si el carrito se tuerce y una linterna pisa el piso blanco, la luz rebota y apaga el motor del lado opuesto: como la otra rueda sigue empujando, el robot gira solo y vuelve a montarse sobre la línea negra.
                             </p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Comparativa Formal y Rigurosa: Arquitectura Micro:bit vs Enfoques Puramente Analógicos -->
+                <!-- Comparativa Formal: Analógico Discreto vs Microcontroladores -->
                 <div class="comparison-container reveal" style="margin-top: 4.5rem;">
                     <div class="comparison-header">
-                        <span class="badge badge-green">Evaluación de Arquitecturas de Control</span>
-                        <h2 style="font-size: 2rem; margin-top: 0.5rem; color: var(--color-dark-blue);">Control Digital con BBC Micro:bit vs. Control Analógico Discreto</h2>
+                        <span class="badge badge-green">Evaluación de Arquitecturas</span>
+                        <h2 style="font-size: 2rem; margin-top: 0.5rem; color: var(--color-dark-blue);">Electrónica Analógica Discreta (CNY70 + 2N2222A) vs. Microcontroladores</h2>
                         <p style="color: var(--text-secondary); max-width: 720px; margin: 0.5rem auto 0;">
-                            Fundamentación técnico-pedagógica de por qué la arquitectura híbrida Micro:bit + Puente H L298N es el estándar formativo óptimo en grado 11 para desarrollar pensamiento computacional y robótica aplicada.
+                            Por qué construir el seguidor de línea con electrónica pura de transistores en grado 11 fortalece el dominio real de la física circuital antes de pasar a placas programables.
                         </p>
                     </div>
 
                     <div class="comparison-columns">
                         
-                        <!-- Columna Nuestro Enfoque: BBC Micro:bit + L298N -->
+                        <!-- Columna Nuestro Enfoque: Analógico Discreto -->
                         <div class="comparison-card direct reveal reveal-delay-1">
                             <div class="comp-title">
-                                <h3 style="font-size: 1.3rem; color: var(--color-accent-green-bright);">Arquitectura Digital BBC Micro:bit + L298N</h3>
+                                <h3 style="font-size: 1.3rem; color: var(--color-accent-green-bright);">Hardware Analógico Puro (CNY70 + 2N2222A)</h3>
                                 <span class="badge badge-green">Nuestra Elección</span>
                             </div>
                             <p style="font-size: 0.88rem; color: var(--text-secondary);">
-                                El lazo de control combina procesamiento digital en tiempo real con una etapa de potencia industrial L298N capaz de modular velocidad por PWM y dirección diferencial.
+                                Dos etapas simétricas de transistores NPN en protoboard alimentadas por una batería de 9V, sin circuitos integrados complejos ni código.
                             </p>
                             <ul class="comp-list">
                                 <li class="comp-item">
                                     <span class="comp-icon" style="color: var(--color-accent-green-bright);">✓</span>
-                                    <div><strong>Pensamiento Computacional Real:</strong> El estudiante programa algoritmos condicionales, modulación PWM para curvas suaves y calibración dinámica de umbrales digitales en MakeCode o Python.</div>
+                                    <div><strong>Dominio Real de Fundamentos:</strong> El estudiante aprende de primera mano polarización de transistores (Emisor-Base-Colector), código de colores de resistencias y estados de corte/saturación.</div>
                                 </li>
                                 <li class="comp-item">
                                     <span class="comp-icon" style="color: var(--color-accent-green-bright);">✓</span>
-                                    <div><strong>Control de Velocidad Analógico (PWM):</strong> Permite ajustar la velocidad de los motores (Pines 0 y 1) sin recalentar transistores lineales, evitando que la inercia saque al robot en curvas cerradas.</div>
+                                    <div><strong>Respuesta Física Instantánea:</strong> No existe ciclo de lectura ni latencia de software; el transistor conmuta en microsegundos en cuanto cambia la luz reflejada.</div>
                                 </li>
                                 <li class="comp-item">
                                     <span class="comp-icon" style="color: var(--color-accent-green-bright);">✓</span>
-                                    <div><strong>Aislamiento de Potencia y Señal:</strong> El Puente H L298N aísla eléctricamente los 9V inductivos de los motores de la lógica de 3.3V del microcontrolador y los 5V de los sensores HW-511.</div>
+                                    <div><strong>Bajo Costo y Cero Soldadura:</strong> Con menos de una docena de componentes básicos montados sobre una protoboard se logra un vehículo totalmente funcional.</div>
                                 </li>
                                 <li class="comp-item">
                                     <span class="comp-icon" style="color: var(--color-accent-green-bright);">✓</span>
-                                    <div><strong>Escalabilidad y Telemetría:</strong> Posibilidad de incorporar matriz LED de estado, botones de arranque, radio inalámbrica y sensores adicionales sin rediseñar el hardware físico.</div>
+                                    <div><strong>Ajuste Físico Directo:</strong> Permite calibrar la velocidad en curvas simplemente variando la resistencia hacia la base del transistor Q2 (de 1 kΩ hasta un potenciómetro de 50 kΩ).</div>
                                 </li>
                             </ul>
                         </div>
 
-                        <!-- Columna Analógico Discreto -->
+                        <!-- Columna Microcontroladores -->
                         <div class="comparison-card arduino reveal reveal-delay-2">
                             <div class="comp-title">
-                                <h3 style="font-size: 1.3rem; color: #dc2626;">Circuito Puramente Analógico (LM393 + Transistores)</h3>
-                                <span class="badge" style="background: rgba(220, 38, 38, 0.12); color: #dc2626; border: 1px solid rgba(220, 38, 38, 0.35); font-weight: 700;">Enfoque Discreto Rígido</span>
+                                <h3 style="font-size: 1.3rem; color: #dc2626;">Sistemas Programables (Arduino / Micro:bit + Puente H)</h3>
+                                <span class="badge" style="background: rgba(220, 38, 38, 0.12); color: #dc2626; border: 1px solid rgba(220, 38, 38, 0.35); font-weight: 700;">Mayor Complejidad</span>
                             </div>
                             <p style="font-size: 0.88rem; color: var(--text-secondary);">
-                                Conexión directa de foto-sensores a amplificadores operacionales/comparadores y transistores bipolares de conmutación sin procesador intermedio.
+                                Requieren tarjeta programable, drivers externos integrados, compilación de firmware y múltiples bancos de baterías para aislar ruidos.
                             </p>
                             <ul class="comp-list">
                                 <li class="comp-item">
                                     <span class="comp-icon" style="color: #f87171;">✕</span>
-                                    <div><strong>Rigidez Algorítmica:</strong> Cualquier cambio en la estrategia de viraje o corrección exige soldar o modificar componentes físicos en protoboard, sin memoria de estados.</div>
+                                    <div><strong>Dependencia de Software y PC:</strong> Si falla el código, el cable USB o la compilación, el robot no se mueve aunque las conexiones físicas estén correctas.</div>
                                 </li>
                                 <li class="comp-item">
                                     <span class="comp-icon" style="color: #f87171;">✕</span>
-                                    <div><strong>Control Todo/Nada (Bang-Bang):</strong> Los motores operan exclusivamente al 100% o 0%, generando tirones mecánicos y oscilaciones bruscas (hunting) a lo largo de la trayectoria.</div>
+                                    <div><strong>Efecto "Caja Negra":</strong> Al usar módulos preensamblados y librerías listas, el estudiante suele omitir cómo funciona realmente la etapa de amplificación por transistores.</div>
                                 </li>
                                 <li class="comp-item">
                                     <span class="comp-icon" style="color: #f87171;">✕</span>
-                                    <div><strong>Sin Pensamiento Computacional:</strong> No aborda variables, estructuras de decisión complejas, ciclos de polling ni las competencias de software exigidas por el Ministerio y el British Council.</div>
+                                    <div><strong>Mayor Peso y Múltiples Fuentes:</strong> Exige separar fuentes de alimentación (5V/3.3V para lógica y 9V para motores) e integrar tierras comunes entre módulos.</div>
                                 </li>
                                 <li class="comp-item">
                                     <span class="comp-icon" style="color: #f87171;">✕</span>
-                                    <div><strong>Alta Sensibilidad a Batería Descargada:</strong> Al caer el voltaje, el umbral de los divisores resistivos se desfasa y requiere calibración manual continua con destornillador.</div>
+                                    <div><strong>Costo y Riesgo de Daño:</strong> Un cortocircuito accidental puede averiar el microcontrolador completo; en nuestro circuito basta reemplazar una resistencia o un 2N2222A económico.</div>
                                 </li>
                             </ul>
                         </div>
@@ -241,7 +241,7 @@
                     </a>
                     <a href="funciones.html" class="nav-next-btn" style="text-align: right;">
                         <span class="nav-direction-label">Siguiente Sección Curricular &rarr;</span>
-                        <span class="nav-page-title">Sección 3: Funciones y Cinemática</span>
+                        <span class="nav-page-title">Sección 3: Funciones y Control</span>
                     </a>
                 </div>
 
@@ -263,7 +263,7 @@
                     </div>
                     <p style="font-size: 0.88rem; line-height: 1.6; margin-bottom: 1rem; color: #cfc0ab;">
                         <em>“Servimos a la Comunidad y Formamos para la Vida”</em>.<br>
-                        Fundamentación teórica y principios de lazo cerrado para proyectos de Tecnología e Informática.
+                        Fundamentación teórica y principios de lazo cerrado analógico para proyectos de Tecnología e Informática.
                     </p>
                     <span class="badge badge-green">INACEGO · Grado 11° · 2026</span>
                 </div>
@@ -274,28 +274,28 @@
                         <li><a href="index.html" class="footer-link">Inicio del Proyecto</a></li>
                         <li><a href="materiales.html" class="footer-link">1. Materiales</a></li>
                         <li><a href="concepto.html" class="footer-link">2. Concepto (Actual)</a></li>
-                        <li><a href="funciones.html" class="footer-link">3. Funciones y Cinemática</a></li>
+                        <li><a href="funciones.html" class="footer-link">3. Funciones y Control Cruzado</a></li>
                         <li><a href="electronica.html" class="footer-link">4. Parte Electrónica</a></li>
-                        <li><a href="video.html" class="footer-link">Video y Capturas</a></li>
+                        <li><a href="video.html" class="footer-link">Video Tutorial</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-col">
                     <h4>Fundamentos</h4>
                     <ul class="footer-links">
-                        <li><span class="footer-link">Lazo Cerrado de Control</span></li>
-                        <li><span class="footer-link">Reflectancia Óptica Infrarroja</span></li>
-                        <li><span class="footer-link">Cinemática Diferencial</span></li>
-                        <li><span class="footer-link">Histéresis Analógica</span></li>
+                        <li><span class="footer-link">Lazo Cerrado Analógico</span></li>
+                        <li><span class="footer-link">Reflectancia Óptica CNY70</span></li>
+                        <li><span class="footer-link">Corte y Saturación BJT</span></li>
+                        <li><span class="footer-link">Disposición Cruzada</span></li>
                     </ul>
                 </div>
 
                 <div class="footer-col">
                     <h4>Fuentes Técnicas</h4>
                     <ul class="footer-links">
-                        <li><span class="footer-link">Kuo, B. - Sistemas de Control Automático</span></li>
-                        <li><span class="footer-link">Ogata, K. - Ingeniería de Control Moderna</span></li>
-                        <li><span class="footer-link">Estándares Curriculares MEN Grado 11</span></li>
+                        <li><span class="footer-link">Boylestad - Electrónica Analógica</span></li>
+                        <li><span class="footer-link">Vishay CNY70 Technical Note</span></li>
+                        <li><span class="footer-link">Estándares Curriculares MEN 11°</span></li>
                     </ul>
                 </div>
             </div>
@@ -342,4 +342,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
